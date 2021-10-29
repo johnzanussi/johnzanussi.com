@@ -1,11 +1,4 @@
-import bundleAnalyzer from '@next/bundle-analyzer';
-
-const withBundleAnalyzer = bundleAnalyzer({
-    enabled: process.env.ANALYZE === 'true',
-});
-
-
-const config = withBundleAnalyzer({
+const config = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
@@ -29,7 +22,6 @@ const config = withBundleAnalyzer({
     //     'md',
     //     'mdx',
     // ],
-
-});
+};
 
 export default config;
