@@ -1,0 +1,112 @@
+@import "./bootstrap";
+@import "./animations";
+
+a {
+    transition: color 0.5s cubic-bezier(.37,.75,.61,1.05) 0ms,
+                opacity 0.5s cubic-bezier(.37,.75,.61,1.05) 0ms;
+}
+
+h1 {
+    word-spacing: -0.2em;
+}
+
+h2 {
+    word-spacing: -0.1em;
+    &.border-bottom {
+        border-color: rgba($headings-color, .30) !important;
+    }
+}
+
+.display-1 {
+    word-spacing: -0.5em;
+    @include media-breakpoint-down(md) {
+        font-size: 2.5rem;
+    }
+}
+
+.bg-nav {
+    background-color: $nav;
+}
+
+.bg-dark-card {
+    background-color: $dark-card;
+}
+
+.shadow-hover-none {
+    transition-property: box-shadow, opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(.37,.75,.61,1.05);
+    transition-delay: 0ms;
+
+    &:hover {
+        box-shadow: none !important;
+        opacity: 90%;
+    }
+}
+
+.rounded-md-end {
+    @include media-breakpoint-up(md) {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        @include border-end-radius;
+    }
+}
+
+.collapse-button {
+
+    @include transition($accordion-icon-transition);
+
+    &:not(.collapsed) {
+        transform: $accordion-icon-transform;
+    }
+
+}
+
+.nav-photo {
+
+    @include media-breakpoint-down(md) {
+        width: 110px;
+        height: 110px;
+    }
+
+    // @include transition($accordion-icon-transition);
+
+    a:hover > span {
+        animation: shakeX;
+        animation-duration: .5s;
+    }
+
+}
+
+.site-nav {
+    top: 3rem;
+}
+
+.site-main {
+    max-width: 1200px;
+}
+
+
+.link-anchor {
+    opacity: 0;
+
+
+    :hover > & {
+        opacity: .5;
+    }
+
+    &:hover {
+        opacity: 1;
+        color: $link-color;
+    }
+}
+
+.post-card {
+
+    @include media-breakpoint-up(md) {
+        .card-img {
+            flex: 0 0 450px;
+        }
+    }
+
+}

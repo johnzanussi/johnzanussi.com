@@ -1,0 +1,98 @@
+@import "../node_modules/bootstrap/scss/functions";
+
+// https://coolors.co/2cb9dd-ff1f93-0e141b-182635-a6b143-ea3734-ece9eb-ffda22-9cab9e
+// $primary: #2CB9DD;
+// $secondary: #FF1F93;
+// $success: #DCF763;
+// $danger: #EA3734;
+// $info: #E4572E;
+// $dark: #0e141b;
+// $light: #F1EBFF;
+// $warning: #FFDA22;
+// $white: #ECE9EB;
+// $nav: #182635;
+
+// $text-muted: #9CAB9E;
+
+// $headings-color: #A6B143;
+
+// https://beta.reactjs.org/
+// https://coolors.co/23272f-16273c-149eca-da4167-fdca40-f79824-f0a7a0
+$primary: #149eca;
+$secondary: #FF389F;
+$success: #DCF763;
+$danger: #DF6887;
+$info: #E4572E;
+$dark: #16273C;
+$light: #F1EBFF;
+$warning: #FFDA22;
+$white: #ECE9EB;
+
+$nav: #23272f;
+$dark-card: #343a46;
+
+$text-muted: #9CAB9E;
+
+$headings-color: $success;
+
+$link-decoration: none;
+$link-hover-decoration: none;
+$link-shade-percentage: 40%;
+
+$code-color: #E166A3;
+
+$accordion-icon-transform: rotate(180deg) !default;
+
+$font-family-sans-serif: 'Roboto';
+$font-family-monospace: 'Roboto Mono';
+
+
+@import "../node_modules/bootstrap/scss/variables";
+
+// $custom-colors: (
+//     'nav': $nav,
+//     'dark-card': $dark-card
+// );
+// $theme-colors: map-merge($theme-colors, $custom-colors);
+
+$headings-font-family: $font-family-monospace;
+$navbar-dark-toggler-border-color: $white;
+
+$border-radius: 1rem;
+
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/utilities";
+
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+// @import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
+// @import "../node_modules/bootstrap/scss/tables";
+// @import "../node_modules/bootstrap/scss/forms";
+@import "../node_modules/bootstrap/scss/buttons";
+@import "../node_modules/bootstrap/scss/transitions";
+// @import "../node_modules/bootstrap/scss/dropdown";
+// @import "../node_modules/bootstrap/scss/button-group";
+// @import "../node_modules/bootstrap/scss/nav";
+@import "../node_modules/bootstrap/scss/navbar";
+@import "../node_modules/bootstrap/scss/card";
+// @import "../node_modules/bootstrap/scss/accordion";
+// @import "../node_modules/bootstrap/scss/breadcrumb";
+// @import "../node_modules/bootstrap/scss/pagination";
+// @import "../node_modules/bootstrap/scss/badge";
+// @import "../node_modules/bootstrap/scss/alert";
+@import "../node_modules/bootstrap/scss/progress";
+// @import "../node_modules/bootstrap/scss/list-group";
+// @import "../node_modules/bootstrap/scss/close";
+// @import "../node_modules/bootstrap/scss/toasts";
+// @import "../node_modules/bootstrap/scss/modal";
+// @import "../node_modules/bootstrap/scss/tooltip";
+// @import "../node_modules/bootstrap/scss/popover";
+// @import "../node_modules/bootstrap/scss/carousel";
+// @import "../node_modules/bootstrap/scss/spinners";
+// @import "../node_modules/bootstrap/scss/offcanvas";
+
+@import "../node_modules/bootstrap/scss/helpers";
+@import "../node_modules/bootstrap/scss/utilities/api";
