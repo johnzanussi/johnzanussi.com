@@ -1,4 +1,4 @@
-Back in the day, `johnzanussi.com` used to be the home of my Tumblr blog. Then, in 2014, I switched it to a single splash page with "Full site coming soon" in the footer. Well, almost eight years later, I've finally built a more elaborate website for myself. Below, I'll document some of my processes, the tools, libraries, and services I used, and what I would like to add in the future.
+Back in the day, [`johnzanussi.com`](https://johnzanussi.com) used to be the home of my Tumblr blog. Then, in 2014, I switched it to a single splash page with "Full site coming soon" in the footer. Well, almost eight years later, I've finally built a more elaborate website for myself. Below, I'll document some of my processes, the tools, libraries, and services I used, and what I would like to add in the future.
 
 All the code that powers this website is available on my [GitHub](https://github.com/johnzanussi/johnzanussi.com).
 
