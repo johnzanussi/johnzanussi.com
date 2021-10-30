@@ -4,8 +4,8 @@ All the code that powers this website is available on my [GitHub](https://github
 
 <MDXColumns>
 
-[![Screen shot of johnzanussi.com from 2008](/assets/pages/README/screenshot-johnzanussi-dot-com-tumblr.png)](https://web.archive.org/web/20080817121815/http://johnzanussi.com/)
-[![Screen shot of johnzanussi.com from 2021](/assets/pages/README/screenshot-johnzanussi-dot-com-splash.png)](https://web.archive.org/web/20210610103313/http://johnzanussi.com/)
+[![Screen shot of johnzanussi.com from 2008](public/assets/pages/README/screenshot-johnzanussi-dot-com-tumblr.png)](https://web.archive.org/web/20080817121815/http://johnzanussi.com/)
+[![Screen shot of johnzanussi.com from 2021](/public/assets/pages/README/screenshot-johnzanussi-dot-com-splash.png)](https://web.archive.org/web/20210610103313/http://johnzanussi.com/)
 
 </MDXColumns>
 
