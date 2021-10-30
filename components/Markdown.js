@@ -6,6 +6,7 @@ import Link from './Link';
 import PageTitle from './PageTitle';
 import Image from './Image';
 import MDXColumns from './MDXColumns';
+import CodeBlock from './CodeBlock';
 import AmazonDisclosure from './AmazonDisclosure';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHashtag } from '@fortawesome/free-solid-svg-icons';
@@ -21,6 +22,11 @@ const components = {
             <Image className="img-fluid mw-100" layout="responsive" {...props} />
         </div>
     ),
+    iframe: props => (
+        <div className="mb-4">
+            <iframe {...props} />
+        </div>
+    ),
     sup: ({ children, ...props }) => (
         <sup {...props} className="text-danger">
             [{Children.map(children, child => cloneElement(child, { className: 'link-danger' }))}]
@@ -29,6 +35,7 @@ const components = {
     FontAwesomeHashtag: (props) => <FontAwesomeIcon icon={faHashtag} {...props} />,
     MDXColumns: MDXColumns,
     AmazonDisclosure: AmazonDisclosure,
+    code: CodeBlock,
 };
 
 const Markdown = ({ source }) => {
