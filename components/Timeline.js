@@ -1,4 +1,6 @@
-import { differenceInMonths, parseISO, format } from 'date-fns';
+import differenceInMonths from 'date-fns/differenceInMonths';
+import parseISO from 'date-fns/parseISO';
+import format from 'date-fns/format';
 
 const Timeline = () => {
 
