@@ -50,9 +50,10 @@ Since I’m not the best at articulating my thoughts into words, I hired someone
 ## To Do
 * Add [Lighthouse](https://developers.google.com/web/tools/lighthouse) results to this page
 * Pull YouTube channel names, images, and notification setting from YouTube API
-* Install [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) and add prop definitions
-* Create light theme and theme switcher
+* ~~Install [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) and add prop definitions~~ Convert to TypeScript
 * Install and configure [Prettier](https://prettier.io/)
+* Create light theme and theme switcher
 * Create a way to embed [Thingiverse](https://www.thingiverse.com/) things
 * Add pagination for Posts page
 * Create a "More posts" component for the bottom of individual posts
+* Add comments on posts
