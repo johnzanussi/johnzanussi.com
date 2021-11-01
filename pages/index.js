@@ -1,6 +1,7 @@
 import { getPostData } from '../lib/posts';
 
 import Layout from '../components/Layout';
+import Meta from '../components/Meta';
 import Link from '../components/Link';
 import PostCard from '../components/PostCard';
 import Emoji from '../components/Emoji';
@@ -10,6 +11,11 @@ export default function Index({ featuredPost }) {
     return (
 
         <Layout>
+
+            <Meta
+                title="John Zanussi"
+                description="A place where I write about technology, 3D Printing, and other hobby projects I have going on"
+            />
 
             <h1 className="display-1 mb-3 mb-md-5">
                 Hey, there! <Emoji label="waving hand">👋</Emoji>
