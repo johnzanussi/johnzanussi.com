@@ -17,6 +17,7 @@
     "dev": "next -p 3001",
     "build": "next build",
     "build:analyze": "ANALYZE=true next build",
+    "postbuild": "next-sitemap",
     "start": "next start -p 3001",
     "lint": "next lint",
     "lint:fix": "next lint --fix"
@@ -53,6 +54,7 @@
     "eslint": "^7.32.0",
     "eslint-config-next": "11.1.2",
     "eslint-plugin-unused-imports": "^1.1.5",
+    "next-sitemap": "^1.6.192",
     "postcss": "^8.3.11",
     "sass": "^1.43.2",
     "sharp": "^0.29.2"
