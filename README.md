@@ -46,6 +46,8 @@ I didn't know much about Vercel until I was ready to deploy my first Next.js pro
 ##### [Fiverr](https://www.fiverr.com/)
 Since I’m not the best at articulating my thoughts into words, I hired someone on Fiverr to proofread most of these site pages. I’ve used Fiverr in the past for various tasks and have had nothing but great experiences. 
 
+##### [Plausible](https://plausible.io/)
+I'm self hosting Plausible at [analytics.johnzanussi.com](https://analytics.johnzanussi.com/) to collect traffic data from this site. I followed this [amazing guide](https://www.stackovercloud.com/2021/10/28/how-to-install-plausible-analytics-on-ubuntu-20-04/) to get the self hosted instance installed and running on DigitalOcean. I'm also using the [`next-plausible`](https://github.com/4lejandrito/next-plausible) package to send tracking data to the self hosted instance.
 
 ## To Do
 * Add [Lighthouse](https://developers.google.com/web/tools/lighthouse) results to this page

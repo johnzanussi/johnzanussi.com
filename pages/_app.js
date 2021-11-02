@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
 import { DefaultSeo } from 'next-seo';
+import PlausibleProvider from 'next-plausible';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -12,13 +12,13 @@ const App = ({ Component, pageProps }) => {
 
     return (
 
-        <Fragment>
+        <PlausibleProvider>
 
             <DefaultSeo {...seoConfig}/>
 
             <Component {...pageProps} />
 
-        </Fragment>
+        </PlausibleProvider>
 
     );
 

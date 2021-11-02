@@ -1,3 +1,5 @@
+import { withPlausibleProxy } from 'next-plausible';
+
 const config = {
     reactStrictMode: true,
     swcMinify: true,
@@ -24,4 +26,13 @@ const config = {
     // ],
 };
 
-export default config;
+const plausibleConfig = {
+    domain: 'johnzanussi.com',
+    customDomain: 'https://analytics.johnzanussi.com',
+    trackOutboundLinks: true,
+    selfHosted: true,
+    scriptName: 'extra',
+    integrity: 'sha384-SgKGCKUzFLz4c6yD0hY3wsa0IAuWZCUZCzzK91si4d/LvGTq/a7LbzMlg190satZ',
+};
+
+export default withPlausibleProxy(plausibleConfig)(config);
