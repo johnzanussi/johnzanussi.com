@@ -1,17 +1,27 @@
+import classNames from 'classnames';
+
 import Link from './Link';
 import Image from './Image';
 import DateFormat from './DateFormat';
+import DraftBadge from './DraftBadge';
 
 const PostCard = ({ post, ...props }) => {
 
     return (
 
         <div
-            className="post-card card rounded shadow shadow-hover-none bg-dark-card flex-md-row overflow-hidden"
+            className={classNames(
+                'post-card card rounded shadow shadow-hover-none bg-dark-card flex-md-row overflow-hidden',
+                {
+                    'border-info': post.isDraft,
+                }
+            )}
             {...props}
         >
 
             <div className="card-body p-3 p-md-4 order-1 order-md-0">
+
+                {post.isDraft && <DraftBadge className="position-absolute bottom-0 start-0" />}
 
                 <div className="text-muted mb-2">
                     <DateFormat date={post.date} />
