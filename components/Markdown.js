@@ -8,6 +8,8 @@ import Image from './Image';
 import MDXColumns from './MDXColumns';
 import CodeBlock from './CodeBlock';
 import AmazonDisclosure from './AmazonDisclosure';
+import AmazonProducts from './AmazonProducts';
+import YouTubeEmbed from './YouTubeEmbed';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHashtag } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,10 +34,17 @@ const components = {
             [{Children.map(children, child => cloneElement(child, { className: 'link-danger' }))}]
         </sup>
     ),
+    table: props => (
+        <div className="table-responsive mb-4">
+            <table className="table text-white" {...props } />
+        </div>
+    ),
     FontAwesomeHashtag: (props) => <FontAwesomeIcon icon={faHashtag} {...props} />,
     MDXColumns: MDXColumns,
     AmazonDisclosure: AmazonDisclosure,
+    AmazonProducts: AmazonProducts,
     code: CodeBlock,
+    YouTubeEmbed: YouTubeEmbed,
 };
 
 const Markdown = ({ source }) => {

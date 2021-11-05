@@ -6,5 +6,6 @@
 <url><loc>http://localhost:3001/youtube</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>http://localhost:3001/about</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>http://localhost:3001/posts/3d-printer-psu-control</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3001/posts/unifi-g4-doorbell-chime-with-sonos</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>http://localhost:3001/posts/using-custom-svgs-with-fontawesome</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
