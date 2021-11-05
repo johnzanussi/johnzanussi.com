@@ -4,6 +4,7 @@ import Layout from '../../components/Layout';
 import Meta from '../../components/Meta';
 import DateFormat from '../../components/DateFormat';
 import Markdown from '../../components/Markdown';
+import DraftBadge from '../../components/DraftBadge';
 
 const Post = ({ post }) => {
 
@@ -17,6 +18,8 @@ const Post = ({ post }) => {
                 description={post.excerpt}
                 url={post.url}
             />
+
+            {post.isDraft && <DraftBadge className="me-auto mb-1" />}
 
             <DateFormat date={post.date} />
 
