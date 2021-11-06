@@ -57,5 +57,5 @@ I'm self hosting Plausible at [analytics.johnzanussi.com](https://analytics.john
 * Create light theme and theme switcher
 * Create a way to embed [Thingiverse](https://www.thingiverse.com/) things
 * Add pagination for Posts page
-* Create a "More posts" component for the bottom of individual posts
+* ✅ ~~Create a "More posts" component for the bottom of individual posts~~ [6844b46](https://github.com/johnzanussi/johnzanussi.com/commit/6844b46917bf863f5eb70e4b18557a24ba9cc13f)
 * Add comments on posts
