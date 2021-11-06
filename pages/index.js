@@ -4,9 +4,17 @@ import Layout from '../components/Layout';
 import Meta from '../components/Meta';
 import Link from '../components/Link';
 import PostCard from '../components/PostCard';
+import PostPagination from '../components/PostPagination';
 import Emoji from '../components/Emoji';
 
 export default function Index({ featuredPost }) {
+    const posts = [
+        {
+            title: 'More Posts',
+            url: '/posts',
+            isPrevious: false,
+        },
+    ];
     return (
         <Layout>
             <Meta
@@ -63,6 +71,7 @@ export default function Index({ featuredPost }) {
             <div className="mt-3">
                 <PostCard post={featuredPost} />
             </div>
+            <PostPagination posts={posts} showLabels={false} />
         </Layout>
     );
 }

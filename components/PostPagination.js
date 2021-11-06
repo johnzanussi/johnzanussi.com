@@ -5,16 +5,16 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import Link from './Link';
 
-const PostPagination = ({ posts, ...props }) => {
+const PostPagination = ({ posts, showLabels, ...props }) => {
     return (
         <nav aria-label="Post pagination" {...props}>
             <ul className="pagination pagination-lg row my-4">
-                {posts.map(({ isPrevious, ...post }) => {
+                {posts.map(({ isPrevious, title, url }) => {
                     const label = isPrevious ? 'Previous' : 'Next';
 
                     return (
                         <li
-                            key={post.title}
+                            key={title}
                             className={classNames('col-md-6 page-item', {
                                 'text-start mb-4 mb-md-0': isPrevious,
                                 'text-end': !isPrevious,
@@ -23,24 +23,26 @@ const PostPagination = ({ posts, ...props }) => {
                             })}
                         >
                             <Link
-                                href={post.url}
+                                href={url}
                                 className="page-link h-100 rounded-1"
                             >
-                                <div className="text-white fs-6">
-                                    {label} Post
-                                </div>
+                                {showLabels && (
+                                    <div className="text-white fs-6">
+                                        {label} Post
+                                    </div>
+                                )}
 
                                 {isPrevious && (
                                     <Fragment>
                                         <FontAwesomeIcon icon={faArrowLeft} />
                                         &nbsp;
-                                        {post.title}
+                                        {title}
                                     </Fragment>
                                 )}
 
                                 {!isPrevious && (
                                     <Fragment>
-                                        {post.title}&nbsp;
+                                        {title}&nbsp;
                                         <FontAwesomeIcon icon={faArrowRight} />
                                     </Fragment>
                                 )}
@@ -51,6 +53,10 @@ const PostPagination = ({ posts, ...props }) => {
             </ul>
         </nav>
     );
+};
+
+PostPagination.defaultProps = {
+    showLabels: true,
 };
 
 export default PostPagination;
