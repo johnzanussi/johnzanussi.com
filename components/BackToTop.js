@@ -4,13 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLevelUpAlt } from '@fortawesome/free-solid-svg-icons';
 
 const BackToTop = ({ threshold, className, ...props }) => {
-
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-
         const handleResize = () => {
-            if ((document.body.clientHeight - window.innerHeight) > threshold) {
+            if (document.body.clientHeight - window.innerHeight > threshold) {
                 setIsVisible(true);
             }
         };
@@ -20,7 +18,6 @@ const BackToTop = ({ threshold, className, ...props }) => {
         window.addEventListener('resize', handleResize);
 
         return () => window.removeEventListener('resize', handleResize);
-
     }, [threshold]);
 
     const scrollToTop = () => {
@@ -47,7 +44,6 @@ const BackToTop = ({ threshold, className, ...props }) => {
             </button>
         </div>
     );
-
 };
 
 BackToTop.defaultProps = {

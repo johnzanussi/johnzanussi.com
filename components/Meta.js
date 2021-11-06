@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 const Meta = ({ title, description, openGraph, ...props }) => {
-
     const { asPath } = useRouter();
 
     const url = `${process.env.NEXT_PUBLIC_SITE_URL}${asPath}`;

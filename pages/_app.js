@@ -9,19 +9,13 @@ import seoConfig from '../next-seo.config.js';
 import '../styles/index.scss';
 
 const App = ({ Component, pageProps }) => {
-
     return (
-
         <PlausibleProvider>
-
-            <DefaultSeo {...seoConfig}/>
+            <DefaultSeo {...seoConfig} />
 
             <Component {...pageProps} />
-
         </PlausibleProvider>
-
     );
-
 };
 
 export default App;

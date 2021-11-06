@@ -20,7 +20,8 @@
     "postbuild": "next-sitemap",
     "start": "next start -p 3001",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@fec/remark-a11y-emoji": "^3.1.0",
@@ -55,9 +56,16 @@
     "eslint": "^7.32.0",
     "eslint-config-next": "11.1.2",
     "eslint-plugin-unused-imports": "^1.1.5",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
     "next-sitemap": "^1.6.192",
     "postcss": "^8.3.11",
+    "prettier": "2.4.1",
     "sass": "^1.43.2",
     "sharp": "^0.29.2"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }

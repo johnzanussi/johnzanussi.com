@@ -3,17 +3,9 @@ import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 
 const DateFormat = ({ date, formatStr }) => {
-
     const dateToFormat = isDate(date) ? date : parseISO(date);
 
-    return (
-
-        <time dateTime={date}>
-            {format(dateToFormat, formatStr)}
-        </time>
-
-    );
-
+    return <time dateTime={date}>{format(dateToFormat, formatStr)}</time>;
 };
 
 DateFormat.defaultProps = {

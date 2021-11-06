@@ -2,9 +2,9 @@
 title: Using Custom Icon SVGs with Font Awesome's React Component
 excerpt: How I was able to load a custom svg file into the FontAwesomeReact component.
 coverImage:
-  url: /assets/posts/using-custom-svgs-with-fontawesome/screenshot-font-awesome-code-example.jpg
-  width: 1600
-  height: 900
+    url: /assets/posts/using-custom-svgs-with-fontawesome/screenshot-font-awesome-code-example.jpg
+    width: 1600
+    height: 900
 date: '2021-11-01'
 ---
 
@@ -15,13 +15,13 @@ Since I was already using and somewhat familiar with the [`react-fontawesome`](h
 If we take a look at the documentation for using [Font Awesome with React](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react) we can see that we have to import both the `FontAwesomeIcon` base component and the icon component for whatever icon we want to display. I appreciate this approach as it allows for tree shaking of the `free-solid-svg-icons` library. Because the icon itself was imported separately it was a signal to me that I may be able to pass anything to the `FontAwesomeIcon` component.
 
 ```jsx url=https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react#using title=Font-Awesome-React-Docs
-import ReactDOM from 'react-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
-const element = <FontAwesomeIcon icon={faCoffee} />
+const element = <FontAwesomeIcon icon={faCoffee} />;
 
-ReactDOM.render(element, document.body)
+ReactDOM.render(element, document.body);
 ```
 
 Let's have a look at the source of `faCoffee` in the `@fortawesome/free-solid-svg-icons` library.
@@ -35,18 +35,14 @@ var width = 640;
 var height = 512;
 var ligatures = [];
 var unicode = 'f0f4';
-var svgPathData = 'M192 384h192c53 0 96-43 96-96h32c70.6 0 128-57.4 128-128S582.6 32 512 32H120c-13.3 0-24 10.7-24 24v232c0 53 43 96 96 96zM512 96c35.3 0 64 28.7 64 64s-28.7 64-64 64h-32V96h32zm47.7 384H48.3c-47.6 0-61-64-36-64h583.3c25 0 11.8 64-35.9 64z';
+var svgPathData =
+    'M192 384h192c53 0 96-43 96-96h32c70.6 0 128-57.4 128-128S582.6 32 512 32H120c-13.3 0-24 10.7-24 24v232c0 53 43 96 96 96zM512 96c35.3 0 64 28.7 64 64s-28.7 64-64 64h-32V96h32zm47.7 384H48.3c-47.6 0-61-64-36-64h583.3c25 0 11.8 64-35.9 64z';
 
 exports.definition = {
-  prefix: prefix,
-  iconName: iconName,
-  icon: [
-    width,
-    height,
-    ligatures,
-    unicode,
-    svgPathData
-  ]};
+    prefix: prefix,
+    iconName: iconName,
+    icon: [width, height, ligatures, unicode, svgPathData],
+};
 
 exports.faCoffee = exports.definition;
 exports.prefix = prefix;
@@ -55,10 +51,10 @@ exports.width = width;
 exports.height = height;
 exports.ligatures = ligatures;
 exports.unicode = unicode;
-exports.svgPathData = svgPathData
+exports.svgPathData = svgPathData;
 ```
 
-Well okay, this looks promising. It seems like this is just an abstraction of the svg file as a module in JavaScript. 
+Well okay, this looks promising. It seems like this is just an abstraction of the svg file as a module in JavaScript.
 
 Now let's see if we can find a SVG for the Thingiverse logo. A quick search for "thingiverse svg icon" yields the following from [worldvectorlogo.com](https://worldvectorlogo.com/logo/thingiverse-logo).
 
@@ -84,18 +80,13 @@ const width = 448;
 const height = 512;
 const ligatures = [];
 const unicode = 'f16d';
-const svgPathData = 'M256 512C114.615 512 0 397.385 0 256S114.615 0 256 0s256 114.615 256 256-114.615 256-256 256zm0-36.571c121.187 0 219.429-98.242 219.429-219.429S377.187 36.571 256 36.571 36.571 134.813 36.571 256 134.813 475.429 256 475.429zm32.722-269.474v219.428h-65.444V205.955h-92.39V140.51h250.225v65.444z';
+const svgPathData =
+    'M256 512C114.615 512 0 397.385 0 256S114.615 0 256 0s256 114.615 256 256-114.615 256-256 256zm0-36.571c121.187 0 219.429-98.242 219.429-219.429S377.187 36.571 256 36.571 36.571 134.813 36.571 256 134.813 475.429 256 475.429zm32.722-269.474v219.428h-65.444V205.955h-92.39V140.51h250.225v65.444z';
 
 const ThingiverseIcon = {
     prefix: prefix,
     iconName: iconName,
-    icon: [
-        width,
-        height,
-        ligatures,
-        unicode,
-        svgPathData
-    ],
+    icon: [width, height, ligatures, unicode, svgPathData],
 };
 
 export default ThingiverseIcon;
@@ -104,11 +95,11 @@ export default ThingiverseIcon;
 We can bring this all together and try it out in a simple example.
 
 ```jsx codesandbox=ds9s9?entry=/src/App.js
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import faThingiverse from "./components/IconThingiverse";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import faThingiverse from './components/IconThingiverse';
 
 const App = () => {
-  return <FontAwesomeIcon icon={faThingiverse} size="2x" />;
+    return <FontAwesomeIcon icon={faThingiverse} size="2x" />;
 };
 
 export default App;

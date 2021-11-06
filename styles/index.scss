@@ -1,9 +1,9 @@
-@import "./bootstrap";
-@import "./animations";
+@import './bootstrap';
+@import './animations';
 
 a {
-    transition: color 0.5s cubic-bezier(.37,.75,.61,1.05) 0ms,
-                opacity 0.5s cubic-bezier(.37,.75,.61,1.05) 0ms;
+    transition: color 0.5s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0ms,
+        opacity 0.5s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0ms;
 }
 
 h1 {
@@ -13,7 +13,7 @@ h1 {
 h2 {
     word-spacing: -0.1em;
     &.border-bottom {
-        border-color: rgba($headings-color, .30) !important;
+        border-color: rgba($headings-color, 0.3) !important;
     }
 }
 
@@ -35,7 +35,7 @@ h2 {
 .shadow-hover-none {
     transition-property: box-shadow, opacity;
     transition-duration: 0.2s;
-    transition-timing-function: cubic-bezier(.37,.75,.61,1.05);
+    transition-timing-function: cubic-bezier(0.37, 0.75, 0.61, 1.05);
     transition-delay: 0ms;
 
     &:hover {
@@ -53,17 +53,14 @@ h2 {
 }
 
 .collapse-button {
-
     @include transition($accordion-icon-transition);
 
     &:not(.collapsed) {
         transform: $accordion-icon-transform;
     }
-
 }
 
 .nav-photo {
-
     @include media-breakpoint-down(md) {
         width: 110px;
         height: 110px;
@@ -73,9 +70,8 @@ h2 {
 
     a:hover > span {
         animation: shakeX;
-        animation-duration: .5s;
+        animation-duration: 0.5s;
     }
-
 }
 
 .site-nav {
@@ -86,13 +82,11 @@ h2 {
     max-width: 1200px;
 }
 
-
 .link-anchor {
     opacity: 0;
 
-
     :hover > & {
-        opacity: .5;
+        opacity: 0.5;
     }
 
     &:hover {
@@ -102,11 +96,9 @@ h2 {
 }
 
 .post-card {
-
     @include media-breakpoint-up(md) {
         .card-img {
             flex: 0 0 450px;
         }
     }
-
 }

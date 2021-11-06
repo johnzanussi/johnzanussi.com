@@ -6,31 +6,22 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Link from './Link';
 
 const PostPagination = ({ posts, ...props }) => {
-
     return (
-
-        <nav
-            aria-label="Post pagination"
-            {...props}
-        >
-
+        <nav aria-label="Post pagination" {...props}>
             <ul className="pagination pagination-lg row my-4">
-
                 {posts.map(({ isPrevious, ...post }) => {
-
                     const label = isPrevious ? 'Previous' : 'Next';
 
                     return (
-
                         <li
                             key={post.title}
                             className={classNames('col-md-6 page-item', {
                                 'text-start mb-4 mb-md-0': isPrevious,
                                 'text-end': !isPrevious,
-                                'offset-md-6': !isPrevious && posts.length === 1,
+                                'offset-md-6':
+                                    !isPrevious && posts.length === 1,
                             })}
                         >
-
                             <Link
                                 href={post.url}
                                 className="page-link h-100 rounded-1"
@@ -41,7 +32,8 @@ const PostPagination = ({ posts, ...props }) => {
 
                                 {isPrevious && (
                                     <Fragment>
-                                        <FontAwesomeIcon icon={faArrowLeft} />&nbsp;
+                                        <FontAwesomeIcon icon={faArrowLeft} />
+                                        &nbsp;
                                         {post.title}
                                     </Fragment>
                                 )}
@@ -52,22 +44,13 @@ const PostPagination = ({ posts, ...props }) => {
                                         <FontAwesomeIcon icon={faArrowRight} />
                                     </Fragment>
                                 )}
-
                             </Link>
-
                         </li>
-
                     );
-
                 })}
-
-
             </ul>
-
         </nav>
-
     );
-
 };
 
 export default PostPagination;

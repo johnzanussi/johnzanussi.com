@@ -1,4 +1,8 @@
-import { getPostData, getSiblingPosts, getPostsStaticPaths } from '../../lib/posts';
+import {
+    getPostData,
+    getSiblingPosts,
+    getPostsStaticPaths,
+} from '../../lib/posts';
 
 import Layout from '../../components/Layout';
 import Meta from '../../components/Meta';
@@ -8,11 +12,8 @@ import DraftBadge from '../../components/DraftBadge';
 import PostPagination from '../../components/PostPagination';
 
 const Post = ({ post, siblingPosts }) => {
-
     return (
-
         <Layout>
-
             <Meta
                 title={post.title}
                 image={post.coverImage}
@@ -24,23 +25,18 @@ const Post = ({ post, siblingPosts }) => {
 
             <DateFormat date={post.date} />
 
-            <h1>
-                {post.title}
-            </h1>
+            <h1>{post.title}</h1>
 
             <hr />
 
             <Markdown source={post.content} />
 
             <PostPagination posts={siblingPosts} />
-
         </Layout>
-
     );
 };
 
 export async function getStaticProps({ params }) {
-
     const post = await getPostData(params.slug);
 
     const siblingPosts = await getSiblingPosts(post);
@@ -51,7 +47,6 @@ export async function getStaticProps({ params }) {
             siblingPosts,
         },
     };
-
 }
 
 export async function getStaticPaths() {

@@ -15,31 +15,41 @@ import { faHashtag } from '@fortawesome/free-solid-svg-icons';
 
 const components = {
     a: (props) => <Link {...props} />,
-    h2: props => <h2 className="mt-4 mb-3 pb-2 border-bottom" {...props} />,
-    h3: props => <h3 className="mt-4" {...props} />,
-    h4: props => <h4 className="mt-3" {...props} />,
-    h5: props => <h5 className="mt-3 text-white" {...props} />,
+    h2: (props) => <h2 className="mt-4 mb-3 pb-2 border-bottom" {...props} />,
+    h3: (props) => <h3 className="mt-4" {...props} />,
+    h4: (props) => <h4 className="mt-3" {...props} />,
+    h5: (props) => <h5 className="mt-3 text-white" {...props} />,
     img: (props) => (
         <div className="mb-4">
-            <Image className="img-fluid mw-100" layout="responsive" {...props} />
+            <Image
+                className="img-fluid mw-100"
+                layout="responsive"
+                {...props}
+            />
         </div>
     ),
-    iframe: props => (
+    iframe: (props) => (
         <div className="mb-4">
             <iframe {...props} />
         </div>
     ),
     sup: ({ children, ...props }) => (
         <sup {...props} className="text-danger">
-            [{Children.map(children, child => cloneElement(child, { className: 'link-danger' }))}]
+            [
+            {Children.map(children, (child) =>
+                cloneElement(child, { className: 'link-danger' })
+            )}
+            ]
         </sup>
     ),
-    table: props => (
+    table: (props) => (
         <div className="table-responsive mb-4">
-            <table className="table text-white" {...props } />
+            <table className="table text-white" {...props} />
         </div>
     ),
-    FontAwesomeHashtag: (props) => <FontAwesomeIcon icon={faHashtag} {...props} />,
+    FontAwesomeHashtag: (props) => (
+        <FontAwesomeIcon icon={faHashtag} {...props} />
+    ),
     MDXColumns: MDXColumns,
     AmazonDisclosure: AmazonDisclosure,
     AmazonProducts: AmazonProducts,
@@ -48,14 +58,7 @@ const components = {
 };
 
 const Markdown = ({ source }) => {
-
-    return (
-        <MDXRemote
-            components={components}
-            {...source }
-        />
-    );
-
+    return <MDXRemote components={components} {...source} />;
 };
 
 export default Markdown;

@@ -16,7 +16,7 @@ const seoConfig = {
     additionalMetaTags: [
         {
             name: 'viewport',
-            content: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+            content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
         },
         {
             name: 'theme-color',
@@ -24,19 +24,19 @@ const seoConfig = {
         },
         {
             name: 'mobile-web-app-capable',
-            content: 'yes'
+            content: 'yes',
         },
         {
             name: 'apple-mobile-web-app-capable',
-            content: 'yes'
+            content: 'yes',
         },
         {
             name: 'application-name',
-            content: 'John Zanussi'
+            content: 'John Zanussi',
         },
         {
             name: 'apple-mobile-web-app-title',
-            content: 'John Zanussi'
+            content: 'John Zanussi',
         },
     ],
     additionalLinkTags: [
@@ -136,6 +136,3 @@ const seoConfig = {
 };
 
 export default seoConfig;
-
-
-

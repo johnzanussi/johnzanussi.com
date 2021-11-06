@@ -1,9 +1,7 @@
 {
     "root": true,
     "extends": "next/core-web-vitals",
-    "plugins": [
-        "unused-imports"
-    ],
+    "plugins": ["unused-imports"],
     "rules": {
         "indent": [
             "error",
@@ -12,13 +10,8 @@
                 "ignoredNodes": ["TemplateLiteral"]
             }
         ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "no-trailing-spaces": [
-            "error"
-        ],
-        "template-curly-spacing" : "off"
+        "semi": ["error", "always"],
+        "no-trailing-spaces": ["error"],
+        "template-curly-spacing": "off"
     }
 }

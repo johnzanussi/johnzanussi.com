@@ -3,7 +3,6 @@ import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 
 const Timeline = () => {
-
     const events = [
         {
             // CH
@@ -53,9 +52,7 @@ const Timeline = () => {
 
     return (
         <div className="d-flex mb-4">
-
             {events.map(({ start, end, color, label, textColor }) => {
-
                 const eventLength = differenceInMonths(
                     parseISO(end),
                     parseISO(start)
@@ -64,16 +61,15 @@ const Timeline = () => {
                 const percent = `${eventLength}%`;
 
                 return (
-                    <div
-                        key={start}
-                        className=""
-                        style={{ width: percent }}>
-
+                    <div key={start} className="" style={{ width: percent }}>
                         <div
-                            className={`w-100 text-${textColor ? textColor : 'dark'} fw-bold text-end p-2`}
+                            className={`w-100 text-${
+                                textColor ? textColor : 'dark'
+                            } fw-bold text-end p-2`}
                             style={{
                                 backgroundColor: color,
-                            }}>
+                            }}
+                        >
                             {label}
                         </div>
 
@@ -81,19 +77,13 @@ const Timeline = () => {
                             className="p-1 text-end small"
                             style={{ borderColor: `${color} !important` }}
                         >
-
                             {format(parseISO(start), 'MMMM yyyy')}
-
                         </div>
-
                     </div>
                 );
-
             })}
-
         </div>
     );
-
 };
 
 export default Timeline;
