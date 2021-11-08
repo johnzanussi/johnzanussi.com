@@ -1,39 +1,5 @@
 @import '../node_modules/bootstrap/scss/functions';
 
-// https://coolors.co/2cb9dd-ff1f93-0e141b-182635-a6b143-ea3734-ece9eb-ffda22-9cab9e
-// $primary: #2CB9DD;
-// $secondary: #FF1F93;
-// $success: #DCF763;
-// $danger: #EA3734;
-// $info: #E4572E;
-// $dark: #0e141b;
-// $light: #F1EBFF;
-// $warning: #FFDA22;
-// $white: #ECE9EB;
-// $nav: #182635;
-
-// $text-muted: #9CAB9E;
-
-// $headings-color: #A6B143;
-
-// https://beta.reactjs.org/
-// https://coolors.co/23272f-16273c-149eca-da4167-fdca40-f79824-f0a7a0
-// $primary: #149eca;
-// $secondary: #ff389f;
-// $success: #dcf763;
-// $danger: #df6887;
-// $info: #e4572e;
-// $dark: #16273c;
-// $light: #f1ebff;
-// $warning: #ffda22;
-// $white: #ece9eb;
-
-// $nav: #23272f;
-// $dark-card: #343a46;
-
-// $text-muted: #9cab9e;
-
-
 $primary: #13a0d1;
 $secondary: #ff36a4;
 $success: #0177c1;
@@ -44,8 +10,10 @@ $light: #f1ebff;
 $warning: #fcd12a;
 $white: #ecede8;
 
-$nav: #0e1114;
-$dark-card: #303c4c;
+$body-bg: #0e1114;
+$body-color: $white;
+
+$card-bg: #303c4c;
 
 $text-muted: #cdc5ba;
 
@@ -65,21 +33,15 @@ $font-family-monospace: 'Roboto Mono';
 $list-group-bg: #282c34;
 $list-group-color: $primary;
 $list-group-border-color: rgba($primary, 0.4);
-$list-group-hover-bg: $nav;
+$list-group-hover-bg: $body-bg;
 $list-group-active-color: $white;
-$list-group-active-bg: $nav;
+$list-group-active-bg: $body-bg;
 $list-group-action-color: $primary;
 $list-group-action-hover-color: $list-group-action-color;
-$list-group-action-active-bg: $nav;
+$list-group-action-active-bg: $body-bg;
 $list-group-action-active-color: $white;
 
 @import '../node_modules/bootstrap/scss/variables';
-
-// $custom-colors: (
-//     'nav': $nav,
-//     'dark-card': $dark-card
-// );
-// $theme-colors: map-merge($theme-colors, $custom-colors);
 
 $headings-font-family: $font-family-monospace;
 $navbar-dark-toggler-border-color: $white;

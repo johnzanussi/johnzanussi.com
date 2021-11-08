@@ -9,7 +9,7 @@ const PostCard = ({ post, ...props }) => {
     return (
         <div
             className={classNames(
-                'post-card card rounded shadow shadow-hover-none bg-dark-card flex-md-row overflow-hidden',
+                'post-card card rounded shadow shadow-hover-none flex-md-row overflow-hidden',
                 {
                     'border-info': post.isDraft,
                 }

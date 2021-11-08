@@ -11,9 +11,8 @@ export default class MyDocument extends Document {
                     />
                 </Head>
 
-                <body className="bg-nav text-white">
+                <body>
                     <Main />
-
                     <NextScript />
                 </body>
             </Html>
