@@ -134,9 +134,21 @@ You'll need a single "Trigger" which is activated when the doorbell button is pr
 
 #### Actions
 
-I've created two "Actions". One to set the volume of the speaker to 65% and the other to play the file we uploaded to Home Assistant.
+*UPDATE: Thanks to Reddit users [u/Eriner_](https://www.reddit.com/r/Ubiquiti/comments/qq9qhz/comment/hk17gt9/?utm_source=reddit&utm_medium=web2x&context=3) and [u/pie_faced_avitar](https://www.reddit.com/user/pie_faced_avitar/) for both suggesting to use the [`sonos.shapshot` and `sonos.restore` services](https://www.home-assistant.io/integrations/sonos/#service-sonossnapshot) to pause and resume whatever may be playing when the doorbell chime is played.*
+
 
 ###### Action 1
+Create a snapshot of what is currently playing on all Sonos speakers.
+
+| Field       | Value                                                                               |
+| ----------- | ----------------------------------------------------------------------------------- |
+| Action Type | `Call service`                                                                      |
+| Service     | `sonos.snapshot`                                                                    |
+| Entity      | `all`                                                                               |
+| With Group  | `Checked`                                                                           |
+
+###### Action 2
+Set the volume of the speaker that is going to play the doorbell chime.
 
 | Field       | Value                                                                               |
 | ----------- | ----------------------------------------------------------------------------------- |
@@ -145,7 +157,8 @@ I've created two "Actions". One to set the volume of the speaker to 65% and the 
 | Targets     | `media_player.living_room` <br /> Select the speaker from the `Pick Entity` button. |
 | Level       | `0.65` <br /> 65%                                                                   |
 
-###### Action 2
+###### Action 3
+Play the doorbell chime on one or many Sonos speakers.
 
 | Field        | Value                                                                                                                                                                                        |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -153,34 +166,63 @@ I've created two "Actions". One to set the volume of the speaker to 65% and the 
 | Service      | `media_player.play_media`                                                                                                                                                                    |
 | Targets      | `media_player.living_room` <br /> Select the same entity as above.                                                                                                                           |
 | Content ID   | `http://192.168.20.121:8123/local/sounds_sounds_ring_button_Chime.mp3`<br />This is the URL we established by uploading the audio file in [step 3](#3-upload-chime-audio-to-home-assistant). |
-| Content Type | `music`                                                                                                                                                                                      |
+| Content Type | `music`                                                            |
 
-![screenshot-home-assistant-automation-triggers.png](/assets/posts/unifi-g4-doorbell-chime-with-sonos/screenshot-home-assistant-automation-actions.png)
+###### Action 4
+Wait 4 seconds (the length of the audio file) for the doorbell chime to play.
+
+| Field       | Value                                                                               |
+| ----------- | ----------------------------------------------------------------------------------- |
+| Action Type | `Delay`                                                                             |
+| hh mm ss ms | `00:00:04:000`                                                                      |
+
+###### Action 5
+Restore all Sonos speakers back to what they were doing before chime was played.
+
+| Field       | Value                                                                               |
+| ----------- | ----------------------------------------------------------------------------------- |
+| Action Type | `Call service`                                                                      |
+| Service     | `sonos.restore`                                                                     |
+| Entity      | `all`                                                                               |
+| With Group  | `Checked`                                                                           |
+
+![screenshot-home-assistant-automation-triggers.png](/assets/posts/unifi-g4-doorbell-chime-with-sonos/screenshot-home-assistant-automation-actions.jpg)
 
 As mentioned above here is the automation in YAML format.
 
 ```yaml
-alias: 'Play chime on Sonos when doorbell is pressed'
+alias: Play chime on Sonos when doorbell is pressed
 description: ''
 trigger:
-    - platform: state
-      entity_id: binary_sensor.doorbell_front_door
-      to: 'on'
+  - platform: state
+    entity_id: binary_sensor.doorbell_front_door
+    to: 'on'
 condition: []
 action:
-    - service: media_player.volume_set
-      target:
-          entity_id:
-              - media_player.living_room
-      data:
-          volume_level: 0.65
-    - service: media_player.play_media
-      target:
-          entity_id:
-              - media_player.living_room
-      data:
-          media_content_type: music
-          media_content_id: http://192.168.20.121:8123/local/sounds_sounds_ring_button_Chime.mp3
+  - service: sonos.snapshot
+    data:
+      entity_id: all
+  - service: media_player.volume_set
+    target:
+      entity_id:
+        - media_player.living_room
+    data:
+      volume_level: 0.65
+  - service: media_player.play_media
+    target:
+      entity_id:
+        - media_player.living_room
+    data:
+      media_content_type: music
+      media_content_id: http://192.168.20.121:8123/local/sounds_sounds_ring_button_Chime.mp3
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 4
+      milliseconds: 0
+  - service: sonos.restore
+    data:
+      entity_id: all
 mode: single
 ```
 
