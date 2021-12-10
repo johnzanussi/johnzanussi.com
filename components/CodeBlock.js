@@ -20,10 +20,13 @@ const CodeBlock = ({ children, className, filename, url, title }) => {
                 return (
                     <div
                         style={{ ...style }}
-                        className="border border-danger rounded my-3"
+                        className="rounded rounded-1 my-3"
                     >
                         {showHeader && (
-                            <div className="p-3 border-bottom border-danger overflow-auto">
+                            <div
+                                className="p-3 border-bottom overflow-auto"
+                                style={{ borderColor: '#0e1114 !important;' }}
+                            >
                                 {filename}
 
                                 {url && (
