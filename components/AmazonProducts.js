@@ -21,6 +21,7 @@ const AmazonProducts = ({ products }) => {
                             width="50"
                             height="50"
                             alt={title}
+                            style={{ overflow: 'hidden' }}
                         />
 
                         <div className="d-flex gap-2 w-100 justify-content-between">
