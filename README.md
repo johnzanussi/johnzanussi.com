@@ -68,4 +68,4 @@ I'm self hosting Plausible at [analytics.johnzanussi.com](https://analytics.john
 -   Create a way to embed [Thingiverse](https://www.thingiverse.com/) things
 -   Add pagination for Posts page
 -   ✅ ~~Create a "More posts" component for the bottom of individual posts~~ [6844b46](https://github.com/johnzanussi/johnzanussi.com/commit/6844b46917bf863f5eb70e4b18557a24ba9cc13f)
--   Add comments on posts
+-   ✅ ~~Add comments on posts~~ [87219d0](https://github.com/johnzanussi/johnzanussi.com/commit/87219d0045088a4cff94d5cd20d193cf6bd41bf6)

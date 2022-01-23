@@ -1,3 +1,5 @@
+import { FastCommentsCommentWidget } from 'fastcomments-react';
+
 import {
     getPostData,
     getSiblingPosts,
@@ -32,6 +34,16 @@ const Post = ({ post, siblingPosts }) => {
             <Markdown source={post.content} />
 
             <PostPagination posts={siblingPosts} />
+
+            <h2 id="comments">Comments</h2>
+
+            <FastCommentsCommentWidget
+                tenantId="TuZHgHCUlVl"
+                urlId={post.slug}
+                url={post.url}
+                hasDarkBackground={true}
+                pageTitle={post.title}
+            />
         </Layout>
     );
 };
