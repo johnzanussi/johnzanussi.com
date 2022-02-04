@@ -12,6 +12,7 @@ import DateFormat from '../../components/DateFormat';
 import Markdown from '../../components/Markdown';
 import DraftBadge from '../../components/DraftBadge';
 import PostPagination from '../../components/PostPagination';
+import EnjoyCTA from '../../components/EnjoyCTA';
 
 const Post = ({ post, siblingPosts }) => {
     return (
@@ -32,6 +33,8 @@ const Post = ({ post, siblingPosts }) => {
             <hr />
 
             <Markdown source={post.content} />
+
+            <EnjoyCTA />
 
             <PostPagination posts={siblingPosts} />
 
