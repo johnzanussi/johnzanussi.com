@@ -99,7 +99,7 @@ const Layout = ({ children }) => {
                             </p>
 
                             <p className="mb-0 mb-md-3">
-                                Engineering Manager at{' '}
+                                Senior Engineering Manager at{' '}
                                 <Link
                                     href="https://leaflink.com/"
                                     className="text-reset"

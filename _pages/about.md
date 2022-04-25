@@ -50,7 +50,10 @@ Connect with me on [LinkedIn](https://www.linkedin.com/in/john-zanussi/).
 
 ##### LeafLink
 
-**<span className="text-muted">March 2021 - Present</span>**  
+**<span className="text-muted">February 2022 - Present</span>**  
+Senior Engineering Manager, Commerce
+
+**<span className="text-muted">March 2021 - February 2022</span>**  
 Engineering Manager
 
 ##### Daily Harvest
