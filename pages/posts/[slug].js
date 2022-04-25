@@ -43,7 +43,7 @@ const Post = ({ post, siblingPosts }) => {
             <FastCommentsCommentWidget
                 tenantId="TuZHgHCUlVl"
                 urlId={post.slug}
-                url={post.url}
+                url={post.absoluteUrl}
                 hasDarkBackground={true}
                 pageTitle={post.title}
             />
