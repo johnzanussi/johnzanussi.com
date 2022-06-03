@@ -66,7 +66,14 @@ At some point between returning the Honeywell devices and continuing my search o
 
 ### Steps
 
-#### 1. Get audio file to play
+#### 1. Install and configure integrations
+
+Follow the directions for each of the Sonos and UniFi Protect integrations to get them configured in Home Assistant. I didn't run into any issues with either of these and I've been quite satisfied with their reliability.
+
+-   [Sonos](https://www.home-assistant.io/integrations/sonos)
+-   [UniFi Protect](https://www.home-assistant.io/integrations/unifiprotect/)
+
+#### 2. Get audio file to play
 
 You can use any mp3 file you want. In my case, I wanted to use the chime that plays on the G4 doorbell when the button is pressed. Unfortunately Ubiquiti doesn't make these files publicly available. However they do allow you to upload your own chimes to the doorbell ([community.ui.com](https://community.ui.com/questions/G4-Doorbell-Play-custom-ring-sounds-on-button-press-/a9fe4f57-05c3-43e9-a590-1e411ca65b0d) + [reddit.com/r/Ubiquiti](https://www.reddit.com/r/Ubiquiti/comments/htnaaf/uvcg4doorbell_custom_outdoor_chime_sound_songs/)). While I was poking around on the device I found all the default sound files, downloaded them to my computer, then uploaded them to a public repo on GitHub which you can [find here](https://github.com/johnzanussi/unifi-g4-doorbell-sounds).
 
@@ -81,13 +88,6 @@ Again, I chose to use the native chime from the doorbell to play in the house.
     />
     Your browser does not support the audio element. Please upgrade!
 </audio>
-
-#### 2. Install and configure integrations
-
-Follow the directions for each of the Sonos and UniFi Protect integrations to get them configured in Home Assistant. I didn't run into any issues with either of these and I've been quite satisfied with their reliability.
-
--   [Sonos](https://www.home-assistant.io/integrations/sonos)
--   [UniFi Protect](https://github.com/briis/unifiprotect)
 
 #### 3. Upload chime audio to Home Assistant
 
