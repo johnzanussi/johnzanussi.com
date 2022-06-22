@@ -4,13 +4,15 @@ import classNames from 'classnames';
 
 import Link from './Link';
 
-const CodeBlock = ({ children, className, filename, url, title }) => {
+const CodeBlock = ({ children, filename, url, title }) => {
+    const { children: code, className } = children.props;
+
     const language = className.replace(/language-/, '');
 
     return (
         <Highlight
             {...defaultProps}
-            code={children.trim()}
+            code={code}
             language={language}
             theme={theme}
         >

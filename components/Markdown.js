@@ -53,7 +53,7 @@ const components = {
     MDXColumns: MDXColumns,
     AmazonDisclosure: AmazonDisclosure,
     AmazonProducts: AmazonProducts,
-    code: CodeBlock,
+    pre: CodeBlock,
     YouTubeEmbed: YouTubeEmbed,
 };
 
