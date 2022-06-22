@@ -39,7 +39,12 @@ const CodeBlock = ({ children, filename, url, title }) => {
                             </div>
                         )}
 
-                        <pre className={classNames(className, 'p-4 fs-6')}>
+                        <pre
+                            className={classNames(
+                                className,
+                                'pt-4 px-4 fs-6 mb-0'
+                            )}
+                        >
                             {tokens.map((line, i) => (
                                 <div
                                     key={i}

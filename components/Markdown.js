@@ -19,15 +19,24 @@ const components = {
     h3: (props) => <h3 className="mt-4" {...props} />,
     h4: (props) => <h4 className="mt-3" {...props} />,
     h5: (props) => <h5 className="mt-3 text-white" {...props} />,
-    img: (props) => (
-        <div className="mb-4">
+    img: ({ alt, ...props }) => {
+        const [altText, noDivWrap] = alt.split(' noDivWrap');
+
+        const PostImage = (
             <Image
                 className="img-fluid mw-100"
-                layout="responsive"
+                layout="intrinsic"
+                alt={altText}
                 {...props}
             />
-        </div>
-    ),
+        );
+
+        if (noDivWrap === '') {
+            return PostImage;
+        }
+
+        return <div className="mb-4">{PostImage}</div>;
+    },
     iframe: (props) => (
         <div className="mb-4">
             <iframe {...props} />
@@ -55,6 +64,7 @@ const components = {
     AmazonProducts: AmazonProducts,
     pre: CodeBlock,
     YouTubeEmbed: YouTubeEmbed,
+    Image: Image,
 };
 
 const Markdown = ({ source }) => {
