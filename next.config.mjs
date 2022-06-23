@@ -7,9 +7,13 @@ const config = {
         formats: ['image/avif', 'image/webp'],
         imageSizes: [
             450, // Post thumbnail
+            600,
         ],
         // https://getbootstrap.com/docs/5.1/layout/breakpoints/#available-breakpoints
-        deviceSizes: [576, 600, 768, 992, 1200],
+        deviceSizes: [576, 768, 992, 1200],
+        domains: [
+            'cdn.ko-fi.com',
+        ]
     },
     // Using this throws 404s
     // pageExtensions: [
