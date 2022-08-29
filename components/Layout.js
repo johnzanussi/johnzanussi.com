@@ -9,7 +9,7 @@ import {
     faGithub,
     faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
-import faThingiverse from '../components/IconThingiverse';
+import faPrintables from '../components/IconPrintables';
 
 import Meta from '../components/Meta';
 import Link from '../components/Link';
@@ -53,9 +53,9 @@ const Layout = ({ children }) => {
             url: 'https://www.instagram.com/johnzanussi/',
         },
         {
-            name: 'Thingiverse',
-            icon: faThingiverse,
-            url: 'https://www.thingiverse.com/johnzanussi/designs',
+            name: 'Printables',
+            icon: faPrintables,
+            url: 'https://www.printables.com/social/170869-johnzanussi/about',
         },
     ];
 
