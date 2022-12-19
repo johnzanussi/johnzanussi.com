@@ -106,13 +106,13 @@ const Layout = ({ children }) => {
                                 >
                                     LeafLink
                                 </Link>
-                                <br />
+                                {/*<br />
                                 <Link
                                     href="https://grnh.se/15a127b32us"
                                     className="small link-warning opacity-75"
                                 >
                                     We&apos;re hiring!
-                                </Link>
+                                </Link>*/}
                             </p>
                         </div>
                     </div>
