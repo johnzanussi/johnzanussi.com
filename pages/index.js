@@ -1,4 +1,4 @@
-import { getPostData } from '../lib/posts';
+import { getMostRecentPost } from '../lib/posts';
 
 import Layout from '../components/Layout';
 import Meta from '../components/Meta';
@@ -60,12 +60,11 @@ export default function Index({ featuredPost }) {
             <p className="lead">
                 You can read more about me on my{' '}
                 <Link href="/about">About</Link> page. You can see what videos
-                I’m watching on the YouTube page.
+                I’m watching on the <Link href="/youtube">YouTube</Link> page.
             </p>
 
             <p className="lead">
-                Lastly, you can check out the first post I created below. It
-                dives into how I did a thing to my 3D printer.
+                Lastly, you can check out my latest post below.
             </p>
 
             <div className="mt-3">
@@ -77,7 +76,7 @@ export default function Index({ featuredPost }) {
 }
 
 export async function getStaticProps() {
-    const featuredPost = await getPostData('3d-printer-psu-control');
+    const featuredPost = await getMostRecentPost();
 
     return {
         props: {
