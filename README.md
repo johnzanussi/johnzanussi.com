@@ -1,4 +1,4 @@
-Back in the day, [`johnzanussi.com`](https://johnzanussi.com) used to be the home of my Tumblr blog. Then, in 2014, I switched it to a single splash page with "Full site coming soon" in the footer. Well, almost eight years later, I've finally built a more elaborate website for myself. Below, I'll document some of my processes, the tools, libraries, and services I used, and what I would like to add in the future.
+Back in the day, [`johnzanussi.com`](https://johnzanussi.com) was the home of my Tumblr blog. Then, in 2014, I switched it to a single splash page with "Full site coming soon" in the footer. Well, almost eight years later, I've finally built a more elaborate website for myself. Below, I'll document some of my processes, the tools, libraries, and services I used, and what I would like to add in the future.
 
 All the code that powers this website is available on my [GitHub](https://github.com/johnzanussi/johnzanussi.com).
 
@@ -11,7 +11,7 @@ All the code that powers this website is available on my [GitHub](https://github
 
 ## Requirements
 
--   Uses technology I'm mostly familar with
+-   Uses technology I'm most familiar with
 -   Easy to maintain
 -   Easy to deploy
 -   Performant
@@ -28,21 +28,21 @@ All the code that powers this website is available on my [GitHub](https://github
 
 ##### [Next.js](https://nextjs.org)
 
-Next.js has quickly become my go-to for spinning up project sites. It's easy to use, comes with a good amount of starter projects, and deploys easily.
+Next.js has quickly become my go-to for spinning up project sites. It's easy to use, has many starter projects, and deploys easily.
 
 ##### [React](https://reactjs.org)
 
-Your only option for Next.js is React, which is fine by me since it's what I'm most comfortable with. I've been writing React regularly since 2016.
+Your only option for Next.js is React, which is fine since it's what I'm most comfortable with. I've been writing React regularly since 2016.
 
 ##### [Bootstrap](https://getbootstrap.com/)
 
-For this project and another personal project, I gave [Tailwind](https://tailwindcss.com/) a chance. Tailwind is great if you're working in an established design system with a custom component library and just need utility classes. Bootstrap shines compared to Tailwind in the vast array of out-of-the-box components.
+For this project and another personal project, I gave [Tailwind](https://tailwindcss.com/) a chance. Tailwind is great if you're working in an established design system with a custom component library and need utility classes. Bootstrap shines compared to Tailwind in the vast array of out-of-the-box components.
 
 ##### [Font Awesome](https://fontawesome.com/)
 
-Font Awesome gets an honorable mention here as I used a handful of their icons throughout my site.
+Font Awesome gets an honorable mention here, as I used a handful of their icons throughout my site.
 
-A full list of packages can be found in [`package.json`](https://github.com/johnzanussi/johnzanussi.com/package.json)
+A complete list of packages can be found in [`package.json`](https://github.com/johnzanussi/johnzanussi.com/package.json)
 
 ## Services
 
@@ -50,13 +50,17 @@ A full list of packages can be found in [`package.json`](https://github.com/john
 
 I didn't know much about Vercel until I was ready to deploy my first Next.js project. Out of everything here, I'm most impressed with Vercel. I've never experienced a more seamless out-of-the-box solution for deploying static websites. Best of all, it's free for personal projects.
 
-##### [Fiverr](https://www.fiverr.com/)
+##### [FastComments](https://fastcomments.com/)
 
-Since I’m not the best at articulating my thoughts into words, I hired someone on Fiverr to proofread most of these site pages. I’ve used Fiverr in the past for various tasks and have had nothing but great experiences.
+I spent quite some time looking for the best way to add comments, including rolling my own, to this site but eventually landed on FastComments. The key aspects that won me over are that it's pretty feature-rich, doesn't require commenters to create accounts, offers a [React library](https://www.npmjs.com/package/fastcomments-react), and [collects as little data](https://fastcomments.com/privacy-policy) as possible. While FastComments is not free, my site does such little traffic and comment volume that it only costs me $0.99 a month.
 
 ##### [Plausible](https://plausible.io/)
 
-I'm self hosting Plausible at [analytics.johnzanussi.com](https://analytics.johnzanussi.com/) to collect traffic data from this site. I followed this [amazing guide](https://www.stackovercloud.com/2021/10/28/how-to-install-plausible-analytics-on-ubuntu-20-04/) to get the self hosted instance installed and running on DigitalOcean. I'm also using the [`next-plausible`](https://github.com/4lejandrito/next-plausible) package to send tracking data to the self hosted instance.
+I'm self-hosting Plausible at [analytics.johnzanussi.com](https://analytics.johnzanussi.com/) to collect traffic data from this site. I followed this [amazing guide](https://www.stackovercloud.com/2021/10/28/how-to-install-plausible-analytics-on-ubuntu-20-04/) to get the self-hosted instance installed and running on DigitalOcean. I'm also using the [`next-plausible`](https://github.com/4lejandrito/next-plausible) package to send tracking data to the self-hosted instance.
+
+##### [Grammarly](https://www.grammarly.com/)
+
+Since I’m not the best at articulating my thoughts into words, I started using Grammarly's Premium plan to check my work. It's most useful for me as a spell and grammar check, but I also appreciate some of the other suggestions, helping to make my words more readable.
 
 ## To Do
 
