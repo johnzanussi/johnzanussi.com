@@ -1,4 +1,4 @@
-import { getPostsStaticPaths, getAllPostData } from 'lib/posts';
+import { getAllPostData } from 'lib/posts';
 
 import PageTitle from 'components/PageTitle';
 import PostCard from 'components/PostCard';
@@ -17,9 +17,4 @@ export default async function PostsIndex() {
             ))}
         </>
     );
-}
-
-export async function generateStaticParams() {
-    const paths = await getPostsStaticPaths();
-    return paths;
 }

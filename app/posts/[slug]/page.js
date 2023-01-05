@@ -1,4 +1,4 @@
-import { getPostData, getSiblingPosts } from 'lib/posts';
+import { getPostsStaticPaths, getPostData, getSiblingPosts } from 'lib/posts';
 
 import DateFormat from 'components/DateFormat';
 import Markdown from 'components/Markdown';
@@ -38,3 +38,10 @@ export default async function Post({ params }) {
         </>
     );
 }
+
+export async function generateStaticParams() {
+    const paths = await getPostsStaticPaths();
+    return paths;
+}
+
+export const dynamicParams = false;
