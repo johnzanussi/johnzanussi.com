@@ -1,13 +1,10 @@
-import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import { prependHost } from '../lib/utils';
+import { prependHost } from 'lib/utils';
 
-const Meta = ({ title, description, openGraph, ...props }) => {
-    const { asPath } = useRouter();
-
+const Meta = ({ title, description, path = '', openGraph = {}, ...props }) => {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-    const url = prependHost(asPath);
+    const url = prependHost(path);
 
     if (props.images) {
         openGraph.images = props.images;
@@ -24,6 +21,7 @@ const Meta = ({ title, description, openGraph, ...props }) => {
 
     return (
         <NextSeo
+            useAppDir
             title={title}
             description={description}
             canonical={url}
@@ -34,10 +32,6 @@ const Meta = ({ title, description, openGraph, ...props }) => {
             }}
         />
     );
-};
-
-Meta.defaultProps = {
-    openGraph: {},
 };
 
 export default Meta;

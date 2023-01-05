@@ -12,8 +12,8 @@ const Link = ({ href, children, ...props }) => {
 
     // Internal
     return (
-        <InternalLink href={href}>
-            <a {...props}>{children}</a>
+        <InternalLink href={href} {...props}>
+            {children}
         </InternalLink>
     );
 };

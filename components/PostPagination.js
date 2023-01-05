@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import Link from './Link';
+import Link from 'components/Link';
 
-const PostPagination = ({ posts, showLabels, ...props }) => {
+const PostPagination = ({ posts, showLabels = true, ...props }) => {
     return (
         <nav aria-label="Post pagination" {...props}>
             <ul className="pagination pagination-lg row my-4">
@@ -53,10 +53,6 @@ const PostPagination = ({ posts, showLabels, ...props }) => {
             </ul>
         </nav>
     );
-};
-
-PostPagination.defaultProps = {
-    showLabels: true,
 };
 
 export default PostPagination;

@@ -1,5 +1,5 @@
-import Link from './Link';
-import Image from './Image';
+import Link from 'components/Link';
+import Image from 'components/Image';
 
 const EnjoyCTA = () => {
     return (
@@ -21,7 +21,6 @@ const EnjoyCTA = () => {
                     <Image
                         width="143"
                         height="36"
-                        layout="fixed"
                         src="https://cdn.ko-fi.com/cdn/kofi1.png?v=3"
                         alt="Buy Me a Coffee at ko-fi.com"
                     />

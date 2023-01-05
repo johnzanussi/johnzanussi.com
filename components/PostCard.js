@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 
-import Link from './Link';
-import Image from './Image';
-import DateFormat from './DateFormat';
-import DraftBadge from './DraftBadge';
+import Link from 'components/Link';
+import Image from 'components/Image';
+import DateFormat from 'components/DateFormat';
+import DraftBadge from 'components/DraftBadge';
 
 const PostCard = ({ post, ...props }) => {
     return (
@@ -38,8 +38,7 @@ const PostCard = ({ post, ...props }) => {
                 <Image
                     src={post.coverImage.url}
                     alt={`Cover image for ${post.title}`}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
                 />
             </div>
         </div>

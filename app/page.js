@@ -1,13 +1,13 @@
-import { getMostRecentPost } from '../lib/posts';
+import { getMostRecentPost } from 'lib/posts';
 
-import Layout from '../components/Layout';
-import Meta from '../components/Meta';
-import Link from '../components/Link';
-import PostCard from '../components/PostCard';
-import PostPagination from '../components/PostPagination';
-import Emoji from '../components/Emoji';
+import Link from 'components/Link';
+import PostCard from 'components/PostCard';
+import PostPagination from 'components/PostPagination';
+import Emoji from 'components/Emoji';
 
-export default function Index({ featuredPost }) {
+export default async function Page() {
+    const featuredPost = await getMostRecentPost();
+
     const posts = [
         {
             title: 'More Posts',
@@ -15,12 +15,13 @@ export default function Index({ featuredPost }) {
             isPrevious: false,
         },
     ];
+
     return (
-        <Layout>
-            <Meta
+        <>
+            {/*<Meta
                 title="John Zanussi"
                 description="A place where I write about technology, 3D Printing, and other hobby projects I have going on"
-            />
+            />*/}
 
             <h1 className="display-1 mb-3 mb-md-5">
                 Hey, there! <Emoji label="waving hand">👋</Emoji>
@@ -71,16 +72,6 @@ export default function Index({ featuredPost }) {
                 <PostCard post={featuredPost} />
             </div>
             <PostPagination posts={posts} showLabels={false} />
-        </Layout>
+        </>
     );
-}
-
-export async function getStaticProps() {
-    const featuredPost = await getMostRecentPost();
-
-    return {
-        props: {
-            featuredPost,
-        },
-    };
 }

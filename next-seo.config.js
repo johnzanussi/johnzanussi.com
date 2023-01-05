@@ -2,16 +2,14 @@
 
 const seoConfig = {
     titleTemplate: '%s - John Zanussi',
-    defaultTitle: 'John Zanusi',
-    description: 'My personal site',
-    canonical: process.env.NEXT_PUBLIC_SITE_URL,
+    // canonical: process.env.NEXT_PUBLIC_SITE_URL,
     twitter: {
         cardType: 'summary',
         site: '@johnzanussi',
         handle: '@johnzanussi',
     },
     openGraph: {
-        url: process.env.NEXT_PUBLIC_SITE_URL,
+        // url: process.env.NEXT_PUBLIC_SITE_URL,
     },
     additionalMetaTags: [
         {

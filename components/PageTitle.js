@@ -1,4 +1,4 @@
-import DateFormat from './DateFormat';
+import DateFormat from 'components/DateFormat';
 
 const PageTitle = ({ lastUpdated, children, title, ...props }) => (
     <div {...props}>

@@ -1,17 +1,18 @@
+'use client';
+
 import { Children, cloneElement } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
-import dynamic from 'next/dynamic';
-
-import Link from './Link';
-import PageTitle from './PageTitle';
-import Image from './Image';
-import MDXColumns from './MDXColumns';
-import CodeBlock from './CodeBlock';
-import AmazonDisclosure from './AmazonDisclosure';
-import AmazonProducts from './AmazonProducts';
-import YouTubeEmbed from './YouTubeEmbed';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHashtag } from '@fortawesome/free-solid-svg-icons';
+
+import Link from 'components/Link';
+import PageTitle from 'components/PageTitle';
+import Image from 'components/Image';
+import MDXColumns from 'components/MDXColumns';
+import CodeBlock from 'components/CodeBlock';
+import AmazonDisclosure from 'components/AmazonDisclosure';
+import AmazonProducts from 'components/AmazonProducts';
+import YouTubeEmbed from 'components/YouTubeEmbed';
 
 const components = {
     a: (props) => <Link {...props} />,
@@ -23,12 +24,7 @@ const components = {
         const [altText, noDivWrap] = alt.split(' noDivWrap');
 
         const PostImage = (
-            <Image
-                className="img-fluid mw-100"
-                layout="intrinsic"
-                alt={altText}
-                {...props}
-            />
+            <Image className="img-fluid" alt={altText} {...props} />
         );
 
         if (noDivWrap === '') {

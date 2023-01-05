@@ -1,9 +1,11 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLevelUpAlt } from '@fortawesome/free-solid-svg-icons';
 
-const BackToTop = ({ threshold, className, ...props }) => {
+const BackToTop = ({ threshold = 250, className = '', ...props }) => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -44,11 +46,6 @@ const BackToTop = ({ threshold, className, ...props }) => {
             </button>
         </div>
     );
-};
-
-BackToTop.defaultProps = {
-    threshold: 250,
-    className: '',
 };
 
 export default BackToTop;
