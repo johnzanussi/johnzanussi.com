@@ -1,8 +1,10 @@
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/oceanicNext';
+
+import { Fragment } from 'react';
 import classNames from 'classnames';
 
-import Link from './Link';
+import Link from 'components/Link';
 
 const CodeBlock = ({ children, filename, url, title }) => {
     const { children: code, className } = children.props;
@@ -10,12 +12,7 @@ const CodeBlock = ({ children, filename, url, title }) => {
     const language = className.replace(/language-/, '');
 
     return (
-        <Highlight
-            {...defaultProps}
-            code={code}
-            language={language}
-            theme={theme}
-        >
+        <Highlight code={code} language={language} {...defaultProps}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => {
                 const showHeader = !!(filename || url);
 
@@ -64,10 +61,6 @@ const CodeBlock = ({ children, filename, url, title }) => {
             }}
         </Highlight>
     );
-};
-
-CodeBlock.defaultProps = {
-    className: '',
 };
 
 export default CodeBlock;

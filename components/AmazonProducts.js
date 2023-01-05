@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from './Link';
-import AmazonDisclosure from './AmazonDisclosure';
+import Link from 'components/Link';
+import AmazonDisclosure from 'components/AmazonDisclosure';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAmazon } from '@fortawesome/free-brands-svg-icons';
 

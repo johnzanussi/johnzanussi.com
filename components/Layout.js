@@ -1,26 +1,21 @@
-import { useState, Fragment } from 'react';
-import classNames from 'classnames';
-import Collapse from 'react-bootstrap/Collapse';
+import { Fragment } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import {
     faInstagram,
     faGithub,
     faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
-import faPrintables from '../components/IconPrintables';
+import faPrintables from 'components/IconPrintables';
 
-import Meta from '../components/Meta';
-import Link from '../components/Link';
-import Image from '../components/Image';
-import BackToTop from '../components/BackToTop';
+import NavToggle from 'components/NavToggle';
+import Link from 'components/Link';
+import Image from 'components/Image';
+import BackToTop from 'components/BackToTop';
 
-import imgJZ from '../public/assets/img-john-zanussi-kiddo.jpg';
+import imgJZ from 'public/assets/img-john-zanussi-kiddo.jpg';
 
 const Layout = ({ children }) => {
-    const [isOpen, toggleNav] = useState(false);
-
     const pages = [
         {
             title: 'About',
@@ -61,8 +56,6 @@ const Layout = ({ children }) => {
 
     return (
         <Fragment>
-            <Meta />
-
             <div className="d-md-flex mx-2 mx-md-0">
                 <nav className="site-nav d-md-flex flex-md-column flex-md-shrink-0 px-3 py-4 p-md-5 mt-md-5 sticky-md-top align-self-md-start bg-dark shadow rounded-bottom rounded-md-end">
                     <div className="d-flex d-md-block">
@@ -71,7 +64,7 @@ const Layout = ({ children }) => {
                                 <Image
                                     src={imgJZ}
                                     alt="portrait of John Zanussi wearing sunglasses with his daughter on his shoulders"
-                                    className="rounded-circle shadow"
+                                    className="rounded-circle shadow img-fluid"
                                     width="250"
                                     height="250"
                                     placeholder="empty"
@@ -117,23 +110,7 @@ const Layout = ({ children }) => {
                         </div>
                     </div>
 
-                    <button
-                        type="button"
-                        aria-label="Toggle navigation"
-                        aria-expanded={isOpen}
-                        aria-controls="nav-links"
-                        className="d-block d-md-none btn btn-link text-center w-100 mt-4 py-1 bg-light bg-opacity-10 rounded"
-                        onClick={() => toggleNav(!isOpen)}
-                    >
-                        <FontAwesomeIcon
-                            icon={faChevronDown}
-                            className={classNames('collapse-button', {
-                                collapsed: !isOpen,
-                            })}
-                        />
-                    </button>
-
-                    <Collapse in={isOpen}>
+                    <NavToggle>
                         <div
                             id="nav-links"
                             className="d-md-block mt-3 mt-md-0 px-3     p-md-0"
@@ -186,7 +163,7 @@ const Layout = ({ children }) => {
                                 </p>
                             </div>
                         </div>
-                    </Collapse>
+                    </NavToggle>
                 </nav>
 
                 <main className="site-main d-md-flex flex-column flex-grow-1 mb-5 my-md-4 p-4 p-md-5">

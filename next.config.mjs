@@ -1,6 +1,9 @@
 import { withPlausibleProxy } from 'next-plausible';
 
 const config = {
+    experimental: {
+        appDir: true,
+    },
     reactStrictMode: true,
     swcMinify: true,
     images: {

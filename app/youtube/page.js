@@ -2,24 +2,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
-import {
-    getYouTubeSubscriptions,
-    getYouTubeLastUpdated,
-} from '../lib/youtube.js';
+import { getYouTubeSubscriptions, getYouTubeLastUpdated } from 'lib/youtube.js';
 
-import Meta from '../components/Meta';
-import Layout from '../components/Layout';
-import PageTitle from '../components/PageTitle';
-import Link from '../components/Link';
+import PageTitle from 'components/PageTitle';
+import Link from 'components/Link';
 
-export default function YouTube({ subscriptions, lastUpdated }) {
+export default async function YouTube() {
+    const subscriptions = await getYouTubeSubscriptions();
+    const lastUpdated = getYouTubeLastUpdated();
+
     return (
-        <Layout>
-            <Meta
-                title="YouTube Subscriptions"
-                description="A list of YouTube channels I subscribe to"
-            />
-
+        <>
             <PageTitle
                 title="YouTube Subscriptions"
                 lastUpdated={new Date(lastUpdated)}
@@ -81,18 +74,6 @@ export default function YouTube({ subscriptions, lastUpdated }) {
                     );
                 })}
             </div>
-        </Layout>
+        </>
     );
-}
-
-export async function getStaticProps() {
-    const subscriptions = getYouTubeSubscriptions();
-    const lastUpdated = getYouTubeLastUpdated();
-
-    return {
-        props: {
-            subscriptions,
-            lastUpdated,
-        },
-    };
 }

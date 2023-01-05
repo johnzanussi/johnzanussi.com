@@ -23,12 +23,15 @@ $link-decoration: none;
 $link-hover-decoration: none;
 $link-shade-percentage: 40%;
 
+$display-font-weight: 400;
+$lead-font-weight: 400;
+
 $code-color: #e166a3;
 
 $accordion-icon-transform: rotate(180deg) !default;
 
-$font-family-sans-serif: 'Roboto';
-$font-family-monospace: 'Roboto Mono';
+$font-family-sans-serif: var(--font-roboto);
+$font-family-monospace: var(--font-roboto-mono);
 
 $list-group-bg: #282c34;
 $list-group-color: $primary;
@@ -67,7 +70,7 @@ $pagination-focus-bg: transpparent;
 @import '../node_modules/bootstrap/scss/root';
 @import '../node_modules/bootstrap/scss/reboot';
 @import '../node_modules/bootstrap/scss/type';
-// @import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/images";
 @import '../node_modules/bootstrap/scss/containers';
 @import '../node_modules/bootstrap/scss/grid';
 @import '../node_modules/bootstrap/scss/tables';
