@@ -30,3 +30,5 @@ export async function generateStaticParams() {
     const paths = await getDirStaticPaths(PAGES_DIR, 'page');
     return paths;
 }
+
+export const dynamicParams = false;
