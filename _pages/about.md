@@ -48,36 +48,36 @@ Connect with me on [LinkedIn](https://www.linkedin.com/in/john-zanussi/).
 
 ### Work History
 
-##### LeafLink
+###### LeafLink
 
-**<span className="text-muted">February 2022 - Present</span>**  
+<span className="text-muted">February 2022 - Present</span>  
 Senior Engineering Manager, Commerce
 
-**<span className="text-muted">March 2021 - February 2022</span>**  
+<span className="text-muted">March 2021 - February 2022</span>  
 Engineering Manager
 
-##### Daily Harvest
+###### Daily Harvest
 
-**<span className="text-muted">February 2020 - March 2021</span>**  
+<span className="text-muted">February 2020 - March 2021</span>  
 Director, Experience
 
-**<span className="text-muted">September 2018 - February 2020</span>**  
+<span className="text-muted">September 2018 - February 2020</span>  
 Lead Software Engineer
 
-##### GreenBlender
+###### GreenBlender
 
-**<span className="text-muted">February 2017 - July 2018</span>**  
+<span className="text-muted">February 2017 - July 2018</span>  
 Chief Technology Officer
 
-##### EXOS
+###### EXOS
 
-**<span className="text-muted">February 2014 - February 2017</span>**  
+<span className="text-muted">February 2014 - February 2017</span>  
 Senior Web Developer
 
-##### CollegeHumor
+###### CollegeHumor
 
-**<span className="text-muted">February 2011 - February 2014</span>**  
+<span className="text-muted">February 2011 - February 2014</span>  
 Director, Front End Developmenet
 
-**<span className="text-muted">May 2007 - February 2011</span>**  
+<span className="text-muted">May 2007 - February 2011</span>  
 Front End Developer

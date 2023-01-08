@@ -1,18 +1,12 @@
 import { Fragment } from 'react';
-import Head from 'next/head';
 
-import { getDirStaticPaths, getMarkdownData } from 'lib/markdown';
+import { getPagesStaticPaths, getPageData } from 'lib/pages';
 
 import PageTitle from 'components/PageTitle';
 import Markdown from 'components/Markdown';
 
-const PAGES_DIR = '_pages';
-
 export default async function Page({ params }) {
-    const pageData = await getMarkdownData(
-        `${PAGES_DIR}/${params.page}.md`,
-        'all'
-    );
+    const pageData = await getPageData(params.page);
 
     return (
         <Fragment>
@@ -27,7 +21,7 @@ export default async function Page({ params }) {
 }
 
 export async function generateStaticParams() {
-    const paths = await getDirStaticPaths(PAGES_DIR, 'page');
+    const paths = await getPagesStaticPaths();
     return paths;
 }
 
