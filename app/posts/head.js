@@ -6,6 +6,7 @@ export default function Head() {
             <Meta
                 title="Posts"
                 description="A collection of posts I've written about various topics"
+                url="/posts"
             />
         </>
     );

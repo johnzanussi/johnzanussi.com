@@ -1,10 +1,10 @@
 import { NextSeo } from 'next-seo';
 import { prependHost } from 'lib/utils';
 
-const Meta = ({ title, description, path = '', openGraph = {}, ...props }) => {
+const Meta = ({ title, description, url = '', openGraph = {}, ...props }) => {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-    const url = prependHost(path);
+    const fullUrl = prependHost(url);
 
     if (props.images) {
         openGraph.images = props.images;
@@ -24,10 +24,10 @@ const Meta = ({ title, description, path = '', openGraph = {}, ...props }) => {
             useAppDir
             title={title}
             description={description}
-            canonical={url}
+            canonical={fullUrl}
             openGraph={{
                 title: title,
-                url: url,
+                url: fullUrl,
                 ...openGraph,
             }}
         />

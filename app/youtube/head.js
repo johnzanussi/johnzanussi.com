@@ -6,6 +6,7 @@ export default function Head() {
             <Meta
                 title="YouTube Subscriptions"
                 description="A list of YouTube channels I subscribe to"
+                url="/youtube"
             />
         </>
     );
