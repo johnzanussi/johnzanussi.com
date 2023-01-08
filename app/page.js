@@ -1,4 +1,4 @@
-import { getMostRecentPost } from 'lib/posts';
+import { getPostData } from 'lib/posts';
 
 import Link from 'components/Link';
 import PostCard from 'components/PostCard';
@@ -6,7 +6,9 @@ import PostPagination from 'components/PostPagination';
 import Emoji from 'components/Emoji';
 
 export default async function Page() {
-    const featuredPost = await getMostRecentPost();
+    const featuredPost = await getPostData(
+        'rack-mounting-home-assistant-yellow'
+    );
 
     const posts = [
         {
@@ -18,11 +20,6 @@ export default async function Page() {
 
     return (
         <>
-            {/*<Meta
-                title="John Zanussi"
-                description="A place where I write about technology, 3D Printing, and other hobby projects I have going on"
-            />*/}
-
             <h1 className="display-1 mb-3 mb-md-5">
                 Hey, there! <Emoji label="waving hand">👋</Emoji>
             </h1>
@@ -43,9 +40,10 @@ export default async function Page() {
 
             <p className="lead">
                 I’ve been doing a lot of DIY 3D printing and LED projects and
-                wanted a place to share my experiences with the community. This
-                is also an excuse to get my hands into coding again as a
-                developer and try out the new hotness in web technology.
+                wanted a place to share my experiences with the community.
+                Creating this site is also an excuse to get my hands on coding
+                again as a developer and try out the new hotness in web
+                technology.
             </p>
 
             <p className="lead">
@@ -65,12 +63,13 @@ export default async function Page() {
             </p>
 
             <p className="lead">
-                Lastly, you can check out my latest post below.
+                Lastly, you can check out one of my recent posts below.
             </p>
 
             <div className="mt-3">
                 <PostCard post={featuredPost} />
             </div>
+
             <PostPagination posts={posts} showLabels={false} />
         </>
     );

@@ -44,13 +44,13 @@ const CodeBlock = ({ children, filename, url, title }) => {
                         >
                             {tokens.map((line, i) => (
                                 <div
-                                    key={i}
                                     {...getLineProps({ line, key: i })}
+                                    key={i}
                                 >
                                     {line.map((token, key) => (
                                         <span
-                                            key={key}
                                             {...getTokenProps({ token, key })}
+                                            key={key}
                                         />
                                     ))}
                                 </div>

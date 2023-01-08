@@ -10,6 +10,15 @@ const Link = ({ href, children, ...props }) => {
         );
     }
 
+    // Hash
+    if (href.startsWith('#')) {
+        return (
+            <a href={href} {...props}>
+                {children}
+            </a>
+        );
+    }
+
     // Internal
     return (
         <InternalLink href={href} {...props}>
