@@ -13,10 +13,10 @@ export default async function Post({ params }) {
     const siblingPosts = await getSiblingPosts(post);
 
     return (
-        <>
+        <div className="content-container">
             {post.isDraft && <DraftBadge className="me-auto mb-1" />}
 
-            <DateFormat date={post.date} />
+            <DateFormat date={post.date} className="text-muted" />
 
             <h1>{post.title}</h1>
 
@@ -35,7 +35,7 @@ export default async function Post({ params }) {
                 url={post.absoluteUrl}
                 title={post.title}
             />
-        </>
+        </div>
     );
 }
 

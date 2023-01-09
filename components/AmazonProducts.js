@@ -34,14 +34,6 @@ const AmazonProducts = ({ products }) => {
                         />
                     </Link>
                 ))}
-
-                <div className="list-group-item small text-muted fst-italic">
-                    <small>
-                        The links above are affiliate links. This means that, at
-                        zero cost to you, I will earn an affiliate commission if
-                        you click through the link and finalize a purchase.
-                    </small>
-                </div>
             </div>
         </div>
     );

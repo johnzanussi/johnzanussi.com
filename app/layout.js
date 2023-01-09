@@ -1,25 +1,22 @@
 import { NextSeo } from 'next-seo';
 import PlausibleProvider from 'next-plausible';
-import { Roboto_Flex, Roboto_Mono } from '@next/font/google';
+import { Inter, Roboto_Mono } from '@next/font/google';
 
 import seoConfig from 'next-seo.config';
 
-const robotoFlex = Roboto_Flex({
+const fontInter = Inter({
     subsets: ['latin'],
-    variable: '--font-roboto',
+    variable: '--font-inter',
+    display: 'swap',
 });
 
-const robotoMono = Roboto_Mono({
+const fontRobotoMono = Roboto_Mono({
     subsets: ['latin'],
-    weight: ['300', '400'],
-    style: ['normal', 'italic'],
     variable: '--font-roboto-mono',
     display: 'swap',
 });
 
-export const fontClassNames = [robotoFlex, robotoMono]
-    .map((font) => font.variable)
-    .join(' ');
+const fonts = [fontInter, fontRobotoMono];
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -28,10 +25,15 @@ config.autoAddCss = false;
 import 'styles/index.scss';
 
 import Layout from 'components/Layout';
+import ThemeProvider from 'components/ThemeProvider';
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className={fontClassNames}>
+        <html
+            lang="en"
+            className={fonts.map((font) => font.variable).join(' ')}
+            data-bs-theme="light"
+        >
             <head>
                 <meta charSet="utf-8" />
 
@@ -41,7 +43,9 @@ export default function RootLayout({ children }) {
             </head>
 
             <body>
-                <Layout>{children}</Layout>
+                <ThemeProvider>
+                    <Layout>{children}</Layout>
+                </ThemeProvider>
             </body>
         </html>
     );

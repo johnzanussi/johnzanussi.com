@@ -19,7 +19,7 @@ const components = {
     h2: (props) => <h2 className="mt-4 mb-3 pb-2 border-bottom" {...props} />,
     h3: (props) => <h3 className="mt-4" {...props} />,
     h4: (props) => <h4 className="mt-3" {...props} />,
-    h5: (props) => <h5 className="mt-3 text-white" {...props} />,
+    h5: (props) => <h5 className="mt-3 text-emphasis" {...props} />,
     img: ({ alt, ...props }) => {
         const [altText, noDivWrap] = alt.split(' noDivWrap');
 
@@ -49,7 +49,7 @@ const components = {
     ),
     table: (props) => (
         <div className="table-responsive mb-4">
-            <table className="table text-white" {...props} />
+            <table className="table text-emphasis" {...props} />
         </div>
     ),
     FontAwesomeHashtag: (props) => (

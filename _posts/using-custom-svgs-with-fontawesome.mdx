@@ -14,7 +14,7 @@ Since I was already using and somewhat familiar with the [`react-fontawesome`](h
 
 If we take a look at the documentation for using [Font Awesome with React](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react) we can see that we have to import both the `FontAwesomeIcon` base component and the icon component for whatever icon we want to display. I appreciate this approach as it allows for tree shaking of the `free-solid-svg-icons` library. Because the icon itself was imported separately it was a signal to me that I may be able to pass anything to the `FontAwesomeIcon` component.
 
-```jsx url=https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react#using title=Font-Awesome-React-Docs
+```jsx url="https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react#using" title="Font-Awesome-React-Docs"
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
@@ -26,7 +26,7 @@ ReactDOM.render(element, document.body);
 
 Let's have a look at the source of `faCoffee` in the `@fortawesome/free-solid-svg-icons` library.
 
-```js url=https://github.com/FortAwesome/Font-Awesome/blob/master/js-packages/%40fortawesome/free-solid-svg-icons/faCoffee.js title=faCoffee.js
+```js url="https://github.com/FortAwesome/Font-Awesome/blob/master/js-packages/%40fortawesome/free-solid-svg-icons/faCoffee.js" title="faCoffee.js"
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 var prefix = 'fas';
@@ -62,7 +62,7 @@ Now let's see if we can find a SVG for the Thingiverse logo. A quick search for 
 
 Downloading the file and looking at the source we can see it is a relatively simple SVG with a single `<path>` element which matches what we see in the `faCoffee` example above.
 
-```svg filename=thingiverse-logo.svg
+```svg filename="thingiverse-logo.svg"
 <svg height="2500" width="2500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <g fill="none" fill-rule="evenodd">
         <circle cx="256.962" cy="256.962" fill="#2e88ff" r="237.714"/>
@@ -73,7 +73,7 @@ Downloading the file and looking at the source we can see it is a relatively sim
 
 With that, I created a `IconThingiverse.js` file in the components directory, copied the contents from the `faCoffee.js` source and modified it to bring it up to speed with ES6. Then I copied the contents of the `d` attribute of the `<path>` element from `thingiverse-logo.svg` and pasted it as the value of the `svgPathData` in my new JS file. A few other updates to some of the other `const`'s and we have the following.
 
-```js filename=components/IconThingiverse.js
+```js filename="components/IconThingiverse.js"
 const prefix = 'fajz';
 const iconName = 'thingiverse';
 const width = 448;
@@ -94,7 +94,7 @@ export default ThingiverseIcon;
 
 We can bring this all together and try it out in a simple example.
 
-```jsx codesandbox=ds9s9?entry=/src/App.js
+```jsx codesandbox="ds9s9?entry=/src/App.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import faThingiverse from './components/IconThingiverse';
 
@@ -111,7 +111,7 @@ You might ask, "_Could I have just rendered the SVG directly as it's own compone
 
 For example, where I display the social icons below the nav links I can import all the icons, build an array of the links, then render them all by mapping over the array.
 
-```jsx filename=components/Layout.js
+```jsx filename="components/Layout.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
