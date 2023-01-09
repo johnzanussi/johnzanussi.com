@@ -9,7 +9,7 @@ const PostCard = ({ post, ...props }) => {
     return (
         <div
             className={classNames(
-                'post-card card rounded shadow shadow-hover-none flex-md-row overflow-hidden',
+                'post-card card rounded flex-md-row overflow-hidden bg-tertiary',
                 {
                     'border-info': post.isDraft,
                 }
@@ -25,7 +25,7 @@ const PostCard = ({ post, ...props }) => {
                     <DateFormat date={post.date} />
                 </div>
 
-                <h2 className="card-title mb-3">
+                <h2 className="mb-3">
                     <Link href={post.url} className="stretched-link text-reset">
                         {post.title}
                     </Link>

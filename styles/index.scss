@@ -17,6 +17,31 @@ h2 {
     }
 }
 
+@include color-mode(light) {
+    .text-emphasis {
+        color: $emphasis-color;
+    }
+}
+
+@include color-mode(dark) {
+    .text-emphasis {
+        color: $emphasis-color-dark;
+    }
+    .code-block {
+        border: 0 !important;
+    }
+}
+
+.code-block {
+    .code-language {
+        background-color: var(--bs-border-color);
+    }
+}
+
+.bg-tertiary {
+    background-color: var(--bs-tertiary-bg);
+}
+
 .display-1 {
     word-spacing: -0.5em;
     @include media-breakpoint-down(md) {
@@ -67,11 +92,18 @@ h2 {
 }
 
 .site-nav {
-    top: 3rem;
+    @include media-breakpoint-up(md) {
+        position: sticky;
+        top: 3rem;
+    }
 }
 
 .site-main {
     max-width: 1200px;
+}
+
+.content-container {
+    max-width: 900px;
 }
 
 .link-anchor {
@@ -93,4 +125,8 @@ h2 {
             flex: 0 0 450px;
         }
     }
+}
+
+.border-bottom-start {
+    @include border-bottom-start-radius($border-radius-sm);
 }

@@ -27,7 +27,7 @@ const PostPagination = ({ posts, showLabels = true, ...props }) => {
                                 className="page-link h-100 rounded-1"
                             >
                                 {showLabels && (
-                                    <div className="text-white fs-6">
+                                    <div className="text-emphasis fs-6">
                                         {label} Post
                                     </div>
                                 )}

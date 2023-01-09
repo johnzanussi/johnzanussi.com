@@ -1,23 +1,40 @@
+// https://getbootstrap.com/docs/5.3/customize/sass/#importing
+
+// 1. Bootsrap Functions
 @import '../node_modules/bootstrap/scss/functions';
 
-$primary: #13a0d1; // links
-$secondary: #ff36a4; // social icons
+
+// 2.
+$white: #f2f2f2;
+$primary: #13a0d1;
+$secondary: #ff36a4;
 $success: #0177c1;
 $danger: #ff6ec7;
 $info: #e4572e;
 $dark: #01233d; // nav sidebar background
 $light: #f1ebff;
 $warning: #fcd12a; // headings
-$white: #ecede8;
 
-$body-bg: #0e1114; // body background
-$body-color: $white; // text color
+$body-bg-dark: #0e1114;
+$box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !default;
 
-$card-bg: #303c4c;
+$link-color: #0d7092;
+$link-color-dark: $primary;
 
-$text-muted: #8a9098;
 
-$headings-color: $warning;
+// $body-tertiary-color: #f8f9fa;
+$body-tertiary-bg-dark: #1B2025;
+$border-color-translucent-dark: #3e4143;
+
+$link-color-dark: $primary;
+
+$color-mode-type: data;
+
+
+$line-height-base: 1.65;
+
+$headings-color: #0c5294;
+$headings-color-dark: $warning;
 
 $link-decoration: none;
 $link-hover-decoration: none;
@@ -30,49 +47,54 @@ $code-color: #e166a3;
 
 $accordion-icon-transform: rotate(180deg) !default;
 
-$font-family-sans-serif: var(--font-roboto);
+$font-family-sans-serif: var(--font-inter);
 $font-family-monospace: var(--font-roboto-mono);
-
-$list-group-bg: #282c34;
-$list-group-color: $primary;
-$list-group-border-color: rgba($primary, 0.4);
-$list-group-hover-bg: $body-bg;
-$list-group-active-color: $white;
-$list-group-active-bg: $body-bg;
-$list-group-action-color: $primary;
-$list-group-action-hover-color: $list-group-action-color;
-$list-group-action-active-bg: $body-bg;
-$list-group-action-active-color: $white;
-
-@import '../node_modules/bootstrap/scss/variables';
-
 $headings-font-family: $font-family-monospace;
-$navbar-dark-toggler-border-color: $white;
+
+$card-bg: #303c4c;
 
 $border-radius: 1rem;
 
-$pagination-bg: transparent;
-$pagination-border-color: $gray-700;
-$pagination-hover-bg: transparent;
-$pagination-hover-border-color: $link-color;
-$pagination-hover-color: $primary;
+// 3. Bootstrap Variables
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/variables-dark";
+
+$code-font-size: $font-size-base;
+
+
+
+$pagination-bg: var(--bs-tertiary-bg);
+$pagination-hover-border-color: var(--bs-border-color);
 
 $pagination-active-color: $primary;
-$pagination-active-bg: transparent;
-$pagination-active-border-color: $link-color;
+$pagination-active-border-color: var(--bs-link-color);
+$pagination-focus-bg: transparent;
 
-$pagination-focus-color: $primary;
-$pagination-focus-bg: transpparent;
+// $border-color-dark:
 
-@import '../node_modules/bootstrap/scss/mixins';
-@import '../node_modules/bootstrap/scss/utilities';
 
-@import '../node_modules/bootstrap/scss/root';
-@import '../node_modules/bootstrap/scss/reboot';
-@import '../node_modules/bootstrap/scss/type';
+// 3. Bootstrap Variables
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/variables-dark";
+
+// 4. Custom Maps
+
+
+// 5. Bootstrap Required
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+
+
+// 6. Bootstrap Optional
+@import "../node_modules/bootstrap/scss/utilities";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
 @import "../node_modules/bootstrap/scss/images";
-@import '../node_modules/bootstrap/scss/containers';
-@import '../node_modules/bootstrap/scss/grid';
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/helpers";
+
 @import '../node_modules/bootstrap/scss/tables';
 // @import "../node_modules/bootstrap/scss/forms";
 @import '../node_modules/bootstrap/scss/buttons';
@@ -86,7 +108,7 @@ $pagination-focus-bg: transpparent;
 // @import "../node_modules/bootstrap/scss/breadcrumb";
 @import '../node_modules/bootstrap/scss/pagination';
 // @import "../node_modules/bootstrap/scss/badge";
-// @import "../node_modules/bootstrap/scss/alert";
+@import "../node_modules/bootstrap/scss/alert";
 @import '../node_modules/bootstrap/scss/progress';
 @import '../node_modules/bootstrap/scss/list-group';
 // @import "../node_modules/bootstrap/scss/close";
@@ -98,5 +120,5 @@ $pagination-focus-bg: transpparent;
 // @import "../node_modules/bootstrap/scss/spinners";
 // @import "../node_modules/bootstrap/scss/offcanvas";
 
-@import '../node_modules/bootstrap/scss/helpers';
-@import '../node_modules/bootstrap/scss/utilities/api';
+// 7. Bootstrap Utilities API
+@import "../node_modules/bootstrap/scss/utilities/api";

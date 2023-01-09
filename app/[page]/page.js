@@ -9,14 +9,14 @@ export default async function Page({ params }) {
     const pageData = await getPageData(params.page);
 
     return (
-        <Fragment>
+        <div className="content-container">
             <PageTitle
                 title={pageData.title}
                 lastUpdated={pageData.lastUpdated}
             ></PageTitle>
 
             <Markdown source={pageData.content} />
-        </Fragment>
+        </div>
     );
 }
 

@@ -3,7 +3,7 @@ import Image from 'components/Image';
 
 const EnjoyCTA = () => {
     return (
-        <div className="bg-dark p-4 text-white text-opacity-75 text-center rounded rounded-1 border border-dark border-opacity-50">
+        <div className="alert alert-info text-center">
             <p>
                 Found the above useful? Have a question? Thought of something I
                 didn&apos;t?
