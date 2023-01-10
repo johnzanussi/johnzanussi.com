@@ -62,8 +62,6 @@ const Layout = ({ children }) => {
                     data-bs-theme="dark"
                     className="navbar site-nav d-md-flex flex-md-column flex-md-shrink-0 px-3 py-4 p-md-5 mt-md-5 sticky-md-top align-self-md-start shadow rounded-bottom rounded-md-end bg-dark"
                 >
-                    <ColorModeToggle className="p-3 position-absolute top-0 end-0" />
-
                     <div className="d-flex d-md-block">
                         <div className="nav-photo text-center">
                             <Link href="/">
@@ -121,7 +119,7 @@ const Layout = ({ children }) => {
                             id="nav-links"
                             className="d-md-block w-100 mt-3 mt-md-0"
                         >
-                            <ul className="list-unstyled font-monospace fs-5 px-3 p-md-0">
+                            <ul className="list-unstyled font-monospace fs-5 px-3 p-md-0 text-end text-md-start">
                                 {pages.map(({ title, url }) => (
                                     <li key={title}>
                                         <Link
@@ -172,7 +170,7 @@ const Layout = ({ children }) => {
                     </NavToggle>
                 </nav>
 
-                <main className="site-main d-md-flex flex-column flex-grow-1 mb-5 my-md-4 p-4 p-md-5">
+                <main className="site-main d-md-flex flex-column flex-grow-1 mb-5 my-md-4 px-3 py-4 p-md-5">
                     {children}
 
                     <BackToTop className="text-center mt-5" />
