@@ -32,7 +32,6 @@ export default function RootLayout({ children }) {
         <html
             lang="en"
             className={fonts.map((font) => font.variable).join(' ')}
-            data-bs-theme="light"
         >
             <head>
                 <meta charSet="utf-8" />

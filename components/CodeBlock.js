@@ -1,10 +1,12 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import themeLightOrig from 'prism-react-renderer/themes/nightOwlLight';
 import themeDark from 'prism-react-renderer/themes/vsDark';
 import classNames from 'classnames';
+
+// import { useTheme } from 'next-themes';
+import useTheme from 'hooks/useTheme';
 
 import Link from 'components/Link';
 
@@ -37,7 +39,7 @@ const CodeBlock = ({ children, filename, url, title }) => {
 
                 return (
                     <div
-                        className="code-block rounded rounded-2 border mb-3"
+                        className="code-block rounded-md-2 border mx-n4 mx-md-0 mb-3 overflow-hidden"
                         style={style}
                     >
                         {showHeader && (
@@ -52,7 +54,7 @@ const CodeBlock = ({ children, filename, url, title }) => {
                             </div>
                         )}
 
-                        <div className="position-relative p-4">
+                        <div className="position-relative p-4 pb-0">
                             {!!language && (
                                 <div
                                     className="code-language position-absolute top-0 end-0 opacity-75 px-2 font-monospace border-bottom-start small"
@@ -65,7 +67,7 @@ const CodeBlock = ({ children, filename, url, title }) => {
                                 </div>
                             )}
 
-                            <pre className={classNames(className, 'mb-0')}>
+                            <pre className={classNames(className, 'mb-0 pb-4')}>
                                 {tokens.map((line, i) => (
                                     <div
                                         {...getLineProps({ line, key: i })}

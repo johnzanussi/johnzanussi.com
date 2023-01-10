@@ -28,7 +28,7 @@ h2 {
         color: $emphasis-color-dark;
     }
     .code-block {
-        border: 0 !important;
+        border-color: #000 !important;
     }
 }
 
@@ -61,11 +61,28 @@ h2 {
     }
 }
 
-.rounded-md-end {
-    @include media-breakpoint-up(md) {
+
+@include media-breakpoint-up(md) {
+    .rounded-md-end {
         border-top-left-radius: 0 !important;
         border-bottom-left-radius: 0 !important;
         @include border-end-radius;
+    }
+
+    .rounded-md-2 {
+        @include border-radius(var(--bs-border-radius));
+    }
+
+    .site-nav {
+        position: sticky;
+        top: 3rem;
+    }
+
+    .post-card {
+        .card-img {
+            flex: 0 0 450px;
+        }
+
     }
 }
 
@@ -91,12 +108,7 @@ h2 {
     }
 }
 
-.site-nav {
-    @include media-breakpoint-up(md) {
-        position: sticky;
-        top: 3rem;
-    }
-}
+
 
 .site-main {
     max-width: 1200px;
@@ -119,14 +131,19 @@ h2 {
     }
 }
 
-.post-card {
-    @include media-breakpoint-up(md) {
-        .card-img {
-            flex: 0 0 450px;
-        }
-    }
-}
 
 .border-bottom-start {
     @include border-bottom-start-radius($border-radius-sm);
+}
+
+.nav-color-mode-toggle {
+    @include media-breakpoint-down(md) {
+        background-color: rgba($light, 0.1) !important;
+        @include border-radius;
+    }
+    @include media-breakpoint-up(md) {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 }

@@ -1,9 +1,12 @@
 'use client';
 
-import { useTheme } from 'next-themes';
+import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
+
+// import { useTheme } from 'next-themes';
+import useTheme from 'hooks/useTheme';
 
 export default function ColorModeToggle({ className }) {
     const { theme, setTheme } = useTheme();
@@ -21,9 +24,8 @@ export default function ColorModeToggle({ className }) {
             className={classNames('btn btn-link', colorClass, className)}
             onClick={() => toggleTheme(theme)}
             role="button"
-            title={`Turn the lights ${theme === 'light' ? 'off' : 'on'}`}
         >
-            <FontAwesomeIcon icon={icon} className="lead" />
+            <FontAwesomeIcon icon={icon} className="lead align-text-top" />
         </button>
     );
 }
