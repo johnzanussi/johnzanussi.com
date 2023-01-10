@@ -31,7 +31,7 @@ const components = {
             return PostImage;
         }
 
-        return <div className="mb-4 mx-n4">{PostImage}</div>;
+        return <div className="mb-4 mx-n4 mx-md-0">{PostImage}</div>;
     },
     iframe: (props) => (
         <div className="mb-4">
