@@ -64,12 +64,11 @@ Since I’m not the best at articulating my thoughts into words, I started using
 
 ## To Do
 
--   Add [Lighthouse](https://developers.google.com/web/tools/lighthouse) results to this page
--   Pull YouTube channel names, images, and notification setting from YouTube API
--   ~~Install [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) and add prop definitions~~ Convert to TypeScript
 -   ✅ ~~Install and configure [Prettier](https://prettier.io/)~~ [493a49a](https://github.com/johnzanussi/johnzanussi.com/commit/493a49ad0587d9c8195c2bf735625c827664bd89)
--   Create light theme and theme switcher
--   Create a way to embed [Thingiverse](https://www.thingiverse.com/) things
--   Add pagination for Posts page
+-   ✅ ~~Create light theme and theme switcher~~ [#14](https://github.com/johnzanussi/johnzanussi.com/pull/14)
 -   ✅ ~~Create a "More posts" component for the bottom of individual posts~~ [6844b46](https://github.com/johnzanussi/johnzanussi.com/commit/6844b46917bf863f5eb70e4b18557a24ba9cc13f)
 -   ✅ ~~Add comments on posts~~ [87219d0](https://github.com/johnzanussi/johnzanussi.com/commit/87219d0045088a4cff94d5cd20d193cf6bd41bf6)
+-   Convert to TypeScript
+-   Add pagination for `/posts` page
+-   Pull YouTube channel names, images, and notification setting from YouTube API
+-   Add [Lighthouse](https://developers.google.com/web/tools/lighthouse) results to this page
