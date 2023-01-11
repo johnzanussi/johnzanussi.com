@@ -21,7 +21,7 @@ const Link = ({ href, children, ...props }) => {
 
     // Internal
     return (
-        <InternalLink href={href} {...props}>
+        <InternalLink href={href} scroll {...props}>
             {children}
         </InternalLink>
     );
