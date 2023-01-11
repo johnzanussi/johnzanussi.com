@@ -170,7 +170,7 @@ const Layout = ({ children }) => {
                     </NavToggle>
                 </nav>
 
-                <main className="site-main d-md-flex flex-column flex-grow-1 mb-5 my-md-4 px-3 py-4 p-md-5">
+                <main className="site-main d-md-flex flex-column flex-grow-1 mb-5 my-md-4 px-2 py-4 p-md-5">
                     {children}
 
                     <BackToTop className="text-center mt-5" />
