@@ -1,6 +1,10 @@
 @import './bootstrap';
 @import './animations';
 
+body {
+    background-attachment: fixed;
+}
+
 a {
     transition: color 0.5s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0ms,
         opacity 0.5s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0ms;
@@ -18,12 +22,22 @@ h2 {
 }
 
 @include color-mode(light) {
+
+    body {
+        background: linear-gradient(50deg, rgba(241,238,235,1) 55%, rgba(214,229,244,1) 100%);
+    }
+
     .text-emphasis {
         color: $emphasis-color;
     }
 }
 
 @include color-mode(dark) {
+
+    body {
+        background: linear-gradient(50deg, rgba(14,17,20,1) 45%, rgba(6,28,51,1) 100%);
+    }
+
     .text-emphasis {
         color: $emphasis-color-dark;
     }
@@ -115,7 +129,7 @@ h2 {
 }
 
 .content-container {
-    max-width: 900px;
+    max-width: 44em;
 }
 
 .link-anchor {
