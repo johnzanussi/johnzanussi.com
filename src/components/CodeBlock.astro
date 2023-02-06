@@ -1,0 +1,57 @@
+---
+import { getCodeFromSlot } from '@utils/remark/code-blocks';
+import { Prism } from '@astrojs/prism';
+import Link from '@components/Link.astro';
+
+import '../styles/code-block.scss';
+
+const code = await getCodeFromSlot(Astro.slots);
+
+const {
+    style,
+    lang,
+    filename = '',
+    url = '',
+    title = '',
+} = Astro.props;
+
+const showHeader = !!(filename || url);
+---
+
+<figure
+    class="code-block rounded-1 border mb-3 overflow-hidden"
+    style={style}
+>
+    {showHeader && (
+        <figcaption class="py-2 px-4 border-bottom overflow-auto text-muted font-monospace">
+            {filename}
+
+            {url && (
+                <Link href={url}>
+                    {title.replace(/-/g, ' ') || url}
+                </Link>
+            )}
+        </figcaption>
+    )}
+
+    <div class="position-relative p-4 pb-0">
+
+        {!!lang && (
+            <div
+                class="code-language position-absolute top-0 end-0 opacity-75 px-2 font-monospace border-bottom-start small"
+                style={{ fontSize: '0.75em' }}
+            >
+                {lang}
+            </div>
+        )}
+
+        <Prism
+            code={code}
+            lang={Astro.props.lang}
+            class="m-0 p-0 pb-4"
+        />
+
+    </div>
+
+</figure>
+

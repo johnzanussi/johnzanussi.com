@@ -1,0 +1,26 @@
+---
+import Image from '@components/Image.astro';
+
+const { alt, ...props } = Astro.props;
+
+const [altText, noDivWrap] = alt.split(' noDivWrap');
+---
+
+{noDivWrap ? (
+
+<Image
+    class="img-fluid"
+    alt={altText}
+    {...props}
+/>
+
+) : (
+
+<div class="mb-4">
+    <Image
+        class="img-fluid"
+        alt={altText}
+        {...props}
+    />
+</div>
+) }

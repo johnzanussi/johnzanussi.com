@@ -1,0 +1,175 @@
+---
+title: Using Custom Icon SVGs with Font Awesome's React Component
+excerpt: How I was able to load a custom svg file into the FontAwesomeReact component.
+coverImage:
+    url: ~screenshot-font-awesome-code-example.jpg
+    width: 1600
+    height: 900
+date: '2021-11-01'
+---
+
+While building this site I wanted to include a link to my [Thingiverse profile](https://www.thingiverse.com/johnzanussi/designs) as an icon next to the other social media icons in the nav. Unfortunately the Thingiverse logo is not included in [Font Awesome's brand icons](https://fontawesome.com/v5.15/icons?d=gallery&p=2&s=brands). There is an [open pull request](https://github.com/FortAwesome/Font-Awesome/issues/2737) to add the Thingiverse logo but it has been open since 2014 so it doesn't seem like it will be added any time soon.
+
+Since I was already using and somewhat familiar with the [`react-fontawesome`](https://github.com/FortAwesome/react-fontawesome) library I figured I'd do a little resverse engineering and see how it works internally to see if I could shim something together.
+
+If we take a look at the documentation for using [Font Awesome with React](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react) we can see that we have to import both the `FontAwesomeIcon` base component and the icon component for whatever icon we want to display. I appreciate this approach as it allows for tree shaking of the `free-solid-svg-icons` library. Because the icon itself was imported separately it was a signal to me that I may be able to pass anything to the `FontAwesomeIcon` component.
+
+```jsx url="https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react#using" title="Font-Awesome-React-Docs"
+import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
+const element = <FontAwesomeIcon icon={faCoffee} />;
+
+ReactDOM.render(element, document.body);
+```
+
+Let's have a look at the source of `faCoffee` in the `@fortawesome/free-solid-svg-icons` library.
+
+```js url="https://github.com/FortAwesome/Font-Awesome/blob/master/js-packages/%40fortawesome/free-solid-svg-icons/faCoffee.js" title="faCoffee.js"
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+var prefix = 'fas';
+var iconName = 'coffee';
+var width = 640;
+var height = 512;
+var ligatures = [];
+var unicode = 'f0f4';
+var svgPathData =
+    'M192 384h192c53 0 96-43 96-96h32c70.6 0 128-57.4 128-128S582.6 32 512 32H120c-13.3 0-24 10.7-24 24v232c0 53 43 96 96 96zM512 96c35.3 0 64 28.7 64 64s-28.7 64-64 64h-32V96h32zm47.7 384H48.3c-47.6 0-61-64-36-64h583.3c25 0 11.8 64-35.9 64z';
+
+exports.definition = {
+    prefix: prefix,
+    iconName: iconName,
+    icon: [width, height, ligatures, unicode, svgPathData],
+};
+
+exports.faCoffee = exports.definition;
+exports.prefix = prefix;
+exports.iconName = iconName;
+exports.width = width;
+exports.height = height;
+exports.ligatures = ligatures;
+exports.unicode = unicode;
+exports.svgPathData = svgPathData;
+```
+
+Well okay, this looks promising. It seems like this is just an abstraction of the svg file as a module in JavaScript.
+
+Now let's see if we can find a SVG for the Thingiverse logo. A quick search for "thingiverse svg icon" yields the following from [worldvectorlogo.com](https://worldvectorlogo.com/logo/thingiverse-logo).
+
+![Screeshot of the free Thingiverse svg on worldvectorlogo.com](~screenshot-vector-thingiverse-logo-svg.png)
+
+Downloading the file and looking at the source we can see it is a relatively simple SVG with a single `<path>` element which matches what we see in the `faCoffee` example above.
+
+```svg
+// thingiverse-logo.svg
+<svg height="2500" width="2500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <g fill="none" fill-rule="evenodd">
+        <circle cx="256.962" cy="256.962" fill="#2e88ff" r="237.714"/>
+        <path d="M256 512C114.615 512 0 397.385 0 256S114.615 0 256 0s256 114.615 256 256-114.615 256-256 256zm0-36.571c121.187 0 219.429-98.242 219.429-219.429S377.187 36.571 256 36.571 36.571 134.813 36.571 256 134.813 475.429 256 475.429zm32.722-269.474v219.428h-65.444V205.955h-92.39V140.51h250.225v65.444z" fill="#fff"/>
+    </g>
+</svg>
+```
+
+With that, I created a `IconThingiverse.js` file in the components directory, copied the contents from the `faCoffee.js` source and modified it to bring it up to speed with ES6. Then I copied the contents of the `d` attribute of the `<path>` element from `thingiverse-logo.svg` and pasted it as the value of the `svgPathData` in my new JS file. A few other updates to some of the other `const`'s and we have the following.
+
+```js
+// components/IconThingiverse.js
+const prefix = 'fajz';
+const iconName = 'thingiverse';
+const width = 448;
+const height = 512;
+const ligatures = [];
+const unicode = 'f16d';
+const svgPathData =
+    'M256 512C114.615 512 0 397.385 0 256S114.615 0 256 0s256 114.615 256 256-114.615 256-256 256zm0-36.571c121.187 0 219.429-98.242 219.429-219.429S377.187 36.571 256 36.571 36.571 134.813 36.571 256 134.813 475.429 256 475.429zm32.722-269.474v219.428h-65.444V205.955h-92.39V140.51h250.225v65.444z';
+
+const ThingiverseIcon = {
+    prefix: prefix,
+    iconName: iconName,
+    icon: [width, height, ligatures, unicode, svgPathData],
+};
+
+export default ThingiverseIcon;
+```
+
+We can bring this all together and try it out in a simple example.
+
+```jsx codesandbox="ds9s9?entry=/src/App.js"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import faThingiverse from '@components/IconThingiverse';
+
+const App = () => {
+    return <FontAwesomeIcon icon={faThingiverse} size="2x" />;
+};
+
+export default App;
+```
+
+Woud you look at that, it works! Best of all it acts just like any other Font Awesome icon as it inherits the styles of it's parent element and is a benefactor of all the other things the `FontAwesomeIcon` components does.
+
+You might ask, "_Could I have just rendered the SVG directly as it's own component?_". Yeah, sure. And I would have done that had this not all worked out. Plus it keeps the way I interact with icons within this codebase consistent.
+
+For example, where I display the social icons below the nav links I can import all the icons, build an array of the links, then render them all by mapping over the array.
+
+```jsx
+// components/Layout.js
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faInstagram, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import faThingiverse from '@components/IconThingiverse';
+
+...
+
+const socialLinks = [
+    {
+        name: 'LinkedIn',
+        icon: faLinkedin,
+        url: 'https://www.linkedin.com/in/john-zanussi/',
+    },
+    {
+        name: 'GitHub',
+        icon: faGithub,
+        url: 'https://github.com/johnzanussi',
+    },
+    {
+        name: 'Instagram',
+        icon: faInstagram,
+        url: 'https://www.instagram.com/johnzanussi/',
+    },
+    {
+        name: 'Thingiverse',
+        icon: faThingiverse,
+        url: 'https://www.thingiverse.com/johnzanussi/designs',
+    },
+];
+
+...
+
+<ul class="list-inline mt-5 mt-md-4 text-center text-md-start">
+
+    {socialLinks.map(({ name, icon, url }) => (
+
+        <li
+            key={name}
+            class="list-inline-item me-4"
+        >
+
+            <Link
+                href={url}
+                title={name}
+                class="link-secondary opacity-50">
+                <FontAwesomeIcon icon={icon} size="2x" />
+            </Link>
+
+        </li>
+
+    ))}
+
+</ul>
+```
+
+I'm very aware I got lucky on a few steps along the way. Finding a free SVG file for the logo I was looking for was the first. The SVG being relatively simple and being compatable with what `<FontAwesomeReact>` expects in the `svgPathData` prop was the other. This solution obviously won't work with every SVG but it at least serves as a guide for others to try it out.
+
+You can checkout all the code for this entire website on my [GitHub](https://github.com/johnzanussi/johnzanussi.com).

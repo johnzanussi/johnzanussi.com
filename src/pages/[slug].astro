@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+
+import ContentLayout from '@layouts/ContentLayout.astro';
+import Markdown from '@components/Markdown.astro';
+import PageTitle from '@components/PageTitle.astro';
+
+import README from '../../README.mdx';
+
+export async function getStaticPaths() {
+
+    const pages = await getCollection('pages');
+
+    // Built With aka README
+    pages.push({
+        slug: 'built-with',
+        data: {
+            title: 'Built With',
+        },
+        collection: 'pages',
+        render: () => ({ Content: README }),
+    });
+
+    return pages.map(page => ({
+        params: {
+            slug: page.slug,
+        },
+        props: {
+            page,
+        },
+    }));
+
+}
+
+const { page } = Astro.props;
+const { Content } = await page.render();
+
+const { data, slug } = page;
+
+const { title, excerpt } = data;
+
+const metadata = {
+    title,
+    description: excerpt,
+    screenshot: slug,
+};
+---
+
+<ContentLayout metadata={metadata}>
+
+    <PageTitle>
+        {title}
+    </PageTitle>
+
+    <Markdown Content={Content} />
+
+</ContentLayout>

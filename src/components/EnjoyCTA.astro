@@ -1,0 +1,37 @@
+---
+import Image from '@components/Image.astro';
+import Link from './Link.astro';
+---
+
+<div class="bg-info text-center p-3 rounded-1">
+
+    <p>
+        Found the above useful? Have a question? Thought of something I
+        didn&apos;t?
+    </p>
+
+    <p>
+        Consider leaving a comment below or send me an email at
+        johnzanussi@gmail.com.
+    </p>
+
+    <p>You can also buy me a coffee. Cheers!</p>
+
+    <p>
+
+        <Link href="https://www.buymeacoffee.com/johnzanussi">
+
+            <Image
+                width="180"
+                height="50"
+                src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png"
+                alt="Buy Me A Coffee"
+                breakpoints={[180]}
+                class="rounded-2"
+            />
+
+        </Link>
+
+    </p>
+
+</div>

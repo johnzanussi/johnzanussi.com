@@ -1,0 +1,270 @@
+@import './bootstrap';
+@import './animations';
+
+a {
+    transition: color 0.5s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0ms,
+                opacity 0.5s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0ms;
+}
+
+h1 {
+    word-spacing: -0.2em;
+}
+
+h2 {
+    word-spacing: -0.1em;
+    &.border-bottom {
+        border-color: rgba($headings-color, 0.3) !important;
+    }
+}
+
+body {
+    &:before {
+        content: '';
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: -1;
+        transition: background 150ms ease 0s,
+                    background-image 150ms ease 0s;
+        background: rgb(248, 249, 250);
+        background-image: linear-gradient(
+            45deg,
+            hsl(210deg 17% 98%) 14%,
+            hsl(209deg 50% 95%) 61%,
+            hsl(209deg 62% 93%) 77%,
+            hsl(208deg 68% 91%) 87%,
+            hsl(208deg 72% 89%) 94%,
+            hsl(207deg 74% 86%) 99%,
+            hsl(207deg 76% 84%) 101%,
+            hsl(206deg 77% 81%) 101%
+        );
+
+    }
+}
+
+
+.text-emphasis {
+    color: $emphasis-color;
+}
+
+html[data-bs-theme="light"] {
+    .d-inline-light {
+        display: inline !important;
+    }
+}
+
+html[data-bs-theme="dark"] {
+
+    body {
+        &:before {
+            // background: linear-gradient(50deg, rgba(14,17,20,1) 45%, rgba(6,28,51,1) 100%);
+            background: $body-bg-dark;
+            background-image: linear-gradient(
+                45deg,
+                hsl(210deg 18% 7%) 14%,
+                hsl(209deg 29% 8%) 61%,
+                hsl(209deg 38% 9%) 77%,
+                hsl(209deg 49% 10%) 87%,
+                hsl(208deg 60% 11%) 94%,
+                hsl(207deg 72% 11%) 99%,
+                hsl(207deg 84% 12%) 101%,
+                hsl(206deg 97% 12%) 101%
+            );
+        }
+    }
+
+    .d-inline-dark {
+        display: inline !important;
+    }
+
+    .text-emphasis {
+        color: $emphasis-color-dark;
+    }
+
+    .bg-info {
+        background-color: rgba(25, 113, 194, 0.2) !important;
+    }
+
+}
+
+.bg-tertiary {
+    background-color: var(--bs-tertiary-bg);
+}
+
+.display-1 {
+    word-spacing: -0.5em;
+    @include media-breakpoint-down(md) {
+        font-size: 2.5rem;
+    }
+}
+
+@include media-breakpoint-between(md, xl) {
+
+    .site-nav {
+
+        width: 275px;
+
+        .nav-photo img {
+            max-width: 75% !important;
+        }
+
+        h1 {
+            font-size: 33px;
+        }
+
+    }
+
+}
+
+
+@include media-breakpoint-up(md) {
+    .rounded-md-end {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        @include border-end-radius;
+    }
+
+    .rounded-md-2 {
+        @include border-radius(var(--bs-border-radius));
+    }
+
+    .site-nav {
+        position: sticky;
+        top: 3rem;
+        &.is-static {
+            position: relative;
+        }
+    }
+
+    .post-card {
+        .card-img {
+            flex: 0 0 40%;
+        }
+
+    }
+}
+
+.card {
+
+    transition: transform 150ms ease 0s,
+                box-shadow 100ms ease 0s;
+
+    &:hover {
+        box-shadow: $box-shadow;
+        transform: scale(1.02);
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+
+        .card-body {
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+        }
+
+        h1 {
+            font-size: $h4-font-size;
+        }
+
+        p,
+        time {
+            font-size: $small-font-size;
+        }
+
+    }
+
+    html[data-bs-theme="dark"] & {
+        background-color: $card-bg-dark;
+        border-color: $card-border-color-dark;
+    }
+
+    a {
+        transition: color 150ms ease 0s;
+    }
+
+}
+
+.collapse-button {
+    @include transition($accordion-icon-transition);
+
+    button:not(.collapsed) & {
+        transform: $accordion-icon-transform;
+    }
+}
+
+.nav-photo {
+    @include media-breakpoint-down(md) {
+        width: 110px;
+        height: 110px;
+    }
+
+    // @include transition($accordion-icon-transition);
+
+    a:hover > span {
+        animation: shakeX;
+        animation-duration: 0.5s;
+    }
+}
+
+
+
+.site-main {
+    max-width: 1200px;
+}
+
+@include media-breakpoint-up(xl) {
+    .content-container {
+        max-width: 45em; // 720px
+    }
+}
+
+.link-anchor {
+    opacity: 0;
+
+    :hover > & {
+        opacity: 0.5;
+    }
+
+    &:hover {
+        opacity: 1;
+        color: $link-color;
+    }
+}
+
+
+.border-bottom-start {
+    @include border-bottom-start-radius($border-radius-sm);
+}
+
+.nav-color-mode-toggle {
+    width: 50px;
+    @include media-breakpoint-down(md) {
+        background-color: rgba($light, 0.1) !important;
+        @include border-radius;
+    }
+    @include media-breakpoint-up(md) {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+
+
+// https://github.com/FortAwesome/Font-Awesome/blob/6.x/js-packages/%40fortawesome/fontawesome-svg-core/styles.css
+.icon-fa {
+    display: inline-block;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+
+    &.fa-2x {
+        font-size: 2em;
+    }
+}
+
+.post-pagination {
+    a {
+        color: var(--body-color);
+    }
+}

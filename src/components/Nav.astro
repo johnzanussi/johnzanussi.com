@@ -1,0 +1,187 @@
+---
+import Image from '@components/Image.astro';
+import { Icon } from 'astro-iconify';
+
+import Link from '@components/Link.astro';
+import NavToggle from '@components/NavToggle.astro';
+
+const pages = [
+    {
+        title: 'About',
+        url: '/about',
+    },
+    {
+        title: 'Posts',
+        url: '/posts',
+    },
+    {
+        title: 'YouTube',
+        url: '/youtube',
+    },
+];
+
+const socialLinks = [
+    {
+        name: 'LinkedIn',
+        icon: 'fa6-brands:linkedin',
+        url: 'https://www.linkedin.com/in/john-zanussi/',
+    },
+    {
+        name: 'GitHub',
+        icon: 'fa6-brands:github',
+        url: 'https://github.com/johnzanussi',
+    },
+    {
+        name: 'Instagram',
+        icon: 'fa6-brands:instagram',
+        url: 'https://www.instagram.com/johnzanussi/',
+    },
+    {
+        name: 'Printables',
+        icon: 'printables-spool',
+        url: 'https://www.printables.com/social/170869-johnzanussi/about',
+    },
+    {
+        name: 'RSS',
+        icon: 'fa6-solid:rss',
+        url: '/rss.xml',
+    }
+];
+
+const socialLinksCount = socialLinks.length - 1;
+---
+<nav
+    data-bs-theme="dark"
+    class="navbar site-nav d-md-flex flex-md-column flex-md-shrink-0 px-3 py-md-5 p-xl-5 sticky-md-top align-self-md-start shadow-lg rounded-bottom rounded-md-end bg-dark"
+    id="site-nav"
+>
+    <div class="d-flex d-md-block">
+        <div class="nav-photo text-center mb-3 mb-md-0">
+
+            <Link href="/">
+
+                <Image
+                    src="assets/img-john-zanussi-kiddo.jpg"
+                    alt="portrait of John Zanussi wearing sunglasses with his daughter on his shoulders"
+                    class="rounded-circle shadow img-fluid"
+                    width="250"
+                    height="250"
+                    breakpoints={[250]}
+                    loading="eager"
+                />
+
+            </Link>
+
+            <p class="m-0">
+                <Link
+                    href="https://en.pronouns.page/he"
+                    class="d-block navbar-text small mt-1 p-0"
+                >
+                    he/him
+                </Link>
+            </p>
+        </div>
+
+        <div class="ms-3 ms-md-0">
+            <h1 class="mt-md-4 text-primary">
+                John Zanussi
+            </h1>
+
+            <p class="small navbar-text text-muted mb-1 mb-md-3 p-0">
+                Long Island, New York
+            </p>
+
+            <p class="navbar-text small mb-0 mb-md-3 p-0 text-white">
+                Senior Engineering Manager at{' '}
+                <Link
+                    href="https://leaflink.com/"
+                    class="text-reset"
+                >
+                    LeafLink
+                </Link>
+                {/*<br />
+                <Link
+                    href="https://grnh.se/15a127b32us"
+                    class="small link-warning opacity-75"
+                >
+                    We&apos;re hiring!
+                </Link>*/}
+            </p>
+        </div>
+    </div>
+
+    <NavToggle class="d-md-block w-100 mt-3 mt-md-0">
+
+        <ul class="list-unstyled font-monospace fs-5 px-3 p-md-0 text-end text-md-start">
+            {pages.map(({ title, url }) => (
+                <li>
+                    <Link
+                        href={url}
+                        class="d-block font-weight-bold"
+                    >
+                        {title}
+                    </Link>
+                </li>
+            ))}
+        </ul>
+
+        <ul class="list-inline mt-4 text-center text-md-start d-flex d-md-block justify-content-center justify-content-md-evenly">
+            {socialLinks.map(({ name, icon, url }, i) => (
+                <li class:list={[
+                    'list-inline-item',
+                    {
+                        'me-4 me-md-3 me-xl-4': i < socialLinksCount,
+                    }
+                ]}>
+                    <Link
+                        href={url}
+                        title={name}
+                        class="link-secondary opacity-50"
+                    >
+                        <Icon
+                            name={icon}
+                            class="icon-fa fa-2x"
+                        />
+
+                    </Link>
+                </li>
+            ))}
+        </ul>
+
+        <div class="small text-center text-md-start">
+            <p class="mb-1">
+                <Link
+                    href="/built-with"
+                    class="text-decoration-none"
+                >
+                    Built with Astro, Bootstrap, and more.
+                </Link>
+            </p>
+
+            <p class="navbar-text text-muted mb-0 p-0">
+                All content copyright John Zanussi.
+            </p>
+        </div>
+
+    </NavToggle>
+
+</nav>
+
+<script>
+const handleNavWindowResize = () => {
+
+    const nav = document.getElementById('site-nav');
+    const offset = Number(getComputedStyle(nav).top.replace(/[^\d]+/, ''));
+
+    const isStatic = document.documentElement.clientHeight < nav.offsetHeight + offset;
+
+    nav.classList.toggle('position-relative', isStatic);
+
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+    handleNavWindowResize();
+});
+
+window.addEventListener('resize', handleNavWindowResize);
+</script>

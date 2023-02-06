@@ -1,0 +1,41 @@
+---
+import Icon from '@components/Icon.astro';
+
+const {
+    class: className = '',
+    ...props
+} = Astro.props;
+---
+
+<button
+    type="button"
+    class="btn btn-link btn-back-to-top d-none"
+    aria-label="Back to top"
+    {...props}
+>
+    Back to top <Icon icon="fa-solid:level-up-alt" />
+</button>
+
+<script>
+const backToTop = document.querySelectorAll('.btn-back-to-top');
+const threshold = 250;
+
+const handleResize = () => {
+    if (document.body.clientHeight - window.innerHeight > threshold) {
+        backToTop.forEach((btn) => btn.classList.remove('d-none'));
+    }
+};
+
+handleResize();
+
+window.addEventListener('resize', handleResize);
+
+backToTop.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    });
+});
+</script>

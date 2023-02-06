@@ -1,0 +1,41 @@
+<script is:inline>
+const storedTheme = localStorage.getItem('theme');
+
+const getPreferredTheme = () => {
+    if (storedTheme) {
+        return storedTheme
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
+const setTheme = (theme) => {
+    if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme = 'dark';
+    }
+    localStorage.setItem('theme', theme);
+    const event = new CustomEvent('theme', { detail: theme });
+    document.dispatchEvent(event);
+    document.documentElement.setAttribute('data-bs-theme', theme);
+};
+
+setTheme(getPreferredTheme());
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (storedTheme !== 'light' || storedTheme !== 'dark') {
+        setTheme(getPreferredTheme());
+    }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+
+    document.querySelectorAll('[data-bs-theme-value]')
+        .forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                setTheme(
+                    toggle.getAttribute('data-bs-theme-value')
+                );
+            })
+        })
+});
+</script>

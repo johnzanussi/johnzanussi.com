@@ -1,0 +1,27 @@
+.code-block {
+
+    html[data-bs-theme="light"] & {
+        @import './prism/light';
+    }
+
+    html[data-bs-theme="dark"] & {
+        // https://github.com/PrismJS/prism-themes/blob/master/themes/prism-one-dark.css
+        @import './prism/dark';
+
+        &,
+        figcaption {
+            border-color: rgb(37, 38, 43) !important;
+        }
+    }
+
+    &,
+    code[class*="language-"],
+    pre[class*="language-"] {
+        background-color: var(--bs-body-bg) !important;
+    }
+
+    .code-language {
+        background-color: var(--bs-border-color);
+    }
+
+}
