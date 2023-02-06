@@ -1,0 +1,94 @@
+---
+import {
+    getDateSortedCollection,
+    getSiblingItems,
+    getPostUrl,
+    getCollectionUrl,
+} from '@utils/collections';
+import { getRelativeSrc } from '@utils/images';
+import { absoluteUrl } from '@utils/urls';
+
+import ContentLayout from '@layouts/ContentLayout.astro';
+
+import AmazonDisclosure from '@components/AmazonDisclosure.astro';
+import Comments from '@components/Comments.astro';
+import DateFormat from '@components/DateFormat.astro';
+import EnjoyCTA from '@components/EnjoyCTA.astro';
+import Markdown from '@components/Markdown.astro';
+import PostPagination from '@components/PostPagination.astro';
+
+export async function getStaticPaths() {
+
+    const posts = await getDateSortedCollection('posts');
+
+    return posts.map(post => ({
+        params: {
+            slug: post.slug,
+        },
+        props: {
+            post
+        },
+    }));
+
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const { data, slug } = post;
+
+const {
+    title,
+    date,
+    excerpt,
+    coverImage,
+    hasAmazonLinks = false,
+} = data;
+
+const postUrl = absoluteUrl(getPostUrl(slug));
+
+const metadata = {
+    title,
+    url: postUrl,
+    description: excerpt,
+    image: absoluteUrl(getRelativeSrc(slug, coverImage.url)),
+    ogType: 'article',
+    publishDate: date,
+    breadcrumbs: [
+        {
+            title: 'Posts',
+            url: absoluteUrl(getCollectionUrl('posts')),
+        },
+    ],
+};
+
+const siblingPosts = await getSiblingItems('posts', post);
+---
+
+<ContentLayout metadata={metadata}>
+
+    <DateFormat date={date} class="text-muted" />
+
+    <h1>{title}</h1>
+
+    <hr />
+
+    <Markdown Content={Content} />
+
+    {hasAmazonLinks && <AmazonDisclosure />}
+
+    <EnjoyCTA />
+
+    <PostPagination posts={siblingPosts} />
+
+    <h2 id="comments">
+        Comments
+    </h2>
+
+    <Comments
+        id={slug}
+        url={postUrl}
+        title={title}
+    />
+
+</ContentLayout>

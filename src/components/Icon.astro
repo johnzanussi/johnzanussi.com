@@ -1,0 +1,18 @@
+---
+// https://iconify.design/
+import { Icon } from 'astro-iconify';
+
+const { class: className, icon } = Astro.props;
+
+const classes = [
+    className,
+    {
+        'icon-fa': icon?.startsWith('fa'),
+    }
+];
+---
+
+<Icon
+    name={icon}
+    class:list={classes}
+/>

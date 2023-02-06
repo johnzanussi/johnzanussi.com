@@ -1,0 +1,23 @@
+---
+import { getImage } from '@utils/images.js';
+import { Img } from 'astro-imagetools/components';
+
+const { src, class: className, ...props } = Astro.props;
+
+const image = await getImage(src);
+
+const attributes = {};
+
+if (className) {
+    attributes.img = {
+        class: className,
+    };
+}
+
+---
+
+<Img
+    src={image}
+    attributes={attributes}
+    {...props}
+/>

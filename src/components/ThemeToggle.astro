@@ -1,0 +1,30 @@
+---
+import Icon from '@components/Icon.astro';
+
+const { class: className } = Astro.props;
+---
+
+<button
+    class:list={['btn btn-link text-warning d-none d-inline-light', className]}
+    role="button"
+    data-bs-theme-value="dark"
+    aria-label="Switch to dark theme"
+>
+    <Icon
+        icon="fa6-solid:sun"
+        class="lead align-text-top"
+    />
+
+</button>
+
+<button
+    class:list={['btn btn-link text-danger d-none d-inline-dark', className]}
+    role="button"
+    data-bs-theme-value="light"
+    aria-label="Switch to light theme"
+>
+    <Icon
+        icon="fa6-solid:moon"
+        class="lead align-text-top"
+    />
+</button>

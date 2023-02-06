@@ -1,0 +1,60 @@
+---
+import { getRelativeSrc } from '@utils/images.js';
+import { getPostUrl } from '@utils/collections.js';
+
+import DateFormat from '@components/DateFormat.astro';
+import Image from '@components/Image.astro';
+import Link from '@components/Link.astro';
+
+const { post, ...props } = Astro.props;
+
+const { data, slug } = post;
+
+const {
+    date,
+    title,
+    excerpt,
+    coverImage,
+} = data;
+---
+<article
+    class="post-card card flex-xl-row p-3"
+    {...props}
+>
+
+    <div class="card-body order-1 order-xl-0 px-2 p-xl-2 pb-0 pe-xl-0">
+
+        <div class="text-muted mb-2 small">
+            <DateFormat date={date} />
+        </div>
+
+        <h1 class="h2">
+            <Link
+                href={getPostUrl(slug)}
+                class="stretched-link text-reset"
+            >
+                {title}
+            </Link>
+        </h1>
+
+        <p class="m-0">
+            {excerpt}
+        </p>
+
+    </div>
+
+    <div class="card-img ratio ratio-16x9 position-relative order-0 order-xl-1 ms-xl-3">
+
+        <Image
+            src={getRelativeSrc(slug, coverImage.url)}
+            alt={`Cover image for ${title}`}
+            width={coverImage.width}
+            height={coverImage.height}
+            breakpoints={[428, 768]}
+            sizes="(min-width: 1200px) 428w, 100vw"
+            class="rounded"
+        />
+
+    </div>
+
+</article>

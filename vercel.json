@@ -1,0 +1,13 @@
+{
+    "framework": "astro",
+    "rewrites": [
+        {
+            "source": "/rk6m8wh2a.js",
+            "destination": "https://analytics.johnzanussi.com/js/plausible.js"
+        },
+        {
+            "source": "/api/rk6m8wh2a",
+            "destination": "https://analytics.johnzanussi.com/api/event"
+        }
+    ]
+}

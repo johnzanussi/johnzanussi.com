@@ -1,0 +1,29 @@
+---
+import { getDateSortedCollection } from '@utils/collections';
+
+import Layout from '@layouts/Layout.astro';
+import PageTitle from '@components/PageTitle.astro';
+import PostCard from '@components/PostCard.astro';
+
+const posts = await getDateSortedCollection('posts');
+
+const metadata = {
+    title: 'Posts',
+    description: 'A collection of posts I\'ve written about various topics.',
+    screenshot: 'posts',
+};
+---
+
+<Layout metadata={metadata}>
+
+    <PageTitle class="mb-4">
+        Posts
+    </PageTitle>
+
+    {posts.map(post => (
+        <div class="mb-4">
+            <PostCard post={post} />
+        </div>
+    ))}
+
+</Layout>

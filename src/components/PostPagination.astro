@@ -1,0 +1,83 @@
+---
+import { getPostUrl } from '@utils/collections';
+
+import Icon from '@components/Icon.astro';
+import Link from '@components/Link.astro';
+
+const { posts, showLabels = true, ...props } = Astro.props;
+---
+
+<nav
+    aria-label="Post pagination"
+    {...props}
+>
+
+    <ul class="list-unstyled row my-4 post-pagination">
+
+        {posts.map(({ isPrevious, data, slug }) => {
+
+            const { title, url } = data;
+            const label = isPrevious ? 'Previous' : 'Next';
+            const icon = `fa6-solid:arrow-${isPrevious ? 'left' : 'right'}`;
+
+            return (
+
+                <li
+                    class:list={[
+                        'col-md-6',
+                        {
+                            'text-start mb-4 mb-md-0': isPrevious,
+                            'text-end': !isPrevious,
+                            'offset-md-6': !isPrevious && posts.length === 1,
+                        },
+                    ]}
+                >
+
+                    <div class="card h-100 rounded-1 flex-row justify-content-between p-3">
+
+                        <div class:list={[
+                                'align-self-center',
+                                {
+                                    'order-0 me-3': isPrevious,
+                                    'order-1 ms-3': !isPrevious,
+                                }
+                            ]}
+                        >
+
+                            <Icon icon={icon} />
+
+                        </div>
+
+                        <Link
+                            href={url || getPostUrl(slug)}
+                            class:list={[
+                                'stretched-link lh-sm',
+                                {
+                                    'order-1 text-end': isPrevious,
+                                    'order-0 text-start': !isPrevious,
+                                }
+                            ]}>
+
+                            {showLabels && (
+                                <div class="fs-6 mb-2 text-muted">
+                                    {label} Post
+                                </div>
+                            )}
+
+                            <span class="fs-6">
+                                {title}
+                            </span>
+
+                        </Link>
+
+                    </div>
+
+                </li>
+
+            );
+
+        })}
+
+    </ul>
+
+</nav>

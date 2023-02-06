@@ -1,0 +1,36 @@
+---
+const { id, url, title } = Astro.props;
+---
+
+<script
+    is:inline
+    src="https://cdn.fastcomments.com/js/embed-v2.min.js"
+/>
+
+<div
+    id="fastcomments"
+    data-id={id}
+    data-url={url}
+    data-title={title}
+/>
+
+<script>
+const comments = document.getElementById('fastcomments');
+
+const getConfig = (theme) => ({
+    tenantId: 'TuZHgHCUlVl',
+    urlId: comments.dataset.id,
+    url: comments.dataset.url,
+    pageTitle: comments.dataset.title,
+    hasDarkBackground: theme === 'dark',
+});
+
+const fastComments = FastCommentsUI(
+    comments,
+    getConfig(localStorage.getItem('theme'))
+);
+
+document.addEventListener('theme', (event) => {
+    fastComments.update(getConfig(event.detail));
+}, false);
+</script>

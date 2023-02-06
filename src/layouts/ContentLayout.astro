@@ -1,0 +1,14 @@
+---
+import BackToTop from '@components/BackToTop.astro';
+import Layout from '@layouts/Layout.astro';
+---
+
+<Layout {...Astro.props}>
+    <div class="content-container">
+        <slot />
+
+        <div class="text-center mt-5">
+            <BackToTop />
+        </div>
+    </div>
+</Layout>

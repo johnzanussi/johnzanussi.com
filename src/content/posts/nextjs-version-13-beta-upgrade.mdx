@@ -1,0 +1,230 @@
+---
+title: Upgrading to Next.js 13 and opting in to the app directory beta
+excerpt: I documented my journey of upgrading this site to Next.js 13 and opting into the new app directory beta.
+coverImage:
+    url: ~cover-nextjs-v13-upgrade-guide.jpg
+    width: 1600
+    height: 900
+date: '2023-01-08'
+---
+
+When I built this site in 2021, I had been aware of Next.js but never used it. I was excited to have a project that would allow me to learn the ins and outs of Next. At that time, I used version 12, and since then, I've been following the developments of Next on the [Vercel YouTube channel](https://www.youtube.com/@VercelHQ), [Hacker News](https://news.ycombinator.com/from?site=nextjs.org), and [r/nextjs](https://www.reddit.com/r/nextjs). I was excited at the [release of version 13](https://nextjs.org/blog/next-13) and all the enhancements that came with it. I knew I'd eventually find time to upgrade, but I didn't prioritize it. I had some time off from work towards the end of the year and found a couple of days to go heads down in the updated docs and update this site. In addition, I also moved all my content from the `/pages` directory into the `/app` directory (which is still in beta).
+
+I learned a few things while upgrading that weren't clear in the [official upgrade guide](https://beta.nextjs.org/docs/upgrade-guide). I also took the opportunity to do a few cleanup things that I've wanted to do for a while. And, yes, it would have been cleaner/safer to keep those items separate from the upgrade, but this is my site and project, and I do what I want.
+
+You can [view the entire changeset on GitHub](https://github.com/johnzanussi/johnzanussi.com/pull/13/files) if you don't want to read words and only look at the code.
+
+I followed the [official upgrade guide](https://beta.nextjs.org/docs/upgrade-guide) step by step. As this was my first time digging into the beta docs, I did a lot of bouncing around, reading, and re-reading sections and pages of the docs. For the most part, the upgrade guide is an excellent resource. I got through most sections without issue. There were areas that held me up and I will explain those problems and what I did to solve them. If you're upgrading and have questions, please drop them in the [Comments](#comments) section below.
+
+* [Images](#images)
+* [Fonts](#fonts)
+  * [Font name conventions](#font-name-conventions)
+  * [Bootstrap](#bootstrap)
+* [Migrating from `pages` to `app`](#migrating-from-pages-to-app)
+  * [Routing](#routing)
+  * [Server Components + Client Components](#server-components--client-components)
+  * [head.js](#headjs)
+* [General Cleanup](#general-cleanup)
+  * [Replace defaultProps with default function parameters](#replace-defaultprops-with-default-function-parameters)
+  * [Absolute Imports](#absolute-imports)
+* [Comments](#comments)  
+
+
+## Images
+The Next team [offers two codemods](https://beta.nextjs.org/docs/upgrade-guide#image-component) to help you migrate to the new image component. However, I didn't find either of them useful.
+
+`next-image-to-legacy-image` updates the import to use the legacy `<Image />` component, which I didn't want to do. 
+
+`next-image-experimental` does its best to modify existing `<Image />` components to match the new conventions. Since I [have a component](https://github.com/johnzanussi/johnzanussi.com/blob/main/components/Image.js) that wraps `next/image` this codemod wouldn't work for me. 
+
+So I found all the places where I imported my `<Image />` component and manually updated them. Luckily for me, there were only four places. Updating the props used wasn't intuitive, but between the [beta docs](https://beta.nextjs.org/docs/optimizing/images) and [current docs](https://nextjs.org/docs/basic-features/image-optimization) for Image optimization and the [`next/image` docs](https://nextjs.org/docs/api-reference/next/image), I got the information I needed to update the components accordingly.
+
+## Fonts
+I was super happy to see the introduction of the `@next/font` module, as it supports self-hosting of any font file, including Google Fonts. My site uses two Google Fonts: [Roboto](https://fonts.google.com/specimen/Roboto) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono).
+
+The upgrade guide helped me get most of the way to working except for 1) Font name conventions and 2) use with Bootstrap.
+
+#### Font name conventions
+The docs use the font Inter as an example. When importing the font from the `@next/font/google` package, you destructure the font from the package using its name. So in the case of "Inter".
+
+```js
+import { Inter } from '@next/font/google';
+```
+
+However, they do not mention the convention when importing fonts with more than one word in their name, such as "Roboto Mono". After trying a few things and searching around, I found this [Next.js 13 + Google Fonts](https://medium.com/codex/next-js-13-google-fonts-5e0e50e031c6) post on Medium, which confirmed what I had seen by testing: Fonts with two words use an underscore in place of the space.
+
+```js
+import { Roboto_Mono } from '@next/font/google';
+```
+
+I was able to get the answer I needed by trial and error and searching, but it would have been nice to see that as an example or mentioned in Next's docs.
+
+#### Bootstrap
+Yes, I still use Bootstrap. I wrote a bit about my decision to use it over Tailwind on my [Built With page](/built-with#bootstrap). Because of how Bootstrap works, I couldn't just add the font class name to the `<html>` tag. Next does provide an example for using `next/font` with Tailwind, which helped point me in the right direction. 
+
+To work with Bootstrap, first, include the `variable` property to define a CSS variable for the font. The variable name (`--font-roboto`) can be whatever you'd like.
+
+```js
+const roboto = Roboto({
+    subsets: ['latin'],
+    style: ['normal', 'italic'],
+    variable: '--font-roboto',
+});
+````
+
+Include the font's `variable` property as a class name to the `<html>` tag.
+
+```jsx
+<html lang="en" class={roboto.variable}>
+```
+
+Update your `bootstrap.scss` file to use the CSS variable when setting the font family.
+
+```scss
+$font-family-sans-serif: var(--font-roboto);
+```
+
+You can view my full implementation in the [`app/layout.js` file here](https://github.com/johnzanussi/johnzanussi.com/pull/13/files#diff-28d6371ce6a935bbbf260c960c211c40eb5a4faa836dd266fa053996b6212cef).
+
+
+
+## Migrating from pages to app
+I went back and forth about opting into the app directory, as the Next team is very clear that it is still in beta. They even go as far as to recommend not using it in production. I'd heed that warning if this were a client site or something for work. But, again, this is my site, and I do what I want. 
+
+Overall, migrating the five or so pages was pretty straightforward, and following the guide proved to be very useful. There were a few hiccups, though.
+
+#### Routing
+All the pages on my site are based on static files available during build time. For example, the `/posts/[slug]` URL points to the `app/posts/[slug]/page.js` file, and only the static files available in the `_posts` directory should count for valid URLs. Everything else should 404.
+
+Here's the output from a recent build.
+
+```
+Route (app)
+┌ ○ /
+├ ● /[page]
+├  └ /about
+├ ○ /built-with
+├ ○ /posts
+├ ● /posts/[slug]
+├  ├ /posts/3d-printer-psu-control
+├  ├ /posts/nextjs-version-13-beta-upgrade
+├  ├ /posts/rack-mounting-home-assistant-yellow
+├  ├ /posts/unifi-g4-doorbell-chime-with-sonos
+├  ├ /posts/using-custom-svgs-with-fontawesome
+├  ├ /posts/wireless-ecobee-mini-split-home-assistant
+├  └ /posts/wled-christmas-lights
+└ ○ /youtube 
+
+...
+
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+●  (SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
+```
+
+This means I don't need true dynamic URLs where the lookup if a page exists happens server side. In my case, I was getting a runtime error where the URL `/favicon.ico` was throwing a server error because it was attempting to be routed through the `app/[page]/page.js` file.
+
+There are two solutions to this problem. 
+
+For static URLs generated with the `generateStaticParams` function, we can export a `dynamicParams` const as `false`. According to [the docs for `dynamicParams`](https://beta.nextjs.org/docs/api-reference/segment-config#dynamicparams), "Dynamic segments not included in generateStaticParams will return a 404" when the value is `false`.
+
+```js
+export async function generateStaticParams() {
+    const paths = await getPostsStaticPaths();
+    return paths;
+}
+
+export const dynamicParams = false;
+```
+The other way is to use the `notFound()` function provided by the `next/naviagtion` module.
+
+You can find more information on [`notFound()` in the docs](https://beta.nextjs.org/docs/api-reference/notfound#notfound).
+
+#### Server Components + Client Components
+
+With the concept of Server Components and Client Components, Next.js 13 defaults files within the `app` director to server components. You can force any component to be a client component by using the `"use client"` directive at the top of the component file.
+
+Most of this site is purely static, and there is little interactivity that would require a ton of JavaScript at run time. Having so few client components allows me to fully take advantage of Server Components and [Next's static rendering](https://beta.nextjs.org/docs/rendering/static-and-dynamic-rendering#static-rendering-default). I'm only using the `use client` directive in four places across the site.
+
+Three of the four components that define the `use client` directive truly need it. [`BackToTop`](https://github.com/johnzanussi/johnzanussi.com/blob/1bb6cc99ed9241e92b6f8b5579f97cbcfd313531/components/BackToTop.js), [`Comments`](https://github.com/johnzanussi/johnzanussi.com/blob/1bb6cc99ed9241e92b6f8b5579f97cbcfd313531/components/Comments.js), and [`NavToggle`](https://github.com/johnzanussi/johnzanussi.com/blob/1bb6cc99ed9241e92b6f8b5579f97cbcfd313531/components/NavToggle.js) all interact directly with the DOM in some way and cannot be rendered entirely on the server.
+
+The one exception is the component I created that renders MDX (Markdown) content which uses the `next-mdx-remote` npm package. The Next team is still working on proper support for MDX in the `app` directory, so I'm happy to use this stopgap until they've sorted it out. 
+
+As a development tool, there is also the [`server-only`](https://www.npmjs.com/package/server-only) package. You can ensure that a client component doesn't import the file by importing the package into a file. While in development mode, the package will throw a warning in the console, letting you know of your misdeeds. 
+
+Read more on [keeping server-only code out of client components in the docs](https://beta.nextjs.org/docs/rendering/server-and-client-components#keeping-server-only-code-out-of-client-components-poisoning). 
+
+#### head.js
+The last pain point I dealt with during this upgrade was the new [`head.js`](https://beta.nextjs.org/docs/api-reference/file-conventions/head) paradigm. `head.js` is a new "special file" Next introduced that allows different route segments to configure the `<head>` tag of the corresponding page.
+
+I use a combination of the [`next-seo`](https://github.com/garmeeh/next-seo) package and my own [`<Meta />`](https://github.com/johnzanussi/johnzanussi.com/blob/main/components/Meta.js) component to configure and output all the SEO related meta tags I'd like on any given page. Luckily for me, the `next-seo` maintainers are already [working on and have documentation](https://github.com/garmeeh/next-seo/blob/master/APP_DIRECTORY.md) for supporting the `app` directory. Their work made my life easier in understanding the limitations of `head.js` and getting things working the way I expected them to.
+
+In making the upgrade, I had to create the new `head.js` file for all my route segments. Doing so meant I had to fetch a page's data twice, once in `head.js` and again in the main content `page.js`. [The Next team says](https://beta.nextjs.org/docs/data-fetching/fundamentals#automatic-fetch-request-deduping), "When rendering a route, Next.js will automatically dedupe requests for the same data across layout.js, page.js, and head.js.". I have yet to see how they're doing this and if it's working, but it feels clunky to make the same request twice for a single page.
+
+```js
+import { getPostData } from 'lib/posts';
+import Meta from 'components/Meta';
+
+export default async function Head({ params }) {
+    const post = await getPostData(params.slug);
+
+    return (
+        <>
+            <Meta
+                title={post.title}
+                image={post.coverImage}
+                description={post.excerpt}
+                url={post.url}
+            />
+        </>
+    );
+}
+```
+
+Lastly, I had to restructure how I set meta tags for each page. From `'next-seo`'s doc, "Next.js no longer de-duplicates tags in the head." Removing the deduping of tags means instead of updating similar meta tags across different pages; new meta tags will be appended to the existing ones.
+
+Now, the Next team has stated, in a few places, that they are still very much working on how `head.js` works and the APIs they provide to support frequent use cases. I look forward to seeing what they come up with.
+
+## General Cleanup
+As I mentioned earlier, I took the opportunity to complete the following cleanup tasks.
+
+#### Replace `defaultProps` with default function parameters
+In React 18.3 `defaultProps` [will be deprecated](https://github.com/facebook/react/pull/25699), and I was getting console warnings about it, so I took the opportunity to convert the handful of components that used `defaultProps` to use [default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters). 
+
+The migration was relatively easy and there weren't any gotchas.
+
+#### Absolute Imports
+Since the `/app` directory uses directories (and nested directories) to define routes, I found my import paths were becoming quite ugly.
+
+For example, the posts `page` file on my site lives in `app/posts/[slug]/page.js`, which makes any import from the root directory look like this.
+
+```js
+import Comments from '@components/Comments';
+```
+
+And for the posts listing page at `app/posts/page` the import path is 
+
+```js
+import Comments from '@components/Comments';
+```
+
+Keeping track of how many levels deep a given file is and updating the import path is cumbersome and slows me down. 
+
+To fix this, I followed the [Absolute Imports and Module path aliases guide](https://nextjs.org/docs/advanced-features/module-path-aliases) to add a [`jsconfig.json`](https://github.com/johnzanussi/johnzanussi.com/pull/13/files#diff-7fe0ab2d61296b5df4add971654584ba7ee8082cc5b79ffa3b60da0ed9f0b3eb) file to the root directory that contains the following.
+
+```js
+{
+    "compilerOptions": {
+        "baseUrl": "."
+    }
+}
+```
+
+Using the `baseUrl` option allows me to ditch the many levels of `../` in my imports and always work from the root directory. So no matter where a file is in the directory tree, I can import a file like so.
+
+```js
+import Comments from 'components/Comments';
+```
+
+
+## End
+Hopefully, others thinking about, or in the process, of upgrading to Next.js 13 find this writeup helpful. Overall my experience with Next continues to be an enjoyable one. I'm excited to see the progress and momentum it has gained recently. 

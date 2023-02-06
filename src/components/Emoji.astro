@@ -1,0 +1,13 @@
+---
+const { label, children, ...props } = Astro.props;
+---
+
+<span
+    aria-label={label}
+    role="img"
+    {...props}
+>
+
+    <slot />
+
+</span>

@@ -1,0 +1,42 @@
+---
+import ThemeToggle from '@components/ThemeToggle.astro';
+import Icon from '@components/Icon.astro';
+
+const { class: className } = Astro.props;
+---
+<div class="d-flex w-100 mt-4">
+
+    <ThemeToggle class="nav-color-mode-toggle me-2 py-1 p-md-3" />
+
+    <button
+        type="button"
+        role="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="nav-collapse"
+        class="d-block flex-grow-1 d-md-none btn btn-link text-center py-1 bg-light bg-opacity-10 rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#nav-collapse"
+    >
+
+        <Icon
+            icon="fa6-solid:chevron-down"
+            class="collapse-button"
+        />
+
+    </button>
+
+</div>
+
+<div
+    class:list={['collapse', className]}
+    id="nav-collapse"
+>
+
+    <slot />
+
+</div>
+
+<script>
+import 'bootstrap/js/dist/collapse.js';
+</script>
