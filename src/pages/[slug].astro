@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getItems } from '@utils/collections';
 
 import ContentLayout from '@layouts/ContentLayout.astro';
 import Markdown from '@components/Markdown.astro';
@@ -9,7 +9,7 @@ import README from '../../README.mdx';
 
 export async function getStaticPaths() {
 
-    const pages = await getCollection('pages');
+    const pages = await getItems('pages');
 
     // Built With aka README
     pages.push({

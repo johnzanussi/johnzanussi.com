@@ -3,6 +3,7 @@ import { getRelativeSrc } from '@utils/images.js';
 import { getPostUrl } from '@utils/collections.js';
 
 import DateFormat from '@components/DateFormat.astro';
+import DraftBadge from '@components/DraftBadge.astro';
 import Image from '@components/Image.astro';
 import Link from '@components/Link.astro';
 
@@ -15,17 +16,29 @@ const {
     title,
     excerpt,
     coverImage,
+    draft,
 } = data;
 ---
 <article
-    class="post-card card flex-xl-row p-3"
+    class:list={[
+        'post-card card flex-xl-row p-3',
+        {
+            'border-warning bg-warning-subtle': draft,
+        },
+    ]}
     {...props}
 >
 
     <div class="card-body order-1 order-xl-0 px-2 p-xl-2 pb-0 pe-xl-0">
 
         <div class="text-muted mb-2 small">
+
             <DateFormat date={date} />
+
+            {draft && (
+                <DraftBadge class="ms-2" />
+            )}
+
         </div>
 
         <h1 class="h2">
