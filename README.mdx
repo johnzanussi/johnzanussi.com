@@ -1,9 +1,9 @@
-Back in the day, [`johnzanussi.com`](https://johnzanussi.com) was the home of my Tumblr blog. Then, in 2014, I switched it to a single splash page with "Full site coming soon" in the footer. Well, almost eight years later, I've finally built a more elaborate website for myself. Below, I'll document some of my processes, the tools, libraries, and services I used, and what I would like to add in the future.
+Back in the day (2008), [`johnzanussi.com`](https://johnzanussi.com) was the home of my Tumblr blog. Then, in 2014, I switched it to a single splash page with "Full site coming soon" in the footer. Almost eight years later, in late-2021, I finally built a more elaborate website for myself. Below, I'll document some of my processes, the tools, libraries, and services I used, and what I would like to add in the future.
 
 All the code that powers this website is available on my [GitHub](https://github.com/johnzanussi/johnzanussi.com).
 
-[![Screen shot of johnzanussi.com from 2008](public/assets/pages/README/screenshot-johnzanussi-dot-com-tumblr.png)](https://web.archive.org/web/20080817121815/http://johnzanussi.com/)
-[![Screen shot of johnzanussi.com from 2021](public/assets/pages/README/screenshot-johnzanussi-dot-com-splash.png)](https://web.archive.org/web/20210610103313/http://johnzanussi.com/)
+[![Screen shot of johnzanussi.com from 2008](src/assets/pages/README/screenshot-johnzanussi-dot-com-tumblr.png)](https://web.archive.org/web/20080817121815/http://johnzanussi.com/)
+[![Screen shot of johnzanussi.com from 2021](src/assets/pages/README/screenshot-johnzanussi-dot-com-splash.png)](https://web.archive.org/web/20210610103313/http://johnzanussi.com/)
 
 ## Requirements
 
@@ -22,13 +22,17 @@ All the code that powers this website is available on my [GitHub](https://github
 
 ## Libraries
 
-##### [Next.js](https://nextjs.org)
+##### [Astro](https://astro.build/)
 
-Next.js has quickly become my go-to for spinning up project sites. It's easy to use, has many starter projects, and deploys easily.
+As of February 2023, this website is built on Astro. While browsing Reddit one day, I saw someone mention Astro. I immediately fell in love with it as it takes static site generation to the next level. I plan on writing a detailed post comparing Astro to Next.js as it relates to this site. Until then, you can [check out what Astro is all about](https://astro.build/) or view the code that powers this site [on my GitHub](https://github.com/johnzanussi/johnzanussi.com).
 
-##### [React](https://reactjs.org)
+##### [~~Next.js~~](https://nextjs.org)
 
-Your only option for Next.js is React, which is fine since it's what I'm most comfortable with. I've been writing React regularly since 2016.
+~~Next.js has quickly become my go-to for spinning up project sites. It's easy to use, has many starter projects, and deploys easily.~~
+
+##### [~~React~~](https://reactjs.org)
+
+~~Your only option for Next.js is React, which is fine since it's what I'm most comfortable with. I've been writing React regularly since 2016.~~
 
 ##### [Bootstrap](https://getbootstrap.com/)
 
@@ -64,7 +68,7 @@ Since I’m not the best at articulating my thoughts into words, I started using
 -   ✅ ~~Create light theme and theme switcher~~ [#14](https://github.com/johnzanussi/johnzanussi.com/pull/14)
 -   ✅ ~~Create a "More posts" component for the bottom of individual posts~~ [6844b46](https://github.com/johnzanussi/johnzanussi.com/commit/6844b46917bf863f5eb70e4b18557a24ba9cc13f)
 -   ✅ ~~Add comments on posts~~ [87219d0](https://github.com/johnzanussi/johnzanussi.com/commit/87219d0045088a4cff94d5cd20d193cf6bd41bf6)
+-   ✅ ~~Pull YouTube channel names, images, and notification setting from YouTube API~~
 -   Convert to TypeScript
 -   Add pagination for `/posts` page
--   Pull YouTube channel names, images, and notification setting from YouTube API
 -   Add [Lighthouse](https://developers.google.com/web/tools/lighthouse) results to this page
