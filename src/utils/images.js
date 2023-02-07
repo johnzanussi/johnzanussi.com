@@ -22,7 +22,9 @@ export const getImage = async (path) => {
         return path;
     }
 
-    return `src/${path.match(/assets(.*)/)[0]}`;
+    const relativePath = `/src/${path.match(/assets(.*)/)[0]}`;
+
+    return relativePath;
 
     // const images = await getImages();
 
