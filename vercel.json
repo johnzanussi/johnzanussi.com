@@ -9,5 +9,16 @@
             "source": "/api/rk6m8wh2a",
             "destination": "https://analytics.johnzanussi.com/api/event"
         }
+    ],
+    "headers": [
+        {
+            "source": "/_astro/(.*).(css|js|br|gz)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "max-age=31536000, immutable"
+                }
+            ]
+        }
     ]
 }
