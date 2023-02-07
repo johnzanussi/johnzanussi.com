@@ -37,7 +37,9 @@ export default defineConfig({
         sitemap(),
         robotsTxt(),
         purgecss(),
-        compress(),
+        compress({
+            path: '.vercel/output/static',
+        }),
     ],
     markdown: {
         syntaxHighlight: false,
