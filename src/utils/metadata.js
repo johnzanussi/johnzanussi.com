@@ -2,6 +2,9 @@ import { MetadataGenerator } from 'metatags-generator';
 import merge from 'deepmerge';
 import { getScreenshotPath } from '@utils/images';
 
+const NAME = 'John Zanussi';
+const URL = import.meta.env.SITE;
+
 const settings = {
     structuredData: true,
     androidChromeIcons: true,
@@ -25,11 +28,31 @@ const icons = [
     '/icons/android-chrome-192x192.png',
 ];
 
-const NAME = 'John Zanussi';
-const URL = import.meta.env.SITE;
+const meta = [
+    {
+        name: 'theme-color',
+        content: '#01233d',
+    },
+    {
+        name: 'mobile-web-app-capable',
+        content: 'yes',
+    },
+    {
+        name: 'apple-mobile-web-app-capable',
+        content: 'yes',
+    },
+    {
+        name: 'application-name',
+        content: NAME,
+    },
+    {
+        name: 'apple-mobile-web-app-title',
+        content: NAME,
+    }
+];
 
 const defaultData = {
-    title: 'John Zanussi',
+    title: NAME,
     url: URL,
     ogType: 'website',
 };
@@ -60,6 +83,8 @@ export function generateTags(metadata) {
         .setTwitterMeta({
             card: 'summary_large_image',
         });
+
+    meta.forEach(meta => generator.add('meta', meta));
 
     if (data.ogType === 'article') {
         generator.add('meta', {
