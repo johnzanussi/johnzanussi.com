@@ -1,3 +1,5 @@
+import { renderImg } from "astro-imagetools/api";
+
 import { absoluteUrl } from './urls.js';
 
 // let _images;
@@ -43,4 +45,24 @@ export const getRelativeSrc = (slug, src) => {
 
 export const getScreenshotPath = (slug) => {
     return absoluteUrl(`/public/screenshots/${slug}.jpg`);
+};
+
+
+export const getImageUrl = async (slug, path, width) => {
+
+    const src = await getImage(getRelativeSrc(slug, path));
+
+    const { img } = await renderImg({
+        src: src,
+        alt: 'asdf',
+        breakpoints: [width],
+        placeholder: 'none',
+        loading: null,
+        decoding: null,
+    });
+
+    const url = img.match(/srcset="([^"]+)"/)[1];
+
+    return url;
+
 };

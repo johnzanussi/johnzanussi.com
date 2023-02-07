@@ -5,7 +5,7 @@ import {
     getPostUrl,
     getCollectionUrl,
 } from '@utils/collections';
-import { getRelativeSrc } from '@utils/images';
+import { getImageUrl } from '@utils/images';
 import { absoluteUrl } from '@utils/urls';
 
 import ContentLayout from '@layouts/ContentLayout.astro';
@@ -49,11 +49,13 @@ const {
 
 const postUrl = absoluteUrl(getPostUrl(slug));
 
+const ogImage = await getImageUrl(slug, coverImage.url, coverImage.width);
+
 const metadata = {
     title,
     url: postUrl,
     description: excerpt,
-    image: absoluteUrl(getRelativeSrc(slug, coverImage.url)),
+    image: absoluteUrl(ogImage),
     ogType: 'article',
     publishDate: date,
     breadcrumbs: [
