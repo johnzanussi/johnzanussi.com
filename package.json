@@ -31,6 +31,7 @@
     "@fontsource/roboto-mono": "^4.5.10",
     "astro": "^2.0.6",
     "astro-auto-import": "^0.2.1",
+    "astro-compressor": "^0.3.0",
     "astro-iconify": "^1.2.0",
     "astro-imagetools": "github:johnzanussi/astro-imagetools-pkg",
     "astro-purgecss": "^2.0.0",

@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import AutoImport from 'astro-auto-import';
 import compress from 'astro-compress';
+import compressor from 'astro-compressor';
 import { astroImageTools } from 'astro-imagetools';
 import mdx from '@astrojs/mdx';
 import purgecss from 'astro-purgecss';
@@ -40,6 +41,7 @@ export default defineConfig({
         compress({
             path: '.vercel/output/static',
         }),
+        compressor(),
     ],
     markdown: {
         syntaxHighlight: false,
