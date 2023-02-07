@@ -5,6 +5,20 @@ const collectionUrls = {
     pages: '/',
 };
 
+const isDev = import.meta.env.MODE === 'development';
+
+export const getItems = async (collection, includeDrafts = isDev) => {
+
+    const items = await getCollection(collection);
+
+    if (includeDrafts) {
+        return items;
+    }
+
+    return items.filter(item => !item.data.draft);
+
+};
+
 export const getItemUrl = (collection, slug) => {
     return `${collectionUrls[collection]}/${slug}`;
 };
@@ -16,7 +30,7 @@ export const getCollectionUrl = (collection) => {
 export const getPostUrl = (slug) => getItemUrl('posts', slug);
 
 export const getDateSortedCollection = async (collection) => {
-    const items = await getCollection(collection);
+    const items = await getItems(collection);
 
     const sortedCollection = items.sort(
         (itemA, itemB) => Date.parse(itemB.data.date) - Date.parse(itemA.data.date)
@@ -29,15 +43,15 @@ export const getDateSortedCollection = async (collection) => {
  * Get the previous and next items if
  * available for a given item
  *
- * @param  {Object} item     A item object
- * @return {Array}           Array containing 0, 1, or 2 items
+ * @param  {Object} item        A item object
+ * @return {Promise<array>}     Array containing 0, 1, or 2 items
  */
 export const getSiblingItems = async (collection, item) => {
     // Setup return value
     const siblingItems = [];
 
     // Get all the items
-    const allItems = await getCollection(collection);
+    const allItems = await getItems(collection);
 
     // Find the index for the given item
     const itemIndex = allItems.findIndex((allItem) => allItem.slug === item.slug);

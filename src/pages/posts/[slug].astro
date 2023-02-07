@@ -13,6 +13,7 @@ import ContentLayout from '@layouts/ContentLayout.astro';
 import AmazonDisclosure from '@components/AmazonDisclosure.astro';
 import Comments from '@components/Comments.astro';
 import DateFormat from '@components/DateFormat.astro';
+import DraftBadge from '@components/DraftBadge.astro';
 import EnjoyCTA from '@components/EnjoyCTA.astro';
 import Markdown from '@components/Markdown.astro';
 import PostPagination from '@components/PostPagination.astro';
@@ -42,6 +43,7 @@ const {
     date,
     excerpt,
     coverImage,
+    draft,
     hasAmazonLinks = false,
 } = data;
 
@@ -68,6 +70,10 @@ const siblingPosts = await getSiblingItems('posts', post);
 <ContentLayout metadata={metadata}>
 
     <DateFormat date={date} class="text-muted" />
+
+    {draft && (
+        <DraftBadge class="ms-2" />
+    )}
 
     <h1>{title}</h1>
 
