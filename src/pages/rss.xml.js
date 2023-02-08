@@ -2,6 +2,7 @@ import rss from '@astrojs/rss';
 import { getDateSortedCollection, getPostUrl } from '@utils/collections';
 
 export async function get(context) {
+
     const posts = await getDateSortedCollection('posts');
 
     const config = {
@@ -15,7 +16,13 @@ export async function get(context) {
             description: post.data.excerpt || '',
             link: getPostUrl(post.slug),
         })),
-        customData: '<language>en-us</language>',
+        xmlns: {
+            atom: 'http://www.w3.org/2005/Atom',
+        },
+        customData: [
+            '<language>en-us</language>',
+            `<atom:link href="${context.site}rss.xml" rel="self" type="application/rss+xml" />`,
+        ].join(''),
         stylesheet: '/rss/styles.xsl',
     };
 
