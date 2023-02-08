@@ -19,16 +19,11 @@ import addClasses from 'rehype-add-classes';
 import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis';
 
 // Env Variables
-const isDev = import.meta.env.MODE === 'development';
+const isLocal = !process.env.VERCEL_ENV;
 const { SITE_URL = '', PORT = 0 } = loadEnv(import.meta.env.MODE, process.cwd(), '');
 
-const SITE = isDev ? SITE_URL : `https://${process.env.VERCEL_URL}`;
-
-console.log('import.meta.env.MODE', import.meta.env.MODE);
-console.log('SITE', SITE);
-
 export default defineConfig({
-    site: SITE,
+    site: isLocal ? SITE_URL : `https://${process.env.VERCEL_URL}`,
     server: {
         port: Number(PORT),
     },
