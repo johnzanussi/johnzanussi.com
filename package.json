@@ -22,6 +22,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/image": "^0.14.1",
     "@astrojs/mdx": "^0.15.2",
     "@astrojs/prism": "^2.0.0",
     "@astrojs/rss": "^2.1.0",
@@ -33,7 +34,6 @@
     "astro-auto-import": "^0.2.1",
     "astro-compressor": "^0.3.0",
     "astro-iconify": "^1.2.0",
-    "astro-imagetools": "github:johnzanussi/astro-imagetools-pkg",
     "astro-purgecss": "^2.0.0",
     "astro-seo": "^0.7.0",
     "bootstrap": "^5.3.0-alpha1",
@@ -43,11 +43,12 @@
     "github-slugger": "^2.0.0",
     "metatags-generator": "^1.1.8",
     "rehype-accessible-emojis": "^0.3.2",
-    "rehype-add-classes": "^1.0.0"
+    "rehype-add-classes": "github:tycol7/rehype-add-classes",
+    "sharp": "^0.31.3"
   },
   "devDependencies": {
     "@supabase/supabase-js": "^2.7.1",
-    "astro-compress": "1.1.29",
+    "astro-compress": "^1.1.30",
     "astro-robots-txt": "^0.3.11",
     "he": "^1.2.0",
     "sass": "^1.58.0",

@@ -1,6 +1,10 @@
 ---
 title: About
 excerpt: A little bit of info about me.
+coverImage:
+    url: ~cover-about-screenshot.jpg
+    width: 1200
+    height: 627
 ---
 
 ## Personal

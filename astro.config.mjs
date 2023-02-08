@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import AutoImport from 'astro-auto-import';
 import compress from 'astro-compress';
 import compressor from 'astro-compressor';
-import { astroImageTools } from 'astro-imagetools';
+import image from '@astrojs/image';
 import mdx from '@astrojs/mdx';
 import purgecss from 'astro-purgecss';
 import robotsTxt from 'astro-robots-txt';
@@ -34,13 +34,13 @@ export default defineConfig({
             ],
         }),
         mdx(),
-        astroImageTools,
+        image({
+            serviceEntryPoint: '@astrojs/image/sharp',
+        }),
         sitemap(),
         robotsTxt(),
         purgecss(),
-        compress({
-            path: '.vercel/output/static',
-        }),
+        compress(),
         compressor(),
     ],
     markdown: {
