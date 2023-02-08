@@ -40,9 +40,7 @@ export default defineConfig({
         sitemap(),
         robotsTxt(),
         purgecss(),
-        compress({
-            path: '.vercel/output/static',
-        }),
+        compress(),
         compressor(),
     ],
     markdown: {
