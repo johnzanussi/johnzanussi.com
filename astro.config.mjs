@@ -1,3 +1,4 @@
+import { loadEnv } from 'vite';
 import { defineConfig } from 'astro/config';
 import AutoImport from 'astro-auto-import';
 import compress from 'astro-compress';
@@ -17,13 +18,14 @@ import { codeBlockComponent, remarkCodeBlocks } from './src/utils/remark/code-bl
 import addClasses from 'rehype-add-classes';
 import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis';
 
-const port = 3001;
-const isDev = process.env.NODE_ENV === 'development';
+// Env Variables
+const isDev = import.meta.env.MODE === 'development';
+const { SITE_URL = '', PORT = 0 } = loadEnv(import.meta.env.MODE, process.cwd(), '');
 
 export default defineConfig({
-    site: isDev ? `http://localhost:${port}/` : 'https://johnzanussi.com/',
+    site: isDev ? SITE_URL : `https://${import.meta.env.VERCEL_URL}`,
     server: {
-        port: port
+        port: Number(PORT),
     },
     output: 'static',
     adapter: vercel(),
@@ -41,7 +43,7 @@ export default defineConfig({
         robotsTxt(),
         purgecss(),
         compress(),
-        compressor(),
+        // compressor(), // Vercel does this for us
     ],
     markdown: {
         syntaxHighlight: false,
