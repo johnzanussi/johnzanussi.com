@@ -5,7 +5,8 @@ import {
     getPostUrl,
     getCollectionUrl,
 } from '@utils/collections';
-import { getImageUrl } from '@utils/images';
+
+import { getItemImagePath, getRenderedImage } from '@utils/images';
 import { absoluteUrl } from '@utils/urls';
 
 import ContentLayout from '@layouts/ContentLayout.astro';
@@ -17,6 +18,8 @@ import DraftBadge from '@components/DraftBadge.astro';
 import EnjoyCTA from '@components/EnjoyCTA.astro';
 import Markdown from '@components/Markdown.astro';
 import PostPagination from '@components/PostPagination.astro';
+
+const COLLECTION_TYPE = 'posts';
 
 export async function getStaticPaths() {
 
@@ -49,13 +52,15 @@ const {
 
 const postUrl = absoluteUrl(getPostUrl(slug));
 
-const ogImage = await getImageUrl(slug, coverImage.url, coverImage.width);
+const ogImageSrc = await getRenderedImage(
+    getItemImagePath(slug, coverImage.url, 'posts')
+);
 
 const metadata = {
     title,
     url: postUrl,
     description: excerpt,
-    image: absoluteUrl(ogImage),
+    image: absoluteUrl(ogImageSrc),
     ogType: 'article',
     publishDate: date,
     breadcrumbs: [

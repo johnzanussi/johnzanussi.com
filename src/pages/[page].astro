@@ -1,29 +1,19 @@
 ---
 import { getItems } from '@utils/collections';
+import { getItemImagePath, getRenderedImage } from '@utils/images';
+import { absoluteUrl } from '@utils/urls';
 
 import ContentLayout from '@layouts/ContentLayout.astro';
 import Markdown from '@components/Markdown.astro';
 import PageTitle from '@components/PageTitle.astro';
 
-import README from '../../README.mdx';
-
 export async function getStaticPaths() {
 
     const pages = await getItems('pages');
 
-    // Built With aka README
-    pages.push({
-        slug: 'built-with',
-        data: {
-            title: 'Built With',
-        },
-        collection: 'pages',
-        render: () => ({ Content: README }),
-    });
-
     return pages.map(page => ({
         params: {
-            slug: page.slug,
+            page: page.slug,
         },
         props: {
             page,
@@ -37,11 +27,20 @@ const { Content } = await page.render();
 
 const { data, slug } = page;
 
-const { title, excerpt } = data;
+const {
+    coverImage,
+    excerpt,
+    title,
+} = data;
+
+const ogImageSrc = await getRenderedImage(
+    getItemImagePath(slug, coverImage.url, 'pages')
+);
 
 const metadata = {
     title,
     description: excerpt,
+    image: absoluteUrl(ogImageSrc),
 };
 ---
 

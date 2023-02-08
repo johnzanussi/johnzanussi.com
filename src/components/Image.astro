@@ -1,23 +1,47 @@
 ---
-import { getImage } from '@utils/images.js';
-import { Img } from 'astro-imagetools/components';
+import { Image } from '@astrojs/image/components';
+import { getImage } from '@astrojs/image';
 
-const { src, class: className, ...props } = Astro.props;
+import { loadImage } from '@utils/images.js';
 
-const image = await getImage(src);
+const {
+    src,
+    widths,
+    aspectRatio,
+    ...props
+} = Astro.props;
 
-const attributes = {};
+const image = await loadImage(src);
 
-if (className) {
-    attributes.img = {
-        class: className,
-    };
+const format = 'webp';
+
+const responsiveAttrs = {};
+
+if (widths) {
+
+    const srcset = await Promise.all(widths.map(async (width) => {
+
+        const { src } = await getImage({
+            src: image,
+            width: width,
+            aspectRatio: aspectRatio,
+            format: format,
+        });
+
+        return `${decodeURI(src)} ${width}w`;
+
+    }));
+
+    responsiveAttrs.srcset = srcset.join(', ');
+    responsiveAttrs.aspectRatio = aspectRatio;
+
 }
 
 ---
 
-<Img
+<Image
     src={image}
-    attributes={attributes}
+    format={format}
     {...props}
+    {...responsiveAttrs}
 />

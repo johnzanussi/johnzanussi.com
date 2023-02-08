@@ -1,6 +1,6 @@
 ---
-import { getRelativeSrc } from '@utils/images.js';
 import { getPostUrl } from '@utils/collections.js';
+import { getItemImagePath } from '@utils/images.js';
 
 import DateFormat from '@components/DateFormat.astro';
 import DraftBadge from '@components/DraftBadge.astro';
@@ -59,12 +59,11 @@ const {
     <div class="card-img ratio ratio-16x9 position-relative order-0 order-xl-1 ms-xl-3">
 
         <Image
-            src={getRelativeSrc(slug, coverImage.url)}
+            src={getItemImagePath(slug, coverImage.url)}
             alt={`Cover image for ${title}`}
-            width={coverImage.width}
-            height={coverImage.height}
-            breakpoints={[428, 768]}
-            sizes="(min-width: 1200px) 428w, 100vw"
+            width={1600}
+            aspectRatio="16:9"
+            widths={[428, 768, 1200, 1600]}
             class="rounded"
         />
 
