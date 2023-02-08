@@ -22,9 +22,14 @@ import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis';
 const isDev = import.meta.env.MODE === 'development';
 const { SITE_URL = '', PORT = 0 } = loadEnv(import.meta.env.MODE, process.cwd(), '');
 
+console.log('SITE_URL', SITE_URL);
+console.log('PORT', PORT);
+
+const site = isDev ? SITE_URL : `https://${import.meta.env.VERCEL_URL}`;
+console.log('SITE', site);
 
 export default defineConfig({
-    site: isDev ? SITE_URL : `https://${import.meta.env.VERCEL_URL}`,
+    site: site,
     server: {
         port: Number(PORT),
     },
