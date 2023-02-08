@@ -26,7 +26,7 @@ console.log('SITE_URL', SITE_URL);
 console.log('PORT', PORT);
 
 const site = isDev ? SITE_URL : `https://${import.meta.env.VERCEL_URL}`;
-console.log('SITE', site);
+console.log('SITE', import.meta.env);
 
 export default defineConfig({
     site: site,
