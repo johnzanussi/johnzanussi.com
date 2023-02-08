@@ -1,6 +1,5 @@
 {
     "framework": "astro",
-    "outputDirectory": ".vercel/output/static",
     "rewrites": [
         {
             "source": "/rk6m8wh2a.js",
