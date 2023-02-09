@@ -2,7 +2,6 @@ import { loadEnv } from 'vite';
 import { defineConfig } from 'astro/config';
 import AutoImport from 'astro-auto-import';
 import compress from 'astro-compress';
-import compressor from 'astro-compressor';
 import image from '@astrojs/image';
 import mdx from '@astrojs/mdx';
 import purgecss from 'astro-purgecss';
@@ -43,7 +42,6 @@ export default defineConfig({
         robotsTxt(),
         purgecss(),
         compress(),
-        // compressor(), // Vercel does this for us
     ],
     markdown: {
         syntaxHighlight: false,
