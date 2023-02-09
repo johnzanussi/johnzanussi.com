@@ -18,41 +18,27 @@ import addClasses from 'rehype-add-classes';
 import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis';
 
 // Env Variables
-const envVariables = () => {
+const currentEnv = process.env.VERCEL_ENV ? process.env.VERCEL_ENV : 'local';
 
-    const env = process.env.VERCEL_ENV ? process.env.VERCEL_ENV : 'local';
-
-    if (env === 'local') {
-
+const envVariables = {
+    local: () => {
         const { SITE_URL = '', PORT = 0 } = loadEnv(import.meta.env.MODE, process.cwd(), '');
-
         return {
             url: SITE_URL,
             port: Number(PORT),
         };
+    },
+    preview: () => ({
+        url: `https://${process.env.VERCEL_URL}/`,
+        port: 0,
+    }),
+    production: () => ({
+        url: 'https://johnzanussi.com/',
+        port: 0,
+    }),
+};
 
-    } else if (env === 'preview') {
-
-        return {
-            url: `https://${process.env.VERCEL_URL}/`,
-            port: 0,
-        };
-
-    } else if (env === 'production') {
-
-        return {
-            url: 'https://johnzanussi.com/',
-            port: 0,
-        };
-
-    }
-
-}
-
-const { url, port } = envVariables();
-
-console.log('url', url);
-console.log('port', port);
+const { url, port } = envVariables[currentEnv]();
 
 export default defineConfig({
     site: url,
