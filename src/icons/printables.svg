@@ -1,13 +1,1 @@
-<svg
-    aria-hidden="true"
-    focusable="false"
-    role="img"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 106 96"
->
-    <path
-        fill="currentColor"
-        d="m0 94.05 32.61-18.81-32.61-18.81 0 37.62zm32.61-94.05-32.61 18.81 32.61 18.81 0 37.62 32.61-18.81 0-37.62-32.61-18.81z"
-    />
-
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 106 96"><path fill="currentColor" d="m0 94.05 32.61-18.81L0 56.43v37.62zM32.61 0 0 18.81l32.61 18.81v37.62l32.61-18.81V18.81L32.61 0z"/></svg>
