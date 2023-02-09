@@ -25,6 +25,7 @@ const getConfig = (theme) => ({
     hasDarkBackground: theme === 'dark',
 });
 
+/* global FastCommentsUI */
 const fastComments = FastCommentsUI(
     comments,
     getConfig(localStorage.getItem('theme'))

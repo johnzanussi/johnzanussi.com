@@ -41,7 +41,9 @@ export default defineConfig({
         sitemap(),
         robotsTxt(),
         purgecss(),
-        compress(),
+        compress({
+            img: false,
+        }),
     ],
     markdown: {
         syntaxHighlight: false,

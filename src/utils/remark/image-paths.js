@@ -9,7 +9,7 @@ export default function remarkImagePaths() {
 
             const filePath = file.history[0];
 
-            const matchContent = /\/content\/([^\/]+)/.exec(filePath);
+            const matchContent = /\/content\/([^/]+)/.exec(filePath);
 
             if (matchContent) {
 

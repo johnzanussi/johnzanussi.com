@@ -19,8 +19,6 @@ import EnjoyCTA from '@components/EnjoyCTA.astro';
 import Markdown from '@components/Markdown.astro';
 import PostPagination from '@components/PostPagination.astro';
 
-const COLLECTION_TYPE = 'posts';
-
 export async function getStaticPaths() {
 
     const posts = await getDateSortedCollection('posts');

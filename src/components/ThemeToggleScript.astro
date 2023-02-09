@@ -3,7 +3,7 @@ const storedTheme = localStorage.getItem('theme');
 
 const getPreferredTheme = () => {
     if (storedTheme) {
-        return storedTheme
+        return storedTheme;
     }
 
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 setTheme(
                     toggle.getAttribute('data-bs-theme-value')
                 );
-            })
-        })
+            });
+        });
 });
 </script>

@@ -9,7 +9,10 @@ const {
 
 <button
     type="button"
-    class="btn btn-link btn-back-to-top d-none"
+    class:list={[
+        'btn btn-link btn-back-to-top d-none',
+        className,
+    ]}
     aria-label="Back to top"
     {...props}
 >

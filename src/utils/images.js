@@ -58,4 +58,4 @@ export const getRenderedImage = async (path, options = {}) => {
     });
 
     return src;
-}
+};
