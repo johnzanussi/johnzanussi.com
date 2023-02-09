@@ -34,14 +34,14 @@ const envVariables = () => {
     } else if (env === 'preview') {
 
         return {
-            url: `https://${process.env.VERCEL_URL}`,
+            url: `https://${process.env.VERCEL_URL}/`,
             port: 0,
         };
 
     } else if (env === 'production') {
 
         return {
-            url: 'https://johnzanussi.com',
+            url: 'https://johnzanussi.com/',
             port: 0,
         };
 
