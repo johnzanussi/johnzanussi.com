@@ -19,7 +19,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@astrojs/image": "^0.14.1",
@@ -50,7 +51,12 @@
     "astro-compress": "^1.1.30",
     "astro-robots-txt": "^0.3.11",
     "he": "^1.2.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.1",
     "sass": "^1.58.0",
     "unist-util-visit": "^4.1.2"
+  },
+  "lint-staged": {
+    "*.{gif,jpg,jpeg,png}": "node ./lib/compress-images.mjs"
   }
 }
