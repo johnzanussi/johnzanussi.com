@@ -1,5 +1,4 @@
 @import './bootstrap';
-@import './animations';
 
 a {
     transition: color 0.5s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0ms,
@@ -194,17 +193,17 @@ html[data-bs-theme="dark"] {
 }
 
 .nav-photo {
-    @include media-breakpoint-down(md) {
-        width: 110px;
-        height: 110px;
+
+    img {
+
+        @include media-breakpoint-down(md) {
+            width: 125px;
+            height: 125px;
+            min-width: 125px;
+        }
+
     }
 
-    // @include transition($accordion-icon-transition);
-
-    a:hover > span {
-        animation: shakeX;
-        animation-duration: 0.5s;
-    }
 }
 
 

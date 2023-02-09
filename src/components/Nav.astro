@@ -56,9 +56,10 @@ const socialLinksCount = socialLinks.length - 1;
     id="site-nav"
 >
     <div class="d-flex d-md-block">
-        <div class="nav-photo text-center mb-3 mb-md-0">
 
-            <Link href="/">
+        <div class="nav-photo text-center mb-md-0">
+
+            <Link href="/" class="d-block">
 
                 <Image
                     src="assets/img-john-zanussi-kiddo.jpg"
@@ -66,22 +67,27 @@ const socialLinksCount = socialLinks.length - 1;
                     class="rounded-circle shadow img-fluid"
                     width="250"
                     height="250"
+                    loading="eager"
                 />
 
             </Link>
 
             <p class="m-0">
+
                 <Link
                     href="https://en.pronouns.page/he"
-                    class="d-block navbar-text small mt-1 p-0"
+                    class="d-block navbar-text small p-3"
                 >
                     he/him
                 </Link>
+
             </p>
+
         </div>
 
-        <div class="ms-3 ms-md-0">
-            <h1 class="mt-md-4 text-primary">
+        <div class="mt-3 mt-md-0 ms-3 ms-md-0">
+
+            <h1 class="mt-md-2 text-primary">
                 John Zanussi
             </h1>
 
@@ -105,7 +111,9 @@ const socialLinksCount = socialLinks.length - 1;
                     We&apos;re hiring!
                 </Link>*/}
             </p>
+
         </div>
+
     </div>
 
     <NavToggle class="d-md-block w-100 mt-3 mt-md-0">
