@@ -18,13 +18,46 @@ import addClasses from 'rehype-add-classes';
 import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis';
 
 // Env Variables
-const isLocal = !process.env.VERCEL_ENV;
-const { SITE_URL = '', PORT = 0 } = loadEnv(import.meta.env.MODE, process.cwd(), '');
+const envVariables = () => {
+
+    const env = process.env.VERCEL_ENV ? process.env.VERCEL_ENV : 'local';
+
+    if (env === 'local') {
+
+        const { SITE_URL = '', PORT = 0 } = loadEnv(import.meta.env.MODE, process.cwd(), '');
+
+        return {
+            url: SITE_URL,
+            port: Number(PORT),
+        };
+
+    } else if (env === 'preview') {
+
+        return {
+            url: `https://${process.env.VERCEL_URL}`,
+            port: 0,
+        };
+
+    } else if (env === 'production') {
+
+        return {
+            url: 'https://johnzanussi.com',
+            port: 0,
+        };
+
+    }
+
+}
+
+const { url, port } = envVariables();
+
+console.log('url', url);
+console.log('port', port);
 
 export default defineConfig({
-    site: isLocal ? SITE_URL : `https://${process.env.VERCEL_URL}`,
+    site: url,
     server: {
-        port: Number(PORT),
+        port: port,
     },
     output: 'static',
     adapter: vercel(),
