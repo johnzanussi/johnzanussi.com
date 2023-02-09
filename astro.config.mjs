@@ -87,13 +87,3 @@ export default defineConfig({
         extendDefaultPlugins: true,
     }
 });
-
-// npm install reading-time mdast-util-to-string
-// https://docs.astro.build/en/guides/markdown-content/#example-calculate-reading-time
-
-// https://github.com/arobase-che/remark-attr
-// https://github.com/remarkjs/remark-breaks
-// https://github.com/remarkjs/remark-directive
-// https://github.com/remarkjs/remark-unwrap-images
-// https://github.com/kevinzunigacuellar/remark-code-title/blob/main/packages/remark-code-title/src/remarkPlugin.ts
-// https://github.com/sindresorhus/find-up
