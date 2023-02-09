@@ -9,7 +9,7 @@ export const codeBlockComponent = {
 
 export function remarkCodeBlocks() {
 
-    return function (tree, file) {
+    return function (tree) {
 
         const transformMDX = (node, index, parent) => {
 
@@ -24,7 +24,7 @@ export function remarkCodeBlocks() {
                     return {
                         ...accum,
                         [key]: value,
-                    }
+                    };
                 }, {});
 
             }
@@ -54,7 +54,7 @@ export function remarkCodeBlocks() {
 
         visit(tree, 'code', transformMDX);
 
-    }
+    };
 }
 
 export async function getCodeFromSlot(slots) {
@@ -79,7 +79,7 @@ function makeMDXComponentNode(name, attributes, ...children) {
         name,
         attributes: Object.entries(attributes)
             // Filter out non-truthy attributes to avoid empty attrs being parsed as `true`.
-            .filter(([_k, v]) => v !== false && Boolean(v))
+            .filter(([, v]) => v !== false && Boolean(v))
             .map(([name, value]) => ({ type: 'mdxJsxAttribute', name, value })),
         children,
     };
