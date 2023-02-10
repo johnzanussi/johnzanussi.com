@@ -1,8 +1,19 @@
 @import './bootstrap';
 
 a {
-    transition: color 0.5s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0ms,
-                opacity 0.5s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0ms;
+    transition: color 500ms ease 0s,
+                opacity 500ms ease 0s,
+                border-color 500ms;
+
+    &.link-opacity {
+        opacity: 0.65;
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            opacity: 1;
+        }
+    }
 }
 
 h1 {
@@ -208,7 +219,7 @@ html[data-bs-theme="dark"] {
 
 
 
-.site-main {
+.mw-1200 {
     max-width: 1200px;
 }
 
@@ -266,4 +277,8 @@ html[data-bs-theme="dark"] {
     a {
         color: var(--body-color);
     }
+}
+
+.font-sans-serif {
+    font-family: $font-family-sans-serif !important;
 }

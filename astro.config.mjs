@@ -12,6 +12,7 @@ import vercel from '@astrojs/vercel/static';
 // Remark
 import remarkImagePaths from './src/utils/remark/image-paths';
 import { codeBlockComponent, remarkCodeBlocks } from './src/utils/remark/code-blocks';
+import remarkSectionize from './src/utils/remark/sectionize';
 
 // Rehype
 import addClasses from 'rehype-add-classes';
@@ -67,6 +68,7 @@ export default defineConfig({
     markdown: {
         syntaxHighlight: false,
         remarkPlugins: [
+            remarkSectionize,
             remarkCodeBlocks,
             remarkImagePaths,
         ],

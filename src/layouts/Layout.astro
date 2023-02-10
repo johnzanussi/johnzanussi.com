@@ -9,7 +9,7 @@ import ThemeToggleScript from '@components/ThemeToggleScript.astro';
 
 import { generateTags } from '@utils/metadata';
 
-const { metadata } = Astro.props;
+const { metadata, isFlexColumn = true } = Astro.props;
 
 const tags = generateTags(metadata);
 const { head, body } = tags;
@@ -43,7 +43,12 @@ const isDev = import.meta.env.MODE === 'development';
 
     <Nav />
 
-    <main class="site-main d-md-flex flex-column flex-grow-1 mb-5 my-md-4 px-2 py-4 px-md-4 p-lg-5">
+    <main class:list={[
+        'site-main d-md-flex  mb-5 my-md-4 px-2 py-4 px-md-4 p-lg-5',
+        {
+            'mw-1200 flex-column flex-grow-1': isFlexColumn,
+        },
+    ]}>
 
         <slot />
 

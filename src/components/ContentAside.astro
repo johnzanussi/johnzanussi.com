@@ -1,0 +1,30 @@
+---
+import Link from '@components/Link.astro';
+import TableOfContents from '@components/TableOfContents.astro';
+
+import '../styles/toc.scss';
+
+const { headings } = Astro.props;
+---
+<aside class="aside-content sticky-top align-self-md-start ms-5 d-none d-xxl-block">
+
+    <nav class="ps-5" id="content-toc">
+
+        <h2 class="font-sans-serif text-uppercase small ps-4">
+            In this post
+        </h2>
+
+        <TableOfContents headings={headings} />
+
+    </nav>
+
+</aside>
+
+<script>
+import scrollSpy from 'simple-scrollspy';
+
+scrollSpy('.aside-content nav', {
+    sectionClass: '.content-container section',
+    offset: 100,
+});
+</script>

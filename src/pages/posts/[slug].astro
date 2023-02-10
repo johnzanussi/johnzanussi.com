@@ -35,7 +35,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 const { data, slug } = post;
 
@@ -72,7 +72,10 @@ const metadata = {
 const siblingPosts = await getSiblingItems('posts', post);
 ---
 
-<ContentLayout metadata={metadata}>
+<ContentLayout
+    metadata={metadata}
+    headings={headings}
+>
 
     <DateFormat date={date} class="text-muted" />
 

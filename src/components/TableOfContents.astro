@@ -1,0 +1,50 @@
+---
+const {
+    headings,
+    depth = 2,
+} = Astro.props;
+
+const topLevel = headings.filter((heading) => heading.depth === depth);
+
+---
+
+<ul class="list-unstyled">
+
+    {topLevel.map((heading, i) => {
+
+        const sliceStart = headings.indexOf(heading) + 1;
+
+        const sliceEnd = headings.indexOf(topLevel[i + 1]);
+
+        const subHeadings = headings.slice(
+            sliceStart,
+            sliceEnd > 0 ? sliceEnd : undefined
+        );
+
+        return (
+
+            <li>
+
+                <a
+                    class:list={[
+                        'link-opacity',
+                        `depth-${heading.depth}`,
+                    ]}
+                    href={`#${heading.slug.replace('h-', '')}`}>
+                    {heading.text}
+                </a>
+
+                {subHeadings.length > 0 && (
+                    <Astro.self
+                        headings={subHeadings}
+                        depth={heading.depth + 1}
+                    />
+                )}
+
+            </li>
+
+        );
+
+    })}
+
+</ul>

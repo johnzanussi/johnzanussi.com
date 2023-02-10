@@ -65,16 +65,14 @@ After a couple instances of having to get out of bed in the middle of the night 
 
 At some point between returning the Honeywell devices and continuing my search on Google for another solution I was fiddling around in Home Assistant and had a realization that I may be able to pull this off with my current setup. After some more searching and tinkering I was able to get the UniFi doorbell chime to play through one of my Sonos speakers when the doorbell button was pressed. The following steps are specific to the [UniFi Protect G4 Doorbell](https://store.ui.com/collections/unifi-protect-cameras/products/uvc-g4-doorbell) and a [Sonos speaker](https://www.sonos.com/en-us/home) but this theoretically could work with any doorbell/button and speaker that is connected to Home Assistant.
 
-### Steps
-
-#### 1. Install and configure integrations
+### 1. Install and configure integrations
 
 Follow the directions for each of the Sonos and UniFi Protect integrations to get them configured in Home Assistant. I didn't run into any issues with either of these and I've been quite satisfied with their reliability.
 
 -   [Sonos](https://www.home-assistant.io/integrations/sonos)
 -   [UniFi Protect](https://www.home-assistant.io/integrations/unifiprotect/)
 
-#### 2. Get audio file to play
+### 2. Get audio file to play
 
 You can use any mp3 file you want. In my case, I wanted to use the chime that plays on the G4 doorbell when the button is pressed. Unfortunately Ubiquiti doesn't make these files publicly available. However they do allow you to upload your own chimes to the doorbell ([community.ui.com](https://community.ui.com/questions/G4-Doorbell-Play-custom-ring-sounds-on-button-press-/a9fe4f57-05c3-43e9-a590-1e411ca65b0d) + [reddit.com/r/Ubiquiti](https://www.reddit.com/r/Ubiquiti/comments/htnaaf/uvcg4doorbell_custom_outdoor_chime_sound_songs/)). While I was poking around on the device I found all the default sound files, downloaded them to my computer, then uploaded them to a public repo on GitHub which you can [find here](https://github.com/johnzanussi/unifi-g4-doorbell-sounds).
 
@@ -90,7 +88,7 @@ Again, I chose to use the native chime from the doorbell to play in the house.
     Your browser does not support the audio element. Please upgrade!
 </audio>
 
-#### 3. Upload chime audio to Home Assistant
+### 3. Upload chime audio to Home Assistant
 
 There's a couple ways to do this. The easiest way is to install the official File Editor add-on. Other options include SFTP and `scp` command.
 
@@ -110,7 +108,7 @@ There's a couple ways to do this. The easiest way is to install the official Fil
    In my case the URL parts look like this: `http://192.168.20.121:8123/` + `local/` + `sounds_sounds_ring_button_Chime.mp3`  
    You can test that it works by loading it up into your browser.
 
-#### 4. Create automation
+### 4. Create automation
 
 _The following instructions are for creating a new automation in the visual editor. If you want to create the automation in code I've included automation in YAML format below._
 
@@ -122,7 +120,7 @@ I named my automation `Play chime on Sonos when doorbell is pressed`.
 
 You'll need a single "Trigger" which is activated when the doorbell button is pressed. The values I've used are below. Simply, we're triggering the automation when the state of the doorbell is set to "on".
 
-###### Trigger 1
+##### Trigger 1
 
 | Field        | Value                               |
 | ------------ | ----------------------------------- |
@@ -138,7 +136,7 @@ You'll need a single "Trigger" which is activated when the doorbell button is pr
 *UPDATE: Thanks to Reddit users [u/Eriner_](https://www.reddit.com/r/Ubiquiti/comments/qq9qhz/comment/hk17gt9/?utm_source=reddit&utm_medium=web2x&context=3) and [u/pie_faced_avitar](https://www.reddit.com/user/pie_faced_avitar/) for both suggesting to use the [`sonos.shapshot` and `sonos.restore` services](https://www.home-assistant.io/integrations/sonos/#service-sonossnapshot) to pause and resume whatever may be playing when the doorbell chime is played.*
 
 
-###### Action 1
+##### Action 1
 Create a snapshot of what is currently playing on all Sonos speakers.
 
 | Field       | Value                                                                               |
@@ -148,7 +146,7 @@ Create a snapshot of what is currently playing on all Sonos speakers.
 | Entity      | `all`                                                                               |
 | With Group  | `Checked`                                                                           |
 
-###### Action 2
+##### Action 2
 Set the volume of the speaker that is going to play the doorbell chime.
 
 | Field       | Value                                                                               |
@@ -158,7 +156,7 @@ Set the volume of the speaker that is going to play the doorbell chime.
 | Targets     | `media_player.living_room` <br /> Select the speaker from the `Pick Entity` button. |
 | Level       | `0.65` <br /> 65%                                                                   |
 
-###### Action 3
+##### Action 3
 Play the doorbell chime on one or many Sonos speakers.
 
 | Field        | Value                                                                                                                                                                                        |
@@ -169,7 +167,7 @@ Play the doorbell chime on one or many Sonos speakers.
 | Content ID   | `http://192.168.20.121:8123/local/sounds_sounds_ring_button_Chime.mp3`<br />This is the URL we established by uploading the audio file in [step 3](#3-upload-chime-audio-to-home-assistant). |
 | Content Type | `music`                                                            |
 
-###### Action 4
+##### Action 4
 Wait 4 seconds (the length of the audio file) for the doorbell chime to play.
 
 | Field       | Value                                                                               |
@@ -177,7 +175,7 @@ Wait 4 seconds (the length of the audio file) for the doorbell chime to play.
 | Action Type | `Delay`                                                                             |
 | hh mm ss ms | `00:00:04:000`                                                                      |
 
-###### Action 5
+##### Action 5
 Restore all Sonos speakers back to what they were doing before chime was played.
 
 | Field       | Value                                                                               |
@@ -227,7 +225,7 @@ action:
 mode: single
 ```
 
-#### 5. Test and enjoy!
+### 5. Test It
 
 Save your automation then go test it out! Here's a quick video my wife and I recorded to showcase how responsive the automation is. There is a less than a second delay between the doorbell being pressed and the audio playing on the Sonos speaker in my house.
 

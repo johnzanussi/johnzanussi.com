@@ -16,20 +16,6 @@ You can [view the entire changeset on GitHub](https://github.com/johnzanussi/joh
 
 I followed the [official upgrade guide](https://beta.nextjs.org/docs/upgrade-guide) step by step. As this was my first time digging into the beta docs, I did a lot of bouncing around, reading, and re-reading sections and pages of the docs. For the most part, the upgrade guide is an excellent resource. I got through most sections without issue. There were areas that held me up and I will explain those problems and what I did to solve them. If you're upgrading and have questions, please drop them in the [Comments](#comments) section below.
 
-* [Images](#images)
-* [Fonts](#fonts)
-  * [Font name conventions](#font-name-conventions)
-  * [Bootstrap](#bootstrap)
-* [Migrating from `pages` to `app`](#migrating-from-pages-to-app)
-  * [Routing](#routing)
-  * [Server Components + Client Components](#server-components--client-components)
-  * [head.js](#headjs)
-* [General Cleanup](#general-cleanup)
-  * [Replace defaultProps with default function parameters](#replace-defaultprops-with-default-function-parameters)
-  * [Absolute Imports](#absolute-imports)
-* [Comments](#comments)  
-
-
 ## Images
 The Next team [offers two codemods](https://beta.nextjs.org/docs/upgrade-guide#image-component) to help you migrate to the new image component. However, I didn't find either of them useful.
 
@@ -44,7 +30,7 @@ I was super happy to see the introduction of the `@next/font` module, as it supp
 
 The upgrade guide helped me get most of the way to working except for 1) Font name conventions and 2) use with Bootstrap.
 
-#### Font name conventions
+### Font name conventions
 The docs use the font Inter as an example. When importing the font from the `@next/font/google` package, you destructure the font from the package using its name. So in the case of "Inter".
 
 ```js
@@ -59,7 +45,7 @@ import { Roboto_Mono } from '@next/font/google';
 
 I was able to get the answer I needed by trial and error and searching, but it would have been nice to see that as an example or mentioned in Next's docs.
 
-#### Bootstrap
+### Bootstrap
 Yes, I still use Bootstrap. I wrote a bit about my decision to use it over Tailwind on my [Built With page](/built-with#bootstrap). Because of how Bootstrap works, I couldn't just add the font class name to the `<html>` tag. Next does provide an example for using `next/font` with Tailwind, which helped point me in the right direction. 
 
 To work with Bootstrap, first, include the `variable` property to define a CSS variable for the font. The variable name (`--font-roboto`) can be whatever you'd like.
@@ -93,7 +79,7 @@ I went back and forth about opting into the app directory, as the Next team is v
 
 Overall, migrating the five or so pages was pretty straightforward, and following the guide proved to be very useful. There were a few hiccups, though.
 
-#### Routing
+### Routing
 All the pages on my site are based on static files available during build time. For example, the `/posts/[slug]` URL points to the `app/posts/[slug]/page.js` file, and only the static files available in the `_posts` directory should count for valid URLs. Everything else should 404.
 
 Here's the output from a recent build.
@@ -139,7 +125,7 @@ The other way is to use the `notFound()` function provided by the `next/naviagti
 
 You can find more information on [`notFound()` in the docs](https://beta.nextjs.org/docs/api-reference/notfound#notfound).
 
-#### Server Components + Client Components
+### Server Components + Client Components
 
 With the concept of Server Components and Client Components, Next.js 13 defaults files within the `app` director to server components. You can force any component to be a client component by using the `"use client"` directive at the top of the component file.
 
@@ -187,12 +173,12 @@ Now, the Next team has stated, in a few places, that they are still very much wo
 ## General Cleanup
 As I mentioned earlier, I took the opportunity to complete the following cleanup tasks.
 
-#### Replace `defaultProps` with default function parameters
+### Replace `defaultProps` with default function parameters
 In React 18.3 `defaultProps` [will be deprecated](https://github.com/facebook/react/pull/25699), and I was getting console warnings about it, so I took the opportunity to convert the handful of components that used `defaultProps` to use [default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters). 
 
 The migration was relatively easy and there weren't any gotchas.
 
-#### Absolute Imports
+### Absolute Imports
 Since the `/app` directory uses directories (and nested directories) to define routes, I found my import paths were becoming quite ugly.
 
 For example, the posts `page` file on my site lives in `app/posts/[slug]/page.js`, which makes any import from the root directory look like this.
@@ -225,6 +211,5 @@ Using the `baseUrl` option allows me to ditch the many levels of `../` in my imp
 import Comments from 'components/Comments';
 ```
 
-
-## End
+## Conclusion
 Hopefully, others thinking about, or in the process, of upgrading to Next.js 13 find this writeup helpful. Overall my experience with Next continues to be an enjoyable one. I'm excited to see the progress and momentum it has gained recently. 
