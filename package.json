@@ -32,6 +32,7 @@
     "@astrojs/vercel": "^3.1.1",
     "@fontsource/inter": "^4.5.15",
     "@fontsource/roboto-mono": "^4.5.10",
+    "@github/clipboard-copy-element": "^1.1.2",
     "astro": "^2.0.10",
     "astro-auto-import": "^0.2.1",
     "astro-iconify": "^1.2.0",

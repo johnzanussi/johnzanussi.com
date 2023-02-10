@@ -247,6 +247,10 @@ html[data-bs-theme="dark"] {
     @include border-bottom-start-radius($border-radius-sm);
 }
 
+.border-bottom-end {
+    @include border-bottom-end-radius($border-radius-sm);
+}
+
 .nav-color-mode-toggle {
     width: 50px;
     @include media-breakpoint-down(md) {

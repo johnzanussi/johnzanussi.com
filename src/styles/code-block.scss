@@ -22,6 +22,27 @@
 
     .code-language {
         background-color: var(--bs-border-color);
+        font-size: 0.75em;
+    }
+
+    .btn-copy {
+
+        transition: opacity 1s ease-out;
+
+        &:not(.copied) {
+            opacity: 0;
+            display: none;
+        }
+
+    }
+
+    &:hover {
+
+        .btn-copy {
+            opacity: 1;
+            display: block;
+        }
+
     }
 
 }
