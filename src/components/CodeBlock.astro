@@ -1,9 +1,11 @@
 ---
 import { getCodeFromSlot } from '@utils/remark/code-blocks';
 import { Prism } from '@astrojs/prism';
+
+import CopyToClipboard from '@components/CopyToClipboard.astro';
 import Link from '@components/Link.astro';
 
-import '../styles/code-block.scss';
+import '@styles/code-block.scss';
 
 const code = await getCodeFromSlot(Astro.slots);
 
@@ -19,7 +21,7 @@ const showHeader = !!(filename || url);
 ---
 
 <figure
-    class="code-block rounded-1 border mb-3 overflow-hidden"
+    class="code-block rounded-1 border mb-3"
     style={style}
 >
     {showHeader && (
@@ -37,10 +39,7 @@ const showHeader = !!(filename || url);
     <div class="position-relative p-4 pb-0">
 
         {!!lang && (
-            <div
-                class="code-language position-absolute top-0 end-0 opacity-75 px-2 font-monospace border-bottom-start small"
-                style={{ fontSize: '0.75em' }}
-            >
+            <div class="code-language position-absolute top-0 start-0 opacity-75 px-2 font-monospace border-bottom-end small">
                 {lang}
             </div>
         )}
@@ -51,7 +50,11 @@ const showHeader = !!(filename || url);
             class="m-0 p-0 pb-4"
         />
 
+        <CopyToClipboard
+            class="position-absolute top-0 end-0 mt-1 me-1 small"
+            value={code}
+        >
+
     </div>
 
 </figure>
-

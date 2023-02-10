@@ -1,0 +1,44 @@
+---
+import Icon from '@components/Icon.astro';
+const { class: className, ...props } = Astro.props;
+
+import '@styles/copy-to-clipboard.scss';
+---
+
+<script>
+import '@github/clipboard-copy-element';
+document.addEventListener('clipboard-copy', (event) => {
+    const button = event.target;
+    button.classList.add('copied');
+    setTimeout(() => {
+        button.classList.remove('copied');
+    }, 3000);
+});
+</script>
+
+<clipboard-copy
+    class:list={[
+        'btn-copy btn btn-sm border-0 text-muted',
+        className,
+    ]}
+    title="Copy code"
+    {...props}
+>
+
+    <Icon
+        icon="fa6-solid:copy"
+        class="icon-copy copy-pending"
+    />
+
+    <span class="copy-success text-success small">
+
+        Copied
+
+        <Icon
+            icon="fa6-solid:thumbs-up"
+            class="icon-success"
+        />
+
+    </span>
+
+</clipboard-copy>
