@@ -12,6 +12,7 @@ import vercel from '@astrojs/vercel/static';
 // Remark
 import remarkImagePaths from './src/utils/remark/image-paths';
 import { codeBlockComponent, remarkCodeBlocks } from './src/utils/remark/code-blocks';
+import remarkReadingtime from './src/utils/remark/reading-time';
 import remarkSectionize from './src/utils/remark/sectionize';
 
 // Rehype
@@ -71,6 +72,7 @@ export default defineConfig({
             remarkSectionize,
             remarkCodeBlocks,
             remarkImagePaths,
+            remarkReadingtime,
         ],
         rehypePlugins: [
             rehypeAccessibleEmojis,
