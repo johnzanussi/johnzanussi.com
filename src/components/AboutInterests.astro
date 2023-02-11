@@ -1,0 +1,96 @@
+---
+import Emoji from '@components/Emoji.astro';
+
+const interests = [
+    {
+        title: 'Hobbies',
+        items: [
+            {
+                title: 'Fishing',
+                emoji: '🎣',
+            },
+            {
+                title: '3D Printing',
+                emoji: '🖨️',
+                label: 'printer'
+            },
+            {
+                title: 'Home Improvement/DIY',
+                emoji: '🔨',
+            },
+            {
+                title: 'Home Automation',
+                emoji: '🖥️',
+            },
+            {
+                title: 'Cooking',
+                emoji: '👨‍🍳',
+            },
+            {
+                title: 'Gardening',
+                emoji: '🪴',
+            },
+        ],
+    },
+     {
+        title: 'Sports  ',
+        items: [
+            {
+                title: 'New York Islanders',
+                emoji: '🏒',
+            },
+            {
+                title: 'New York Giants',
+                emoji: '🏈',
+            },
+            {
+                title: 'Formula 1',
+                sub: '(Red Bull, McLaren)',
+                emoji: '🏎️',
+            },
+            {
+                title: 'West Virginia Mountaineers',
+                emoji: '🏈 🏀',
+            },
+            {
+                title: 'Tennis',
+                sub: ' (Rafa, Djoko, Iga)',
+                emoji: '🎾',
+            },
+            {
+                title: 'Boxing',
+                emoji: '🥊',
+            },
+        ],
+    }
+];
+---
+<div class="row">
+
+    {interests.map(({ title, items }) => (
+        <div class="col-6">
+
+            <h3>
+                {title}
+            </h3>
+
+            <ul class="list-unstyled">
+
+                {items.map(({ emoji, title, sub }) => (
+
+                    <li class="fw-semibold">
+
+                        <Emoji class="fs-3" e={emoji} /> {title}
+
+                        {sub && <small class="text-muted">{sub}</small>}
+
+                    </li>
+
+                ))}
+
+            </ul>
+
+        </div>
+    ))}
+
+</div>

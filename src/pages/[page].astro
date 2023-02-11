@@ -4,6 +4,7 @@ import { getItemImagePath, getRenderedImage } from '@utils/images';
 import { absoluteUrl } from '@utils/urls';
 
 import DividerLayout from '@layouts/DividerLayout.astro';
+import BackToTop from '@components/BackToTop.astro';
 import Markdown from '@components/Markdown.astro';
 
 export async function getStaticPaths() {
@@ -54,6 +55,11 @@ const metadata = {
         <article class="content-container">
 
             <Markdown Content={Content} />
+
+
+            <p class="py-5 text-center">
+                <BackToTop />
+            </p>
 
         </article>
 

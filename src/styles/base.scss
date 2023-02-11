@@ -2,16 +2,6 @@ a {
     transition: color 500ms ease 0s,
                 opacity 500ms ease 0s,
                 border-color 500ms;
-
-    &.link-opacity {
-        opacity: 0.65;
-        &:hover,
-        &:focus,
-        &:active,
-        &.active {
-            opacity: 1;
-        }
-    }
 }
 
 h1 {

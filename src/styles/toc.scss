@@ -18,13 +18,8 @@
     a {
         display: block;
         font-size: 15px;
-        color: var(--bs-body-color);
         border-left: 1px solid var(--bs-border-color);
         padding: .15em $depth-padding;
-
-        &:hover {
-            color: var(--bs-emphasis-color);
-        }
 
         &.active {
             color: var(--bs-emphasis-color);

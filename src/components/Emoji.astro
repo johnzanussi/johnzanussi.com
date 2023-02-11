@@ -1,13 +1,23 @@
 ---
-const { label, ...props } = Astro.props;
+import { emojiToName } from 'gemoji';
+const { label, e, ...props } = Astro.props;
+
+let ariaLabel = label;
+
+if (!label) {
+    const emoji = e ? e : await Astro.slots.render('default');
+    ariaLabel = emojiToName[emoji] || '';
+}
 ---
 
 <span
-    aria-label={label}
+    aria-label={ariaLabel}
     role="img"
     {...props}
 >
 
-    <slot />
+    <slot>
+        {e}
+    </slot>
 
 </span>
