@@ -34,17 +34,17 @@
 }
 
 // Link
-.link-anchor {
-    opacity: 0;
+.link-faded {
 
-    :hover > & {
-        opacity: 0.5;
-    }
+    color: var(--bs-body-color);
+    opacity: 0.65;
 
-    &:hover {
+    &:hover,
+    &:focus {
+        color: var(--bs-emphasis-color);
         opacity: 1;
-        color: $link-color;
     }
+
 }
 
 // Sizing
