@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/rk6m8wh2a.js",
-            "destination": "https://analytics.johnzanussi.com/js/plausible.js"
+            "destination": "https://analytics.johnzanussi.com/js/script.outbound-links.js"
         },
         {
             "source": "/api/rk6m8wh2a",
