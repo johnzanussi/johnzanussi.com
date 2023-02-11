@@ -1,87 +1,60 @@
 @import './bootstrap';
 
-a {
-    transition: color 500ms ease 0s,
-                opacity 500ms ease 0s,
-                border-color 500ms;
+:root {
 
-    &.link-opacity {
-        opacity: 0.65;
-        &:hover,
-        &:focus,
-        &:active,
-        &.active {
-            opacity: 1;
-        }
+    --jz-nav-width: auto;
+
+    @include media-breakpoint-between(md, xl) {
+        --jz-nav-width: 275px;
     }
-}
 
-h1 {
-    word-spacing: -0.2em;
-}
-
-h2 {
-    word-spacing: -0.1em;
-    &.border-bottom {
-        border-color: rgba($headings-color, 0.3) !important;
+    @include media-breakpoint-up(xl) {
+        --jz-nav-width: 375px;
     }
+
 }
 
-body {
-    &:before {
-        content: '';
-        height: 100vh;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        z-index: -1;
-        transition: background 150ms ease 0s,
-                    background-image 150ms ease 0s;
-        background: rgb(248, 249, 250);
-        background-image: linear-gradient(
-            45deg,
-            hsl(210deg 17% 98%) 14%,
-            hsl(209deg 50% 95%) 61%,
-            hsl(209deg 62% 93%) 77%,
-            hsl(208deg 68% 91%) 87%,
-            hsl(208deg 72% 89%) 94%,
-            hsl(207deg 74% 86%) 99%,
-            hsl(207deg 76% 84%) 101%,
-            hsl(206deg 77% 81%) 101%
-        );
-
-    }
-}
-
-
-.text-emphasis {
-    color: $emphasis-color;
-}
-
+:root,
 html[data-bs-theme="light"] {
+
+    --jz-bg-gradient: linear-gradient(
+        45deg,
+        hsl(210deg 17% 98%) 14%,
+        hsl(209deg 50% 95%) 61%,
+        hsl(209deg 62% 93%) 77%,
+        hsl(208deg 68% 91%) 87%,
+        hsl(208deg 72% 89%) 94%,
+        hsl(207deg 74% 86%) 99%,
+        hsl(207deg 76% 84%) 101%,
+        hsl(206deg 77% 81%) 101%
+    );
+
+    --jz-header-bg-color: #9ac4d2;
+
     .d-inline-light {
         display: inline !important;
     }
+
 }
 
 html[data-bs-theme="dark"] {
 
-    body {
-        &:before {
-            // background: linear-gradient(50deg, rgba(14,17,20,1) 45%, rgba(6,28,51,1) 100%);
-            background: $body-bg-dark;
-            background-image: linear-gradient(
-                45deg,
-                hsl(210deg 18% 7%) 14%,
-                hsl(209deg 29% 8%) 61%,
-                hsl(209deg 38% 9%) 77%,
-                hsl(209deg 49% 10%) 87%,
-                hsl(208deg 60% 11%) 94%,
-                hsl(207deg 72% 11%) 99%,
-                hsl(207deg 84% 12%) 101%,
-                hsl(206deg 97% 12%) 101%
-            );
-        }
+    --jz-bg-gradient: linear-gradient(
+        45deg,
+        hsl(210deg 18% 7%) 14%,
+        hsl(209deg 29% 8%) 61%,
+        hsl(209deg 38% 9%) 77%,
+        hsl(209deg 49% 10%) 87%,
+        hsl(208deg 60% 11%) 94%,
+        hsl(207deg 72% 11%) 99%,
+        hsl(207deg 84% 12%) 101%,
+        hsl(206deg 97% 12%) 101%
+    );
+
+    --jz-header-bg-color: #1f3749;
+
+    .d-inline-light {
+        display: none !important;
     }
 
     .d-inline-dark {
@@ -98,53 +71,15 @@ html[data-bs-theme="dark"] {
 
 }
 
-.bg-tertiary {
-    background-color: var(--bs-tertiary-bg);
-}
-
-.display-1 {
-    word-spacing: -0.5em;
-    @include media-breakpoint-down(md) {
-        font-size: 2.5rem;
-    }
-}
-
-@include media-breakpoint-between(md, xl) {
-
-    .site-nav {
-
-        width: 275px;
-
-        .nav-photo img {
-            max-width: 75% !important;
-        }
-
-        h1 {
-            font-size: 33px;
-        }
-
-    }
-
-}
-
+@import './base';
+@import './utils';
+@import './nav';
 
 @include media-breakpoint-up(md) {
     .rounded-md-end {
         border-top-left-radius: 0 !important;
         border-bottom-left-radius: 0 !important;
         @include border-end-radius;
-    }
-
-    .rounded-md-2 {
-        @include border-radius(var(--bs-border-radius));
-    }
-
-    .site-nav {
-        position: sticky;
-        top: 3rem;
-        &.is-static {
-            position: relative;
-        }
     }
 
     .post-card {
@@ -195,85 +130,11 @@ html[data-bs-theme="dark"] {
 
 }
 
-.collapse-button {
-    @include transition($accordion-icon-transition);
 
-    button:not(.collapsed) & {
-        transform: $accordion-icon-transform;
-    }
-}
-
-.nav-photo {
-
-    img {
-
-        @include media-breakpoint-down(md) {
-            width: 125px;
-            height: 125px;
-            min-width: 125px;
-        }
-
-    }
-
-}
-
-
-
-.mw-1200 {
-    max-width: 1200px;
-}
-
-@include media-breakpoint-up(xl) {
-    .content-container {
+.content-container {
+    max-width: 100%;
+    @include media-breakpoint-up(xl) {
         max-width: 45em; // 720px
-    }
-}
-
-.link-anchor {
-    opacity: 0;
-
-    :hover > & {
-        opacity: 0.5;
-    }
-
-    &:hover {
-        opacity: 1;
-        color: $link-color;
-    }
-}
-
-
-.border-bottom-start {
-    @include border-bottom-start-radius($border-radius-sm);
-}
-
-.border-bottom-end {
-    @include border-bottom-end-radius($border-radius-sm);
-}
-
-.nav-color-mode-toggle {
-    width: 50px;
-    @include media-breakpoint-down(md) {
-        background-color: rgba($light, 0.1) !important;
-        @include border-radius;
-    }
-    @include media-breakpoint-up(md) {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-}
-
-
-// https://github.com/FortAwesome/Font-Awesome/blob/6.x/js-packages/%40fortawesome/fontawesome-svg-core/styles.css
-.icon-fa {
-    display: inline-block;
-    height: 1em;
-    overflow: visible;
-    vertical-align: -.125em;
-
-    &.fa-2x {
-        font-size: 2em;
     }
 }
 
@@ -281,10 +142,6 @@ html[data-bs-theme="dark"] {
     a {
         color: var(--body-color);
     }
-}
-
-.font-sans-serif {
-    font-family: $font-family-sans-serif !important;
 }
 
 .mdx-columns > div {
@@ -295,5 +152,13 @@ html[data-bs-theme="dark"] {
 .emoji-lg {
     span[role="img"] {
         font-size: 1.5em;
+    }
+}
+
+.p-nav {
+    padding-inline: 1em;
+    @include media-breakpoint-up(md) {
+        padding-left: calc(var(--jz-nav-width) + 3em);
+        padding-right: 3em;
     }
 }

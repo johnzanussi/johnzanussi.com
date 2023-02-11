@@ -2,6 +2,7 @@
 
     $bullet-size: 50px;
     $border-size: 4px;
+    $bullet-size-half: calc($bullet-size / 2);
 
     // padding-left: $bullet-size / 2;
 
@@ -9,7 +10,7 @@
 
         .era-start {
             // width: 100px;
-            padding-right: ($bullet-size / 2) + 10px;
+            padding-right: $bullet-size-half + 10px;
             line-height: $bullet-size;
         }
 
@@ -26,7 +27,7 @@
             content: '';
             display: block;
             position: absolute;
-            inset: 0 auto 0 -$border-size;
+            inset: 0 auto 0 (-$border-size);
             border-left: $border-size solid var(--jz-era-color);
 
             html[data-bs-theme="dark"] & {
@@ -42,7 +43,7 @@
             height: $bullet-size;
             border: $border-size solid var(--jz-era-color);
             background-color: var(--jz-era-color);
-            margin-left: -$bullet-size / 2;
+            margin-left: (-$bullet-size-half);
 
             html[data-bs-theme="dark"] & {
                 border-color: var(--jz-era-color-dark);

@@ -1,0 +1,42 @@
+a {
+    transition: color 500ms ease 0s,
+                opacity 500ms ease 0s,
+                border-color 500ms;
+
+    &.link-opacity {
+        opacity: 0.65;
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            opacity: 1;
+        }
+    }
+}
+
+h1 {
+    word-spacing: -0.2em;
+}
+
+h2 {
+    word-spacing: -0.1em;
+    &.border-bottom {
+        border-color: rgba($headings-color, 0.3) !important;
+    }
+}
+
+body {
+    &:before {
+        content: '';
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: -1;
+        transition: background 150ms ease 0s,
+                    background-image 150ms ease 0s;
+        background: var(--bs-body-bg);
+        background-image: var(--jz-bg-gradient);
+        background-attachment: fixed;
+    }
+}

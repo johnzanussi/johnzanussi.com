@@ -3,9 +3,8 @@ import { getItems } from '@utils/collections';
 import { getItemImagePath, getRenderedImage } from '@utils/images';
 import { absoluteUrl } from '@utils/urls';
 
-import ContentLayout from '@layouts/ContentLayout.astro';
+import DividerLayout from '@layouts/DividerLayout.astro';
 import Markdown from '@components/Markdown.astro';
-import PageTitle from '@components/PageTitle.astro';
 
 export async function getStaticPaths() {
 
@@ -44,12 +43,20 @@ const metadata = {
 };
 ---
 
-<ContentLayout metadata={metadata}>
+<DividerLayout metadata={metadata}>
 
-    <PageTitle>
+    <h1 slot="header">
         {title}
-    </PageTitle>
+    </h1>
 
-    <Markdown Content={Content} />
+    <Fragment slot="main">
 
-</ContentLayout>
+        <article class="content-container">
+
+            <Markdown Content={Content} />
+
+        </article>
+
+    </Fragment>
+
+</DividerLayout>
