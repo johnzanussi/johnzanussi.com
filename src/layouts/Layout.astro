@@ -9,7 +9,7 @@ import ThemeToggleScript from '@components/ThemeToggleScript.astro';
 
 import { generateTags } from '@utils/metadata';
 
-const { metadata, isFlexColumn = true } = Astro.props;
+const { metadata, class: className = [] } = Astro.props;
 
 const tags = generateTags(metadata);
 const { head, body } = tags;
@@ -39,20 +39,16 @@ const isDev = import.meta.env.MODE === 'development';
 
 <Fragment set:html={body} />
 
-<div class="d-md-flex mx-2 mx-md-0">
+<div class:list={[
+    'site position-relative',
+    className,
+]}>
 
-    <Nav />
+    <div class="site-nav-wrap px-2 px-md-0">
+        <Nav />
+    </div>
 
-    <main class:list={[
-        'site-main d-md-flex  mb-5 my-md-4 px-2 py-4 px-md-4 p-lg-5',
-        {
-            'mw-1200 flex-column flex-grow-1': isFlexColumn,
-        },
-    ]}>
-
-        <slot />
-
-    </main>
+    <slot />
 
 </div>
 

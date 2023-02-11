@@ -1,0 +1,72 @@
+// Background
+.bg-tertiary {
+    background-color: var(--bs-tertiary-bg);
+}
+
+// Border
+.border-bottom-start {
+    @include border-bottom-start-radius($border-radius-sm);
+}
+
+.border-bottom-end {
+    @include border-bottom-end-radius($border-radius-sm);
+}
+
+// Display
+.display-1 {
+    word-spacing: -0.5em;
+    @include media-breakpoint-down(md) {
+        font-size: 2.5rem;
+    }
+}
+
+// Icons
+// https://github.com/FortAwesome/Font-Awesome/blob/6.x/js-packages/%40fortawesome/fontawesome-svg-core/styles.css
+.icon-fa {
+    display: inline-block;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+
+    &.fa-2x {
+        font-size: 2em;
+    }
+}
+
+// Link
+.link-anchor {
+    opacity: 0;
+
+    :hover > & {
+        opacity: 0.5;
+    }
+
+    &:hover {
+        opacity: 1;
+        color: $link-color;
+    }
+}
+
+// Sizing
+.mw-1100 {
+    max-width: 1100px;
+}
+
+.mw-1600 {
+    max-width: 1600px;
+}
+
+.mw-md-85p {
+    @include media-breakpoint-up(md) {
+        max-width: 85%;
+    }
+}
+
+// Text
+.font-sans-serif {
+    font-family: $font-family-sans-serif !important;
+}
+
+.text-emphasis {
+    color: $emphasis-color;
+}

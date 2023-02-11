@@ -57,6 +57,8 @@
     "@typescript-eslint/parser": "^5.51.0",
     "astro-compress": "^1.1.32",
     "astro-robots-txt": "^0.3.12",
+    "autoprefixer": "^10.4.13",
+    "cssnano": "^5.1.14",
     "eslint": "^8.33.0",
     "eslint-plugin-astro": "^0.23.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",

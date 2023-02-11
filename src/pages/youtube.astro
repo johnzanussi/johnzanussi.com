@@ -4,10 +4,9 @@ import {
     groupAndSortSubscriptions,
 } from '@utils/youtube';
 
-import Layout from '@layouts/Layout.astro';
+import DividerLayout from '@layouts/DividerLayout.astro';
 import Icon from '@components/Icon.astro';
 import Link from '@components/Link.astro';
-import PageTitle from '@components/PageTitle.astro';
 
 const metadata = {
     title: 'YouTube',
@@ -19,71 +18,74 @@ const data = await fetchYouTubeSubscriptions();
 
 const subscriptions = groupAndSortSubscriptions(data);
 ---
-<Layout metadata={metadata}>
+<DividerLayout metadata={metadata}>
 
-    <PageTitle
-        title="YouTube Subscriptions"
+    <h1 slot="header">
+        <Icon icon="fa6-brands:youtube" /> YouTube Subscriptions
+    </h1>
+
+    <div
+        slot="main"
+        class="d-flex flex-column flex-grow-1 mw-1100"
     >
 
-        <Icon icon="fa6-brands:youtube" /> YouTube Subscriptions
+        <p>
+            I watch a lot of YouTube videos. After live sports, YouTube is
+            where I consume most video content. Every so often, a friend or
+            colleague will ask about the channels I watch, so this is my way
+            of addressing these requests. The following list is not all of
+            the channels I subscribe to, but these are the channels that I
+            watch regularly. The channels with the{' '}
+            <Icon icon="fa6-solid:bell" title="bell icon" /> icon are
+            channels that I receive notifications when new videos are
+            posted.
+        </p>
 
-    </PageTitle>
+        <p class="text-muted">
+            Categories and channels are listed in alphabetical order.
+        </p>
 
-    <p>
-        I watch a lot of YouTube videos. After live sports, YouTube is
-        where I consume most video content. Every so often, a friend or
-        colleague will ask about the channels I watch, so this is my way
-        of addressing these requests. The following list is not all of
-        the channels I subscribe to, but these are the channels that I
-        watch regularly. The channels with the{' '}
-        <Icon icon="fa6-solid:bell" title="bell icon" /> icon are
-        channels that I receive notifications when new videos are
-        posted.
-    </p>
+        <div class="mt-3 row">
 
-    <p class="text-muted">
-        Categories and channels are listed in alphabetical order.
-    </p>
+            {subscriptions.map(({ category, categorySlug, channels }) => (
 
-    <div class="mt-3 row">
+                <div class="col-6 col-md-4 mb-4">
 
-        {subscriptions.map(({ category, categorySlug, channels }) => (
+                    <h3
+                        id={categorySlug}
+                        class="text-capitalize mb-3">
+                        {category}
+                    </h3>
 
-            <div class="col-6 col-md-4 mb-4">
+                    <ul class="list-unstyled">
 
-                <h3
-                    id={categorySlug}
-                    class="text-capitalize mb-3">
-                    {category}
-                </h3>
+                        {channels.map(({ title, channelId, hasNotifications }) => (
 
-                <ul class="list-unstyled">
+                            <li class="mb-1">
 
-                    {channels.map(({ title, channelId, hasNotifications }) => (
+                                <Link href={`https://www.youtube.com/channel/${channelId}`}>
+                                    {title}
+                                </Link>
 
-                        <li class="mb-1">
+                                {hasNotifications && (
+                                    <Icon
+                                        icon="fa6-solid:bell"
+                                        title="bell icon"
+                                        class="ms-1 text-warning opacity-75"
+                                    />
+                                )}
+                            </li>
 
-                            <Link href={`https://www.youtube.com/channel/${channelId}`}>
-                                {title}
-                            </Link>
+                        ))}
 
-                            {hasNotifications && (
-                                <Icon
-                                    icon="fa6-solid:bell"
-                                    title="bell icon"
-                                    class="ms-1 text-warning opacity-75"
-                                />
-                            )}
-                        </li>
+                    </ul>
 
-                    ))}
+                </div>
 
-                </ul>
+            ))}
 
-            </div>
-
-        ))}
+        </div>
 
     </div>
 
-</Layout>
+</DividerLayout>

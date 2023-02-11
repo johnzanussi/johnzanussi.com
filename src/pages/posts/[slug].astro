@@ -9,7 +9,7 @@ import {
 import { getItemImagePath, getRenderedImage } from '@utils/images';
 import { absoluteUrl } from '@utils/urls';
 
-import ContentLayout from '@layouts/ContentLayout.astro';
+import DividerLayout from '@layouts/DividerLayout.astro';
 
 import AmazonDisclosure from '@components/AmazonDisclosure.astro';
 import Comments from '@components/Comments.astro';
@@ -18,6 +18,9 @@ import DraftBadge from '@components/DraftBadge.astro';
 import EnjoyCTA from '@components/EnjoyCTA.astro';
 import Markdown from '@components/Markdown.astro';
 import PostPagination from '@components/PostPagination.astro';
+
+import ContentAside from '@components/ContentAside.astro';
+import Image from '@components/Image.astro';
 
 export async function getStaticPaths() {
 
@@ -71,38 +74,64 @@ const metadata = {
 
 const siblingPosts = await getSiblingItems('posts', post);
 ---
-
-<ContentLayout
+<DividerLayout
     metadata={metadata}
     headings={headings}
 >
 
-    <DateFormat date={date} class="text-muted" />
+    <Fragment slot="header">
 
-    {draft && (
-        <DraftBadge class="ms-2" />
-    )}
+        <div class="mb-3 mw-md-85p">
 
-    <h1>{title}</h1>
+            <Image
+                src={getItemImagePath(slug, coverImage.url, 'posts')}
+                width={coverImage.width}
+                height={coverImage.height}
+                alt={title}
+                widths={[576, 768, 992, 1200, 1400, 1600]}
+                class="img-fluid rounded shadow"
+            />
 
-    <hr />
+        </div>
 
-    <Markdown Content={Content} />
+        <DateFormat date={date} class="text-muted" />
 
-    {hasAmazonLinks && <AmazonDisclosure />}
+        {draft && (
+            <DraftBadge class="ms-2" />
+        )}
 
-    <EnjoyCTA />
+        <h1 class="mb-0">
+            {title}
+        </h1>
 
-    <PostPagination posts={siblingPosts} />
+    </Fragment>
 
-    <h2 id="comments">
-        Comments
-    </h2>
+    <Fragment slot="main">
 
-    <Comments
-        id={slug}
-        url={postUrl}
-        title={title}
-    />
+        <article class="content-container">
 
-</ContentLayout>
+            <Markdown Content={Content} />
+
+            {hasAmazonLinks && <AmazonDisclosure />}
+
+            <EnjoyCTA />
+
+            <PostPagination posts={siblingPosts} />
+
+            <h2 id="comments">
+                Comments
+            </h2>
+
+            <Comments
+                id={slug}
+                url={postUrl}
+                title={title}
+            />
+
+        </article>
+
+        {headings.length > 0 && <ContentAside headings={headings} />}
+
+    </Fragment>
+
+</DividerLayout>

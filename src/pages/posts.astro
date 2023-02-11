@@ -1,8 +1,7 @@
 ---
 import { getDateSortedCollection } from '@utils/collections';
 
-import Layout from '@layouts/Layout.astro';
-import PageTitle from '@components/PageTitle.astro';
+import DividerLayout from '@layouts/DividerLayout.astro';
 import PostCard from '@components/PostCard.astro';
 
 const posts = await getDateSortedCollection('posts');
@@ -14,16 +13,24 @@ const metadata = {
 };
 ---
 
-<Layout metadata={metadata}>
+<DividerLayout metadata={metadata}>
 
-    <PageTitle class="mb-4">
+    <h1 slot="header">
         Posts
-    </PageTitle>
+    </h1>
 
-    {posts.map(post => (
-        <div class="mb-4">
-            <PostCard post={post} />
+    <div
+        slot="main"
+        class="d-flex flex-column flex-grow-1"
+    >
+
+        <div class="mw-1100">
+            {posts.map(post => (
+                <div class="mb-4">
+                    <PostCard post={post} />
+                </div>
+            ))}
         </div>
-    ))}
+    </div>
 
-</Layout>
+</DividerLayout>
