@@ -1,0 +1,88 @@
+---
+import Timeline from '@components/Timeline.astro';
+
+const history = [
+    {
+        title: 'LeafLink',
+        image: 'leaflink.jpg',
+        color: '#1e154a',
+        colorDark: '#99e3e9',
+        link: 'https://leaflink.com/',
+        startYear: '2021',
+        roles: [
+            {
+                timeframe: 'February 2022 - Present',
+                title: 'Senior Engineering Manager, Commerce',
+            },
+            {
+                timeframe: 'March 2021 - February 2022',
+                title: 'Engineering Manager',
+            },
+        ],
+    },
+    {
+        title: 'Daily Harvest',
+        image: 'daily-harvest.jpg',
+        color: '#393d3d',
+        colorDark: '#fff',
+        link: 'https://www.daily-harvest.com/',
+        startYear: '2018',
+        roles: [
+            {
+                timeframe: 'February 2020 - March 2021',
+                title: 'Director, Experience',
+            },
+            {
+                timeframe: 'September 2018 - February 2020',
+                title: 'Lead Software Engineer',
+            },
+        ],
+    },
+    {
+        title: 'GreenBlender',
+        image: 'greenblender.jpg',
+        color: '#4d9f4d',
+        link: 'https://www.crunchbase.com/organization/green-blender',
+        startYear: '2017',
+        roles: [
+            {
+                timeframe: 'February 2017 - July 2018',
+                title: 'Chief Technology Officer',
+            },
+        ],
+    },
+    {
+        title: 'EXOS',
+        image: 'exos.jpg',
+        color: '#201b51',
+        colorDark: '#17dbab',
+        link: 'https://www.teamexos.com/',
+        startYear: '2014',
+        roles: [
+            {
+                timeframe: 'February 2014 - February 2017',
+                title: 'Senior Web Developer',
+            },
+        ],
+    },
+    {
+        title: 'CollegeHumor',
+        image: 'collegehumor.jpg',
+        color: '#fcb831',
+        link: 'https://en.wikipedia.org/wiki/CollegeHumor',
+        startYear: '2007',
+        roles: [
+            {
+                timeframe: 'February 2011 - February 2014',
+                title: 'Director, Front End Development',
+            },
+            {
+                timeframe: 'May 2007 - February 2011',
+                title: 'Front End Developer',
+            },
+        ]
+    },
+];
+---
+
+<Timeline timeline={history} />

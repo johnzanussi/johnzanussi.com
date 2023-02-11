@@ -286,3 +286,14 @@ html[data-bs-theme="dark"] {
 .font-sans-serif {
     font-family: $font-family-sans-serif !important;
 }
+
+.mdx-columns > div {
+    flex: 1 1 auto !important;
+}
+
+
+.emoji-lg {
+    span[role="img"] {
+        font-size: 1.5em;
+    }
+}

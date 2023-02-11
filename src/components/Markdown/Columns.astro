@@ -1,0 +1,13 @@
+---
+const { class:className, ...props } = Astro.props;
+---
+<div
+    class:list={[
+        'mdx-columns d-flex',
+        className,
+    ]}
+    {...props}>
+
+    <slot />
+
+</div>
