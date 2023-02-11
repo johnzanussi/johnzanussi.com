@@ -1,0 +1,90 @@
+---
+import Image from '@components/Image.astro';
+import Link from '@components/Link.astro';
+import Icon from '@components/Icon.astro';
+
+import '@styles/timeline.scss';
+
+const { timeline } = Astro.props;
+---
+
+<div class="timeline">
+
+    {timeline.map(era => {
+        const {
+            color,
+            colorDark,
+            image,
+            link,
+            roles,
+            startYear,
+            title,
+        } = era;
+
+        const variables = [
+            `--jz-era-color: ${color};`,
+            `--jz-era-color-dark: ${colorDark || color};`
+        ];
+
+        return (
+
+            <div class="era-wrap d-flex">
+
+                <span class="era-start text-end text-muted small">
+                    {startYear}
+                </span>
+
+                <div
+                    class="era position-relative d-flex pb-4"
+                    style={variables.join('')}>
+
+                    <Link href={link}>
+                        <Image
+                            src={`src/assets/pages/about/job-icons/${image}`}
+                            alt={title}
+                            width="50"
+                            height="50"
+                            class="era-bullet rounded-circle position-relative z-2 me-3 shadow"
+                        />
+                    </Link>
+
+                    <div>
+
+                        <Link
+                            href={link}
+                            class="era-title d-block fs-4 fw-bolder">
+                            {title}
+                            {' '}
+                            <Icon
+                                icon="fa-solid:external-link-alt"
+                                class="icon-link ms-1"
+                            />
+                        </Link>
+
+                        {roles.map(({ title, timeframe }) => (
+
+                            <Fragment>
+
+                                <p class="small text-muted mb-0">
+                                    {timeframe}
+                                </p>
+
+                                <p class="text-emphasis">
+                                    {title}
+                                </p>
+
+                            </Fragment>
+
+                        ))}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        );
+
+    })}
+
+</div>
