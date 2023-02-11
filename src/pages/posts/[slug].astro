@@ -38,9 +38,13 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content, headings } = await post.render();
+const {
+    Content,
+    headings,
+    remarkPluginFrontmatter: data,
+} = await post.render();
 
-const { data, slug } = post;
+const { slug } = post;
 
 const {
     title,
@@ -49,6 +53,7 @@ const {
     coverImage,
     draft,
     hasAmazonLinks = false,
+    minutesRead,
 } = data;
 
 const postUrl = absoluteUrl(getPostUrl(slug));
@@ -94,7 +99,18 @@ const siblingPosts = await getSiblingItems('posts', post);
 
         </div>
 
-        <DateFormat date={date} class="text-muted" />
+        <p>
+
+            <DateFormat
+                date={date}
+                class="text-body-secondary"
+            />
+
+            <span class="ms-3 small text-body-tertiary">
+                {minutesRead}
+            </span>
+
+        </p>
 
         {draft && (
             <DraftBadge class="ms-2" />
