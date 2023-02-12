@@ -21,7 +21,7 @@ The Next team [offers two codemods](https://beta.nextjs.org/docs/upgrade-guide#i
 
 `next-image-to-legacy-image` updates the import to use the legacy `<Image />` component, which I didn't want to do. 
 
-`next-image-experimental` does its best to modify existing `<Image />` components to match the new conventions. Since I [have a component](https://github.com/johnzanussi/johnzanussi.com/blob/main/components/Image.js) that wraps `next/image` this codemod wouldn't work for me. 
+`next-image-experimental` does its best to modify existing `<Image />` components to match the new conventions. Since I [have a component](https://github.com/johnzanussi/johnzanussi.com/blob/nextjs/components/Image.js) that wraps `next/image` this codemod wouldn't work for me. 
 
 So I found all the places where I imported my `<Image />` component and manually updated them. Luckily for me, there were only four places. Updating the props used wasn't intuitive, but between the [beta docs](https://beta.nextjs.org/docs/optimizing/images) and [current docs](https://nextjs.org/docs/basic-features/image-optimization) for Image optimization and the [`next/image` docs](https://nextjs.org/docs/api-reference/next/image), I got the information I needed to update the components accordingly.
 
@@ -142,7 +142,7 @@ Read more on [keeping server-only code out of client components in the docs](htt
 #### head.js
 The last pain point I dealt with during this upgrade was the new [`head.js`](https://beta.nextjs.org/docs/api-reference/file-conventions/head) paradigm. `head.js` is a new "special file" Next introduced that allows different route segments to configure the `<head>` tag of the corresponding page.
 
-I use a combination of the [`next-seo`](https://github.com/garmeeh/next-seo) package and my own [`<Meta />`](https://github.com/johnzanussi/johnzanussi.com/blob/main/components/Meta.js) component to configure and output all the SEO related meta tags I'd like on any given page. Luckily for me, the `next-seo` maintainers are already [working on and have documentation](https://github.com/garmeeh/next-seo/blob/master/APP_DIRECTORY.md) for supporting the `app` directory. Their work made my life easier in understanding the limitations of `head.js` and getting things working the way I expected them to.
+I use a combination of the [`next-seo`](https://github.com/garmeeh/next-seo) package and my own [`<Meta />`](https://github.com/johnzanussi/johnzanussi.com/blob/nextjs/components/Meta.js) component to configure and output all the SEO related meta tags I'd like on any given page. Luckily for me, the `next-seo` maintainers are already [working on and have documentation](https://github.com/garmeeh/next-seo/blob/master/APP_DIRECTORY.md) for supporting the `app` directory. Their work made my life easier in understanding the limitations of `head.js` and getting things working the way I expected them to.
 
 In making the upgrade, I had to create the new `head.js` file for all my route segments. Doing so meant I had to fetch a page's data twice, once in `head.js` and again in the main content `page.js`. [The Next team says](https://beta.nextjs.org/docs/data-fetching/fundamentals#automatic-fetch-request-deduping), "When rendering a route, Next.js will automatically dedupe requests for the same data across layout.js, page.js, and head.js.". I have yet to see how they're doing this and if it's working, but it feels clunky to make the same request twice for a single page.
 
