@@ -110,13 +110,13 @@ const siblingPosts = await getSiblingItems('posts', post);
                 {minutesRead}
             </span>
 
+            {draft && (
+                <DraftBadge class="ms-2" />
+            )}
+
         </p>
 
-        {draft && (
-            <DraftBadge class="ms-2" />
-        )}
-
-        <h1 class="mb-0">
+        <h1 class="mb-0 display-3">
             {title}
         </h1>
 
