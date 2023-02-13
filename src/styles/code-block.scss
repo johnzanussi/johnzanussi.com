@@ -27,6 +27,7 @@
 
     .btn-copy {
 
+        top: calc(28px + .25em);
         transition: opacity 1s ease-out;
 
         &:not(.copied) {

@@ -1,10 +1,7 @@
 ---
 import Icon from '@components/Icon.astro';
 
-const {
-    class: className = '',
-    ...props
-} = Astro.props;
+const { class: className = '', ...props } = Astro.props;
 ---
 
 <button
@@ -21,20 +18,8 @@ const {
 
 <script>
 const backToTop = document.querySelectorAll('.btn-back-to-top');
-const threshold = 250;
-
-const handleResize = () => {
-    if (document.body.clientHeight - window.innerHeight > threshold) {
-        backToTop.forEach((btn) => btn.classList.remove('d-none'));
-    }
-};
-
-handleResize();
-
-window.addEventListener('resize', handleResize);
-
-backToTop.forEach((btn) => {
-    btn.addEventListener('click', () => {
+backToTop.forEach((button) => {
+    button.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth',

@@ -49,8 +49,6 @@ $link-shade-percentage: 40%;
 $display-font-weight: 400;
 $lead-font-weight: 400;
 
-$code-color: #e166a3;
-
 $accordion-icon-transform: rotate(180deg) !default;
 
 $font-family-sans-serif: "InterVariable", sans-serif;
@@ -96,7 +94,7 @@ $code-font-size: $font-size-base;
 @import '../node_modules/bootstrap/scss/tables';
 // @import "../node_modules/bootstrap/scss/forms";
 @import '../node_modules/bootstrap/scss/buttons';
-@import '../node_modules/bootstrap/scss/transitions';
+// @import '../node_modules/bootstrap/scss/transitions';
 // @import "../node_modules/bootstrap/scss/dropdown";
 // @import "../node_modules/bootstrap/scss/button-group";
 // @import "../node_modules/bootstrap/scss/nav";
@@ -106,8 +104,8 @@ $code-font-size: $font-size-base;
 // @import "../node_modules/bootstrap/scss/breadcrumb";
 // @import '../node_modules/bootstrap/scss/pagination';
 // @import "../node_modules/bootstrap/scss/badge";
-@import "../node_modules/bootstrap/scss/alert";
-@import '../node_modules/bootstrap/scss/progress';
+// @import "../node_modules/bootstrap/scss/alert";
+// @import '../node_modules/bootstrap/scss/progress';
 @import '../node_modules/bootstrap/scss/list-group';
 // @import "../node_modules/bootstrap/scss/close";
 // @import "../node_modules/bootstrap/scss/toasts";

@@ -39,7 +39,7 @@ const showHeader = !!(filename || url);
     <div class="position-relative p-4 pb-0">
 
         {!!lang && (
-            <div class="code-language position-absolute top-0 start-0 opacity-75 px-2 font-monospace border-bottom-end small">
+            <div class="code-language position-absolute top-0 end-0 px-2 py-1 font-monospace border-bottom-start">
                 {lang}
             </div>
         )}
@@ -51,7 +51,7 @@ const showHeader = !!(filename || url);
         />
 
         <CopyToClipboard
-            class="position-absolute top-0 end-0 mt-1 me-1 small"
+            class="position-absolute end-0 me-1"
             value={code}
         />
 

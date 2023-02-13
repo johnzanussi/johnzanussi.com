@@ -9,13 +9,11 @@ const isDev = import.meta.env.MODE === 'development';
 
 export const getItems = async (collection, includeDrafts = isDev) => {
 
-    const items = await getCollection(collection);
+    const draftFilter = !includeDrafts ? (item) => !item.data.draft : null;
 
-    if (includeDrafts) {
-        return items;
-    }
+    const items = await getCollection(collection, draftFilter);
 
-    return items.filter(item => !item.data.draft);
+    return items;
 
 };
 

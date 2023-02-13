@@ -5,13 +5,7 @@ if (href?.startsWith('http')) {
     props.target = '_blank';
     props.rel = 'noopener noreferrer';
 }
+// No new lines because the white
+// space was being preserved in MDX
 ---
-
-<a
-    href={href}
-    {...props}
->
-
-    <slot />
-
-</a>
+<a href={href} {...props}><slot /></a>

@@ -84,9 +84,9 @@ export default defineConfig({
                     h4: 'mt-3',
                     h5: 'mt-3 text-emphasis',
                     iframe: 'mb-4',
-                    pre: 'code-block rounded-md-2 border p-4'
-                }
-            ]
+                    pre: 'code-block rounded-md-2 border p-4',
+                },
+            ],
         ],
         extendDefaultPlugins: true,
     }
