@@ -22,6 +22,7 @@ const postCollection = defineCollection({
         }),
         date: z.string().transform(date => new Date(date)),
         hasAmazonLinks: z.boolean().optional(),
+        hiddenIntro: z.boolean().optional(),
         draft: z.boolean().optional(),
     }),
 });
