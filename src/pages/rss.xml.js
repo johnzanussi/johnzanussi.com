@@ -13,10 +13,12 @@ export async function get(context) {
 
         const coverImage = getItemImagePath(post.slug, post.data.coverImage.url, 'posts');
 
-        const image = await getRenderedImage(coverImage, {
-            width: 150,
-            height: 150,
-        });
+        const imageOptions = {
+            width: 200,
+            height: 112,
+        };
+
+        const image = await getRenderedImage(coverImage, imageOptions);
 
         return {
             title: post.data.title,
@@ -24,9 +26,8 @@ export async function get(context) {
             description: post.data.excerpt || '',
             link: url,
             customData: [
-                `<atom:link href="${url}" rel="standout"/>`,
-                `<media:content medium="image" url="${absoluteUrl(image)}" width="150" height="150" />`,
-                `<media:description>${post.data.excerpt}</media:description>`,
+                // `<atom:link href="${url}" rel="standout"/>`,
+                `<media:content medium="image" url="${absoluteUrl(image)}" width="${imageOptions.width}" height="${imageOptions.height}" />`,
             ].join(''),
         };
 
@@ -39,12 +40,13 @@ export async function get(context) {
         site: context.site,
         items: items,
         xmlns: {
-            atom: 'http://www.w3.org/2005/Atom',
+            // atom: 'http://www.w3.org/2005/Atom',
             media: 'http://search.yahoo.com/mrss/',
         },
         customData: [
             '<language>en-us</language>',
-            `<atom:link href="${context.site}rss.xml" rel="self" type="application/rss+xml" />`,
+            `<generator>${context.generator}</generator>`,
+            // `<atom:link href="${context.site}rss.xml" rel="self" type="application/rss+xml" />`,
         ].join(''),
         stylesheet: '/rss/styles.xsl',
     };
