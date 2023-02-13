@@ -1,4 +1,4 @@
 {
     "framework": "nextjs",
-    "outputDirectory": "dist"
+    "outputDirectory": "build"
 }
