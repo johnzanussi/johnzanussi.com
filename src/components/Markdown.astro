@@ -1,9 +1,11 @@
 ---
 import AmazonProducts from '@components/AmazonProducts.astro';
+import Aside from '@components/Aside.astro';
 import Link from '@components/Link.astro';
 import WorkHistory from '@components/WorkHistory.astro';
 import YouTubeEmbed from '@components/YouTubeEmbed.astro';
 
+import Blockquote from '@components/Markdown/Blockquote.astro';
 import Columns from '@components/Markdown/Columns.astro';
 import Image from '@components/Markdown/Image.astro';
 import Table from '@components/Markdown/Table.astro';
@@ -13,6 +15,8 @@ const components = {
     a: Link,
     img: Image,
     table: Table,
+    blockquote: Blockquote,
+    Aside: Aside,
     AmazonProducts: AmazonProducts,
     Columns: Columns,
     WorkHistory: WorkHistory,

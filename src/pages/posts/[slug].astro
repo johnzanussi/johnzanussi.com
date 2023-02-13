@@ -52,8 +52,9 @@ const {
     excerpt,
     coverImage,
     draft,
-    hasAmazonLinks = false,
     minutesRead,
+    hasAmazonLinks = false,
+    hiddenIntro = false,
 } = data;
 
 const postUrl = absoluteUrl(getPostUrl(slug));
@@ -125,7 +126,12 @@ const siblingPosts = await getSiblingItems('posts', post);
 
     <Fragment slot="main">
 
-        <article class="content-container">
+        <article class:list={[
+            'content-container',
+            {
+                'hide-intro-heading': hiddenIntro,
+            }
+        ]}>
 
             <Markdown Content={Content} />
 

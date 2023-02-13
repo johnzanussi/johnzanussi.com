@@ -12,6 +12,16 @@
         --jz-nav-width: 377px;
     }
 
+    --bs-pink-500: #{$pink-500};
+    --bs-pink-900: #{$pink-900};
+    --bs-orange-400: #{$orange-400};
+    --bs-orange-600: #{$orange-600};
+    --bs-orange-900: #{$orange-900};
+
+    --bs-cyan-600: #{$cyan-600};
+    --bs-cyan-900: #{$cyan-900};
+
+    --bs-body-bg-dark: #{$body-bg-dark};
 }
 
 :root,
@@ -141,6 +151,10 @@ html[data-bs-theme="dark"] {
         > h2, > h3, > h4, > h5, > h6 {
             margin-top: 0 !important;
         }
+    }
+
+    &.hide-intro-heading #h-intro {
+        display: none;
     }
 }
 

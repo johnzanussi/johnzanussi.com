@@ -1,0 +1,37 @@
+---
+import Icon from '@components/Icon.astro';
+import Emoji from '@components/Emoji.astro';
+
+import '@styles/aside.scss';
+
+const icons = {
+    egg: 'mdi:egg-easter',
+    wave: '👋',
+    mindblown: '🤯',
+};
+
+const { type, ...props } = Astro.props;
+
+const icon = icons[type] || 'ℹ';
+const isIcon = icon.includes(':');
+---
+
+<aside
+    class:list={`content-aside aside-${type} d-flex border-start border-5 p-3 mb-4 rounded rounded-1 shadow`}
+    {...props}
+>
+
+    <p
+        class="fs-1 m-0"
+        aria-hidden="true"
+    >
+        {isIcon ? <Icon icon={icon} /> : <Emoji e={icon} />}
+    </p>
+
+    <section class="ps-3">
+
+        <slot />
+
+    </section>
+
+</aside>
