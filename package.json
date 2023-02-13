@@ -17,7 +17,6 @@
     "dev": "next -p 3001",
     "build": "next build",
     "build:analyze": "ANALYZE=true next build",
-    "postbuild": "next-sitemap",
     "start": "next start -p 3001",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
