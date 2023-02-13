@@ -39,8 +39,22 @@
 
     width: var(--jz-nav-width);
 
-}
 
+    @include media-breakpoint-down(md) {
+        .collapse {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s cubic-bezier(0, 1, 0, 1);
+
+            &.show {
+                max-height: 99em;
+                transition: max-height .5s ease-in-out;
+            }
+
+        }
+    }
+
+}
 
 .collapse-button {
     @include transition($accordion-icon-transition);

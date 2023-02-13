@@ -1,6 +1,6 @@
 ---
 import Image from '@components/Image.astro';
-import { Icon } from 'astro-iconify';
+import Icon from '@components/Icon.astro';
 
 import Link from '@components/Link.astro';
 import NavToggle from '@components/NavToggle.astro';
@@ -117,9 +117,9 @@ const socialLinksCount = socialLinks.length - 1;
 
     </div>
 
-    <NavToggle class="d-md-block w-100 mt-3 mt-md-0">
+    <NavToggle class="d-md-block w-100">
 
-        <ul class="list-unstyled font-monospace fs-5 px-3 p-md-0 text-end text-md-start">
+        <ul class="list-unstyled font-monospace fs-5 px-3 p-md-0 text-end text-md-start mt-3 mt-md-0">
             {pages.map(({ title, url }) => (
                 <li>
                     <Link
@@ -146,8 +146,8 @@ const socialLinksCount = socialLinks.length - 1;
                         class="link-secondary opacity-50"
                     >
                         <Icon
-                            name={icon}
-                            class="icon-fa fa-2x"
+                            icon={icon}
+                            class="fa-2x"
                         />
 
                     </Link>
