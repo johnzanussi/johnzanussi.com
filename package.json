@@ -49,7 +49,7 @@
     "rehype-accessible-emojis": "^0.3.2",
     "rehype-add-classes": "github:tycol7/rehype-add-classes",
     "sharp": "^0.31.3",
-    "simple-scrollspy": "^2.3.3"
+    "simple-scrollspy": "^2.3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
