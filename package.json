@@ -16,6 +16,7 @@
   "scripts": {
     "dev": "next -p 3001",
     "build": "next build",
+    "postbuild": "",
     "build:analyze": "ANALYZE=true next build",
     "start": "next start -p 3001",
     "lint": "next lint",
