@@ -1,39 +1,24 @@
-Back in the day (2008), [`johnzanussi.com`](https://johnzanussi.com) was the home of my Tumblr blog. Then, in 2014, I switched it to a single splash page with "Full site coming soon" in the footer. Almost eight years later, in late-2021, I finally built a more elaborate website for myself. Below, I'll document some of my processes, the tools, libraries, and services I used, and what I would like to add in the future.
-
-All the code that powers this website is available on my [GitHub](https://github.com/johnzanussi/johnzanussi.com).
-
-<Columns>
+Back in the day (2008), [`johnzanussi.com`](https://johnzanussi.com) was the home of my Tumblr blog.
 
 [![Screen shot of johnzanussi.com from 2008](src/assets/pages/built-with/screenshot-johnzanussi-dot-com-tumblr.png)](https://web.archive.org/web/20080817121815/http://johnzanussi.com/)
 
+Then, in 2014, I switched it to a single splash page with "Full site coming soon" in the footer. Ah, yes, the famous soon&#8482;.
+
 [![Screen shot of johnzanussi.com from 2021](src/assets/pages/built-with/screenshot-johnzanussi-dot-com-splash.png)](https://web.archive.org/web/20210610103313/http://johnzanussi.com/)
 
-</Columns>
+Almost eight years later, in late-2021, I finally built a more elaborate website for myself. Since then, the site has continued to evolve. Below you’ll find some of the libraries and services I used and why I chose them.
 
-## Requirements
-
--   Uses technology I'm most familiar with
--   Easy to maintain
--   Easy to deploy
--   Performant
--   Accessible
--   Code that is sharable on GitHub
-
-## Tools
-
--   MacBook Pro
--   Sublime Text
--   Terminal
+You can also find all the code for this site available on my [GitHub](https://github.com/johnzanussi/johnzanussi.com).
 
 ## Libraries
 
 ##### [Astro](https://astro.build/)
 
-As of February 2023, this website is built on Astro. While browsing Reddit one day, I saw someone mention Astro. I immediately fell in love with it as it takes static site generation to the next level. I plan on writing a detailed post comparing Astro to Next.js as it relates to this site. Until then, you can [check out what Astro is all about](https://astro.build/) or view the code that powers this site [on my GitHub](https://github.com/johnzanussi/johnzanussi.com).
+As of February 2023, this website is built on Astro. While browsing Reddit one day, I saw someone mention Astro. I immediately fell in love with it as it takes static site generation to the next level. I wrote a detailed post about why I chose Astro and the migration from Next.js which [you can read here](/posts/nextjs-to-astro-migration).
 
 ##### [~~Next.js~~](https://nextjs.org)
 
-~~Next.js has quickly become my go-to for spinning up project sites. It's easy to use, has many starter projects, and deploys easily.~~
+~~Next.js has quickly become my go-to for spinning up project sites. It's easy to use, has many starter projects, and deploys easily.~~ The Next.js code has been preserved in the [`nextjs`](https://github.com/johnzanussi/johnzanussi.com/tree/nextjs) branch on my GitHub.
 
 ##### [~~React~~](https://reactjs.org)
 
@@ -47,7 +32,7 @@ For this project and another personal project, I gave [Tailwind](https://tailwin
 
 Font Awesome gets an honorable mention here, as I used a handful of their icons throughout my site.
 
-A complete list of packages can be found in [`package.json`](https://github.com/johnzanussi/johnzanussi.com/package.json)
+A complete list of packages can be found in [`package.json`](https://github.com/johnzanussi/johnzanussi.com/blob/main/package.json)
 
 ## Services
 
@@ -61,19 +46,9 @@ I spent quite some time looking for the best way to add comments, including roll
 
 ##### [Plausible](https://plausible.io/)
 
-I'm self-hosting Plausible at [analytics.johnzanussi.com](https://analytics.johnzanussi.com/) to collect traffic data from this site. I followed this [amazing guide](https://www.stackovercloud.com/2021/10/28/how-to-install-plausible-analytics-on-ubuntu-20-04/) to get the self-hosted instance installed and running on DigitalOcean. I'm also using the [`next-plausible`](https://github.com/4lejandrito/next-plausible) package to send tracking data to the self-hosted instance.
+I'm self-hosting Plausible at [analytics.johnzanussi.com](https://analytics.johnzanussi.com/) to collect traffic data from this site. I followed this [amazing guide](https://www.stackovercloud.com/2021/10/28/how-to-install-plausible-analytics-on-ubuntu-20-04/) to get the self-hosted instance installed and running on DigitalOcean. 
 
 ##### [Grammarly](https://www.grammarly.com/)
 
 Since I’m not the best at articulating my thoughts into words, I started using Grammarly's Premium plan to check my work. It's most useful for me as a spell and grammar check, but I also appreciate some of the other suggestions, helping to make my words more readable.
 
-## To Do
-
--   ✅ ~~Install and configure [Prettier](https://prettier.io/)~~ [493a49a](https://github.com/johnzanussi/johnzanussi.com/commit/493a49ad0587d9c8195c2bf735625c827664bd89)
--   ✅ ~~Create light theme and theme switcher~~ [#14](https://github.com/johnzanussi/johnzanussi.com/pull/14)
--   ✅ ~~Create a "More posts" component for the bottom of individual posts~~ [6844b46](https://github.com/johnzanussi/johnzanussi.com/commit/6844b46917bf863f5eb70e4b18557a24ba9cc13f)
--   ✅ ~~Add comments on posts~~ [87219d0](https://github.com/johnzanussi/johnzanussi.com/commit/87219d0045088a4cff94d5cd20d193cf6bd41bf6)
--   ✅ ~~Pull YouTube channel names, images, and notification setting from YouTube API~~
--   Convert to TypeScript
--   Add pagination for `/posts` page
--   Add [Lighthouse](https://developers.google.com/web/tools/lighthouse) results to this page
