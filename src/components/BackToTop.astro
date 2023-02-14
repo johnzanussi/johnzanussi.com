@@ -17,12 +17,14 @@ const { class: className = '', ...props } = Astro.props;
 </a>
 
 <script>
-import onClick from '@scripts/onClick';
-onClick('.btn-back-to-top', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
+const backToTop = document.querySelectorAll('.btn-back-to-top');
+backToTop.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
     });
 });
 </script>
