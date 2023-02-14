@@ -15,24 +15,28 @@
 
     $depth-padding: 1.5em;
 
-    a {
-        display: block;
-        font-size: 15px;
-        border-left: 1px solid var(--bs-border-color);
-        padding: .15em $depth-padding;
+    nav {
 
-        &.active {
-            color: var(--bs-emphasis-color);
-            border-color: var(--bs-heading-color);
-            opacity: 1;
+        a {
+            display: block;
+            font-size: 15px;
+            border-left: 1px solid var(--bs-border-color);
+            padding: .15em $depth-padding;
+
+            &.active {
+                color: var(--bs-emphasis-color);
+                border-color: var(--bs-heading-color);
+                opacity: 1;
+            }
+
         }
 
-    }
+        @for $i from 3 through 6 {
 
-    @for $i from 3 through 6 {
+            a.depth-#{$i} {
+                padding-left: ($i - 1) * $depth-padding;
+            }
 
-        a.depth-#{$i} {
-            padding-left: ($i - 1) * $depth-padding;
         }
 
     }

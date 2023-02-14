@@ -52,5 +52,18 @@ const isDev = import.meta.env.MODE === 'development';
 
 </div>
 
+<noscript>
+    <style>
+    html[data-bs-theme="light"] .d-nojs-none,
+    html[data-bs-theme="dark"] .d-nojs-none {
+        display: none !important;
+    }
+    html[data-bs-theme="light"] .d-nojs-block,
+    html[data-bs-theme="dark"] .d-nojs-block {
+        display: block !important;
+        max-height: 99em;
+    }
+    </style>
+</noscript>
 </body>
 </html>
