@@ -4,7 +4,7 @@ import Icon from '@components/Icon.astro';
 
 const { class: className } = Astro.props;
 ---
-<div class="d-flex w-100 mt-1 mt-md-4">
+<div class="d-flex w-100 mt-1 mt-md-4 d-nojs-none">
 
     <ThemeToggle class="nav-color-mode-toggle me-2 py-1 p-md-3" />
 
@@ -29,7 +29,7 @@ const { class: className } = Astro.props;
 </div>
 
 <div
-    class:list={['collapse', className]}
+    class:list={['collapse d-nojs-block', className]}
     id="nav-collapse"
 >
 
@@ -38,16 +38,13 @@ const { class: className } = Astro.props;
 </div>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('button[data-toggle="collapse"]');
-    buttons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const isExpanded = button.getAttribute('aria-expanded') === 'true';
-            const toggleElm = document.querySelector(button.dataset.target);
-            button.setAttribute('aria-expanded', !isExpanded);
-            button.classList.toggle('collapsed', !isExpanded);
-            toggleElm.classList.toggle('show', !isExpanded);
-        });
-    });
+import onClick from '@scripts/onClick';
+onClick('button[data-toggle="collapse"]', (event) => {
+    const button = event.target;
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    const toggleElm = document.querySelector(button.dataset.target);
+    button.setAttribute('aria-expanded', !isExpanded);
+    button.classList.toggle('collapsed', !isExpanded);
+    toggleElm.classList.toggle('show', !isExpanded);
 });
 </script>

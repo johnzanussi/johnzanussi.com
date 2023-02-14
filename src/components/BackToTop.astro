@@ -4,26 +4,25 @@ import Icon from '@components/Icon.astro';
 const { class: className = '', ...props } = Astro.props;
 ---
 
-<button
-    type="button"
+<a
+    href="#"
     class:list={[
-        'btn btn-link btn-back-to-top',
+        'btn-back-to-top',
         className,
     ]}
     aria-label="Back to top"
     {...props}
 >
     Back to top <Icon icon="fa-solid:level-up-alt" />
-</button>
+</a>
 
 <script>
-const backToTop = document.querySelectorAll('.btn-back-to-top');
-backToTop.forEach((button) => {
-    button.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
+import onClick from '@scripts/onClick';
+onClick('.btn-back-to-top', (e) => {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
     });
 });
 </script>
