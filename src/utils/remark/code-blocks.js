@@ -7,18 +7,37 @@ export const codeBlockComponent = {
     'src/components/CodeBlock.astro': [['default', CodeSnippetTagname]],
 };
 
+/**
+ * Parse contents of fenced code blocks
+ * and feed them to the CodeBlock.astro
+ * component as props for rendering
+ */
 export function remarkCodeBlocks() {
 
     return function (tree) {
 
         const transformMDX = (node, index, parent) => {
 
+            // Pull the language and other
+            // possible meta string out of node
             const { lang, meta } = node;
 
+            // Setup empty meta attributes
             let metaAttributes = {};
 
             if (meta) {
 
+                // Meta strings are formatted as
+                //  key1="value1" key2="value2"
+                // The regex matches on the keys and values, spreads them into an array,
+                // and reduces down to a key: value object
+                //
+                // key1="value1" key2="value2"
+                // becomes
+                // {
+                //      key1: `value1`,
+                //      key2: `value2`,
+                // }
                 metaAttributes = [...meta.matchAll(/([^=\s]+)=['"]([^'"\s]+)/g)].reduce((accum, match) => {
                     const [, key, value] = match;
                     return {
@@ -29,23 +48,42 @@ export function remarkCodeBlocks() {
 
             }
 
+            // If there was no filename in the meta string
             if (!metaAttributes.filename) {
+
+                // Search for two slashes then a space at the start of a line
+                // and match everything until the end of the line
+                // Example: // astro.config.js
                 node.value = node.value.replace(/^\/\/\s?([^\n]+)\n/, (fullMatch, filename) => {
                     metaAttributes.filename = filename;
                     return '';
                 });
             }
 
-            const attributes = {
-                ...metaAttributes,
+            const props = {
+                code: node.value,
                 lang,
+                ...metaAttributes,
             };
 
-            const codeSnippetWrapper = makeComponentNode(
-                CodeSnippetTagname,
+            const attributes = Object.entries(props).map((entry) => {
+
+                const [name, value] = entry;
+
+                return {
+                    type: 'mdxJsxAttribute',
+                    name,
+                    value,
+                };
+
+            });
+
+            const codeSnippetWrapper = {
+                type: 'mdxJsxFlowElement',
+                name: CodeSnippetTagname,
                 attributes,
-                node
-            );
+                children: [],
+            };
 
             parent.children.splice(index, 1, codeSnippetWrapper);
 
@@ -57,35 +95,3 @@ export function remarkCodeBlocks() {
     };
 }
 
-export async function getCodeFromSlot(slots) {
-
-    const codeHtml = await slots.render('default');
-
-    let code = codeHtml;
-
-    if (code.includes('</code>')) {
-        code = codeHtml.match(/<(code)[^>]*>(?<content>[^<]*)</)[2];
-    }
-
-    code = he.decode(code);
-
-    return code;
-
-}
-
-function makeMDXComponentNode(name, attributes, ...children) {
-    return {
-        type: 'mdxJsxFlowElement',
-        name,
-        attributes: Object.entries(attributes)
-            // Filter out non-truthy attributes to avoid empty attrs being parsed as `true`.
-            .filter(([, v]) => v !== false && Boolean(v))
-            .map(([name, value]) => ({ type: 'mdxJsxAttribute', name, value })),
-        children,
-    };
-}
-
-function makeComponentNode(tagName, attributes, ...children) {
-    const factory = makeMDXComponentNode;
-    return factory(tagName, attributes, ...children);
-}
