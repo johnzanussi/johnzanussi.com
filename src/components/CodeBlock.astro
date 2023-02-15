@@ -1,5 +1,4 @@
 ---
-import { getCodeFromSlot } from '@utils/remark/code-blocks';
 import { Prism } from '@astrojs/prism';
 
 import CopyToClipboard from '@components/CopyToClipboard.astro';
@@ -7,10 +6,8 @@ import Link from '@components/Link.astro';
 
 import '@styles/code-block.scss';
 
-const code = await getCodeFromSlot(Astro.slots);
-
 const {
-    style,
+    code,
     lang,
     filename = '',
     url = '',
@@ -20,10 +17,7 @@ const {
 const showHeader = !!(filename || url);
 ---
 
-<figure
-    class="code-block rounded-1 border mb-3"
-    style={style}
->
+<figure class="code-block rounded-1 border mb-3">
     {showHeader && (
         <figcaption class="py-2 px-4 border-bottom overflow-auto text-body-secondary font-monospace">
             {filename}
