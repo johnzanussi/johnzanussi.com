@@ -4,7 +4,31 @@ import GithubSlugger from 'github-slugger';
 
 import { alphaSortByObjectField } from './sort';
 
-export async function fetchYouTubeSubscriptions() {
+export interface ChannelDB {
+    title: string;
+    has_notifications: boolean;
+    channel_id: string;
+    category: {
+        title: string;
+    }
+}
+
+export interface Channel {
+    title: string;
+    hasNotifications: boolean;
+    channelId: string;
+    category: {
+        title: string;
+    }
+}
+
+export interface CategoryChannels {
+    category: string;
+    categorySlug: string;
+    channels: Channel[];
+}
+
+export async function fetchYouTubeSubscriptions(): Promise<Channel[]> {
 
     const supabase = createClient(
         import.meta.env.SUPABASE_URL,
@@ -27,18 +51,25 @@ export async function fetchYouTubeSubscriptions() {
 
     if (error) {
         // https://github.com/supabase/supabase-js/issues/32
-        throw new Error(error.message, error);
+        console.error(error);
+        throw new Error(error.message);
     }
 
-    return data;
+    return camelcaseKeys(data as ChannelDB[]);
 
 }
 
-export function groupAndSortSubscriptions(subscriptions) {
+interface CategoryMap {
+    [key: string]: Channel[];
+}
+
+export function groupAndSortSubscriptions(subscriptions: Channel[]) {
 
     const slugger = new GithubSlugger();
 
-    const groupedSubs = camelcaseKeys(subscriptions).reduce((accum, channel) => {
+    const initialValue: CategoryMap = {};
+
+    const groupedSubs = subscriptions.reduce((accum, channel: Channel) => {
 
         if (!accum[channel.category.title]) {
             accum[channel.category.title] = [];
@@ -48,7 +79,7 @@ export function groupAndSortSubscriptions(subscriptions) {
 
         return accum;
 
-    }, {});
+    }, initialValue);
 
     const sortedGroups = Object.keys(groupedSubs)
         .sort()

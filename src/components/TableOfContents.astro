@@ -1,11 +1,17 @@
 ---
+import type { MarkdownHeading } from 'astro';
+
+export interface Props {
+    headings: MarkdownHeading[];
+    depth?: number;
+}
+
 const {
     headings,
     depth = 2,
 } = Astro.props;
 
 const topLevel = headings.filter((heading) => heading.depth === depth);
-
 ---
 
 <ul class="list-unstyled">

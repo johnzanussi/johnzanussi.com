@@ -65,8 +65,8 @@ const socialLinksCount = socialLinks.length - 1;
                     src="assets/img-john-zanussi-kiddo.jpg"
                     alt="portrait of John Zanussi wearing sunglasses with his daughter on his shoulders"
                     class="rounded-circle shadow img-fluid"
-                    width="250"
-                    height="250"
+                    width={250}
+                    height={250}
                     loading="eager"
                     widths={[125, 250, 500]}
                 />
@@ -178,17 +178,19 @@ const socialLinksCount = socialLinks.length - 1;
 const handleNavWindowResize = () => {
 
     const nav = document.getElementById('site-nav');
-    const offset = Number(getComputedStyle(nav).top.replace(/[^\d]+/, ''));
 
-    const isStatic = document.documentElement.clientHeight < nav.offsetHeight + offset;
+    if (nav) {
 
-    nav.classList.toggle('position-relative', isStatic);
+        const offset = Number(getComputedStyle(nav).top.replace(/[^\d]+/, ''));
+
+        const isStatic = document.documentElement.clientHeight < nav.offsetHeight + offset;
+
+        nav.classList.toggle('position-relative', isStatic);
+
+    }
 
 };
 
-window.addEventListener('DOMContentLoaded', () => {
-    handleNavWindowResize();
-});
-
+window.addEventListener('DOMContentLoaded', handleNavWindowResize);
 window.addEventListener('resize', handleNavWindowResize);
 </script>

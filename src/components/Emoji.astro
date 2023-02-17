@@ -1,4 +1,11 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'span'> {
+    label?: string;
+    e?: string;
+}
+
 import { emojiToName } from 'gemoji';
 const { label, e, ...props } = Astro.props;
 

@@ -1,28 +1,29 @@
 ---
 import Image from '@components/Image.astro';
 
-const { alt, ...props } = Astro.props;
+const { src, alt, ...props } = Astro.props;
 
-const [altText, noDivWrap = false] = alt.split(' noDivWrap');
+const [altText, noDivWrap = false] = alt ? alt.split(' noDivWrap') : [alt];
 
 const imgProps = {
-    class: 'img-fluid',
+    src,
     alt: altText,
+    class: 'img-fluid',
     widths: [576, 768, 992, 1200, 1400, 1600],
     ...props,
 };
 ---
 
 {noDivWrap && (
+    // @ts-ignore
     <Image {...imgProps} />
 )}
 
 {!noDivWrap && (
 
     <div class="mb-4">
-
+        {/* @ts-ignore */}
         <Image {...imgProps} />
-
     </div>
 
 )}

@@ -1,4 +1,10 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'div'> {
+    value: string;
+}
+
 import Icon from '@components/Icon.astro';
 const { class: className, ...props } = Astro.props;
 
@@ -8,11 +14,13 @@ import '@styles/copy-to-clipboard.scss';
 <script>
 import '@github/clipboard-copy-element';
 document.addEventListener('clipboard-copy', (event) => {
-    const button = event.target;
-    button.classList.add('copied');
-    setTimeout(() => {
-        button.classList.remove('copied');
-    }, 3000);
+    const button = event.target as HTMLElement;
+    if (button) {
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.classList.remove('copied');
+        }, 3000);
+    }
 });
 </script>
 

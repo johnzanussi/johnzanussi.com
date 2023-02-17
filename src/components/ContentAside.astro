@@ -1,4 +1,10 @@
 ---
+import type { MarkdownHeading } from 'astro';
+
+export interface Props {
+    headings: MarkdownHeading[];
+}
+
 import BackToTop from '@components/BackToTop.astro';
 import TableOfContents from '@components/TableOfContents.astro';
 
@@ -23,6 +29,7 @@ const { headings } = Astro.props;
 </aside>
 
 <script>
+// @ts-ignore
 import scrollSpy from 'simple-scrollspy';
 scrollSpy('.aside-content nav', {
     sectionClass: '.content-container section',

@@ -1,4 +1,14 @@
 ---
+interface Product {
+    id: string;
+    title: string;
+    link: string;
+}
+
+export interface Props {
+    products: Product[];
+}
+
 import Icon from '@components/Icon.astro';
 import Link from '@components/Link.astro';
 
@@ -13,7 +23,7 @@ const { products } = Astro.props;
 
             <Link
                 id={id}
-                href={link}a
+                href={link}
                 class="list-group-item list-group-item-action d-flex gap-3 link-reset"
             >
                 <img

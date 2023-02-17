@@ -4,9 +4,15 @@ import { defineCollection, z } from 'astro:content';
 
 // Pages
 const pageCollection = defineCollection({
-    schmea: z.object({
+    schema: z.object({
         title: z.string(),
         excerpt: z.string().nullable(),
+        coverImage: z.object({
+            url: z.string(),
+            width: z.number(),
+            height: z.number(),
+        }),
+        draft: z.boolean().optional(),
     }),
 });
 

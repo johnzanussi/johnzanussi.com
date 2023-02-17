@@ -28,10 +28,15 @@
  *     },
  * ]
  *
- * @param  {Array} unsorted     Array of objects to sort
- * @param  {String} field       The field to sort on
- * @return {Array}              Sorted array
+ * @param  unsorted @type {ArrayObject[]}      Array of objects to sort
+ * @param  field    @type {string}             The field to sort on
+ * @returns         @type {ArrayObject[]}      Sorted array of objects
  */
-export const alphaSortByObjectField = (unsorted, field) => {
+type ArrayObject = Record<string, any>;
+
+export function alphaSortByObjectField<Type extends ArrayObject>(
+    unsorted: Type[],
+    field: keyof Type
+): Type[] {
     return unsorted.sort((a, b) => a[field].localeCompare(b[field]));
-};
+}

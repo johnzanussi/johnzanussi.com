@@ -6,8 +6,10 @@
             "@assets/*": ["src/assets/*"],
             "@components/*": ["src/components/*"],
             "@layouts/*": ["src/layouts/*"],
+            "@scripts/*": ["src/scripts/*"],
             "@styles/*": ["src/styles/*"],
             "@utils/*": ["src/utils/*"]
-        }
+        },
+        "importsNotUsedAsValues": "error"
     }
 }

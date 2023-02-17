@@ -1,4 +1,10 @@
 ---
+export interface Props {
+    id: string;
+    url: string;
+    title: string;
+}
+
 const { id, url, title } = Astro.props;
 ---
 
@@ -15,23 +21,29 @@ const { id, url, title } = Astro.props;
 />
 
 <script>
+/* global FastCommentsUI */
 const comments = document.getElementById('fastcomments');
 
-const getConfig = (theme) => ({
-    tenantId: 'TuZHgHCUlVl',
-    urlId: comments.dataset.id,
-    url: comments.dataset.url,
-    pageTitle: comments.dataset.title,
-    hasDarkBackground: theme === 'dark',
-});
+if (comments !== null) {
 
-/* global FastCommentsUI */
-const fastComments = FastCommentsUI(
-    comments,
-    getConfig(localStorage.getItem('theme'))
-);
+    const getConfig = (theme: string | null) => ({
+        tenantId: 'TuZHgHCUlVl',
+        urlId: comments.dataset.id,
+        url: comments.dataset.url,
+        pageTitle: comments.dataset.title,
+        hasDarkBackground: theme === 'dark',
+    });
 
-document.addEventListener('theme', (event) => {
-    fastComments.update(getConfig(event.detail));
-}, false);
+    // @ts-ignore
+    const fastComments = FastCommentsUI(
+        comments,
+        getConfig(localStorage.getItem('theme'))
+    );
+
+    document.addEventListener('theme', (event) => {
+        const customEvent = event as CustomEvent;
+        fastComments.update(getConfig(customEvent.detail));
+    }, false);
+
+}
 </script>

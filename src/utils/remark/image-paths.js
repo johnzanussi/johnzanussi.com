@@ -1,5 +1,5 @@
 import { visit } from 'unist-util-visit';
-import { getItemImagePath } from '../images.js';
+import { getItemImagePath } from '../images';
 
 /**
  * This allows mdx files to use shortcuts
