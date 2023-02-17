@@ -40,7 +40,7 @@ const ogImageSrc = await getRenderedImage(
 const metadata = {
     title,
     description: excerpt,
-    image: absoluteUrl(ogImageSrc),
+    image: absoluteUrl(ogImageSrc || ''),
 };
 ---
 

@@ -1,4 +1,8 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+
+export type Props = HTMLAttributes<'div'>;
+
 import ThemeToggle from '@components/ThemeToggle.astro';
 import Icon from '@components/Icon.astro';
 
@@ -38,16 +42,19 @@ const { class: className } = Astro.props;
 </div>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('button[data-toggle="collapse"]');
-    buttons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const isExpanded = button.getAttribute('aria-expanded') === 'true';
-            const toggleElm = document.querySelector(button.dataset.target);
-            button.setAttribute('aria-expanded', !isExpanded);
-            button.classList.toggle('collapsed', !isExpanded);
-            toggleElm.classList.toggle('show', !isExpanded);
-        });
-    });
+import onClick from '@scripts/onClick';
+onClick('button[data-toggle="collapse"]', (element) => {
+
+    const toggleElm = document.querySelector(element.dataset.target || '');
+
+    if (element && toggleElm) {
+
+        const isExpanded = element.getAttribute('aria-expanded') === 'true';
+
+        element.setAttribute('aria-expanded', (!isExpanded).toString());
+        element.classList.toggle('collapsed', !isExpanded);
+        toggleElm.classList.toggle('show', !isExpanded);
+
+    }
 });
 </script>

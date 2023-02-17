@@ -1,4 +1,21 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+
+// @TODO: Move this to collections.ts
+interface Post {
+    isPrevious: boolean;
+    slug: string;
+    data: {
+        title: string;
+        url: string;
+    };
+}
+
+export interface Props extends HTMLAttributes<'nav'> {
+    posts: Post[];
+    showLabels?: boolean;
+}
+
 import { getPostUrl } from '@utils/collections';
 
 import Icon from '@components/Icon.astro';

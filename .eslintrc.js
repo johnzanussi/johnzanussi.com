@@ -6,6 +6,7 @@ module.exports = {
     },
     extends: [
         'eslint:recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:astro/recommended',
     ],
@@ -33,6 +34,9 @@ module.exports = {
         },
     ],
     rules: {
+        '@typescript-eslint/ban-ts-comment': 'warn',
+        '@typescript-eslint/no-unused-vars': 'error',
+        'no-unused-vars': 'off',
         'linebreak-style': [
             'error',
             'unix',

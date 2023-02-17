@@ -1,5 +1,5 @@
 ---
-import Emoji from '@components/Emoji.astro';
+import InterestsList from '@components/InterestsList.astro';
 
 const interests = [
     {
@@ -12,7 +12,6 @@ const interests = [
             {
                 title: '3D Printing',
                 emoji: '🖨️',
-                label: 'printer'
             },
             {
                 title: 'Home Improvement/DIY',
@@ -65,32 +64,4 @@ const interests = [
     }
 ];
 ---
-<div class="row">
-
-    {interests.map(({ title, items }) => (
-        <div class="col-6">
-
-            <h3>
-                {title}
-            </h3>
-
-            <ul class="list-unstyled">
-
-                {items.map(({ emoji, title, sub }) => (
-
-                    <li>
-
-                        <Emoji class="fs-3" e={emoji} /> {title}
-
-                        {sub && <small class="text-body-secondary">{sub}</small>}
-
-                    </li>
-
-                ))}
-
-            </ul>
-
-        </div>
-    ))}
-
-</div>
+<InterestsList interests={interests} />

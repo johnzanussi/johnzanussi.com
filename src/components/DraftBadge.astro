@@ -1,4 +1,8 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+
+export type Props = HTMLAttributes<'span'>;
+
 const { class: className = '' } = Astro.props;
 ---
 <span class:list={[

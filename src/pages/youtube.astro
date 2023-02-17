@@ -24,7 +24,7 @@ const subscriptions = groupAndSortSubscriptions(data);
         slot="header"
         class="display-3"
     >
-        <Icon icon="fa6-brands:youtube" /> YouTube Subscriptions
+        <Icon icon="fa6-brands:youtube" label="YouTube Logo" /> YouTube Subscriptions
     </h1>
 
     <div
@@ -39,7 +39,7 @@ const subscriptions = groupAndSortSubscriptions(data);
             of addressing these requests. The following list is not all of
             the channels I subscribe to, but these are the channels that I
             watch regularly. The channels with the{' '}
-            <Icon icon="fa6-solid:bell" title="bell icon" /> icon are
+            <Icon icon="fa6-solid:bell" label="bell icon" /> icon are
             channels that I receive notifications when new videos are
             posted.
         </p>
@@ -73,7 +73,7 @@ const subscriptions = groupAndSortSubscriptions(data);
                                 {hasNotifications && (
                                     <Icon
                                         icon="fa6-solid:bell"
-                                        title="bell icon"
+                                        label="bell icon"
                                         class="ms-1 text-warning opacity-75"
                                     />
                                 )}

@@ -67,7 +67,7 @@ const metadata = {
     title,
     url: postUrl,
     description: excerpt,
-    image: absoluteUrl(ogImageSrc),
+    image: absoluteUrl(ogImageSrc || ''),
     ogType: 'article',
     publishDate: date,
     breadcrumbs: [

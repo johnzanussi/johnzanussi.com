@@ -1,6 +1,12 @@
 ---
-import { getPostUrl } from '@utils/collections.js';
-import { getItemImagePath } from '@utils/images.js';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+    post: CollectionEntry<'posts'>;
+}
+
+import { getPostUrl } from '@utils/collections';
+import { getItemImagePath } from '@utils/images';
 
 import DateFormat from '@components/DateFormat.astro';
 import DraftBadge from '@components/DraftBadge.astro';
@@ -63,7 +69,7 @@ const {
     </div>
 
     <div class="card-img ratio ratio-16x9 position-relative order-0 order-xl-1 ms-xl-3">
-
+        {/* @ts-ignore */}
         <Image
             src={getItemImagePath(slug, coverImage.url)}
             alt={`Cover image for ${title}`}

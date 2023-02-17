@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Interest {
+    title: string;
+    emoji: string;
+    sub?: string;
+}
+
+interface InterestGroup {
+    title: string;
+    items: Interest[];
+}
+
+export interface Props extends HTMLAttributes<'div'> {
+    interests: InterestGroup[];
+}
+
+import Emoji from '@components/Emoji.astro';
+
+const { interests, ...props } = Astro.props;
+---
+<div
+    class="row"
+    {...props}
+>
+    {interests.map(({ title, items }) => (
+
+        <div class="col-6">
+
+            <h3>
+                {title}
+            </h3>
+
+            <ul class="list-unstyled">
+
+                {items.map(({ emoji, title, sub }) => (
+
+                    <li>
+
+                        <Emoji class="fs-3" e={emoji} /> {title}
+
+                        {sub && <small class="text-body-secondary">{sub}</small>}
+
+                    </li>
+
+                ))}
+
+            </ul>
+
+        </div>
+    ))}
+
+</div>

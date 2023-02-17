@@ -1,4 +1,12 @@
 ---
+export interface Props {
+    code: string;
+    lang?: string;
+    filename?: string;
+    url?: string;
+    title?: string;
+}
+
 import { Prism } from '@astrojs/prism';
 
 import CopyToClipboard from '@components/CopyToClipboard.astro';

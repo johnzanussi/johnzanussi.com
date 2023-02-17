@@ -1,9 +1,12 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+
+export type Props = HTMLAttributes<'a'>;
+
 import Icon from '@components/Icon.astro';
 
 const { class: className = '', ...props } = Astro.props;
 ---
-
 <a
     href="#"
     class:list={[
@@ -17,14 +20,12 @@ const { class: className = '', ...props } = Astro.props;
 </a>
 
 <script>
-const backToTop = document.querySelectorAll('.btn-back-to-top');
-backToTop.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
+import onClick from '@scripts/onClick';
+onClick('.btn-back-to-top', (_, event) => {
+    event.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
     });
 });
 </script>

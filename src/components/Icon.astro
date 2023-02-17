@@ -1,8 +1,14 @@
 ---
+export interface Props {
+    icon: string;
+    class?: string;
+    label?: string;
+}
+
 // https://iconify.design/
 import { Icon } from 'astro-iconify';
 
-const { class: className, icon } = Astro.props;
+const { class: className, icon, label } = Astro.props;
 
 const classes = [
     className,
@@ -13,4 +19,5 @@ const classes = [
 <Icon
     name={icon}
     class:list={classes}
+    aria-label={label || `${icon.split(':').pop()} icon`}
 />

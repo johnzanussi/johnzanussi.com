@@ -16,12 +16,12 @@ const { head, body } = tags;
 
 const isDev = import.meta.env.MODE === 'development';
 ---
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="darkreader-lock" />
 <meta name="generator" content={Astro.generator} />
 <Fragment set:html={head} />
 {!isDev && (

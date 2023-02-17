@@ -1,4 +1,23 @@
 ---
+interface Role {
+    timeframe: string;
+    title: string;
+}
+
+interface Era {
+    color: string;
+    colorDark?: string;
+    image: string;
+    link: string;
+    roles: Role[];
+    startYear: string;
+    title: string;
+}
+
+export interface Props {
+    timeline: Era[];
+}
+
 import Image from '@components/Image.astro';
 import Link from '@components/Link.astro';
 import Icon from '@components/Icon.astro';
@@ -42,8 +61,8 @@ const { timeline } = Astro.props;
                         <Image
                             src={`src/assets/pages/about/job-icons/${image}`}
                             alt={title}
-                            width="50"
-                            height="50"
+                            width={50}
+                            height={50}
                             class="era-bullet rounded-circle position-relative z-2 me-3 shadow"
                         />
                     </Link>

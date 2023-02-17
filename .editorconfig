@@ -12,7 +12,7 @@ use_tab_stops = true
 
 # Matches multiple files with brace expansion notation
 # Set default charset
-[*.{js,py}]
+[*.{js,ts,astro}]
 charset = utf-8
 
 [*.{md,mdx}]

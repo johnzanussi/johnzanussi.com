@@ -1,7 +1,10 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+export type Props = HTMLAttributes<'a'>;
+
 const { href, ...props } = Astro.props;
 
-if (href?.startsWith('http')) {
+if (href?.toString().startsWith('http')) {
     props.target = '_blank';
     props.rel = 'noopener noreferrer';
 }
