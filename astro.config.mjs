@@ -59,7 +59,12 @@ export default defineConfig({
         image({
             serviceEntryPoint: '@astrojs/image/sharp',
         }),
-        sitemap(),
+        sitemap({
+            serialize(item) {
+                item.url = item.url.replace(/\/$/, '');
+                return item;
+            },
+        }),
         robotsTxt(),
         purgecss(),
         compress({
