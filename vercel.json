@@ -1,4 +1,5 @@
 {
+    "trailingSlash": false,
     "rewrites": [
         {
             "source": "/rk6m8wh2a.js",
