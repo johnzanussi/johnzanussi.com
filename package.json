@@ -72,7 +72,7 @@
     "he": "^1.2.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2",
-    "sass": "^1.58.2",
+    "sass": "^1.58.3",
     "unist-util-find-after": "^4.0.1",
     "unist-util-visit": "^4.1.2",
     "unist-util-visit-parents": "^5.1.3"
