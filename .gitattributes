@@ -2,4 +2,4 @@
 
 # Tell linguist to ignore xsl files (RSS stylesheet) so XSLT stops
 # showing up as a top language on GitHub.com
-*.xsl linguist-detectable=false
+*.xsl -linguist-detectable
