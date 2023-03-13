@@ -24,7 +24,7 @@
     "update": "npx npm-check-updates"
   },
   "dependencies": {
-    "@astrojs/image": "^0.15.1",
+    "@astrojs/image": "^0.16.0",
     "@astrojs/mdx": "^0.17.2",
     "@astrojs/prism": "^2.0.0",
     "@astrojs/rss": "^2.1.1",
