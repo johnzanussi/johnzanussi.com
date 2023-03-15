@@ -11,9 +11,10 @@ import vercel from '@astrojs/vercel/static';
 
 // Remark
 import remarkImagePaths from './src/utils/remark/image-paths';
-import { codeBlockComponent, remarkCodeBlocks } from './src/utils/remark/code-blocks';
 import remarkReadingtime from './src/utils/remark/reading-time';
 import remarkSectionize from './src/utils/remark/sectionize';
+
+import MDXCodeBlocks, { mdxCodeBlockAutoImport } from 'astro-mdx-code-blocks';
 
 // Rehype
 import addClasses from 'rehype-add-classes';
@@ -24,7 +25,11 @@ const currentEnv = process.env.VERCEL_ENV ? process.env.VERCEL_ENV : 'local';
 
 const envVariables = {
     local: () => {
-        const { SITE_URL = '', PORT = 0 } = loadEnv(import.meta.env.MODE, process.cwd(), '');
+        const { SITE_URL = '', PORT = 0 } = loadEnv(
+            import.meta.env.MODE,
+            process.cwd(),
+            ''
+        );
         return {
             url: SITE_URL,
             port: Number(PORT),
@@ -51,10 +56,9 @@ export default defineConfig({
     adapter: vercel(),
     integrations: [
         AutoImport({
-            imports: [
-                codeBlockComponent,
-            ],
+            imports: [mdxCodeBlockAutoImport('src/components/CodeBlock.astro')],
         }),
+        MDXCodeBlocks(),
         mdx(),
         image({
             serviceEntryPoint: '@astrojs/image/sharp',
@@ -73,12 +77,7 @@ export default defineConfig({
     ],
     markdown: {
         syntaxHighlight: false,
-        remarkPlugins: [
-            remarkSectionize,
-            remarkCodeBlocks,
-            remarkImagePaths,
-            remarkReadingtime,
-        ],
+        remarkPlugins: [remarkSectionize, remarkImagePaths, remarkReadingtime],
         rehypePlugins: [
             rehypeAccessibleEmojis,
             [
@@ -94,5 +93,5 @@ export default defineConfig({
             ],
         ],
         extendDefaultPlugins: true,
-    }
+    },
 });
