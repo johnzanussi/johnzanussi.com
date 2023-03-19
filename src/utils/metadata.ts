@@ -1,6 +1,31 @@
-import { MetadataGenerator } from 'metatags-generator';
+import {
+    MetadataGenerator,
+    MetatagsDocument,
+    OpengraphTypes,
+    Settings,
+} from 'metatags-generator';
+import { HtmlGenerator } from 'metatags-generator/lib/html-generator/generator';
+
 import merge from 'deepmerge';
 import { getScreenshotPath } from '@utils/images';
+
+type OpenGraphTypes = OpengraphTypes | 'website';
+
+type Metadata = {
+    title: string;
+    url: string;
+    ogType: OpenGraphTypes;
+    screenshot?: string;
+    image?: string;
+    description?: string;
+    breadcrumbs?: Breadcrumb[];
+    publishDate?: string;
+};
+
+type Breadcrumb = {
+    title: string;
+    url: string;
+};
 
 const NAME = 'John Zanussi';
 const URL = import.meta.env.SITE;
@@ -48,16 +73,16 @@ const meta = [
     {
         name: 'apple-mobile-web-app-title',
         content: NAME,
-    }
+    },
 ];
 
-const defaultData = {
+const defaultData: Metadata = {
     title: NAME,
     url: URL,
     ogType: 'website',
 };
 
-export function generateTags(metadata) {
+export function generateTags(metadata: Metadata) {
     const data = merge(defaultData, metadata);
 
     if (data.screenshot) {
@@ -65,8 +90,9 @@ export function generateTags(metadata) {
     }
 
     // https://webcode.tools/generators/open-graph/article
-    const generator = withStructuredData()
+    const generator = new MetadataGeneratorStructured()
         .configure(settings)
+        .setOpenGraph(data.ogType)
         .setIcons(icons)
         .setCanonical(data.url)
         .setProjectMeta({
@@ -79,12 +105,11 @@ export function generateTags(metadata) {
             image: data.image,
             locale: 'en_US',
         })
-        .openGraphData(data.ogType)
         .setTwitterMeta({
             card: 'summary_large_image',
-        });
+        }) as unknown as MetadataGeneratorStructured;
 
-    meta.forEach(meta => generator.add('meta', meta));
+    meta.forEach((meta) => generator.add('meta', meta));
 
     if (data.ogType === 'article') {
         generator.add('meta', {
@@ -126,13 +151,58 @@ export function generateTags(metadata) {
     return tags;
 }
 
-// https://github.com/Alivekeep/metatags-generator/blob/master/src/metadata-generator.ts
-function withStructuredData(instance = new MetadataGenerator()) {
-    instance.setStructuredData = (data) => {
-        const generatedData = instance.htmlGenerator.generateJSONLD(data);
-
-        instance.elementsOfBody.set(generatedData, generatedData);
+type StructuredData = {
+    '@type': 'BlogPosting';
+    author: {
+        '@type': string;
+        name: string;
     };
+    headline: string;
+    datePublished: string;
+};
 
-    return instance;
+// https://github.com/Alivekeep/metatags-generator/blob/master/src/metadata-generator.ts
+class MetadataGeneratorStructured extends MetadataGenerator {
+    public structuredData: Map<string, string>;
+
+    constructor() {
+        super();
+        this.structuredData = new Map();
+    }
+
+    configure(settings?: Settings): MetadataGeneratorStructured {
+        super.configure(settings);
+        return this;
+    }
+
+    setOpenGraph(
+        type: OpenGraphTypes,
+        duration?: number
+    ): MetadataGeneratorStructured {
+        if (type === 'website') {
+            this.add('meta', { property: 'og:type', content: type });
+        } else {
+            super.openGraphData(type, duration);
+        }
+        return this;
+    }
+
+    setStructuredData(data: StructuredData) {
+        const htmlgenerator = new HtmlGenerator();
+        const generatedData = htmlgenerator.generateJSONLD(data, {});
+
+        this.structuredData.set(generatedData, generatedData);
+    }
+
+    build(): MetatagsDocument {
+        const document = super.build();
+
+        const sData = Array.from(this.structuredData.values())
+            .sort()
+            .join('\n');
+
+        document.body += sData;
+
+        return document;
+    }
 }

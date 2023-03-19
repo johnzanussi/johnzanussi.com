@@ -26,7 +26,7 @@ const postCollection = defineCollection({
             width: z.number(),
             height: z.number(),
         }),
-        date: z.string().transform(date => new Date(date)),
+        date: z.string().transform((date) => new Date(date)),
         hasAmazonLinks: z.boolean().optional(),
         hiddenIntro: z.boolean().optional(),
         draft: z.boolean().optional(),
@@ -37,3 +37,5 @@ export const collections = {
     pages: pageCollection,
     posts: postCollection,
 };
+
+export type Collection = keyof typeof collections;

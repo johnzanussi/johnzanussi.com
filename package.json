@@ -64,7 +64,6 @@
     "fastcomments-typescript": "^2.0.13",
     "gemoji": "^8.0.0",
     "github-slugger": "^2.0.0",
-    "hast-util-to-string": "^2.0.0",
     "he": "^1.2.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.0",
