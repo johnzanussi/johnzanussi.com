@@ -1,18 +1,10 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-// @TODO: Move this to collections.ts
-interface Post {
-    isPrevious: boolean;
-    slug: string;
-    data: {
-        title: string;
-        url: string;
-    };
-}
+import type { SiblingItems } from '@utils/collections';
 
 export interface Props extends HTMLAttributes<'nav'> {
-    posts: Post[];
+    posts: SiblingItems<'posts'>[];
     showLabels?: boolean;
 }
 
@@ -31,9 +23,10 @@ const { posts, showLabels = true, ...props } = Astro.props;
 
     <ul class="list-unstyled row my-4 post-pagination">
 
-        {posts.map(({ isPrevious, data, slug }) => {
+        {posts.map(({ isPrevious, item }) => {
 
-            const { title, url } = data;
+            const { data, slug } = item;
+            const { title } = data;
             const label = isPrevious ? 'Previous' : 'Next';
             const icon = `fa6-solid:arrow-${isPrevious ? 'left' : 'right'}`;
 
@@ -66,7 +59,7 @@ const { posts, showLabels = true, ...props } = Astro.props;
                         </div>
 
                         <Link
-                            href={url || getPostUrl(slug)}
+                            href={getPostUrl(slug)}
                             class:list={[
                                 'stretched-link lh-sm',
                                 {

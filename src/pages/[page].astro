@@ -1,5 +1,5 @@
 ---
-import { getItems } from '@utils/collections';
+import { getCollection } from 'astro:content';
 import { getItemImagePath, getRenderedImage } from '@utils/images';
 import { absoluteUrl } from '@utils/urls';
 
@@ -9,7 +9,7 @@ import Markdown from '@components/Markdown.astro';
 
 export async function getStaticPaths() {
 
-    const pages = await getItems('pages');
+    const pages = await getCollection('pages');
 
     return pages.map(page => ({
         params: {
