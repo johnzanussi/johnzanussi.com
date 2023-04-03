@@ -27,7 +27,7 @@
     "@astrojs/image": "^0.16.1",
     "@astrojs/mdx": "^0.18.1",
     "@astrojs/prism": "^2.1.1",
-    "@astrojs/rss": "^2.3.0",
+    "@astrojs/rss": "^2.3.2",
     "@astrojs/sitemap": "^1.2.1",
     "@astrojs/vercel": "^3.2.1",
     "@fontsource/inter": "^4.5.15",
