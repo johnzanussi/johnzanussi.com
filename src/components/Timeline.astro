@@ -69,16 +69,24 @@ const { timeline } = Astro.props;
 
                     <div>
 
-                        <Link
-                            href={link}
-                            class="era-title d-block fs-4 fw-bolder">
-                            {title}
-                            {' '}
-                            <Icon
-                                icon="fa-solid:external-link-alt"
-                                class="icon-link ms-1"
-                            />
-                        </Link>
+                        {link && (
+                            <Link
+                                href={link}
+                                class="era-title d-block fs-4 fw-bolder">
+                                {title}
+                                {' '}
+                                <Icon
+                                    icon="fa-solid:external-link-alt"
+                                    class="icon-link ms-1"
+                                />
+                            </Link>
+                        )}
+
+                        {!link && (
+                            <span class="era-title d-block fs-4 fw-bolder">
+                                {title}
+                            </span>
+                        )}
 
                         {roles.map(({ title, timeframe }) => (
 
