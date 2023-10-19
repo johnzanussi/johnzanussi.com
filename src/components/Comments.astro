@@ -34,7 +34,7 @@ if (comments !== null) {
         hasDarkBackground: theme === 'dark',
     });
 
-    // @ts-ignore
+    // @ts-expect-error: No type available for FastCommentsUI
     const fastComments = FastCommentsUI(
         comments,
         getConfig(localStorage.getItem('theme'))

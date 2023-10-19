@@ -1,31 +1,23 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z, type SchemaContext } from 'astro:content';
 
 // https://zod.dev/?id=primitives
 
 // Pages
 const pageCollection = defineCollection({
-    schema: z.object({
+    schema: ({ image }: SchemaContext) => z.object({
         title: z.string(),
         excerpt: z.string().nullable(),
-        coverImage: z.object({
-            url: z.string(),
-            width: z.number(),
-            height: z.number(),
-        }),
-        draft: z.boolean().optional(),
+        cover: image(),
+        draft: z.boolean().optional()
     }),
 });
 
 // Posts
 const postCollection = defineCollection({
-    schema: z.object({
+    schema: ({ image }: SchemaContext) => z.object({
         title: z.string(),
         excerpt: z.string().nullable(),
-        coverImage: z.object({
-            url: z.string(),
-            width: z.number(),
-            height: z.number(),
-        }),
+        cover: image(),
         date: z.string().transform((date) => new Date(date)),
         hasAmazonLinks: z.boolean().optional(),
         hiddenIntro: z.boolean().optional(),
@@ -33,9 +25,41 @@ const postCollection = defineCollection({
     }),
 });
 
+// YouTube Channels
+const ChannelSchema = z.object({
+    title: z.string(),
+    hasNotifications: z.boolean(),
+    channelId: z.string(),
+    category: z.object({
+        title: z.string(),
+    }).nullable(),
+});
+
+const CategoryChannelsSchema = z.object({
+    category: z.string(),
+    categorySlug: z.string(),
+    channels: z.array(ChannelSchema),
+});
+
+export type Channel = z.infer<typeof ChannelSchema>;
+export type CategoryChannels = z.infer<typeof CategoryChannelsSchema>;
+
+const youtubeChannelsCollection = defineCollection({
+    type: 'data',
+    schema: z.array(CategoryChannelsSchema)
+});
+
 export const collections = {
     pages: pageCollection,
     posts: postCollection,
+    youtube: youtubeChannelsCollection,
 };
+// type Foo = z.infer<typeof pageCollection>
 
-export type Collection = keyof typeof collections;
+// type KeysWithDateProperty<T> = {
+//     [K in keyof T]: "date" extends keyof T[K] ? K : never;
+// }[keyof T];
+
+// type CollectionsWithDateProperty = KeysWithDateProperty<typeof collections>;
+
+export type CollectionsWithDateProperty = 'posts';

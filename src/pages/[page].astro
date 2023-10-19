@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { getItemImagePath, getRenderedImage } from '@utils/images';
-import { absoluteUrl } from '@utils/urls';
+import { getImageSrc } from '@utils/images';
 
 import DividerLayout from '@layouts/DividerLayout.astro';
 import BackToTop from '@components/BackToTop.astro';
@@ -25,22 +24,19 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 const { Content } = await page.render();
 
-const { data, slug } = page;
+const { data } = page;
 
 const {
-    coverImage,
     excerpt,
     title,
 } = data;
 
-const ogImageSrc = await getRenderedImage(
-    getItemImagePath(slug, coverImage.url, 'pages')
-);
+const coverImageSrc = await getImageSrc(page.data.cover);
 
 const metadata = {
     title,
     description: excerpt,
-    image: absoluteUrl(ogImageSrc || ''),
+    image: coverImageSrc,
 };
 ---
 
@@ -58,7 +54,6 @@ const metadata = {
         <article class="content-container">
 
             <Markdown Content={Content} />
-
 
             <p class="py-5 text-center">
                 <BackToTop />

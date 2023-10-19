@@ -1,5 +1,5 @@
 ---
-import Image from '@components/Image.astro';
+import { Image } from 'astro:assets';
 import Icon from '@components/Icon.astro';
 
 import Link from '@components/Link.astro';
@@ -49,6 +49,8 @@ const socialLinks = [
 ];
 
 const socialLinksCount = socialLinks.length - 1;
+
+import imgJZ from '@assets/img-john-zanussi-kiddo.jpg';
 ---
 <nav
     data-bs-theme="dark"
@@ -62,7 +64,7 @@ const socialLinksCount = socialLinks.length - 1;
             <Link href="/" class="d-block">
 
                 <Image
-                    src="assets/img-john-zanussi-kiddo.jpg"
+                    src={imgJZ}
                     alt="portrait of John Zanussi wearing sunglasses with his daughter on his shoulders"
                     class="rounded-circle shadow img-fluid"
                     width={250}

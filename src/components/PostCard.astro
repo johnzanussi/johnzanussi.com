@@ -6,14 +6,15 @@ export interface Props {
 }
 
 import { getPostUrl } from '@utils/collections';
-import { getItemImagePath } from '@utils/images';
 
 import DateFormat from '@components/DateFormat.astro';
 import DraftBadge from '@components/DraftBadge.astro';
-import Image from '@components/Image.astro';
+import { Image } from 'astro:assets';
 import Link from '@components/Link.astro';
 
 const { post, ...props } = Astro.props;
+
+const { data: { cover } } = post;
 
 const { remarkPluginFrontmatter: data } = await post.render();
 
@@ -23,7 +24,6 @@ const {
     date,
     title,
     excerpt,
-    coverImage,
     draft,
     minutesRead,
 } = data;
@@ -69,12 +69,10 @@ const {
     </div>
 
     <div class="card-img ratio ratio-16x9 position-relative order-0 order-xl-1 ms-xl-3">
-        {/* @ts-ignore */}
         <Image
-            src={getItemImagePath(slug, coverImage.url)}
+            src={cover}
             alt={`Cover image for ${title}`}
             width={1600}
-            aspectRatio="16:9"
             widths={[428, 768, 1200, 1600]}
             class="rounded"
         />

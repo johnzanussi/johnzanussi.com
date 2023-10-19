@@ -1,5 +1,5 @@
-import { CollectionEntry, getCollection } from 'astro:content';
-import type { Collection } from '../content/config';
+import { type CollectionEntry, type ContentCollectionKey, getCollection } from 'astro:content';
+import type { CollectionsWithDateProperty } from '../content/config';
 
 const collectionUrls = {
     posts: '/posts',
@@ -8,53 +8,42 @@ const collectionUrls = {
 
 const isDev = import.meta.env.MODE === 'development';
 
-// This is temporary until I can figure out how to
-// better use `CollectionEntry` from `astro:content`
-type GenericItem = {
-    slug: string;
-    data: {
-        draft?: boolean;
-        date: string;
-    };
-};
-
 export const getItems = async (
-    collection: Collection,
+    collection: ContentCollectionKey,
     includeDrafts = isDev
 ) => {
     const draftFilter = !includeDrafts
-        ? (item: GenericItem) => !item.data.draft
+        ? (item: CollectionEntry<ContentCollectionKey>) => !item.data.draft
         : undefined;
 
     const items = await getCollection(collection, draftFilter);
 
-    return items as GenericItem[];
+    return items;
 };
 
-export const getItemUrl = (collection: Collection, slug: string) => {
+export const getItemUrl = (collection: ContentCollectionKey, slug: string) => {
     return `${collectionUrls[collection]}/${slug}`;
 };
 
-export const getCollectionUrl = (collection: Collection) => {
+export const getCollectionUrl = (collection: ContentCollectionKey) => {
     return `${collectionUrls[collection]}/`;
 };
 
 export const getPostUrl = (slug: string) => getItemUrl('posts', slug);
 
-export const getDateSortedCollection = async <T extends Collection>(
+export const getDateSortedCollection = async <T extends CollectionsWithDateProperty>(
     collection: T
 ) => {
-    const items = await getItems(collection);
+    const items = await getItems(collection) as CollectionEntry<T>[];
 
-    const sortedCollection = items.sort(
-        (itemA: GenericItem, itemB: GenericItem) =>
-            Date.parse(itemB.data.date) - Date.parse(itemA.data.date)
-    );
+    const sortFunc = (itemA: CollectionEntry<T>, itemB: CollectionEntry<T>) => {
+        return itemB.data.date.getTime() - itemA.data.date.getTime();
+    };
 
-    return sortedCollection as CollectionEntry<T>[];
+    return items.sort(sortFunc);
 };
 
-export type SiblingItems<T extends Collection> = {
+export type SiblingItems<T extends ContentCollectionKey> = {
     isPrevious: boolean;
     item: CollectionEntry<T>;
 };
@@ -63,9 +52,9 @@ export type SiblingItems<T extends Collection> = {
  * Get the previous and next items if
  * available for a given item
  */
-export const getSiblingItems = async <T extends Collection>(
+export const getSiblingItems = async <T extends ContentCollectionKey>(
     collection: T,
-    item: GenericItem
+    item: CollectionEntry<T>
 ) => {
     // Setup return value
     const siblingItems: SiblingItems<T>[] = [];
@@ -75,7 +64,7 @@ export const getSiblingItems = async <T extends Collection>(
 
     // Find the index for the given item
     const itemIndex = allItems.findIndex(
-        (allItem: GenericItem) => allItem.slug === item.slug
+        (allItem: CollectionEntry<ContentCollectionKey>) => allItem.slug === item.slug
     );
 
     // If the item was found

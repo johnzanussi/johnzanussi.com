@@ -52,7 +52,7 @@ onClick('button[data-toggle="collapse"]', (element) => {
         const isExpanded = element.getAttribute('aria-expanded') === 'true';
 
         element.setAttribute('aria-expanded', (!isExpanded).toString());
-        element.classList.toggle('collapsed', !isExpanded);
+        element.classList.toggle('collapsed', isExpanded);
         toggleElm.classList.toggle('show', !isExpanded);
 
     }

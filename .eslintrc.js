@@ -36,6 +36,7 @@ module.exports = {
     rules: {
         '@typescript-eslint/ban-ts-comment': 'warn',
         '@typescript-eslint/no-unused-vars': 'error',
+        '@typescript-eslint/triple-slash-reference': 'off',
         'no-unused-vars': 'off',
         'linebreak-style': [
             'error',

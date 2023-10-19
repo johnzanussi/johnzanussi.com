@@ -2,7 +2,6 @@ import { loadEnv } from 'vite';
 import { defineConfig } from 'astro/config';
 import AutoImport from 'astro-auto-import';
 import compress from 'astro-compress';
-import image from '@astrojs/image';
 import mdx from '@astrojs/mdx';
 import purgecss from 'astro-purgecss';
 import robotsTxt from 'astro-robots-txt';
@@ -10,7 +9,6 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel/static';
 
 // Remark
-import remarkImagePaths from './src/utils/remark/image-paths';
 import remarkReadingtime from './src/utils/remark/reading-time';
 import remarkSectionize from './src/utils/remark/sectionize';
 
@@ -60,9 +58,6 @@ export default defineConfig({
         }),
         MDXCodeBlocks(),
         mdx(),
-        image({
-            serviceEntryPoint: '@astrojs/image/sharp',
-        }),
         sitemap({
             serialize(item) {
                 item.url = item.url.replace(/\/$/, '');
@@ -77,7 +72,10 @@ export default defineConfig({
     ],
     markdown: {
         syntaxHighlight: false,
-        remarkPlugins: [remarkSectionize, remarkImagePaths, remarkReadingtime],
+        remarkPlugins: [
+            remarkSectionize,
+            remarkReadingtime
+        ],
         rehypePlugins: [
             rehypeAccessibleEmojis,
             [
@@ -86,7 +84,7 @@ export default defineConfig({
                     h2: 'mt-4 mb-3 pb-2 border-bottom',
                     h3: 'mt-4',
                     h4: 'mt-3',
-                    h5: 'mt-3 text-emphasis',
+                    h5: 'mt-3 text-body-emphasis',
                     iframe: 'mb-4',
                     pre: 'code-block rounded-md-2 border p-4',
                 },

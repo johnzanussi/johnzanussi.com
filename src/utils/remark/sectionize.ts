@@ -4,7 +4,7 @@ import { visitParents } from 'unist-util-visit-parents';
 import Slugger from 'github-slugger';
 
 import type { Transformer } from 'unified';
-import type { Node, Parent } from 'unist';
+import type { Parent } from 'unist';
 import type { Heading } from 'mdast';
 
 const slugs = new Slugger();
@@ -15,10 +15,9 @@ export default function remarkSectionize(): Transformer {
         const depth = start.depth;
         const parent = ancestors[ancestors.length - 1];
 
-        const isEnd = (node: Node) =>
-            node.type === 'heading' || node.type === 'export';
-
-        const end = findAfter(parent, start, isEnd);
+        const end = findAfter(parent, start, (node) => {
+            return node.type === 'heading' || node.type === 'export';
+        });
 
         if (!end) {
             return;
