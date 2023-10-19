@@ -1,12 +1,11 @@
 import type { APIContext } from 'astro';
 import type { CollectionEntry } from 'astro:content';
-
 import rss from '@astrojs/rss';
-import { getDateSortedCollection, getPostUrl } from '@utils/collections';
-import { getItemImagePath, getRenderedImage } from '@utils/images';
-import { absoluteUrl } from '@utils/urls';
 
-export async function get(context: APIContext) {
+import { getDateSortedCollection, getPostUrl } from '@utils/collections';
+import { getImageSrc } from '@utils/images';
+
+export async function GET(context: APIContext) {
 
     const posts = await getDateSortedCollection('posts');
 
@@ -14,14 +13,12 @@ export async function get(context: APIContext) {
 
         const url = getPostUrl(post.slug);
 
-        const coverImage = getItemImagePath(post.slug, post.data.coverImage.url, 'posts');
-
         const imageOptions = {
             width: 200,
             height: 112,
         };
 
-        const image = await getRenderedImage(coverImage, imageOptions);
+        const coverImageSrc = await getImageSrc(post.data.cover);
 
         return {
             title: post.data.title,
@@ -30,7 +27,7 @@ export async function get(context: APIContext) {
             link: url,
             customData: [
                 // `<atom:link href="${url}" rel="standout"/>`,
-                `<media:content medium="image" url="${absoluteUrl(image || '')}" width="${imageOptions.width}" height="${imageOptions.height}" />`,
+                `<media:content medium="image" url="${coverImageSrc}" width="${imageOptions.width}" height="${imageOptions.height}" />`,
             ].join(''),
         };
 

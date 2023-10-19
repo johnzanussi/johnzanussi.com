@@ -1,10 +1,7 @@
 ---
 title: Creating Christmas Light Effect with WLED
 excerpt: Using open-source WLED library to recreate a traditional repeating color Christmas string light effect
-coverImage:
-    url: ~photo-christmas-led-strip-wled-logo.jpg
-    width: 1600
-    height: 900
+cover: "@assets/posts/wled-christmas-lights/photo-christmas-led-strip-wled-logo.jpg"
 date: '2021-12-09'
 ---
 
@@ -12,7 +9,7 @@ I recently started using WLED for a few DIY projects around the house. One of th
 
 [WLED](https://kno.wled.ge/) is an amazing open-source library for controlling individually addressable LEDS like the SK6812s. There are dozens of baked in effects but to my surprise there isn't one to mimic Christmas lights. The types of lights I am trying to mimic looks something like this.
 
-![Example of multi-color Christmas string lights](~photo-multi-color-christmas-string-lights.jpg)
+![Example of multi-color Christmas string lights](@assets/posts/wled-christmas-lights/photo-multi-color-christmas-string-lights.jpg)
 
 Repeating colors spaced apart by a few inches. After some searching around I found some hints but could not find a detailed example to achieve this effect. I was able to figure it out which is why I'm writing this post. The key to get this working is to create a segment for each color you want to display. From there you'll need to do some simple math to set the segment fields. This should theoretically work with as many colors as you'd like but I haven't tested it with other values.
 
@@ -105,20 +102,20 @@ Once your segments are created and values populated you can click each "Segment"
 
 Here is what my 5 new segments look like with labels added to show which color they control.
 
-![Screen shot of five segments in WLED interface](~wled-christmas-light-segment-settings.jpg)
+![Screen shot of five segments in WLED interface](@assets/posts/wled-christmas-lights/wled-christmas-light-segment-settings.jpg)
 
 
 ### Preset
 Additionally you can turn on all your newly created Segments and create a Preset and select the "Use Current State" checkbox to easily load up the effect.
 
-![Screen shot of Christmas preset in WLED interface](~screenshot-wled-christmas-lights-preset.png)
+![Screen shot of Christmas preset in WLED interface](@assets/posts/wled-christmas-lights/screenshot-wled-christmas-lights-preset.png)
 
 
 ## Results
 
 Here is a photo of my office with the effect in action. Notice how well the LED strips match the traditional string lights around my whiteboard.
 
-![Dimly lit office corner with christmas LEDs](~photo-wled-christmas-lights.jpg)
+![Dimly lit office corner with christmas LEDs](@assets/posts/wled-christmas-lights/photo-wled-christmas-lights.jpg)
 
 If someone has a better way to achieve this please do share. Enjoy and happy holidays!
 

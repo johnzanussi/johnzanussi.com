@@ -18,7 +18,7 @@ export interface Props {
     timeline: Era[];
 }
 
-import Image from '@components/Image.astro';
+import { Image } from 'astro:assets';
 import Link from '@components/Link.astro';
 import Icon from '@components/Icon.astro';
 
@@ -59,7 +59,7 @@ const { timeline } = Astro.props;
 
                     <Link href={link}>
                         <Image
-                            src={`src/assets/pages/about/job-icons/${image}`}
+                            src={image}
                             alt={title}
                             width={50}
                             height={50}
@@ -96,7 +96,7 @@ const { timeline } = Astro.props;
                                     {timeframe}
                                 </p>
 
-                                <p class="text-emphasis">
+                                <p class="text-body-emphasis">
                                     {title}
                                 </p>
 

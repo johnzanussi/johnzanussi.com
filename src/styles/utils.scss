@@ -33,20 +33,6 @@
     }
 }
 
-// Link
-.link-faded {
-
-    color: var(--bs-body-color);
-    opacity: 0.65;
-
-    &:hover,
-    &:focus {
-        color: var(--bs-emphasis-color);
-        opacity: 1;
-    }
-
-}
-
 // Sizing
 .mw-1100 {
     max-width: 1100px;
@@ -65,8 +51,4 @@
 // Text
 .font-sans-serif {
     font-family: $font-family-sans-serif !important;
-}
-
-.text-emphasis {
-    color: $emphasis-color;
 }

@@ -24,12 +24,12 @@ const { headings } = Astro.props;
 
     </nav>
 
-    <BackToTop class="link-faded small ps-4 text-uppercase" />
+    <BackToTop class="link-opacity-75 link-opacity-100-hover link-body-emphasis small ps-4 text-uppercase" />
 
 </aside>
 
 <script>
-// @ts-ignore
+// @ts-expect-error: Library not writtedn in TypeScript https://github.com/kimyvgy/simple-scrollspy
 import scrollSpy from 'simple-scrollspy';
 scrollSpy('.aside-content nav', {
     sectionClass: '.content-container section',

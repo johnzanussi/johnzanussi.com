@@ -6,8 +6,8 @@ import {
     getCollectionUrl,
 } from '@utils/collections';
 
-import { getItemImagePath, getRenderedImage } from '@utils/images';
 import { absoluteUrl } from '@utils/urls';
+import { getImageSrc } from '@utils/images';
 
 import DividerLayout from '@layouts/DividerLayout.astro';
 
@@ -20,7 +20,7 @@ import Markdown from '@components/Markdown.astro';
 import PostPagination from '@components/PostPagination.astro';
 
 import ContentAside from '@components/ContentAside.astro';
-import Image from '@components/Image.astro';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
 
@@ -44,13 +44,12 @@ const {
     remarkPluginFrontmatter: data,
 } = await post.render();
 
-const { slug } = post;
+const { slug, data: { cover } } = post;
 
 const {
     title,
     date,
     excerpt,
-    coverImage,
     draft,
     minutesRead,
     hasAmazonLinks = false,
@@ -59,15 +58,13 @@ const {
 
 const postUrl = absoluteUrl(getPostUrl(slug));
 
-const ogImageSrc = await getRenderedImage(
-    getItemImagePath(slug, coverImage.url, 'posts')
-);
+const coverImageSrc = await getImageSrc(cover);
 
 const metadata = {
     title,
     url: postUrl,
     description: excerpt,
-    image: absoluteUrl(ogImageSrc || ''),
+    image: coverImageSrc,
     ogType: 'article',
     publishDate: date,
     breadcrumbs: [
@@ -90,9 +87,9 @@ const siblingPosts = await getSiblingItems('posts', post);
         <div class="mb-3 mw-md-85p">
 
             <Image
-                src={getItemImagePath(slug, coverImage.url, 'posts')}
-                width={coverImage.width}
-                height={coverImage.height}
+                src={cover}
+                width={cover.width}
+                height={cover.height}
                 alt={title}
                 widths={[576, 768, 992, 1200, 1400, 1600]}
                 class="img-fluid rounded shadow"

@@ -1,5 +1,6 @@
 ---
-import { getEntryBySlug } from 'astro:content';
+import { getEntry } from 'astro:content';
+import { getImageSrc } from '@utils/images';
 
 import Emoji from '@components/Emoji.astro';
 import Layout from '@layouts/Layout.astro';
@@ -7,7 +8,11 @@ import Icon from '@components/Icon.astro';
 import Link from '@components/Link.astro';
 import PostCard from '@components/PostCard.astro';
 
-const featuredPost = await getEntryBySlug(
+import imgScreenshot from '@assets/screenshots/home.jpg';
+
+const imageUrl = await getImageSrc(imgScreenshot);
+
+const featuredPost = await getEntry(
     'posts',
     'rack-mounting-home-assistant-yellow'
 );
@@ -15,7 +20,7 @@ const featuredPost = await getEntryBySlug(
 const metadata = {
     ogType: 'website',
     description: 'A place where I write about technology, 3D Printing, and other hobby projects I have going on.',
-    screenshot: 'home',
+    image: imageUrl,
 };
 
 ---

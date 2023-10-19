@@ -51,8 +51,8 @@ $lead-font-weight: 400;
 
 $accordion-icon-transform: rotate(180deg) !default;
 
-$font-family-sans-serif: "InterVariable", sans-serif;
-$font-family-monospace: "Roboto MonoVariable", monospace;
+$font-family-sans-serif: "Inter Variable", sans-serif;
+$font-family-monospace: "Roboto Mono Variable", monospace;
 $headings-font-family: $font-family-monospace;
 
 $card-bg: rgb(255, 255, 255); // #fff;
@@ -62,6 +62,9 @@ $card-bg-dark: rgb(26, 27, 30);
 $card-border-color-dark: rgb(55, 58, 64);
 
 $border-radius: 1rem;
+
+$body-emphasis-color-dark: $white;
+$body-emphasis-color: $dark;
 
 // 3. Bootstrap Variables
 @import "../node_modules/bootstrap/scss/variables";

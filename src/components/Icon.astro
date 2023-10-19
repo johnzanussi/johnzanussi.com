@@ -6,7 +6,7 @@ export interface Props {
 }
 
 // https://iconify.design/
-import { Icon } from 'astro-iconify';
+import { Icon as AstroIcon } from 'astro-iconify';
 
 const { class: className, icon, label } = Astro.props;
 
@@ -16,7 +16,7 @@ const classes = [
 ];
 ---
 
-<Icon
+<AstroIcon
     name={icon}
     class:list={classes}
     aria-label={label || `${icon.split(':').pop()} icon`}

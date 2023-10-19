@@ -1,22 +1,22 @@
 ---
-import {
-    fetchYouTubeSubscriptions,
-    groupAndSortSubscriptions,
-} from '@utils/youtube';
+import { getEntry } from 'astro:content';
+import { getImageSrc } from '@utils/images';
 
 import DividerLayout from '@layouts/DividerLayout.astro';
 import Icon from '@components/Icon.astro';
 import Link from '@components/Link.astro';
 
+import imgScreenshot from '@assets/screenshots/youtube.jpg';
+
+const imageUrl = await getImageSrc(imgScreenshot);
+
 const metadata = {
     title: 'YouTube',
     description: 'A list of YouTube channels I subscribe to.',
-    screenshot: 'youtube',
+    image: imageUrl,
 };
 
-const data = await fetchYouTubeSubscriptions();
-
-const subscriptions = groupAndSortSubscriptions(data);
+const { data: subscriptions } = await getEntry('youtube', 'channels');
 ---
 <DividerLayout metadata={metadata}>
 

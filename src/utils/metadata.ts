@@ -7,7 +7,6 @@ import {
 import { HtmlGenerator } from 'metatags-generator/lib/html-generator/generator';
 
 import merge from 'deepmerge';
-import { getScreenshotPath } from '@utils/images';
 
 type OpenGraphTypes = OpengraphTypes | 'website';
 
@@ -15,7 +14,6 @@ type Metadata = {
     title: string;
     url: string;
     ogType: OpenGraphTypes;
-    screenshot?: string;
     image?: string;
     description?: string;
     breadcrumbs?: Breadcrumb[];
@@ -84,10 +82,6 @@ const defaultData: Metadata = {
 
 export function generateTags(metadata: Metadata) {
     const data = merge(defaultData, metadata);
-
-    if (data.screenshot) {
-        data.image = getScreenshotPath(data.screenshot);
-    }
 
     // https://webcode.tools/generators/open-graph/article
     const generator = new MetadataGeneratorStructured()

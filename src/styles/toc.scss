@@ -24,9 +24,10 @@
             padding: .15em $depth-padding;
 
             &.active {
-                color: var(--bs-emphasis-color);
-                border-color: var(--bs-heading-color);
-                opacity: 1;
+                color: var(--bs-emphasis-color) !important;
+                font-weight: 500;
+                border-color: var(--bs-heading-color) !important;
+                opacity: 1 !important;
             }
 
         }

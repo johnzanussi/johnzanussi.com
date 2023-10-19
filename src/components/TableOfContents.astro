@@ -33,7 +33,7 @@ const topLevel = headings.filter((heading) => heading.depth === depth);
 
                 <a
                     class:list={[
-                        'link-faded',
+                        'link-opacity-75 link-opacity-100-hover link-body-emphasis',
                         `depth-${heading.depth}`,
                     ]}
                     href={`#${heading.slug.replace('h-', '')}`}>

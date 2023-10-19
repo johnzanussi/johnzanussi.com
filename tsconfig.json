@@ -10,6 +10,6 @@
             "@styles/*": ["src/styles/*"],
             "@utils/*": ["src/utils/*"]
         },
-        "importsNotUsedAsValues": "error"
+        "verbatimModuleSyntax": true
     }
 }

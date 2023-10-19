@@ -1,10 +1,7 @@
 ---
 title: Controlling a 3D Printer's Power Supply with OctoPrint
 excerpt: One of the first things I wanted to do after buying the Ender 3 back in August 2020 was the ability to power on/off the printer via the OctoPrint interface. Luckily there is a robust PSU Control plugin that already exists. I just needed to figure out the hardware...
-coverImage:
-    url: ~diagram-pi-power-relay.jpg
-    width: 1600
-    height: 900
+cover: "@assets/posts/3d-printer-psu-control/diagram-pi-power-relay.jpg"
 date: '2021-10-29'
 hasAmazonLinks: true
 ---
@@ -28,7 +25,7 @@ There are various other tutorials about similar setups but none that match exact
 -   1ft Power Cord ([Amazon](https://amzn.to/3b63cFg))
 -   Printed Pi Enclosure ([Thingiverse](https://www.thingiverse.com/thing:5031152))
 
-![Top view of printed enclosure, a Raspberry Pi 4, and the IoT Power Relay](~equipment-pi-case-power-relay-rpi-4.jpg)
+![Top view of printed enclosure, a Raspberry Pi 4, and the IoT Power Relay](@assets/posts/3d-printer-psu-control/equipment-pi-case-power-relay-rpi-4.jpg)
 
 ## Parts
 
@@ -41,7 +38,7 @@ There are various other tutorials about similar setups but none that match exact
 -   G. Relay screw terminal (Included with IoT Power Relay)
 -   Double sided tape ([Amazon](https://amzn.to/3Ekhvmp))
 
-![Top view of all the listed parts](~parts-list.jpg)
+![Top view of all the listed parts](@assets/posts/3d-printer-psu-control/parts-list.jpg)
 
 ## Tools
 
@@ -55,7 +52,7 @@ There are various other tutorials about similar setups but none that match exact
 
 Mains power is provided to the IoT Power Relay. The "Always On" outlet provides constant power to the Raspberry Pi. By plugging the power cord from the printer's power supply into the "Normally Off" outlet power will not be provided until the Raspberry Pi sends a 3.3v signal to the IoT Power Relay via the wiring we set up.
 
-![A diagram showing the wiring connections between the Raspberry Pi 4 and IoT Power Relay](~diagram-pi-power-relay.jpg)
+![A diagram showing the wiring connections between the Raspberry Pi 4 and IoT Power Relay](@assets/posts/3d-printer-psu-control/diagram-pi-power-relay.jpg)
 
 ## Steps
 
@@ -65,9 +62,9 @@ For the connection between the RPi and the printed enclosure we need a short len
 
 For the connection between the printed enclosure and the PSU controller we again need to solder the ground wire to the larger terminal and power to the smaller terminal of the male barrel connector[^e]. Again covering both in heat shrink[^c]. The other end can be either crimped with ferrules[^f] or plugged right into the PSU connector[^g].
 
-![Wiring between Raspberry Pi 4 dupont connector and female barrel connector](~wiring-rpi-to-print-enclosure.jpg)
+![Wiring between Raspberry Pi 4 dupont connector and female barrel connector](@assets/posts/3d-printer-psu-control/wiring-rpi-to-print-enclosure.jpg)
 
-![Wiring between female barrel connector and IoT Relay screw terminal](~wiring-print-enclosure-to-psu.jpg)
+![Wiring between female barrel connector and IoT Relay screw terminal](@assets/posts/3d-printer-psu-control/wiring-print-enclosure-to-psu.jpg)
 
 ### 2. Add barrel connector to print enclosure
 
@@ -75,9 +72,9 @@ Feed the dupont end of the wire through the hole in the print enclosure until th
 
 Fit the Pi into the case and plug the dupont connector into the GPIO header. Physical pin 37 for red and physical pin 39 for black.
 
-![Back of the printed enclosure with the female barrel connector installed](~pi-enclosure-with-barrel-connector.jpg)
+![Back of the printed enclosure with the female barrel connector installed](@assets/posts/3d-printer-psu-control/pi-enclosure-with-barrel-connector.jpg)
 
-![Top view of the Raspberry Pi 4 in the printed enclosure and the female barrel connector installed](~pi-enclosure-with-rpi-and-barrel-connector.jpg)
+![Top view of the Raspberry Pi 4 in the printed enclosure and the female barrel connector installed](@assets/posts/3d-printer-psu-control/pi-enclosure-with-rpi-and-barrel-connector.jpg)
 
 ### 3. Install Power Relay
 
@@ -85,7 +82,7 @@ I just used some double stick tape to adhere the Power Relay to my Ender 3's pow
 
 The Pi enclosure slides into the aluminum extrusion of the Ender 3 and then wire connections can be made.
 
-![Side view of the Ender 3 with IoT Power Relay stuck to the side of the Ender 3's PSU](~ender-3-with-raspberry-pi-controlled-power.jpg)
+![Side view of the Ender 3 with IoT Power Relay stuck to the side of the Ender 3's PSU](@assets/posts/3d-printer-psu-control/ender-3-with-raspberry-pi-controlled-power.jpg)
 
 ### 4. Configure OctoPrint PSU Plugin
 
@@ -105,7 +102,7 @@ Install the following two plugins to your OctoPrint instance.
 -   Set **Sensing Plugin** to `PSU Control - RPI.GPIO`
 -   Set **Polling Interval** to `1`
 
-![Screenshot of the PSU Control plguin for OctoPrint](~screenshot-octoprint-psu-control-settings.png)
+![Screenshot of the PSU Control plguin for OctoPrint](@assets/posts/3d-printer-psu-control/screenshot-octoprint-psu-control-settings.png)
 
 #### Settings > (Plugins) PSU Control - RPI.GPIO
 
@@ -113,10 +110,10 @@ Install the following two plugins to your OctoPrint instance.
 -   Set **Switching > Pin** to `26`
 -   Set **Sensing > Pin** to `26 Float`
 
-![Screenshot of the PSU Control - RPI.GPIO plguin for OctoPrint](~screenshot-octoprint-psu-control-settings-gpio.png)
+![Screenshot of the PSU Control - RPI.GPIO plguin for OctoPrint](@assets/posts/3d-printer-psu-control/screenshot-octoprint-psu-control-settings-gpio.png)
 
 Save your settings and refresh OctoPrint. You should now have a lightning bolt icon in the top nav bar that you can use to turn on and off your printer.
 
-![Screen shot of OctoPrint's top navigation bar with the PSU plugin's lightning bolt icon green signifying power on](~screenshot-octoprint-nav-bar.jpg)
+![Screen shot of OctoPrint's top navigation bar with the PSU plugin's lightning bolt icon green signifying power on](@assets/posts/3d-printer-psu-control/screenshot-octoprint-nav-bar.jpg)
 
 You should be all set now. Again, this might not be the right or best way to do it. However it is what works for me. If you have any comments or questions feel free to reach out to me via email johnzanussi [at] gmail.com.
