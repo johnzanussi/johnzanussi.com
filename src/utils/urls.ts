@@ -1,4 +1,5 @@
-export function absoluteUrl(url: string): string {
+export function absoluteUrl(url: string) {
+
     if (!url) {
         return '';
     }
@@ -10,7 +11,7 @@ export function absoluteUrl(url: string): string {
     const { SITE, PORT } = import.meta.env;
 
     const parts = [
-        SITE,
+        SITE.endsWith('/') ? SITE.slice(0, -1) : SITE,
         PORT ? `:${PORT}` : '',
         '/',
         url,
