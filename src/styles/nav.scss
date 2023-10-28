@@ -12,6 +12,38 @@
             background-color: var(--jz-header-bg-color);
         }
     }
+
+    @include media-breakpoint-down(md) {
+
+        &,
+        .nav-toggle,
+        .nav-toggle-photo {
+            transition: all .3s ease-in-out;
+        }
+
+        .nav-toggle-photo {
+            width: 0;
+            overflow: hidden;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        &.is-sticky {
+            padding: 0 !important;
+            background-color: transparent !important;
+
+            .nav-toggle-photo {
+                --spacing: 0.5rem;
+                opacity: 1;
+                width: calc(37px + (var(--spacing) * 2));
+                margin-right: var(--spacing);
+                padding: 0 var(--spacing);
+            }
+
+        }
+    }
+
 }
 
 .site-nav {

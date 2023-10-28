@@ -1,0 +1,25 @@
+---
+import Link from '@components/Link.astro';
+import { Image } from 'astro:assets';
+
+import imgJZ from '@assets/img-john-zanussi-kiddo.jpg';
+
+const { class: className, ...props } = Astro.props;
+---
+<Link
+    href="/"
+    class:list={['d-block', className]}
+    {...props}
+>
+
+    <Image
+        src={imgJZ}
+        alt="portrait of John Zanussi wearing sunglasses with his daughter on his shoulders"
+        class="rounded-circle shadow img-fluid nav-photo-img"
+        width={250}
+        height={250}
+        loading="eager"
+        widths={[125, 250, 500]}
+    />
+
+</Link>
