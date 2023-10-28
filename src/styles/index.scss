@@ -88,7 +88,7 @@ html[data-bs-theme="dark"] {
         @include border-end-radius;
     }
 
-    .post-card {
+    .card-post {
         .card-img {
             flex: 0 0 40%;
         }
@@ -96,7 +96,8 @@ html[data-bs-theme="dark"] {
     }
 }
 
-.card {
+.card-post,
+.card-pagination {
 
     transition: transform 150ms ease 0s,
                 box-shadow 100ms ease 0s;

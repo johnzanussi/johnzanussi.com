@@ -4,6 +4,7 @@
 @import '../node_modules/bootstrap/scss/functions';
 
 $enable-negative-margins: true;
+$enable-cssgrid: true;
 
 // 2. Include any default variable overrides here
 $white: #f2f2f2;
@@ -71,6 +72,7 @@ $body-emphasis-color: $dark;
 @import "../node_modules/bootstrap/scss/variables-dark";
 
 $code-font-size: $font-size-base;
+$figure-caption-font-size: $font-size-base;
 
 // 3. Bootstrap Variables
 @import "../node_modules/bootstrap/scss/variables";
@@ -87,6 +89,27 @@ $code-font-size: $font-size-base;
 
 // 6. Bootstrap Optional
 @import "../node_modules/bootstrap/scss/utilities";
+
+
+$utilities: map-merge-multiple(
+    $utilities,
+    (
+        "opacity": (
+            property: opacity,
+            class: opacity,
+            state: hover,
+            values: (
+                0: 0,
+                25: .25,
+                50: .5,
+                75: .75,
+                100: 1,
+            )
+        )
+    ),
+);
+
+
 @import "../node_modules/bootstrap/scss/reboot";
 @import "../node_modules/bootstrap/scss/type";
 @import "../node_modules/bootstrap/scss/images";
@@ -118,6 +141,7 @@ $code-font-size: $font-size-base;
 // @import "../node_modules/bootstrap/scss/carousel";
 // @import "../node_modules/bootstrap/scss/spinners";
 // @import "../node_modules/bootstrap/scss/offcanvas";
+
 
 // 7. Bootstrap Utilities API
 @import "../node_modules/bootstrap/scss/utilities/api";

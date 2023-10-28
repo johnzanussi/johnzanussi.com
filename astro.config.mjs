@@ -2,6 +2,7 @@ import { loadEnv } from 'vite';
 import { defineConfig } from 'astro/config';
 import AutoImport from 'astro-auto-import';
 import compress from 'astro-compress';
+import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
 import purgecss from 'astro-purgecss';
 import robotsTxt from 'astro-robots-txt';
@@ -11,6 +12,7 @@ import vercel from '@astrojs/vercel/static';
 // Remark
 import remarkReadingtime from './src/utils/remark/reading-time';
 import remarkSectionize from './src/utils/remark/sectionize';
+import remarkUnwrapImages from './src/utils/remark/unwrap-images';
 
 import MDXCodeBlocks, { mdxCodeBlockAutoImport } from 'astro-mdx-code-blocks';
 
@@ -69,12 +71,21 @@ export default defineConfig({
         compress({
             img: false,
         }),
+        icon({
+            include: {
+                'fa-solid': ['*'],
+                'fa6-solid': ['*'],
+                'fa6-brands': ['*'],
+                'mdi': ['*'],
+            },
+        }),
     ],
     markdown: {
         syntaxHighlight: false,
         remarkPlugins: [
             remarkSectionize,
-            remarkReadingtime
+            remarkReadingtime,
+            remarkUnwrapImages,
         ],
         rehypePlugins: [
             rehypeAccessibleEmojis,

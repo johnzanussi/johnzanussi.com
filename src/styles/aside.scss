@@ -7,6 +7,14 @@
         --jz-aside-link: var(--bs-pink-900);
     }
 
+    &.aside-idea {
+        --jz-aside-background-start: var(transparent);
+        --jz-aside-background-stop: var(transparent);
+        // --jz-aside-border: var(--bs-teal-800);
+        // --jz-aside-link: var(--bs-orange-900);
+        color: var(--bs-body);
+    }
+
     &.aside-mindblown {
         --jz-aside-background-start: var(--bs-white);
         --jz-aside-background-stop: var(--bs-orange-400);

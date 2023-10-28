@@ -1,0 +1,34 @@
+---
+import Icon from '@components/Icon.astro';
+
+type Props = {
+    align?: string;
+    caption?: string;
+}
+
+const { align, caption } = Astro.props;
+
+const alignClass = align ? `justify-content-${align}` : '';
+
+---
+<figure class="figure">
+
+    <slot />
+
+    <figcaption class="figure-caption">
+
+        {caption && (
+            <p class:list={['figure-caption fst-italic mt-2 d-flex align-items-center', alignClass]}>
+                <Icon
+                    icon="fa6-solid:image"
+                    class="me-2"
+                />
+                {caption}
+            </p>
+        )}
+
+        <slot name="caption" />
+
+    </figcaption>
+
+</figure>
