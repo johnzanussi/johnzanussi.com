@@ -1,0 +1,279 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+type Props = {
+    class: string;
+}
+
+import imgPhoneFrameTop from '@assets/posts/iphone-action-button-commute-shortcut/iphone-frame-top.png';
+import imgPhoneFrameRepeat from '@assets/posts/iphone-action-button-commute-shortcut/iphone-frame-repeat.png';
+import imgPhoneFrameBottom from '@assets/posts/iphone-action-button-commute-shortcut/iphone-frame-bottom.png';
+import imgPhoneFrameButtons from '@assets/posts/iphone-action-button-commute-shortcut/iphone-frame-side-buttons.png';
+
+import imgStep1 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-1-calendar-events.png';
+import imgStep2 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-2-start-day-today.png';
+import imgStep3 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-3-work-calendar.png';
+import imgStep4 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-4-title-has-commuting.png';
+import imgStep5 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-5-start-date.png';
+import imgStep6 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-6-end-date.png';
+import imgStep7 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-7-add-filter.png';
+import imgStep8 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-8-sort-by.png';
+import imgStep9 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-9-limit-one-event.png';
+import imgStep10 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-10-if-calendar-event.png';
+import imgStep11 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-11-open-traintime-app.png';
+import imgStep12 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-12-otherwise.png';
+import imgStep13 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-13-open-phone-app.png';
+import imgStep14 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-14-end-if.png';
+
+type Step = {
+    image: ImageMetadata;
+    alt: string;
+    context?: string;
+    hasBreak?: boolean;
+    className?: string;
+}
+
+const steps: Step[] = [
+    {
+        image: imgStep1,
+        alt: 'Find All Calendar Events where All of the following are true',
+        context: 'Search through all the calendar events on my phone where the following conditions are true',
+        className: 'border-bottom pt-2 pt-md-3',
+    },
+    {
+        image: imgStep2,
+        alt: 'Start Date is today and',
+        context: 'The start date of a calendar event happens today',
+        className: 'border-bottom',
+    },
+    {
+        image: imgStep3,
+        alt: 'Calendar is jzanussi@justworks.com and',
+        context: 'The calendar event exists on my work calendar',
+        className: 'border-bottom',
+    },
+    {
+        image: imgStep4,
+        alt: 'Title contains Commuting and',
+        context: 'The title of the calendar event contains the word "Commuting"',
+        className: 'border-bottom',
+    },
+    {
+        image: imgStep5,
+        alt: 'Start Date is before Current Date and',
+        context: 'The start date and time of the calendar event is before right now.',
+        className: 'border-bottom',
+    },
+    {
+        image: imgStep6,
+        alt: 'End Date is after Current Date',
+        context: 'The end date and time of the calendar event is after right now.',
+        className: 'border-bottom',
+    },
+    {
+        image: imgStep7,
+        alt: 'Add Filter',
+        className: 'border-bottom',
+    },
+    {
+        image: imgStep8,
+        alt: 'Sort by None',
+        context: 'No need to sort as we\'re only looking for one event',
+        className: 'border-bottom',
+    },
+    {
+        image: imgStep9,
+        alt: 'Limit. Get 1 Calendar Event',
+        context: 'Enable the limit filter and limit to only 1 calendar event',
+        hasBreak: true,
+    },
+    {
+        image: imgStep10,
+        alt: 'If Calendar Events has any value',
+        context: 'If the result of the above logic contains an event with any value it means we satisfied the conditions',
+        className: 'mb-2 mb-md-3',
+    },
+    {
+        image: imgStep11,
+        alt: 'Open TrainTime app',
+        context: 'Open the TrainTime app',
+        className: 'ms-2 mb-2 ms-md-3 mb-md-3',
+    },
+    {
+        image: imgStep12,
+        alt: 'Otherwise',
+        context: 'Otherwise, if no event was found',
+        className: 'mb-2 mb-md-3',
+    },
+    {
+        image: imgStep13,
+        alt: 'Open Photo in Camera app',
+        context: 'Then open the the Camera app set to the Photo screen',
+        className: 'ms-2 mb-2 ms-md-3 mb-md-3',
+    },
+    {
+        image: imgStep14,
+        alt: 'End If',
+        context: 'All done',
+        className: 'pb-2 pb-md-3',
+    },
+
+];
+
+const bgRepeat = await getImage({ src: imgPhoneFrameRepeat });
+
+const { class: className, ...props } = Astro.props;
+
+import '@styles/iphone-scroll.scss';
+---
+<div
+    class={className}
+    {...props}
+>
+
+    <div
+        id="iphone-sim"
+        class="iphone">
+
+        <Image
+            src={imgPhoneFrameTop}
+            alt="Top frame of iPhone 15"
+            class="iphone-top img-fluid w-60"
+        />
+
+        <div class="iphone-viewport position-relative">
+
+            <Image
+                src={imgPhoneFrameButtons}
+                alt="Side frame of iPhone 15"
+                class="img-fluid position-absolute iphone-buttons"
+            />
+
+            {steps.map((step, i) => {
+
+                const {
+                    image,
+                    alt,
+                    context = '',
+                    hasBreak = false,
+                    className = '',
+                } = step;
+
+                return (
+                    <div class:list={[
+                        'step d-flex',
+                        {
+                            'has-context': !!context,
+                            'active': !!context && i === 0,
+                        }
+                    ]}>
+
+                        <div
+                            class="shortcut px-3 px-md-4 bg-black"
+                            style={{
+                                backgroundImage: `url('${bgRepeat.src}')`
+                            }}>
+
+                            <div class:list={['shortcut-img opacity-50', className]}>
+                                <Image
+                                    src={image}
+                                    alt={alt}
+                                    class="img-fluid d-block"
+                                />
+                            </div>
+
+                            {hasBreak && (
+                                <div class="d-flex justify-content-center overflow-hidden vr-wrap">
+                                    <div class="vr opacity-100"></div>
+                                </div>
+                            )}
+
+                        </div>
+
+                        <div class="context invisible overflow-visible">
+                            {step.context}
+                        </div>
+                    </div>
+                );
+            })}
+
+        </div>
+
+        <Image
+            src={imgPhoneFrameBottom}
+            alt="Bottom frame of iPhone 15"
+            class="img-fluid w-60"
+        />
+
+    </div>
+
+</div>
+
+<script>
+import { debounce } from 'debounce';
+
+let observer: null | IntersectionObserver = null;
+
+const initialize = () => {
+    const $container = document.getElementById('iphone-sim');
+
+    if ($container) {
+
+        const $phoneTop = document.querySelector('.iphone-top');
+        const $viewport = $container.querySelector('.iphone-viewport');
+        const $steps = $container.querySelectorAll('.step');
+
+        if (
+            $phoneTop &&
+            $viewport &&
+            $steps
+        ) {
+            const { height: phoneTopHeight } = $phoneTop.getBoundingClientRect();
+
+            const tallestStepHeight = [...$steps].reduce((accum, $step) => {
+                const { height } = $step.getBoundingClientRect();
+                if (height > accum) {
+                    console.log($step, height);
+                    return height;
+                }
+                return accum;
+            }, 0);
+
+            const topOfPageOptions = {
+                rootMargin: `-${phoneTopHeight}px 0px ${-Math.abs(window.innerHeight - (phoneTopHeight + tallestStepHeight))}px 0px`,
+                threshold: .75,
+            };
+
+            const callback = (entries: IntersectionObserverEntry[]) => {
+
+                entries.forEach(entry => {
+
+                    const $step = entry.target;
+
+                    if ($step.classList.contains('has-context') && entry.isIntersecting) {
+                        Array.from($viewport.querySelectorAll('.active')).forEach(el => el.classList.remove('active'));
+                        $step.classList.add('active');
+                    }
+
+                });
+            };
+
+            observer = new IntersectionObserver(callback, topOfPageOptions);
+
+            $steps.forEach(element => observer && observer.observe(element));
+
+        }
+
+    }
+};
+
+initialize();
+
+window.onresize = debounce(() => {
+    if (observer) {
+        observer.disconnect();
+    }
+    initialize();
+}, 200);
+</script>
