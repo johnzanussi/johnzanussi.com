@@ -54,7 +54,12 @@ export default defineConfig({
     },
     output: 'static',
     adapter: vercel({
-        webAnalytics: true,
+        webAnalytics: {
+            enabled: true,
+        },
+        speedInsights: {
+            enabled: true,
+        },
     }),
     integrations: [
         AutoImport({
