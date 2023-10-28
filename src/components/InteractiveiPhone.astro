@@ -191,7 +191,7 @@ import '@styles/iphone-scroll.scss';
 
                         </div>
 
-                        <div class="context invisible overflow-visible">
+                        <div class="context invisible overflow-visible lh-sm">
                             {step.context}
                         </div>
                     </div>
@@ -211,6 +211,7 @@ import '@styles/iphone-scroll.scss';
 </div>
 
 <script>
+// import 'intersection-observer-debugger';
 import { debounce } from 'debounce';
 
 let observer: null | IntersectionObserver = null;
@@ -240,8 +241,12 @@ const initialize = () => {
                 return accum;
             }, 0);
 
+            const isPortrait = window.screen.availHeight > window.screen.availWidth;
+            const topMargin = isPortrait ? window.screen.availHeight * .3 : phoneTopHeight;
+            const bottomMargin = -Math.abs(window.innerHeight - (topMargin + tallestStepHeight));
+
             const topOfPageOptions = {
-                rootMargin: `-${phoneTopHeight}px 0px ${-Math.abs(window.innerHeight - (phoneTopHeight + tallestStepHeight))}px 0px`,
+                rootMargin: `-${topMargin}px 0px ${bottomMargin}px 0px`,
                 threshold: .75,
             };
 
