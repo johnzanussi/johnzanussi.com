@@ -1,0 +1,19 @@
+---
+type Props = {
+    columns: number[];
+}
+
+const { columns } = Astro.props;
+const templateColumns = columns.map(column => `${column}fr`).join(' ');
+---
+
+<div
+    class="grid text-center"
+    style={{
+        '--bs-columns': columns.length,
+        'grid-template-columns': templateColumns,
+    }}>
+
+    <slot />
+
+</div>

@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from 'astro';
+
 interface Role {
     timeframe: string;
     title: string;
@@ -7,7 +9,7 @@ interface Role {
 interface Era {
     color: string;
     colorDark?: string;
-    image: string;
+    image: ImageMetadata;
     link: string;
     roles: Role[];
     startYear: string;

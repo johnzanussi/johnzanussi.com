@@ -5,6 +5,8 @@ const { src, alt, ...props } = Astro.props;
 
 const [altText, noDivWrap = false] = alt ? alt.split(' noDivWrap') : [alt];
 
+const isUnwrapped = noDivWrap === '';
+
 const imgProps = {
     src,
     alt: altText,
@@ -14,11 +16,11 @@ const imgProps = {
 };
 ---
 
-{noDivWrap && (
+{isUnwrapped && (
     <AstroImage {...imgProps} />
 )}
 
-{!noDivWrap && (
+{!isUnwrapped && (
 
     <div class="mb-4">
         <AstroImage {...imgProps} />

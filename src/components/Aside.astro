@@ -1,6 +1,6 @@
 ---
 export interface Props {
-    type: 'egg' | 'wave' | 'mindblown';
+    type: 'egg' | 'idea' | 'mindblown' | 'wave';
 }
 
 import Icon from '@components/Icon.astro';
@@ -10,8 +10,9 @@ import '@styles/aside.scss';
 
 const typeIcons = {
     egg: 'mdi:egg-easter',
-    wave: '👋',
+    idea: '💡',
     mindblown: '🤯',
+    wave: '👋',
 };
 
 const { type, ...props } = Astro.props;

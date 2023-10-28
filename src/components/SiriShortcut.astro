@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import Link from '@components/Link.astro';
+
+import imgTrainIcon from '@assets/icons/icon-train.png';
+
+type Props = {
+    url: string;
+    title: string;
+    color: string;
+};
+const {
+    color,
+    title,
+    url
+} = Astro.props;
+---
+<div
+    class="card d-inline-block shadow-sm mb-4 border-0"
+    style={{
+        backgroundColor: color,
+        width: '250px',
+    }}
+>
+
+    <div class="card-body">
+
+        <Link
+            href={url}
+            class="stretched-link rounded-2 text-white float-end bg-white p-2"
+            style="--bs-bg-opacity: .15"
+        >
+            Get Shortcut
+        </Link>
+
+        <Image
+            src={imgTrainIcon}
+            alt="Blue Train Icon"
+            width={30}
+            height={43}
+        />
+
+        <h5 class="card-title font-sans-serif mt-3 mb-0 text-white lh-base">
+            {title}
+        </h5>
+
+    </div>
+
+</div>

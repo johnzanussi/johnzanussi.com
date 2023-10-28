@@ -21,10 +21,9 @@ const { id, url, title } = Astro.props;
 />
 
 <script>
-/* global FastCommentsUI */
 const comments = document.getElementById('fastcomments');
 
-if (comments !== null) {
+if (comments !== null && window.FastCommentsUI) {
 
     const getConfig = (theme: string | null) => ({
         tenantId: 'TuZHgHCUlVl',
@@ -34,16 +33,19 @@ if (comments !== null) {
         hasDarkBackground: theme === 'dark',
     });
 
-    // @ts-expect-error: No type available for FastCommentsUI
-    const fastComments = FastCommentsUI(
+    const fastComments = window.FastCommentsUI(
         comments,
         getConfig(localStorage.getItem('theme'))
     );
 
-    document.addEventListener('theme', (event) => {
-        const customEvent = event as CustomEvent;
-        fastComments.update(getConfig(customEvent.detail));
-    }, false);
+    if (fastComments) {
+
+        document.addEventListener('theme', (event) => {
+            const customEvent = event as CustomEvent;
+            fastComments.update(getConfig(customEvent.detail));
+        }, false);
+
+    }
 
 }
 </script>
