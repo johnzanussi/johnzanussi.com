@@ -1,0 +1,91 @@
+---
+title: iPhone 15 Action Button Commuting Shortcut
+excerpt: Using a custom iOS Shortcut to open my train ticketing app using the iPhone 15 action button only while commuting
+cover: "@assets/posts/iphone-action-button-commute-shortcut/cover-iphone-action-button.jpg"
+date: '2023-10-28'
+---
+
+import InteractiveiPhone from '@components/InteractiveiPhone.astro';
+import SiriShortcut from '@components/SiriShortcut.astro';
+import Figure from '@components/Figure.astro';
+
+import imgLIRRDigitalTicket from '@assets/posts/iphone-action-button-commute-shortcut/lirr-digital-ticket.jpg';
+import imgLIRRPhysicalTicket from '@assets/posts/iphone-action-button-commute-shortcut/lirr-physical-ticket.jpg';
+
+I recently got the new iPhone 15. I've been looking for interesting ways to use the new action button on the side of the phone. Up until today, I had it set to open the camera. It's useful but feels like wasted potential.
+
+I also recently started commuting to/from work again on a somewhat regular but not predictable basis.
+
+I spend most of my commute sitting on the trains of the Long Island Railroad. In recent years, the LIRR has adopted digital tickets via the [MTA TrainTime app](https://new.mta.info/traintime). This is a vast improvement over dealing with and waiting in line at physical ticket machines at train stations. The big difference I've noticed between physical and digital tickets is that a physical ticket can be kept visible while riding when the conductors come around to check. With the digital ticket, since I usually use my phone during the commute, I fumble and swipe through my open apps to find TrainTime before the conductor gets to me.
+
+<Figure
+    align="center"
+    caption="A digital and a physical LIRR ticket">
+
+    <Grid columns={[5, 7]}>
+
+        ![Screenshot of a LIRR digital ticket noDivWrap](@assets/posts/iphone-action-button-commute-shortcut/lirr-digital-ticket.jpg)
+
+        ![A physical paper LIRR ticket noDivWrap](@assets/posts/iphone-action-button-commute-shortcut/lirr-physical-ticket.jpg)
+
+    </Grid>
+
+</Figure>
+
+While sitting on the train, thinking of the best ways to utilize the new action button, the conductor came around looking to see my ticket, and I had a lightbulb moment.
+
+<Aside type="idea">
+    Would I be able to open the TrainTime app with the action button only while I'm commuting?
+</Aside>
+
+After some thinking and tinkering, I've created an iOS Shortcut that does precisely that. Here it is in action.
+
+<YouTubeEmbed id="F3sLd3n_0Ok">https://youtu.be/F3sLd3n_0Ok</YouTubeEmbed>
+
+The key to getting this to work is that I block off time for commuting to/from the office on my work calendar so that no one schedules calls during those times. As seen above, I can use these events as inputs in the shortcut.
+
+![Screenshot of Apple Calendar with a "Commuting Home" event from 6-8pm noDivWrap](@assets/posts/iphone-action-button-commute-shortcut/screenshot-calendar-commuting-event.jpg)
+
+## Shortcut
+
+Below is the full shortcut as captured from my phone. Scroll through to get more information on each step.
+
+<InteractiveiPhone class="mb-4" />
+
+You can install and try out the shortcut yourself by clicking below.
+
+<div class="text-center">
+
+    <SiriShortcut
+        url="https://www.icloud.com/shortcuts/013d2209d99f4bc3987b2b92ada621e9"
+        title="Open TrainTime App While Commuting"
+        color="#01aef0"
+    />
+
+</div>
+
+With the shortcut created, I can map it to the Action button from within iOS settings.
+
+<Grid columns={[1, 1]}>
+
+    ![Screenshot of the Action Button settings screen in iOS](@assets/posts/iphone-action-button-commute-shortcut/screenshot-ios-action-button.png)
+
+    ![REPLACE THIS WITH UPDATED PHOTO](@assets/posts/iphone-action-button-commute-shortcut/screenshot-ios-shortcut-selection.png)
+
+</Grid>
+
+## Limitations
+ * This only works if I add commuting blocks to my calendar.
+ * If there are delays or my whereabouts don't reflect the calendar, there could be false positives on both sides of the blocks.
+
+## Improvements
+ * There's probably some location-based logic I can add to remove some edge cases, like excluding my home and office locations from the `true` condition.
+ * If the LIRR ever adds WiFi to their trains, I could check if my phone is connected to the train's SSID to trigger the shortcut and cut out the calendar dependency.
+
+This has been working well for now, and I'm excited to continue to find interesting ways to use the iPhone 15's action button.
+
+If you've got an interesting use case for the action button, please share it in the [comments](#comments) below.
+
+
+
+
