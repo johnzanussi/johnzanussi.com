@@ -1,9 +1,9 @@
 ---
-import { Image } from 'astro:assets';
 import Icon from '@components/Icon.astro';
 
 import Link from '@components/Link.astro';
 import NavToggle from '@components/NavToggle.astro';
+import NavPhoto from '@components/NavPhoto.astro';
 
 const pages = [
     {
@@ -49,8 +49,6 @@ const socialLinks = [
 ];
 
 const socialLinksCount = socialLinks.length - 1;
-
-import imgJZ from '@assets/img-john-zanussi-kiddo.jpg';
 ---
 <nav
     data-bs-theme="dark"
@@ -61,19 +59,7 @@ import imgJZ from '@assets/img-john-zanussi-kiddo.jpg';
 
         <div class="nav-photo text-center mb-md-0">
 
-            <Link href="/" class="d-block">
-
-                <Image
-                    src={imgJZ}
-                    alt="portrait of John Zanussi wearing sunglasses with his daughter on his shoulders"
-                    class="rounded-circle shadow img-fluid"
-                    width={250}
-                    height={250}
-                    loading="eager"
-                    widths={[125, 250, 500]}
-                />
-
-            </Link>
+            <NavPhoto />
 
             <p class="m-0">
 
@@ -114,7 +100,7 @@ import imgJZ from '@assets/img-john-zanussi-kiddo.jpg';
 
     <NavToggle class="d-md-block w-100">
 
-        <ul class="list-unstyled font-monospace fs-5 px-3 p-md-0 text-end text-md-start mt-3 mt-md-0">
+        <ul class="list-unstyled font-monospace fs-5 px-3 p-md-0 text-center text-md-start mt-3 mt-md-0">
             {pages.map(({ title, url }) => (
                 <li>
                     <Link
@@ -170,17 +156,62 @@ import imgJZ from '@assets/img-john-zanussi-kiddo.jpg';
 </nav>
 
 <script>
+let observer: null | IntersectionObserver = null;
+let topMargin = 0;
+
 const handleNavWindowResize = () => {
 
-    const nav = document.getElementById('site-nav');
+    const $nav = document.getElementById('site-nav');
 
-    if (nav) {
+    if ($nav) {
 
-        const offset = Number(getComputedStyle(nav).top.replace(/[^\d]+/, ''));
+        const offset = Number(getComputedStyle($nav).top.replace(/[^\d]+/, ''));
 
-        const isStatic = document.documentElement.clientHeight < nav.offsetHeight + offset;
+        const isStatic = document.documentElement.clientHeight < $nav.offsetHeight + offset;
 
-        nav.classList.toggle('position-relative', isStatic);
+        $nav.classList.toggle('position-relative', isStatic);
+
+    }
+
+    const $navToggle = document.querySelector('[data-target="#nav-collapse"]');
+
+    if (
+        $navToggle &&
+        getComputedStyle($navToggle).display !== 'none'
+    ) {
+
+        const $nav = document.querySelector<HTMLElement>('.site-nav-wrap');
+        const $navPhoto = document.querySelector<HTMLElement>('.site-nav-wrap .nav-photo');
+
+        if ($nav && $navPhoto) {
+
+            const { height } = $navPhoto.getBoundingClientRect();
+
+            if (topMargin !== height) {
+
+                topMargin = height;
+
+                $nav.style.top = `-${topMargin + 4}px`;
+
+                const options = {
+                    threshold: [1],
+                    rootMargin: `${topMargin}px`,
+                };
+
+                const callback = ([entry]: IntersectionObserverEntry[]) => {
+                    entry.target.classList.toggle('is-sticky', entry.intersectionRatio < 1);
+                };
+
+                if (observer) {
+                    observer.disconnect();
+                }
+
+                observer = new IntersectionObserver(callback, options);
+
+                observer.observe($nav);
+
+            }
+        }
 
     }
 

@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import NavPhoto from '@components/NavPhoto.astro';
 
 export type Props = HTMLAttributes<'div'>;
 
@@ -8,7 +9,9 @@ import Icon from '@components/Icon.astro';
 
 const { class: className } = Astro.props;
 ---
-<div class="d-flex w-100 mt-1 mt-md-4 d-nojs-none">
+<div class="d-flex w-100 mt-1 mt-md-4 d-nojs-none nav-toggle">
+
+    <NavPhoto class="nav-toggle-photo d-md-none" />
 
     <ThemeToggle class="nav-color-mode-toggle me-2 py-1 p-md-3" />
 
