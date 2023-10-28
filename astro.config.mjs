@@ -53,7 +53,9 @@ export default defineConfig({
         port: port,
     },
     output: 'static',
-    adapter: vercel(),
+    adapter: vercel({
+        webAnalytics: true,
+    }),
     integrations: [
         AutoImport({
             imports: [mdxCodeBlockAutoImport('src/components/CodeBlock.astro')],
