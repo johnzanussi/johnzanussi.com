@@ -1,5 +1,5 @@
 # https://github.com/github/linguist/blob/master/docs/overrides.md
 
-# Tell linguist to ignore xsl files (RSS stylesheet) so XSLT stops
-# showing up as a top language on GitHub.com
+# Tell linguist to ignore xsl (RSS stylesheet) and MDX so they don't show up as a top language on GitHub.com
 *.xsl -linguist-detectable
+*.mdx -linguist-detectable
