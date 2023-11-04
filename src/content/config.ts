@@ -30,9 +30,6 @@ const ChannelSchema = z.object({
     title: z.string(),
     hasNotifications: z.boolean(),
     channelId: z.string(),
-    category: z.object({
-        title: z.string(),
-    }).nullable(),
 });
 
 const CategoryChannelsSchema = z.object({
