@@ -69,7 +69,7 @@
     "astro-robots-txt": "^1.0.0",
     "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.1",
-    "eslint": "^8.52.0",
+    "eslint": "^8.53.0",
     "eslint-plugin-astro": "^0.29.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-unused-imports": "^3.0.0",
