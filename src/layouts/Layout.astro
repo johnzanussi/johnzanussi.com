@@ -8,6 +8,7 @@ import Nav from '@components/Nav.astro';
 import ThemeToggleScript from '@components/ThemeToggleScript.astro';
 
 import { generateTags } from '@utils/metadata';
+import SimpleAnalytics from '@components/SimpleAnalytics.astro';
 
 const { metadata, class: className = [] } = Astro.props;
 
@@ -65,5 +66,6 @@ const isDev = import.meta.env.MODE === 'development';
     }
     </style>
 </noscript>
+{!isDev && (<SimpleAnalytics />)}
 </body>
 </html>

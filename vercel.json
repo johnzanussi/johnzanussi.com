@@ -8,6 +8,14 @@
         {
             "source": "/api/rk6m8wh2a",
             "destination": "https://analytics.johnzanussi.com/api/event"
+        },
+        {
+            "source": "/uF7uQafzGw.js",
+            "destination": "https://scripts.simpleanalyticscdn.com/latest.js"
+        },
+        {
+            "source": "/uF7uQafzGw.gif",
+            "destination": "https://queue.simpleanalyticscdn.com/noscript.gif"
         }
     ],
     "headers": [
