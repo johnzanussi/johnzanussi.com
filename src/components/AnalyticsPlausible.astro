@@ -1,0 +1,28 @@
+---
+import vercel from '../../vercel.json';
+
+type Config = {
+    script?: string;
+    api?: string;
+};
+
+const prefix = 'plausible-';
+
+const { api, script }: Config = vercel.rewrites.reduce((accum, rewrite) => {
+    if (rewrite.id?.includes(prefix)) {
+        return {
+            ...accum,
+            [rewrite.id.replace(prefix, '')]: rewrite.source,
+        };
+    }
+    return accum;
+}, {});
+---
+{api && script && (
+    <script
+        defer
+        data-domain="johnzanussi.com"
+        data-api={api}
+        src={script}
+    />
+)}

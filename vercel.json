@@ -8,6 +8,16 @@
         {
             "source": "/api/rk6m8wh2a",
             "destination": "https://analytics.johnzanussi.com/api/event"
+        },
+        {
+            "source": "/lxmsCZJtB2.js",
+            "destination": "https://plausible.io/js/script.js",
+            "id": "plausible-script"
+        },
+        {
+            "source": "/api/lxmsCZJtB2",
+            "destination": "https://plausible.io/api/event",
+            "id": "plausible-api"
         }
     ],
     "headers": [
