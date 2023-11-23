@@ -11,13 +11,11 @@
         },
         {
             "source": "/lxmsCZJtB2.js",
-            "destination": "https://plausible.io/js/script.js",
-            "permanent": true
+            "destination": "https://plausible.io/js/script.js"
         },
         {
             "source": "/api/lxmsCZJtB2",
-            "destination": "https://plausible.io/api/event",
-            "permanent": true
+            "destination": "https://plausible.io/api/event"
         }
     ],
     "headers": [
