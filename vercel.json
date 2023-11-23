@@ -12,12 +12,12 @@
         {
             "source": "/lxmsCZJtB2.js",
             "destination": "https://plausible.io/js/script.js",
-            "id": "plausible-script"
+            "permanent": true
         },
         {
             "source": "/api/lxmsCZJtB2",
             "destination": "https://plausible.io/api/event",
-            "id": "plausible-api"
+            "permanent": true
         }
     ],
     "headers": [
