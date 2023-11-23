@@ -6,25 +6,25 @@ type Props = {
     class: string;
 }
 
-import imgPhoneFrameTop from '@assets/posts/iphone-action-button-commute-shortcut/iphone-frame-top.png';
-import imgPhoneFrameRepeat from '@assets/posts/iphone-action-button-commute-shortcut/iphone-frame-repeat.png';
-import imgPhoneFrameBottom from '@assets/posts/iphone-action-button-commute-shortcut/iphone-frame-bottom.png';
-import imgPhoneFrameButtons from '@assets/posts/iphone-action-button-commute-shortcut/iphone-frame-side-buttons.png';
+import imgPhoneFrameTop from '@/content/posts/iphone-action-button-commute-shortcut/iphone-frame-top.png';
+import imgPhoneFrameRepeat from '@/content/posts/iphone-action-button-commute-shortcut/iphone-frame-repeat.png';
+import imgPhoneFrameBottom from '@/content/posts/iphone-action-button-commute-shortcut/iphone-frame-bottom.png';
+import imgPhoneFrameButtons from '@/content/posts/iphone-action-button-commute-shortcut/iphone-frame-side-buttons.png';
 
-import imgStep1 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-1-calendar-events.png';
-import imgStep2 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-2-start-day-today.png';
-import imgStep3 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-3-work-calendar.png';
-import imgStep4 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-4-title-has-commuting.png';
-import imgStep5 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-5-start-date.png';
-import imgStep6 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-6-end-date.png';
-import imgStep7 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-7-add-filter.png';
-import imgStep8 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-8-sort-by.png';
-import imgStep9 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-9-limit-one-event.png';
-import imgStep10 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-10-if-calendar-event.png';
-import imgStep11 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-11-open-traintime-app.png';
-import imgStep12 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-12-otherwise.png';
-import imgStep13 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-13-open-phone-app.png';
-import imgStep14 from '@assets/posts/iphone-action-button-commute-shortcut/shortcut/step-14-end-if.png';
+import imgStep1 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-1-calendar-events.png';
+import imgStep2 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-2-start-day-today.png';
+import imgStep3 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-3-work-calendar.png';
+import imgStep4 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-4-title-has-commuting.png';
+import imgStep5 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-5-start-date.png';
+import imgStep6 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-6-end-date.png';
+import imgStep7 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-7-add-filter.png';
+import imgStep8 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-8-sort-by.png';
+import imgStep9 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-9-limit-one-event.png';
+import imgStep10 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-10-if-calendar-event.png';
+import imgStep11 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-11-open-traintime-app.png';
+import imgStep12 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-12-otherwise.png';
+import imgStep13 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-13-open-phone-app.png';
+import imgStep14 from '@/content/posts/iphone-action-button-commute-shortcut/shortcut/step-14-end-if.png';
 
 type Step = {
     image: ImageMetadata;
@@ -125,7 +125,7 @@ const bgRepeat = await getImage({ src: imgPhoneFrameRepeat });
 
 const { class: className, ...props } = Astro.props;
 
-import '@styles/iphone-scroll.scss';
+import '@/styles/iphone-scroll.scss';
 ---
 <div
     class={className}
@@ -212,7 +212,7 @@ import '@styles/iphone-scroll.scss';
 
 <script>
 // import 'intersection-observer-debugger';
-import { debounce } from 'debounce';
+import debounce from 'debounce';
 
 let observer: null | IntersectionObserver = null;
 
@@ -235,7 +235,6 @@ const initialize = () => {
             const tallestStepHeight = [...$steps].reduce((accum, $step) => {
                 const { height } = $step.getBoundingClientRect();
                 if (height > accum) {
-                    console.log($step, height);
                     return height;
                 }
                 return accum;

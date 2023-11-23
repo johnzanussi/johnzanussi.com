@@ -5,12 +5,12 @@ export interface Props {
     post: CollectionEntry<'posts'>;
 }
 
-import { getPostUrl } from '@utils/collections';
+import { getPostUrl } from '@/utils/collections';
 
-import DateFormat from '@components/DateFormat.astro';
-import DraftBadge from '@components/DraftBadge.astro';
+import DateFormat from '@/components/DateFormat.astro';
+import DraftBadge from '@/components/DraftBadge.astro';
 import { Image } from 'astro:assets';
-import Link from '@components/Link.astro';
+import Link from '@/components/Link.astro';
 
 const { post, ...props } = Astro.props;
 

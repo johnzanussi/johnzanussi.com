@@ -1,11 +1,11 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import NavPhoto from '@components/NavPhoto.astro';
+import NavPhoto from '@/components/NavPhoto.astro';
 
 export type Props = HTMLAttributes<'div'>;
 
-import ThemeToggle from '@components/ThemeToggle.astro';
-import Icon from '@components/Icon.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import Icon from '@/components/Icon.astro';
 
 const { class: className } = Astro.props;
 ---
@@ -45,7 +45,7 @@ const { class: className } = Astro.props;
 </div>
 
 <script>
-import onClick from '@scripts/onClick';
+import onClick from '@/scripts/onClick';
 onClick('button[data-toggle="collapse"]', (element) => {
 
     const toggleElm = document.querySelector(element.dataset.target || '');

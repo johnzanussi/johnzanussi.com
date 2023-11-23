@@ -1,5 +1,5 @@
 import { getImage } from 'astro:assets';
-import { absoluteUrl } from '@utils/urls';
+import { absoluteUrl } from '@/utils/urls';
 
 export const getImageSrc = async (
     image: ImageMetadata | string,

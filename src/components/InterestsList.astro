@@ -16,7 +16,7 @@ export interface Props extends HTMLAttributes<'div'> {
     interests: InterestGroup[];
 }
 
-import Emoji from '@components/Emoji.astro';
+import Emoji from '@/components/Emoji.astro';
 
 const { interests, ...props } = Astro.props;
 ---

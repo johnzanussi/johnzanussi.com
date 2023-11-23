@@ -1,11 +1,11 @@
 ---
-import { getDateSortedCollection } from '@utils/collections';
-import { getImageSrc } from '@utils/images';
+import { getDateSortedCollection } from '@/utils/collections';
+import { getImageSrc } from '@/utils/images';
 
-import DividerLayout from '@layouts/DividerLayout.astro';
-import PostCard from '@components/PostCard.astro';
+import DividerLayout from '@/layouts/DividerLayout.astro';
+import PostCard from '@/components/PostCard.astro';
 
-import imgScreenshot from '@assets/screenshots/posts.jpg';
+import imgScreenshot from '@/assets/screenshots/posts.jpg';
 
 const imageUrl = await getImageSrc(imgScreenshot);
 

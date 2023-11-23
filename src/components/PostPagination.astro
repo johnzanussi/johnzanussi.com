@@ -1,17 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-import type { SiblingItems } from '@utils/collections';
+import type { SiblingItems } from '@/utils/collections';
 
 export interface Props extends HTMLAttributes<'nav'> {
     posts: SiblingItems<'posts'>[];
     showLabels?: boolean;
 }
 
-import { getPostUrl } from '@utils/collections';
+import { getPostUrl } from '@/utils/collections';
 
-import Icon from '@components/Icon.astro';
-import Link from '@components/Link.astro';
+import Icon from '@/components/Icon.astro';
+import Link from '@/components/Link.astro';
 
 const { posts, showLabels = true, ...props } = Astro.props;
 ---

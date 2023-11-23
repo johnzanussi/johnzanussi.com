@@ -1,14 +1,14 @@
 ---
 import { getEntry } from 'astro:content';
-import { getImageSrc } from '@utils/images';
+import { getImageSrc } from '@/utils/images';
 
-import Emoji from '@components/Emoji.astro';
-import Layout from '@layouts/Layout.astro';
-import Icon from '@components/Icon.astro';
-import Link from '@components/Link.astro';
-import PostCard from '@components/PostCard.astro';
+import Emoji from '@/components/Emoji.astro';
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import Link from '@/components/Link.astro';
+import PostCard from '@/components/PostCard.astro';
 
-import imgScreenshot from '@assets/screenshots/home.jpg';
+import imgScreenshot from '@/assets/screenshots/home.jpg';
 
 const imageUrl = await getImageSrc(imgScreenshot);
 

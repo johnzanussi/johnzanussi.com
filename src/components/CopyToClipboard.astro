@@ -5,10 +5,10 @@ export interface Props extends HTMLAttributes<'div'> {
     value: string;
 }
 
-import Icon from '@components/Icon.astro';
+import Icon from '@/components/Icon.astro';
 const { class: className, ...props } = Astro.props;
 
-import '@styles/copy-to-clipboard.scss';
+import '@/styles/copy-to-clipboard.scss';
 ---
 
 <script>
