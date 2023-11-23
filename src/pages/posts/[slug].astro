@@ -4,22 +4,22 @@ import {
     getSiblingItems,
     getPostUrl,
     getCollectionUrl,
-} from '@utils/collections';
+} from '@/utils/collections';
 
-import { absoluteUrl } from '@utils/urls';
-import { getImageSrc } from '@utils/images';
+import { absoluteUrl } from '@/utils/urls';
+import { getImageSrc } from '@/utils/images';
 
-import DividerLayout from '@layouts/DividerLayout.astro';
+import DividerLayout from '@/layouts/DividerLayout.astro';
 
-import AmazonDisclosure from '@components/AmazonDisclosure.astro';
-import Comments from '@components/Comments.astro';
-import DateFormat from '@components/DateFormat.astro';
-import DraftBadge from '@components/DraftBadge.astro';
-import EnjoyCTA from '@components/EnjoyCTA.astro';
-import Markdown from '@components/Markdown.astro';
-import PostPagination from '@components/PostPagination.astro';
+import AmazonDisclosure from '@/components/AmazonDisclosure.astro';
+import Comments from '@/components/Comments.astro';
+import DateFormat from '@/components/DateFormat.astro';
+import DraftBadge from '@/components/DraftBadge.astro';
+import EnjoyCTA from '@/components/EnjoyCTA.astro';
+import Markdown from '@/components/Markdown.astro';
+import PostPagination from '@/components/PostPagination.astro';
 
-import ContentAside from '@components/ContentAside.astro';
+import ContentAside from '@/components/ContentAside.astro';
 import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {

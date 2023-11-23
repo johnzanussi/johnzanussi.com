@@ -1,12 +1,12 @@
 ---
 import { getEntry } from 'astro:content';
-import { getImageSrc } from '@utils/images';
+import { getImageSrc } from '@/utils/images';
 
-import DividerLayout from '@layouts/DividerLayout.astro';
-import Icon from '@components/Icon.astro';
-import Link from '@components/Link.astro';
+import DividerLayout from '@/layouts/DividerLayout.astro';
+import Icon from '@/components/Icon.astro';
+import Link from '@/components/Link.astro';
 
-import imgScreenshot from '@assets/screenshots/youtube.jpg';
+import imgScreenshot from '@/assets/screenshots/youtube.jpg';
 
 const imageUrl = await getImageSrc(imgScreenshot);
 

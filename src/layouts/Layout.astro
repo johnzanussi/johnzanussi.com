@@ -4,11 +4,11 @@ import '@fontsource-variable/roboto-mono';
 
 import '../styles/index.scss';
 
-import Nav from '@components/Nav.astro';
-import ThemeToggleScript from '@components/ThemeToggleScript.astro';
+import Nav from '@/components/Nav.astro';
+import ThemeToggleScript from '@/components/ThemeToggleScript.astro';
 
-import { generateTags } from '@utils/metadata';
-import SimpleAnalytics from '@components/SimpleAnalytics.astro';
+import { generateTags } from '@/utils/metadata';
+import SimpleAnalytics from '@/components/SimpleAnalytics.astro';
 
 const { metadata, class: className = [] } = Astro.props;
 

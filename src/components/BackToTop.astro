@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'astro/types';
 
 export type Props = HTMLAttributes<'a'>;
 
-import Icon from '@components/Icon.astro';
+import Icon from '@/components/Icon.astro';
 
 const { class: className = '', ...props } = Astro.props;
 ---
@@ -20,7 +20,7 @@ const { class: className = '', ...props } = Astro.props;
 </a>
 
 <script>
-import onClick from '@scripts/onClick';
+import onClick from '@/scripts/onClick';
 onClick('.btn-back-to-top', (_, event) => {
     event.preventDefault();
     window.scrollTo({

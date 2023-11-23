@@ -2,8 +2,8 @@ import type { APIContext } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import rss from '@astrojs/rss';
 
-import { getDateSortedCollection, getPostUrl } from '@utils/collections';
-import { getImageSrc } from '@utils/images';
+import { getDateSortedCollection, getPostUrl } from '@/utils/collections';
+import { getImageSrc } from '@/utils/images';
 
 export async function GET(context: APIContext) {
 
