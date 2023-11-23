@@ -10,12 +10,12 @@
             "destination": "https://analytics.johnzanussi.com/api/event"
         },
         {
-            "source": "/uF7uQafzGw.js",
-            "destination": "https://scripts.simpleanalyticscdn.com/latest.js"
+            "source": "/uF7uQafzGw/:path*",
+            "destination": "https://queue.simpleanalyticscdn.com/:path*"
         },
         {
-            "source": "/uF7uQafzGw.gif",
-            "destination": "https://queue.simpleanalyticscdn.com/noscript.gif"
+            "source": "/uF7uQafzGw.js",
+            "destination": "https://simpleanalyticsexternal.com/proxy.js?hostname=johnzanussi.com&path=/uF7uQafzGw"
         }
     ],
     "headers": [
