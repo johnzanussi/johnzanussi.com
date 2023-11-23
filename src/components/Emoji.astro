@@ -16,15 +16,4 @@ if (!label) {
     ariaLabel = emojiToName[emoji] || '';
 }
 ---
-
-<span
-    aria-label={ariaLabel}
-    role="img"
-    {...props}
->
-
-    <slot>
-        {e}
-    </slot>
-
-</span>
+<span aria-label={ariaLabel} role="img" {...props}><slot>{e}</slot></span>
