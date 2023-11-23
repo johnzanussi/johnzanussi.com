@@ -73,7 +73,7 @@ export default defineConfig({
         robotsTxt(),
         purgecss(),
         compress({
-            img: false,
+            Image: false,
         }),
         icon({
             include: {
