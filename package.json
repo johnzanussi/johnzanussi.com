@@ -38,7 +38,7 @@
     "@iconify-json/fa-solid": "^1.1.5",
     "@iconify-json/fa6-brands": "^1.1.13",
     "@iconify-json/fa6-solid": "^1.1.15",
-    "@iconify-json/mdi": "^1.1.55",
+    "@iconify-json/mdi": "^1.1.56",
     "@types/debounce": "^1.2.4",
     "astro": "^3.6.0",
     "astro-auto-import": "^0.3.2",
