@@ -35,7 +35,7 @@
     "@fontsource-variable/inter": "^5.0.15",
     "@fontsource-variable/roboto-mono": "^5.0.16",
     "@github/clipboard-copy-element": "^1.3.0",
-    "@iconify-json/fa-solid": "^1.1.5",
+    "@iconify-json/fa-solid": "^1.1.6",
     "@iconify-json/fa6-brands": "^1.1.13",
     "@iconify-json/fa6-solid": "^1.1.15",
     "@iconify-json/mdi": "^1.1.55",
