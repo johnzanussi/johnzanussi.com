@@ -1,18 +1,19 @@
 ---
-export interface Props {
-    code: string;
-    lang?: string;
-    filename?: string;
-    url?: string;
-    title?: string;
-}
-
-import { Prism } from '@astrojs/prism';
+import type { BuiltinLanguage, SpecialLanguage } from 'shikiji';
+import { getHighlighter } from 'shikiji';
 
 import CopyToClipboard from '@/components/CopyToClipboard.astro';
 import Link from '@/components/Link.astro';
 
 import '@/styles/code-block.scss';
+
+export interface Props {
+    code: string;
+    lang: BuiltinLanguage | SpecialLanguage;
+    filename?: string;
+    url?: string;
+    title?: string;
+}
 
 const {
     code,
@@ -23,6 +24,21 @@ const {
 } = Astro.props;
 
 const showHeader = !!(filename || url);
+
+const themes = {
+    light: 'github-light',
+    dark: 'github-dark',
+};
+
+const shiki = await getHighlighter({
+    langs: [lang],
+    themes: Object.values(themes),
+});
+
+const codeHtml = shiki.codeToHtml(code, {
+    lang: lang,
+    themes: themes,
+});
 ---
 
 <figure class="code-block rounded-1 border mb-3">
@@ -46,10 +62,9 @@ const showHeader = !!(filename || url);
             </div>
         )}
 
-        <Prism
-            code={code}
-            lang={Astro.props.lang}
+        <div
             class="m-0 p-0 pb-4"
+            set:html={codeHtml}
         />
 
         <CopyToClipboard
