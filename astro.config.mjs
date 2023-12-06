@@ -1,6 +1,6 @@
 import { loadEnv } from 'vite';
 import { defineConfig } from 'astro/config';
-import AutoImport from 'astro-auto-import';
+import expressiveCode from 'astro-expressive-code';
 import compress from 'astro-compress';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
@@ -13,8 +13,6 @@ import vercel from '@astrojs/vercel/static';
 import remarkReadingtime from './src/utils/remark/reading-time';
 import remarkSectionize from './src/utils/remark/sectionize';
 import remarkUnwrapImages from './src/utils/remark/unwrap-images';
-
-import MDXCodeBlocks, { mdxCodeBlockAutoImport } from 'astro-mdx-code-blocks';
 
 // Rehype
 import addClasses from 'rehype-add-classes';
@@ -48,6 +46,9 @@ const envVariables = {
 const { url, port } = envVariables[currentEnv]();
 
 export default defineConfig({
+    experimental: {
+        contentCollectionCache: true,
+    },
     site: url,
     server: {
         port: port,
@@ -59,10 +60,19 @@ export default defineConfig({
         },
     }),
     integrations: [
-        AutoImport({
-            imports: [mdxCodeBlockAutoImport('src/components/CodeBlock.astro')],
+        expressiveCode({
+            themeCssSelector: (theme) => `[data-bs-theme='${theme.type}']`,
+            styleOverrides: {
+                codeFontFamily: 'var(--bs-font-monospace)',
+                uiFontFamily: 'var(--bs-font-sans-serif)',
+
+                frames: {
+                    frameBoxShadowCssValue: '1.6px 1.6px 21px 0 rgba(0,0,0,0.1)',
+                    // editorActiveTabIndicatorTopColor: 'var(--bs-heading-color)',
+                    editorActiveTabIndicatorTopColor: 'var(--bs-link-color)',
+                },
+            },
         }),
-        MDXCodeBlocks(),
         mdx(),
         sitemap({
             serialize(item) {
@@ -101,7 +111,6 @@ export default defineConfig({
                     h4: 'mt-3',
                     h5: 'mt-3 text-body-emphasis',
                     iframe: 'mb-4',
-                    pre: 'code-block rounded-md-2 border p-4',
                 },
             ],
         ],
