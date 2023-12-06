@@ -48,6 +48,7 @@
     "date-fns": "^2.30.0",
     "debounce": "^2.0.0",
     "deepmerge": "^4.3.1",
+    "katex": "^0.16.9",
     "mdast-util-mdxjs-esm": "^2.0.1",
     "metatags-generator": "^1.1.8",
     "purgecss": "^5.0.0",

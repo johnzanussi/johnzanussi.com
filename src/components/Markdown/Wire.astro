@@ -1,0 +1,26 @@
+---
+// https://webaim.org/resources/contrastchecker/
+const wireColors = {
+    red: ['A80000'],
+    bla: ['212529'],
+    yel: ['FCD12A', '0E1418'],
+    blu: ['0000DB'],
+} as const;
+
+type Props = {
+    c: keyof typeof wireColors;
+};
+
+const { c } = Astro.props;
+
+const [color, bg = 'F5F5F5'] = wireColors[c];
+
+const styles = {
+    color: `#${bg}`,
+    backgroundColor: `#${color}`,
+};
+
+// No new lines because the white
+// space was being preserved in MDX
+---
+<span class="font-monospace fw-bold px-1 rounded-1 small text-nowrap" style={styles}><slot /></span>
