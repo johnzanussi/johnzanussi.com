@@ -1,0 +1,17 @@
+---
+import { renderToString } from 'katex';
+import 'katex/dist/katex.css';
+
+type Props = {
+    exp: string;
+};
+
+const { exp } = Astro.props;
+
+const formatted = renderToString(exp);
+---
+
+<div
+    class="mb-4 text-center"
+    set:html={formatted}
+/>
