@@ -11,7 +11,7 @@ Since I was already using and somewhat familiar with the [`react-fontawesome`](h
 
 If we take a look at the documentation for using [Font Awesome with React](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react) we can see that we have to import both the `FontAwesomeIcon` base component and the icon component for whatever icon we want to display. I appreciate this approach as it allows for tree shaking of the `free-solid-svg-icons` library. Because the icon itself was imported separately it was a signal to me that I may be able to pass anything to the `FontAwesomeIcon` component.
 
-```jsx url="https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react#using" title="Font-Awesome-React-Docs"
+```jsx url="https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react#using" title="Font Awesome React Docs"
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
@@ -59,8 +59,7 @@ Now let's see if we can find a SVG for the Thingiverse logo. A quick search for 
 
 Downloading the file and looking at the source we can see it is a relatively simple SVG with a single `<path>` element which matches what we see in the `faCoffee` example above.
 
-```html
-// thingiverse-logo.svg
+```html title="thingiverse-logo.svg"
 <svg height="2500" width="2500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <g fill="none" fill-rule="evenodd">
         <circle cx="256.962" cy="256.962" fill="#2e88ff" r="237.714"/>
