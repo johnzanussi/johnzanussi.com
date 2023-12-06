@@ -1,5 +1,5 @@
 ---
-import { renderToString } from 'katex';
+import katex from 'katex';
 import 'katex/dist/katex.css';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 const { exp } = Astro.props;
 
-const formatted = renderToString(exp);
+const formatted = katex.renderToString(exp);
 ---
 
 <div
