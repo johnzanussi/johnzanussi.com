@@ -47,7 +47,7 @@ const { url, port } = envVariables[currentEnv]();
 
 export default defineConfig({
     experimental: {
-        contentCollectionCache: true,
+        // contentCollectionCache: true,
     },
     site: url,
     server: {

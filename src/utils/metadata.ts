@@ -1,11 +1,7 @@
-import {
-    MetadataGenerator,
-    MetatagsDocument,
-    OpengraphTypes,
-    Settings,
-} from 'metatags-generator';
-import { HtmlGenerator } from 'metatags-generator/lib/html-generator/generator';
+import type { MetatagsDocument, OpengraphTypes, Settings } from 'metatags-generator';
 
+import { MetadataGenerator } from 'metatags-generator';
+import { HtmlGenerator } from 'metatags-generator/lib/html-generator/generator';
 import merge from 'deepmerge';
 
 type OpenGraphTypes = OpengraphTypes | 'website';
