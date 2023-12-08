@@ -4,7 +4,16 @@ import { Image } from 'astro:assets';
 
 import imgJZ from '@/assets/img-john-zanussi-kiddo.jpg';
 
-const { class: className, ...props } = Astro.props;
+export type Props = {
+    class?: string;
+    sizes?: string;
+};
+
+const {
+    class: className,
+    sizes = '(min-width: 1200px) 250px, (min-width: 780px) 182px, 125px',
+    ...props
+} = Astro.props;
 ---
 <Link
     href="/"
@@ -19,7 +28,8 @@ const { class: className, ...props } = Astro.props;
         width={250}
         height={250}
         loading="eager"
-        widths={[125, 250, 500]}
+        widths={[37, 74, 125, 250, 500]}
+        sizes={sizes}
     />
 
 </Link>

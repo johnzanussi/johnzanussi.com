@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
-export interface Props {
+export type Props = {
     post: CollectionEntry<'posts'>;
-}
+};
 
 import { getPostUrl } from '@/utils/collections';
 
@@ -71,10 +71,12 @@ const {
     <div class="card-img ratio ratio-16x9 position-relative order-0 order-xl-1 ms-xl-3">
         <Image
             src={cover}
-            alt={`Cover image for ${title}`}
-            width={1600}
-            widths={[428, 768, 1200, 1600]}
+            alt={title}
+            width={852}
+            widths={[308, 324, 426, 786, 852]}
+            sizes="(min-width: 1640px) 426px, (min-width: 1200px) calc(35.48vw - 149px), (min-width: 780px) calc(100vw - 405px), calc(100vw - 66px)"
             class="rounded"
+            loading="lazy"
         />
 
     </div>

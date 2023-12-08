@@ -92,6 +92,7 @@ const siblingPosts = await getSiblingItems('posts', post);
                 height={cover.height}
                 alt={title}
                 widths={[576, 768, 992, 1200, 1400, 1600]}
+                sizes="(min-width: 1680px) 958px, (min-width: 1200px) calc(73.91vw - 269px), (min-width: 780px) calc(85vw - 315px), calc(100vw - 32px)"
                 class="img-fluid rounded shadow"
                 loading="eager"
             />

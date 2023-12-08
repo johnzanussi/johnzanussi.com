@@ -1,12 +1,16 @@
 ---
 import Icon from '@/components/Icon.astro';
 
+export type Props = {
+    class?: string;
+};
+
 const { class: className } = Astro.props;
 ---
 
 <button
     class:list={['btn btn-link text-warning d-none d-inline-light', className]}
-    role="button"
+    type="button"
     data-bs-theme-value="dark"
     aria-label="Switch to dark theme"
 >
@@ -19,7 +23,7 @@ const { class: className } = Astro.props;
 
 <button
     class:list={['btn btn-link text-danger d-none d-inline-dark', className]}
-    role="button"
+    type="button"
     data-bs-theme-value="light"
     aria-label="Switch to light theme"
 >

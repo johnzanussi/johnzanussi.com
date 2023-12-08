@@ -1,8 +1,10 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import type { HTMLAttributes } from 'astro/types';
 import type { ImageMetadata } from 'astro';
 
-type Props = {
+import { Image, getImage } from 'astro:assets';
+
+export interface Props extends HTMLAttributes<'div'> {
     class: string;
 }
 
