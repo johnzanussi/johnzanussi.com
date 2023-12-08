@@ -1,10 +1,10 @@
 ---
 import type { MarkdownHeading } from 'astro';
 
-export interface Props {
+export type Props = {
     headings: MarkdownHeading[];
     depth?: number;
-}
+};
 
 const {
     headings,

@@ -1,9 +1,9 @@
 ---
 import type { MarkdownHeading } from 'astro';
 
-export interface Props {
+export type Props = {
     headings: MarkdownHeading[];
-}
+};
 
 import BackToTop from '@/components/BackToTop.astro';
 import TableOfContents from '@/components/TableOfContents.astro';

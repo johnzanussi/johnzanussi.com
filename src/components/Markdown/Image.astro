@@ -12,18 +12,25 @@ const imgProps = {
     alt: altText,
     class: 'img-fluid',
     widths: [576, 768, 992, 1200, 1400, 1600],
+    sizes: '(min-width: 1200px) 720px, (min-width: 780px) calc(100vw - 371px), calc(100vw - 32px)',
     ...props,
 };
 ---
 
 {isUnwrapped && (
-    <AstroImage {...imgProps} />
+    <AstroImage
+        loading="lazy"
+        {...imgProps}
+    />
 )}
 
 {!isUnwrapped && (
 
     <div class="mb-4">
-        <AstroImage {...imgProps} />
+        <AstroImage
+            loading="lazy"
+            {...imgProps}
+        />
     </div>
 
 )}

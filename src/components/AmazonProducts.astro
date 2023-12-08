@@ -1,13 +1,13 @@
 ---
-interface Product {
+export type Product = {
     id: string;
     title: string;
     link: string;
-}
+};
 
-export interface Props {
+export type Props = {
     products: Product[];
-}
+};
 
 import Icon from '@/components/Icon.astro';
 import Link from '@/components/Link.astro';

@@ -1,5 +1,6 @@
 ---
-export interface Props {
+import type { HTMLAttributes } from 'astro/types';
+export interface Props extends HTMLAttributes<'aside'> {
     type: 'egg' | 'idea' | 'mindblown' | 'wave';
 }
 
