@@ -18,7 +18,12 @@ const typeIcons = {
     xmas: '🎄',
 };
 
-const { type, title, ...props } = Astro.props;
+const {
+    type,
+    title,
+    class: className,
+    ...props
+} = Astro.props;
 
 const icon = typeIcons[type] || '';
 const isIcon = icon.includes(':');
@@ -30,6 +35,7 @@ const isIcon = icon.includes(':');
         {
             'd-flex': !title,
         },
+        className,
     ]}
     {...props}
 >
