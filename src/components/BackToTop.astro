@@ -1,22 +1,22 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-export type Props = HTMLAttributes<'a'>;
+export type Props = HTMLAttributes<'button'>;
 
 import Icon from '@/components/Icon.astro';
 
 const { class: className = '', ...props } = Astro.props;
 ---
-<a
-    href="#"
+<button
+    type="button"
     class:list={[
-        'btn-back-to-top',
+        'btn btn-link btn-back-to-top',
         className,
     ]}
     {...props}
 >
     Back to top <Icon icon="fa-solid:level-up-alt" />
-</a>
+</button>
 
 <script>
 import onClick from '@/scripts/onClick';

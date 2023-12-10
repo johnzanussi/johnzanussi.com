@@ -1,0 +1,232 @@
+---
+title: DIY Automated Christmas Tree Watering
+excerpt: I used an Adafruit QT Py ESP32-C3 board, capacitive moisture sensor, a cheap fountain pump, and a relay to create a self watering system for our christmas tree. All for about $20, not including parts and tools I already owned.
+cover: "@/content/posts/diy-automated-christmas-tree-watering/cover-tree-pump-sensor-relay.jpg"
+date: '2023-12-10'
+hasAmazonLinks: true
+hiddenIntro: true
+---
+
+## Intro
+I'm notoriously bad at watering the Christmas tree we bring into our house every year. I diligently water it for the first few days. Then I forget or get busy; a day or two goes by where I don't water it, and the tree eventually dries out. By the time Christmas comes around, the tree is hanging on for dear life. Plus, even when I remember, getting under the tree is awkward, and I always spill water everywhere. A couple of years ago, I bought a [long funnel](https://amzn.to/49T0xfr), thinking that would make things easier, but it ended up being just as annoying and messy as not using one.
+
+Amazon sells both [cheap siphoning and expensive pumping tree watering systems](https://amzn.to/3R3klnv). The [one I like](https://amzn.to/46AEQ0M) the most is $100. It's not necessarily a bad price if it lasts multiple years. However, thinking about how it works, I decided to try building something myself.
+
+## TL;DR
+I used an Adafruit QT Py ESP32-C3 board, a capacitive moisture sensor, a cheap fountain pump, and a relay to create a self-watering system that wirelessly connects to my existing Home Assistant setup. All for about $20, not including parts and tools I already owned.
+
+I know what you're thinking&hellip;
+
+  > Do you really need your Christmas tree water pump to wirelessly connect to your home network?
+
+**No, absolutely not**. But I had an ESP-32 board on hand, and, as you'll see, [ESPHome](https://esphome.io/index.html) made it incredibly easy to configure the microcontroller and set up the watering automation.
+
+<Aside type="idea">
+    Any microcontroller, internet-connected or not, and relay should work. The concept remains the same: Use the microcontroller to determine if the capacitive sensor is dry and send a signal to turn on a relay that powers a water pump until the sensor detects water.
+</Aside>
+
+## Parts List
+ * [Adafruit QT Py ESP32-C3 dev board](https://www.adafruit.com/product/5405) - $9.95
+ * [Capacitive Moisture Sensor](https://amzn.to/49WIYuS) - $7.99 for 5 ($1.60/each)
+ * [1/2 Inch PVC Clear Vinyl Tubing](https://amzn.to/411BVwU) - $6.88 for 10 feet
+ * [Small Fountain Pump](https://amzn.to/3GmZ03D) - $8.99
+ * [Controllable Power Relay](https://amzn.to/3Gl83Cf) - $29.95
+ * [5 Gallon Bucket](https://www.acehardware.com/departments/paint-and-supplies/painting-tools-and-supplies/paint-pails/1147461) - $4.99
+ * [3D Printed QT Py Case](https://www.printables.com/model/390867-adafruit-qt-py-esp32-c3-case-with-reset-and-second) - Free
+ * [3D Printed Moisture Sensor Mount](https://www.printables.com/model/666579-capacitive-moisture-sensor-magnet-mount) - Free
+
+Total: **$62.36**
+
+I already had the QT Py ESP32-C3 and power relay from previous projects, so my total cost was only **$22.46**.
+
+<Aside type="xmas" title="Holiday Tip">
+  Reuse your empty 3D printer filament spools to keep your Christmas lights untangled and organized.
+
+  ![Christmas lights spooled around empty 3D printer filament spools noDivWrap](@/content/posts/diy-automated-christmas-tree-watering/3d-printer-fillament-spools-christmas-lights.jpg)
+</Aside>
+
+## Circuit
+
+![Circuit diagram showing how the QT Py connects to the moisture sensor and smart power relay](@/content/posts/diy-automated-christmas-tree-watering/diagram-esp32-moisture-sensor-relay.png)
+
+The relay I'm using has four outlets on it and probably wouldn't be my first option if I didn't already have it as I'm only using two of the outlets and only need the one switched outlet.
+
+### QT Py &harr; Capacitive Sensor
+The capacitive moisture sensor gets power from the QT Py via the <Wire c="red">5v</Wire> and <Wire c="bla">GND</Wire> pins and sends its analog signal to the <Wire c="yel">A0</Wire> pin.
+
+### QT Py &harr; Power Relay
+The QT Py connects to the relay via its [STEMMA QT connector](https://www.adafruit.com/category/1005). The connector has four pins, the <Wire c="bla">GND</Wire> and <Wire c="blu">GPIO 5</Wire> pins are used. When the QT Py sends a <Wire c="red">3v</Wire> signal over the <Wire c="blu">GPIO 5</Wire> pin, the relay switches the "normally OFF" outlet on.
+
+The QT Py plugs into the "always ON" outlet via a USB C cable and 5v power brick for constant power.
+
+### Power Relay &harr; Pump
+The pump plugs into the "normally OFF" outlet, which, as the name states, is normally off until a <Wire c="red">3v</Wire> signal provided by the microcontroller is detected, and then it switches on.
+
+![Overhead view of the power relay, QT Py, moisture sensor, pump, and tubing connected together](@/content/posts/diy-automated-christmas-tree-watering/complete-sensor-relay-microcontroller-pump.jpg)
+
+## ESPHome Config
+I'm going to skip over the instructions on setting up a device with ESPHome as there are a ton of tutorials and the [ESPHome docs](https://esphome.io/index.html) that cover those steps in great detail. I have ESPHome running as part of my local [Home Assitant](https://www.home-assistant.io/) instance and used that to compile the following config and flash it onto the QT Py.
+
+```yaml
+esphome:
+  name: esphome-qtpy-c3-xmas-tree
+  friendly_name: esphome-qtpy-c3-xmas-tree
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: ""
+
+ota:
+  password: ""
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+# Virtual Switch for controlling the pump
+switch:
+  - platform: gpio
+    pin: GPIO5 # SDA
+    name: "Tree Pump"
+    id: xmas_tree_pump
+    restore_mode: ALWAYS_OFF
+    icon: "mdi:water-pump"
+
+# Capacitive Moisture Sensor
+# Dry: 2.2V; Fully Submerged: 1.0V
+sensor:
+  - platform: adc # ESPHome Analog To Digital Sensor
+    pin: A0 # A0 pin on the QT Py
+    name: "Christmas Tree Water Sensor"
+    id: xmas_tree_water_sensor
+    icon: "mdi:pine-tree"
+    update_interval: 1s # Update status every second
+    attenuation: auto
+    unit_of_measurement: "%" # Default unit for adc is volts
+    filters:
+    - median:
+        window_size: 3 # Combine 3 values
+        send_every: 3 # Find and send the median after 3 values
+    - calibrate_linear: # More on callibration below
+        - 2.20 -> 61.54
+        - 1.00 -> 100.00
+    - lambda: | # Only return values between 0 and 100
+        if (x < 0) return 0;
+        else if (x > 100) return 100;
+        else return (x);
+    accuracy_decimals: 0
+    on_value_range: # When water is below bottom of sensor
+      - below: 62
+        then:
+          - switch.turn_on: xmas_tree_pump  # Turn on the pump
+          - wait_until: # Wait until the sensor is above 90% or 10 seconds has passed
+              condition:
+                sensor.in_range:
+                  id: xmas_tree_water_sensor
+                  above: 90
+              timeout: 10s
+          - switch.turn_off: xmas_tree_pump # Turn off pump
+```
+The config defines two devices. The first is a virtual switch with the id `xmas_tree_pump` that sends a <Wire c="red">3v</Wire> signal over the <Wire c="blu">GPIO 5</Wire> pin when switched on.
+
+The second device is a sensor with the id `xmas_tree_water_sensor` using the `adc` or Analog to Digital platform that reads its data from the <Wire c="yel">A0</Wire> pin. The time between updates is set to 1 second, and the unit of measurement is changed from volts to percentage.
+
+Filters are applied to refine the incoming data by calculating the median, setting upper and lower limits, and calibrating to a scale, which I will write about below. Documentation for all the sections of the config I used is linked here.
+
+ * [`adc`: Analog to Digital Sensor](https://esphome.io/components/sensor/adc.html)
+    * [`filters`: Sensor Filters](https://esphome.io/components/sensor/index.html#sensor-filters)
+        * [`median`](https://esphome.io/components/sensor/index.html#median)
+        * [`calibrate_linear`](https://esphome.io/components/sensor/index.html#calibrate-linear)
+        * [`lambda`](https://esphome.io/components/sensor/index.html#lambda)
+    * [`on_value_range`](https://esphome.io/components/sensor/index.html#on-value-range)
+        * [`wait_until`](https://esphome.io/guides/automations.html#wait-until-action)
+            * [`sensor.in_range`](https://esphome.io/components/sensor/index.html?highlight=in_range#sensor-in-range-condition)
+ * [`switch`: GPIO Switch](https://esphome.io/components/switch/gpio.html)
+
+### Automation
+```yaml
+on_value_range: # When water is below bottom of sensor
+  - below: 62
+    then:
+      - switch.turn_on: xmas_tree_pump  # Turn on the pump
+      - wait_until: # Wait until the sensor is above 90% or 10 seconds has passed
+          condition:
+            sensor.in_range:
+              id: xmas_tree_water_sensor
+              above: 90
+          timeout: 10s
+      # - delay: 5s
+      - switch.turn_off: xmas_tree_pump # Turn off pump
+```
+When the value of the sensor drops below `62%`, turn on the `xmas_tree_pump` switch. Wait until the sensor is either above `90%` or `10 seconds` have passed, then turn the `xmas_tree_pump` switch off.
+
+### Sensor Calibration
+
+Before completing the filters and automation sections of the config I did some initial testing to determine the voltage values at different water levels on the sensor. As you might have read in the config comments, it measured `2.2v` when the sensor was dry and `1.0v` when fully submerged in water.
+
+The height of the cylinder of my tree stand is 6.5 inches (16.5 cm). With the components of the moisture sensor above the water line, the measurable area of the sensor is about 2.5 inches (6.35cm) tall. The bottom of the sensor sits about 4 inches (10 cm) above the bottom of the cylinder.
+
+![Tree stand with a measuring tape and the moisture sensor clamped to the inside](@/content/posts/diy-automated-christmas-tree-watering/xmas-tree-base-sensor-measurement.jpg)
+
+Doing some simple cross-multiplication, I figured out that when the water is at the bottom of the sensor (4 inches from the bottom of the cylinder), the cylinder is 62% full.
+
+<Math exp="\LARGE\frac{6.5}{4} = \frac{100}{x}\\[1em]\large x = 61.53846154" />
+
+And we can map those values to the voltage readings from above.
+
+| Water Height    | Fill Percentage | Voltage Reading |
+| -------------   | ------          | --------------  |
+| 6.5in (16.5cm)  | 100%            | 1.00 volts      |
+| 4in (10cm)      | 62%             | 2.20 volts      |
+| 0in (0cm)       | 0%              | -               |
+
+Those values can be provided to the [`calibrate_linear`](https://esphome.io/components/sensor/index.html#calibrate-linear) filter in the config. Since the sensor doesn't reach the bottom of the cylinder, there's no way of knowing what the water level is if it's below the sensor, but that shouldn't matter as the automation starts pumping water once the water level falls below 62%, which is below the bottom of the sensor.
+
+```yaml
+- calibrate_linear:
+    - 2.20 -> 61.54
+    - 1.00 -> 100.00
+```
+
+## 3D Prints
+I needed a way to mount the moisture sensor to the tree stand, so I turned to my ever-growing CAD and 3D printing skills. The requirements were simple:
+
+ * Keep the electronics above the water line
+ * Keep the sensor part of the PCB below the water line
+ * Easily removable
+
+This is what I came up with. The sensor friction fits into the print. I added a dab of hot glue to ensure it stays in place. I had some small magnets lying around, and the tree holder is metal, so it securely grabs the stand. You can download, print, and modify the model yourself on [Printables.com](https://www.printables.com/model/666579-capacitive-moisture-sensor-magnet-mount).
+
+[![Different perspectives of the 3D printed moisture sensor mount](@/content/posts/diy-automated-christmas-tree-watering/printed-sensor-mount.png)](https://www.printables.com/model/666579-capacitive-moisture-sensor-magnet-mount)
+
+The other 3D print is a simple case for the QT Py that someone else designed and [uploaded to Printables](https://www.printables.com/model/390867-adafruit-qt-py-esp32-c3-case-with-reset-and-second).
+
+
+## Final Product
+
+The pump goes into the bucket, and the bucket goes into Santa's toy bag to disguise it under the tree.
+
+![Fountain pump inside a 5 gallon bucket full of water](@/content/posts/diy-automated-christmas-tree-watering/tree-pump-and-bucket.jpg)
+
+I used a zip tie to secure the vinyl tubing around the base of the tree. I also looped the tubing above a branch higher than the bucket's water level to prevent any siphoning from happening.
+
+![Under a Christmas tree of the water tube and sensor attached to the base of the tree](@/content/posts/diy-automated-christmas-tree-watering/christmas-tree-pump-and-sensor.jpg)
+
+
+At the time of writing, the setup has been running without issue for a few days. As you can see below, the water level slowly drops below the 62% threshold, and the pump turns on, fills up, and then turns off. There haven't been any spills or overflows yet. I'm happy so far, but it's still too soon to say if this will work long-term or if spending the $100 on the watering system from Amazon is the way to go.
+
+![Screenshot of a graph in Home Assistant showing the water level over time](@/content/posts/diy-automated-christmas-tree-watering/screenshot-home-assitant-christmas-tree-water-level.jpg)
+
+***
+
+<div class="text-center mt-5 mb-3">
+  <span class="text-bg-success text-white rounded-1 fw-bold fs-4 p-2">🎄 Merry Christmas and Happy Holidays! 🎅 🤶</span>
+</div>
+
+![Decorated Christmas tree](@/content/posts/diy-automated-christmas-tree-watering/christmas-tree-2023.jpg)
