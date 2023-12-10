@@ -1,7 +1,8 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 export interface Props extends HTMLAttributes<'aside'> {
-    type: 'egg' | 'idea' | 'mindblown' | 'wave';
+    title?: string;
+    type: 'egg' | 'idea' | 'mindblown' | 'wave' | 'xmas';
 }
 
 import Icon from '@/components/Icon.astro';
@@ -14,27 +15,43 @@ const typeIcons = {
     idea: '💡',
     mindblown: '🤯',
     wave: '👋',
+    xmas: '🎄',
 };
 
-const { type, ...props } = Astro.props;
+const { type, title, ...props } = Astro.props;
 
 const icon = typeIcons[type] || '';
 const isIcon = icon.includes(':');
 ---
 
 <aside
-    class:list={`content-aside aside-${type} d-flex border-start border-5 p-3 mb-4 rounded rounded-1 shadow`}
+    class:list={[
+        `content-aside aside-${type} border-start border-5 p-3 mb-4 rounded rounded-1 shadow`,
+        {
+            'd-flex': !title,
+        },
+    ]}
     {...props}
 >
 
-    <p
-        class="fs-1 m-0"
-        aria-hidden="true"
-    >
-        {isIcon ? <Icon icon={icon} /> : <Emoji e={icon} />}
-    </p>
+    {!title && (
+        <p
+            class="fs-1 m-0"
+            aria-hidden="true"
+        >
+            {isIcon ? <Icon icon={icon} /> : <Emoji e={icon} />}
+        </p>
+    )}
 
     <section class="ps-3">
+
+        {title && (
+            <p class="fs-5 fw-bold">
+                <span class="fs-3">
+                    {isIcon ? <Icon icon={icon} /> : <Emoji e={icon} />}
+                </span> {title}
+            </p>
+        )}
 
         <slot />
 
