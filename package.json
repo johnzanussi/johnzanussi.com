@@ -30,7 +30,7 @@
     "@astrojs/mdx": "^2.0.0",
     "@astrojs/rss": "^4.0.1",
     "@astrojs/sitemap": "^3.0.3",
-    "@astrojs/vercel": "^6.0.1",
+    "@astrojs/vercel": "^6.0.2",
     "@fontsource-variable/inter": "^5.0.16",
     "@fontsource-variable/roboto-mono": "^5.0.17",
     "@iconify-json/fa-solid": "^1.1.7",
