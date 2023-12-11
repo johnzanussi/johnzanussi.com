@@ -4,6 +4,58 @@ excerpt: The tools, libraries, and services used to build JohnZanussi.com.
 cover: "@/content/pages/built-with/cover-built-with-screenshot.jpg"
 ---
 
-import README from '../../../../README.mdx';
+Back in the day (2008), [`johnzanussi.com`](https://johnzanussi.com) was the home of my Tumblr blog.
 
-export default README;
+[![Screen shot of johnzanussi.com from 2008](src/content/pages/built-with/screenshot-johnzanussi-dot-com-tumblr.png)](https://web.archive.org/web/20080817121815/http://johnzanussi.com/)
+
+Then, in 2014, I switched it to a single splash page with "Full site coming soon" in the footer. Ah, yes, the famous soon&#8482;.
+
+[![Screen shot of johnzanussi.com from 2021](src/content/pages/built-with/screenshot-johnzanussi-dot-com-splash.png)](https://web.archive.org/web/20210610103313/http://johnzanussi.com/)
+
+Almost eight years later, in late-2021, I finally built a more elaborate website for myself. Since then, the site has continued to evolve. Below you’ll find some of the libraries and services I used and why I chose them.
+
+You can also find all the code for this site available on my [GitHub](https://github.com/johnzanussi/johnzanussi.com).
+
+## Libraries
+
+##### [Astro](https://astro.build/)
+
+As of February 2023, this website is built on Astro. While browsing Reddit one day, I saw someone mention Astro. I immediately fell in love with it as it takes static site generation to the next level. I wrote a detailed post about why I chose Astro and the migration from Next.js which [you can read here](/posts/nextjs-to-astro-migration).
+
+##### [~~Next.js~~](https://nextjs.org)
+
+~~Next.js has quickly become my go-to for spinning up project sites. It's easy to use, has many starter projects, and deploys easily.~~ The Next.js code has been preserved in the [`nextjs`](https://github.com/johnzanussi/johnzanussi.com/tree/nextjs) branch on my GitHub.
+
+##### [~~React~~](https://reactjs.org)
+
+~~Your only option for Next.js is React, which is fine since it's what I'm most comfortable with. I've been writing React regularly since 2016.~~
+
+##### [Bootstrap](https://getbootstrap.com/)
+
+For this project and another personal project, I gave [Tailwind](https://tailwindcss.com/) a chance. Tailwind is great if you're working in an established design system with a custom component library and need utility classes. Bootstrap shines compared to Tailwind in the vast array of out-of-the-box components.
+
+##### [Font Awesome](https://fontawesome.com/)
+
+Font Awesome gets an honorable mention here, as I used a handful of their icons throughout my site.
+
+A complete list of packages can be found in [`package.json`](https://github.com/johnzanussi/johnzanussi.com/blob/main/package.json)
+
+## Services
+
+##### [Vercel](https://vercel.com/)
+
+I didn't know much about Vercel until I was ready to deploy my first Next.js project. Out of everything here, I'm most impressed with Vercel. I've never experienced a more seamless out-of-the-box solution for deploying static websites. Best of all, it's free for personal projects.
+
+##### [FastComments](https://fastcomments.com/)
+
+I spent quite some time looking for the best way to add comments, including rolling my own, to this site but eventually landed on FastComments. The key aspects that won me over are that it's pretty feature-rich, doesn't require commenters to create accounts, offers a [React library](https://www.npmjs.com/package/fastcomments-react), and [collects as little data](https://fastcomments.com/privacy-policy) as possible. While FastComments is not free, my site does such little traffic and comment volume that it only costs me $0.99 a month.
+
+##### [Plausible](https://plausible.io/)
+
+I'm self-hosting Plausible at [analytics.johnzanussi.com](https://analytics.johnzanussi.com/) to collect traffic data from this site. I followed this [amazing guide](https://www.stackovercloud.com/2021/10/28/how-to-install-plausible-analytics-on-ubuntu-20-04/) to get the self-hosted instance installed and running on DigitalOcean.
+
+##### [Grammarly](https://www.grammarly.com/)
+
+Since I’m not the best at articulating my thoughts into words, I started using Grammarly's Premium plan to check my work. It's most useful for me as a spell and grammar check, but I also appreciate some of the other suggestions, helping to make my words more readable.
+
+

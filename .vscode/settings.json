@@ -1,0 +1,10 @@
+{
+    "[mdx]": {
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            // "strings": false,
+            // "comments": false,
+            // "other": false
+        }
+    }
+}
