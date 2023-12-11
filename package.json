@@ -38,7 +38,7 @@
     "@iconify-json/fa6-solid": "^1.1.19",
     "@iconify-json/mdi": "^1.1.59",
     "@types/debounce": "^1.2.4",
-    "astro": "^4.0.3",
+    "astro": "^4.0.4",
     "astro-auto-import": "^0.4.2",
     "astro-expressive-code": "^0.29.3",
     "astro-icon": "^1.0.0-next.2",
