@@ -1,65 +1,40 @@
-html[data-bs-theme="light"] {
-    .content-aside {
-        &.aside-xmas {
-            --jz-aside-background-start: #A3D0BB;
-            --jz-aside-background-stop: #A3D0BB;
-            --jz-aside-border: #0E5232;
-            --jz-aside-link: var(--bs-dark);
-            color: var(--bs-dark);
-        }
+@mixin aside-variant($name, $color, $opacity: 0.2) {
+    &.aside-#{$name} {
+        --jz-aside: #{$color};
+        --jz-aside-h: #{hue($color)};
+        --jz-aside-l: #{lightness($color)};
+        --jz-aside-s: #{saturation($color)};
+        --jz-aside-o: #{$opacity};
     }
 }
 
 .content-aside {
+    // https://getbootstrap.com/docs/5.3/customize/color/#colors
 
-    &.aside-egg {
-        --jz-aside-background-start: var(--bs-white);
-        --jz-aside-background-stop: rgba(235,182,210,1);
-        --jz-aside-border: var(--bs-pink-500);
-        --jz-aside-link: var(--bs-pink-900);
-    }
+    @include aside-variant('idea', #13a0d1);
+    @include aside-variant('xmas', #048749);
+    @include aside-variant('wave', #6fdef6);
+    @include aside-variant('mindblown', #CA660F);
+    @include aside-variant('egg', #D73384);
 
-    &.aside-idea {
-        --jz-aside-background-start: var(transparent);
-        --jz-aside-background-stop: var(transparent);
-        // --jz-aside-border: var(--bs-teal-800);
-        // --jz-aside-link: var(--bs-orange-900);
-        color: var(--bs-body);
-    }
-
-    &.aside-mindblown {
-        --jz-aside-background-start: var(--bs-white);
-        --jz-aside-background-stop: var(--bs-orange-400);
-        --jz-aside-border: var(--bs-orange-600);
-        --jz-aside-link: var(--bs-orange-900);
-    }
-
-    &.aside-wave {
-        --jz-aside-background-start: var(--bs-white);
-        --jz-aside-background-stop: #6fdef6;
-        --jz-aside-border: var(--bs-cyan-600);
-        --jz-aside-link: var(--bs-cyan-900);
-    }
-
-    &.aside-xmas {
-        --jz-aside-background-start: #0E5232;
-        --jz-aside-background-stop: #0E5232;
-        --jz-aside-border: #A3D0BB;
-        --jz-aside-link: var(--bs-white);
-        color: var(--bs-white);
-    }
-
-    background: var(--jz-aside-background-stop);
-    background: linear-gradient(
-        135deg,
-        var(--jz-aside-background-start) 0%,
-        var(--jz-aside-background-stop) 25%
+    background-color: hsl(
+        var(--jz-aside-h),
+        var(--jz-aside-s),
+        var(--jz-aside-l),
+        var(--jz-aside-o)
     );
-    border-color: var(--jz-aside-border) !important;
-    color: var(--bs-body-bg-dark);
+
+    border-color: var(--jz-aside) !important;
+    color: var(--bs-body-color);
+
+    .aside-icon {
+        width: 40px;
+        height: 40px;
+        background-color: var(--jz-aside);
+    }
 
     .icon {
-        color: var(--jz-aside-border);
+        color: var(--bs-light);
     }
 
     a {
@@ -67,7 +42,7 @@ html[data-bs-theme="light"] {
         text-decoration: underline dashed;
         text-underline-offset: 0.15em;
         &:hover {
-            color: var(--bs-body-bg-dark);
+            color: var(--jz-aside);
         }
     }
 

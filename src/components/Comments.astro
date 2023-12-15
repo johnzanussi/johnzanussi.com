@@ -27,9 +27,9 @@ if (comments !== null && window.FastCommentsUI) {
 
     const getConfig = (theme: string | null) => ({
         tenantId: 'TuZHgHCUlVl',
-        urlId: comments.dataset.id,
-        url: comments.dataset.url,
-        pageTitle: comments.dataset.title,
+        urlId: comments.dataset.id ?? '',
+        url: comments.dataset.url ?? '',
+        pageTitle: comments.dataset.title ?? '',
         hasDarkBackground: theme === 'dark',
     });
 

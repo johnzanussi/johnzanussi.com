@@ -206,7 +206,9 @@ const handleNavWindowResize = () => {
                 };
 
                 const callback = ([entry]: IntersectionObserverEntry[]) => {
-                    entry.target.classList.toggle('is-sticky', entry.intersectionRatio < 1);
+                    if (entry) {
+                        entry.target.classList.toggle('is-sticky', entry.intersectionRatio < 1);
+                    }
                 };
 
                 if (observer) {
