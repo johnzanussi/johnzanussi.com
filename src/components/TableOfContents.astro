@@ -17,10 +17,10 @@ const topLevel = headings.filter((heading) => heading.depth === depth);
 <ul class="list-unstyled">
 
     {topLevel.map((heading, i) => {
+        const topLevelHeading = topLevel[i + 1];
 
         const sliceStart = headings.indexOf(heading) + 1;
-
-        const sliceEnd = headings.indexOf(topLevel[i + 1]);
+        const sliceEnd = topLevelHeading ? headings.indexOf(topLevelHeading) : 0;
 
         const subHeadings = headings.slice(
             sliceStart,
