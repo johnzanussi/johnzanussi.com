@@ -69,7 +69,7 @@
     "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.2",
     "eslint": "^8.55.0",
-    "eslint-plugin-astro": "^0.30.0",
+    "eslint-plugin-astro": "^0.31.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-unused-imports": "^3.0.0",
     "fastcomments-typescript": "^2.1.3",
