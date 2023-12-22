@@ -1,4 +1,17 @@
-@import './bootstrap';
+@import './bootstrap-import';
+$theme-attribute: 'data-bs-theme';
+
+@mixin color-mode-parent($mode: light) {
+    [#{$theme-attribute}="#{$mode}"] & {
+        @content;
+    }
+}
+
+// @mixin color-mode-selector($mode: light, $selector: html) {
+//     #{$selector}[data-bs-theme="#{$mode}"] {
+//         @content;
+//     }
+// }
 
 :root {
 
@@ -12,17 +25,8 @@
         --jz-nav-width: 377px;
     }
 
-    --bs-pink-500: #{$pink-500};
-    --bs-pink-900: #{$pink-900};
-    --bs-orange-400: #{$orange-400};
-    --bs-orange-600: #{$orange-600};
-    --bs-orange-900: #{$orange-900};
-
-    --bs-cyan-600: #{$cyan-600};
-    --bs-cyan-900: #{$cyan-900};
-
-    --bs-body-bg-dark: #{$body-bg-dark};
 }
+
 
 :root,
 html[data-bs-theme="light"] {
@@ -79,6 +83,7 @@ html[data-bs-theme="dark"] {
 
 @import './base';
 @import './utils';
+@import './buttons';
 @import './nav';
 
 @include media-breakpoint-up(md) {
@@ -183,3 +188,4 @@ html[data-bs-theme="dark"] {
 .expressive-code {
     margin-bottom: $spacer * 1.5; // mb-4
 }
+

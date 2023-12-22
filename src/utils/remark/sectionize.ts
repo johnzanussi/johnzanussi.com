@@ -10,59 +10,67 @@ import type { Heading } from 'mdast';
 const slugs = new Slugger();
 
 export default function remarkSectionize(): Transformer {
+
     const sectionize = (heading: Heading, ancestors: Parent[]) => {
+
         const start = heading;
         const depth = start.depth;
         const parent = ancestors[ancestors.length - 1];
 
-        const end = findAfter(parent, start, (node) => {
-            return node.type === 'heading' || node.type === 'export';
-        });
+        if (parent) {
 
-        if (!end) {
-            return;
-        }
+            const end = findAfter(parent, start, (node) => {
+                // Find the next heading or the end of the document
+                return node.type === 'heading' || node.type === 'export' || node.type === 'mdxjsEsm';
+            });
 
-        const startIndex = parent.children.indexOf(start);
-        const endIndex = parent.children.indexOf(end);
+            if (!end) {
+                return;
+            }
 
-        const between = parent.children.slice(
-            startIndex,
-            endIndex > 0 ? endIndex : undefined
-        );
+            const startIndex = parent.children.indexOf(start);
+            const endIndex = parent.children.indexOf(end);
 
-        const headingText = toString(heading)
-            .replace(/^[^a-zA-Z]+/, '')
-            .trim();
+            const between = parent.children.slice(
+                startIndex,
+                endIndex > 0 ? endIndex : undefined
+            );
 
-        const slug = slugs.slug(headingText);
+            const headingText = toString(heading)
+                .replace(/^[^a-zA-Z]+/, '')
+                .trim();
 
-        if (!heading.data) {
-            heading.data = {};
-        }
+            const slug = slugs.slug(headingText);
 
-        if (!heading.data.hProperties) {
-            heading.data.hProperties = {};
-        }
+            if (!heading.data) {
+                heading.data = {};
+            }
 
-        heading.data.hProperties = {
-            ...(heading.data.hProperties as object),
-            id: `h-${slug}`,
-        };
+            if (!heading.data.hProperties) {
+                heading.data.hProperties = {};
+            }
 
-        const section = {
-            type: 'section',
-            depth: depth,
-            children: between,
-            data: {
-                hName: 'section',
-                hProperties: {
-                    id: slug,
+            heading.data.hProperties = {
+                ...(heading.data.hProperties as object),
+                id: `h-${slug}`,
+            };
+
+            const section = {
+                type: 'section',
+                depth: depth,
+                children: between,
+                data: {
+                    hName: 'section',
+                    hProperties: {
+                        id: slug,
+                    },
                 },
-            },
-        };
+            };
 
-        parent.children.splice(startIndex, section.children.length, section);
+            parent.children.splice(startIndex, section.children.length, section);
+
+        }
+
     };
 
     return function (tree) {

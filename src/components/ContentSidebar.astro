@@ -1,0 +1,23 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+import '@/styles/content-sidebar.scss';
+
+export type Props = {
+    headings: MarkdownHeading[];
+    url: string;
+};
+
+import BackToTop from '@/components/BackToTop.astro';
+import TableOfContents from '@/components/TableOfContents/TableOfContents.astro';
+
+const { headings } = Astro.props;
+const hasHeadings = !!headings.length;
+---
+<aside class="content-sidebar sticky-top align-self-md-start mb-3 mb-md-0 ms-md-5 pb-2 pb-md-5 ps-md-5 rounded-bottom z-1 overflow-auto is-sticky">
+
+    {hasHeadings && <TableOfContents headings={headings} />}
+
+    <BackToTop class="link-opacity-75 link-opacity-100-hover link-body-emphasis small ps-4 text-uppercase d-none d-md-block" />
+
+</aside>

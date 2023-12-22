@@ -1,0 +1,42 @@
+.btn {
+
+    &-unstyled {
+        &,
+        &:hover,
+        &:active,
+        &:focus {
+            padding: 0;
+            border: 0 !important;
+            background: transparent !important;
+        }
+    }
+
+    &-xs {
+        @include button-size(0.15rem, 0.5rem, 0.75rem, 4px);
+    }
+
+    &-outline-heading {
+
+        @include color-mode-parent('light') {
+            @include button-outline-variant(
+                $headings-color,
+                $headings-color,
+                'transparent',
+                $headings-color,
+                $headings-color,
+            );
+        }
+
+        @include color-mode-parent('dark') {
+            @include button-outline-variant(
+                $headings-color-dark,
+                $headings-color-dark,
+                'transparent',
+                $headings-color-dark,
+                $headings-color-dark,
+            );
+        }
+
+    }
+
+}

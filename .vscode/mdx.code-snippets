@@ -1,0 +1,30 @@
+{
+	// Frontmatter
+	"MDXFrontMatter": {
+		"scope": "md,mdx",
+		"prefix": "fm",
+		"body": [
+			"---",
+			"title:",
+			"excerpt:",
+			"cover: \"@/content/posts/@/content/posts/rack-mounting-home-assistant-yellow/cover-rack-mounted-home-assistant-yellow.jpg\"",
+			"#cover: \"@/content/posts/@/content/posts/${TM_DIRECTORY/.*\\/(.*)$/$1/g}/$0\"",
+			"date: ''",
+			"#hasAmazonLinks: true",
+			"#hiddenIntro: true",
+			"---"
+		],
+		"description": "Populate post front matter"
+	},
+
+	// Images
+	"MDX Images": {
+		"scope": "md,mdx",
+		"prefix": "img",
+		"body": [
+			"![](@/content/posts/${TM_DIRECTORY/.*\\/(.*)$/$1/g}/$0)"
+		],
+		"description": "Autofill asset file path"
+	}
+
+}

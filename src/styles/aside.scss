@@ -1,3 +1,5 @@
+@use '@/styles/bootstrap.scss' as bs;
+
 @mixin aside-variant($name, $color, $opacity: 0.2) {
     &.aside-#{$name} {
         --jz-aside: #{$color};
@@ -11,11 +13,11 @@
 .content-aside {
     // https://getbootstrap.com/docs/5.3/customize/color/#colors
 
-    @include aside-variant('idea', #13a0d1);
-    @include aside-variant('xmas', #048749);
-    @include aside-variant('wave', #6fdef6);
-    @include aside-variant('mindblown', #CA660F);
-    @include aside-variant('egg', #D73384);
+    @include aside-variant('idea', bs.$primary);
+    @include aside-variant('xmas', bs.$green-600);
+    @include aside-variant('wave', bs.$cyan-300);
+    @include aside-variant('mindblown', bs.$orange-600);
+    @include aside-variant('egg', bs.$pink-500);
 
     background-color: hsl(
         var(--jz-aside-h),
