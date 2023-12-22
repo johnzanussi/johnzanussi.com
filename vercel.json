@@ -20,6 +20,10 @@
         {
             "source": "/ingest/:path(.*)",
             "destination": "https://app.posthog.com/:path*"
+        },
+        {
+            "source": "/e9dj3dRNs.js",
+            "destination": "https://tinylytics.app/embed/xUHdB2b5yvksgocLb-s_.js"
         }
     ],
     "headers": [
