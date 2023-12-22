@@ -163,6 +163,8 @@ const socialLinksCount = socialLinks.length - 1;
 </nav>
 
 <script>
+import isSticky from '@/scripts/isSticky';
+
 let observer: null | IntersectionObserver = null;
 let topMargin = 0;
 
@@ -201,23 +203,14 @@ const handleNavWindowResize = () => {
                 $nav.style.top = `-${topMargin + 4}px`;
 
                 const options = {
-                    threshold: [1],
                     rootMargin: `${topMargin}px`,
-                };
-
-                const callback = ([entry]: IntersectionObserverEntry[]) => {
-                    if (entry) {
-                        entry.target.classList.toggle('is-sticky', entry.intersectionRatio < 1);
-                    }
                 };
 
                 if (observer) {
                     observer.disconnect();
                 }
 
-                observer = new IntersectionObserver(callback, options);
-
-                observer.observe($nav);
+                observer = isSticky($nav, options);
 
             }
         }

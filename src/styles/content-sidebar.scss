@@ -1,0 +1,57 @@
+@use '@/styles/bootstrap.scss' as bs;
+
+.content-sidebar {
+
+    @include bs.media-breakpoint-up(md) {
+        top: 8em !important;
+        max-height: calc(100vh - 8em);
+    }
+
+    @include bs.media-breakpoint-down(md) {
+        top: calc(61px + 0.5rem) !important;
+        margin-top: -1px;
+
+        .content-toc {
+            display: none;
+        }
+
+        .toc-header {
+            padding-top: 0.5rem;
+            border-top: 1px solid transparent;
+        }
+
+        .toc-collapse-icon {
+            transition: transform .2s ease-in-out;
+        }
+
+        &.is-sticky {
+            background-color: bs.$dark;
+            margin-inline: -1em; // .p-nav
+            transition: background-color 0.15s ease-in;
+            box-shadow: var(--bs-box-shadow-lg);
+
+            .toc-header {
+                border-color: bs.$black;
+                padding-inline: var(--bs-border-radius) 1rem;
+            }
+
+            .content-toc {
+                padding-inline: 1rem;
+            }
+        }
+
+        &.show {
+
+            .content-toc {
+                display: block;
+            }
+
+            .toc-collapse-icon {
+                transform: rotate(90deg);
+            }
+
+        }
+
+    }
+
+}

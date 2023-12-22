@@ -1,13 +1,16 @@
+@use '@/styles/bootstrap' as bs;
+
 .content-container {
     section {
-        scroll-margin-top: 1em;
+        scroll-margin-top: 140px;
+
+        @include bs.media-breakpoint-up(md) {
+            scroll-margin-top: 1em;
+        }
     }
 }
 
-.aside-content {
-    top: 8em !important;
-    max-height: calc(100vh - 8em);
-    overflow: auto;
+.content-toc {
 
     h2 {
         opacity: .65;
@@ -15,7 +18,7 @@
 
     $depth-padding: 1.5em;
 
-    nav {
+    ul {
 
         a {
             display: block;

@@ -19,7 +19,7 @@ import EnjoyCTA from '@/components/EnjoyCTA.astro';
 import Markdown from '@/components/Markdown.astro';
 import PostPagination from '@/components/PostPagination.astro';
 
-import ContentAside from '@/components/ContentAside.astro';
+import ContentSidebar from '@/components/ContentSidebar.astro';
 import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
@@ -77,10 +77,7 @@ const metadata = {
 
 const siblingPosts = await getSiblingItems('posts', post);
 ---
-<DividerLayout
-    metadata={metadata}
-    headings={headings}
->
+<DividerLayout metadata={metadata}>
 
     <Fragment slot="header">
 
@@ -139,19 +136,23 @@ const siblingPosts = await getSiblingItems('posts', post);
 
             <PostPagination posts={siblingPosts} />
 
-            <h2 id="comments">
-                Comments
-            </h2>
+            <section id="comments">
 
-            <Comments
-                id={slug}
-                url={postUrl}
-                title={title}
-            />
+                <h2 id="h-comments">
+                    Comments
+                </h2>
+
+                <Comments
+                    id={slug}
+                    url={postUrl}
+                    title={title}
+                />
+
+            </section>
 
         </article>
 
-        {headings.length > 0 && <ContentAside headings={headings} />}
+        <ContentSidebar headings={headings} url={postUrl} />
 
     </Fragment>
 
