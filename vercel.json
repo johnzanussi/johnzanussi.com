@@ -16,6 +16,10 @@
         {
             "source": "/api/lxmsCZJtB2",
             "destination": "https://plausible.io/api/event"
+        },
+        {
+            "source": "/ingest/:path(.*)",
+            "destination": "https://app.posthog.com/:path*"
         }
     ],
     "headers": [

@@ -9,6 +9,7 @@ import ThemeToggleScript from '@/components/ThemeToggleScript.astro';
 
 import { generateTags } from '@/utils/metadata';
 import AnalyticsPlausible from '@/components/AnalyticsPlausible.astro';
+import AnalyticsPostHog from '@/components/AnalyticsPostHog.astro';
 
 const { metadata, class: className = [] } = Astro.props;
 
@@ -26,6 +27,7 @@ const isDev = import.meta.env.MODE === 'development';
 <meta name="generator" content={Astro.generator} />
 <Fragment set:html={head} />
 {!isDev && (
+    <AnalyticsPostHog />
     <AnalyticsPlausible />
     <script
         defer
