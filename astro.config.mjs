@@ -91,6 +91,7 @@ export default defineConfig({
                 'fa6-solid': ['*'],
                 'fa6-brands': ['*'],
                 'mdi': ['*'],
+                'logos': ['*'],
             },
         }),
     ],
