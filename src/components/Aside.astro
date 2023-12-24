@@ -1,14 +1,5 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-export interface Props extends HTMLAttributes<'aside'> {
-    title?: string;
-    type: 'egg' | 'idea' | 'mindblown' | 'wave' | 'xmas';
-}
-
-import Icon from '@/components/Icon.astro';
-import Emoji from '@/components/Emoji.astro';
-
-import '@/styles/aside.scss';
 
 const typeIcons = {
     egg: 'mdi:egg-easter',
@@ -16,7 +7,19 @@ const typeIcons = {
     mindblown: '🤯',
     wave: '👋',
     xmas: 'fa-solid:tree',
+    reddit: 'fa6-brands:reddit-alien',
+    hackernews: 'logos:ycombinator',
 };
+
+interface Props extends HTMLAttributes<'aside'> {
+    title?: string;
+    type: keyof typeof typeIcons;
+}
+
+import Icon from '@/components/Icon.astro';
+import Emoji from '@/components/Emoji.astro';
+
+import '@/styles/aside.scss';
 
 const {
     type,
@@ -41,7 +44,7 @@ const isIcon = icon.includes(':');
 >
 
     <span class="aside-icon position-absolute top-0 start-0 fs-4 rounded-1 text-center translate-middle">
-        {isIcon ? <Icon icon={icon} /> : <Emoji e={icon} />}
+        {isIcon ? <Icon icon={icon} class="position-absolute top-50 left-50 translate-middle"/> : <Emoji e={icon} />}
     </span>
 
     <section class="py-1">

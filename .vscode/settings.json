@@ -5,6 +5,7 @@
             // "strings": false,
             // "comments": false,
             // "other": false
-        }
+        },
+        "files.trimTrailingWhitespace": false
     }
 }
