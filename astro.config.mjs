@@ -1,7 +1,7 @@
 import { loadEnv } from 'vite';
 import { defineConfig } from 'astro/config';
 import expressiveCode from 'astro-expressive-code';
-// import compress from 'astro-compress';
+import compress from 'astro-compress';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
 import purgecss from 'astro-purgecss';
@@ -82,9 +82,9 @@ export default defineConfig({
         }),
         robotsTxt(),
         purgecss(),
-        // compress({
-        //     Image: false,
-        // }),
+        compress({
+            Image: false,
+        }),
         icon({
             include: {
                 'fa-solid': ['*'],

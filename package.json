@@ -88,6 +88,10 @@
     "unist-util-visit": "^5.0.0",
     "unist-util-visit-parents": "^6.0.1"
   },
+  "resolutions": {
+    "astro/sharp": "0.33.1",
+    "astro-compress/sharp": "0.33.1"
+  },
   "lint-staged": {
     "*.{astro,js,ts}": "eslint --cache --fix",
     "*.{gif,jpg,jpeg,png}": "node ./lib/compress-images.mjs"
