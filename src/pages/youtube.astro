@@ -56,9 +56,9 @@ const { data: subscriptions } = await getEntry('youtube', 'channels');
 
                     <h3
                         id={categorySlug}
-                        class="text-capitalize mb-3">
-                        {category}
-                    </h3>
+                        class="text-capitalize mb-3"
+                        set:html={category.replace('/', '/<wbr>')}
+                    />
 
                     <ul class="list-unstyled">
 
