@@ -1,0 +1,28 @@
+---
+type Props = {
+    id: number;
+    class?: string;
+};
+
+const {
+    id,
+    class: className = '',
+} = Astro.props;
+---
+
+<div class:list={['mb-4 embed-center', className]}>
+
+    <div
+        class="strava-embed-placeholder"
+        data-embed-type="activity"
+        data-embed-id={id.toString()}
+        data-style="standard"
+    />
+
+</div>
+
+<script
+    async
+    defer
+    src="https://strava-embeds.com/embed.js"
+/>
