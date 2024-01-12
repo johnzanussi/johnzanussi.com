@@ -67,12 +67,11 @@ if ($sidebar) {
     };
 
     isSticky($sidebar, {
-        rootMargin: '-72px 0px 1000px 0px',
-        threshold: 1,
-    }, (isSticky) => {
-        $sidebar.dataset.bsTheme = isSticky ? 'dark' : undefined;
-        document.querySelector<HTMLElement>('.site-nav')?.classList.toggle('rounded-bottom', !isSticky);
-        document.querySelector<HTMLElement>('.site-nav')?.classList.toggle('shadow-lg', !isSticky);
+        callback: (isSticky) => {
+            $sidebar.dataset.bsTheme = isSticky ? 'dark' : undefined;
+            document.querySelector<HTMLElement>('.site-nav')?.classList.toggle('rounded-bottom', !isSticky);
+            document.querySelector<HTMLElement>('.site-nav')?.classList.toggle('shadow-lg', !isSticky);
+        },
     });
 
     window.addEventListener('click', (event) => {

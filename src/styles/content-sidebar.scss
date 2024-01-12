@@ -27,7 +27,7 @@
         &.is-sticky {
             background-color: bs.$dark;
             margin-inline: -1em; // .p-nav
-            transition: background-color 0.15s ease-in;
+            transition: background-color 0.05s ease-in;
             box-shadow: var(--bs-box-shadow-lg);
 
             .toc-header {
