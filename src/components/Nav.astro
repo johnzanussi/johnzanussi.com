@@ -165,7 +165,9 @@ const socialLinksCount = socialLinks.length - 1;
 <script>
 import isSticky from '@/scripts/isSticky';
 
-let observer: null | IntersectionObserver = null;
+const $nav = document.querySelector<HTMLElement>('.site-nav-wrap');
+const $navToggle = document.querySelector<HTMLElement>('[data-target="#nav-collapse"]');
+
 let topMargin = 0;
 
 const handleNavWindowResize = () => {
@@ -181,8 +183,6 @@ const handleNavWindowResize = () => {
         $nav.classList.toggle('position-relative', isStatic);
 
     }
-
-    const $navToggle = document.querySelector('[data-target="#nav-collapse"]');
 
     if (
         $navToggle &&
@@ -202,22 +202,18 @@ const handleNavWindowResize = () => {
 
                 $nav.style.top = `-${topMargin + 4}px`;
 
-                const options = {
-                    rootMargin: `${topMargin}px`,
-                };
-
-                if (observer) {
-                    observer.disconnect();
-                }
-
-                observer = isSticky($nav, options);
-
             }
         }
 
     }
 
 };
+
+if ($nav && $navToggle) {
+    isSticky($nav, {
+        $offsetEl: $navToggle,
+    });
+}
 
 window.addEventListener('DOMContentLoaded', handleNavWindowResize);
 window.addEventListener('resize', handleNavWindowResize);
