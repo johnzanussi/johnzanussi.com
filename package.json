@@ -62,7 +62,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.7",
     "@babel/eslint-parser": "^7.23.3",
-    "@supabase/supabase-js": "^2.39.2",
+    "@supabase/supabase-js": "^2.39.3",
     "@types/katex": "^0.16.7",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
