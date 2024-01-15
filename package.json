@@ -52,7 +52,7 @@
     "katex": "^0.16.9",
     "mdast-util-mdxjs-esm": "^2.0.1",
     "metatags-generator": "^1.1.8",
-    "posthog-js": "^1.98.0",
+    "posthog-js": "^1.98.2",
     "purgecss": "^5.0.0",
     "reading-time": "^1.5.0",
     "sharp": "^0.33.1",
