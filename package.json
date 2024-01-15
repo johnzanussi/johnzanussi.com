@@ -39,7 +39,7 @@
     "@iconify-json/logos": "^1.1.42",
     "@iconify-json/mdi": "^1.1.64",
     "@types/debounce": "^1.2.4",
-    "astro": "^4.1.1",
+    "astro": "^4.1.2",
     "astro-auto-import": "^0.4.2",
     "astro-expressive-code": "^0.31.0",
     "astro-icon": "^1.0.2",
