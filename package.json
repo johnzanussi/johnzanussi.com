@@ -55,7 +55,6 @@
     "posthog-js": "^1.131.4",
     "purgecss": "^6.0.0",
     "reading-time": "^1.5.0",
-    "sharp": "^0.33.4",
     "simple-scrollspy": "^2.4.2"
   },
   "devDependencies": {
@@ -84,6 +83,7 @@
     "rehype-accessible-emojis": "^0.3.2",
     "rehype-add-classes": "^1.0.0",
     "sass": "^1.77.2",
+    "sharp": "^0.33.4",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.9.0",
     "unist-util-find-after": "^5.0.0",
