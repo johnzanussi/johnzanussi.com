@@ -20,6 +20,7 @@
     @include aside-variant('egg', bs.$pink-500);
     @include aside-variant('reddit', #FF4500);
     @include aside-variant('hackernews', #FF6602);
+    @include aside-variant('info', bs.$blue-500);
 
     background-color: hsl(
         var(--jz-aside-h),
