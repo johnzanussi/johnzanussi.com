@@ -1,0 +1,14 @@
+---
+export type Props = {
+    sources: {
+        src: string;
+        type: 'video/mp4' | 'video/webm';
+    }[];
+};
+
+const { sources } = Astro.props;
+---
+
+<video autoplay loop muted playsinline class="img-fluid mb-4">
+    {sources.map(({ src, type }) => <source src={src} type={type} />)}
+</video>

@@ -2,13 +2,13 @@
 title: Creating an Animated Eye for a Painted Minions Pumpkin
 excerpt: Using 3D printing, electronics, and code to create an animated eye for a painted Minions pumpkin
 cover: "@/content/posts/minions-pumpkin-animated-eye/cover-minions-pumpkin-animated-eye.png"
-date: '2024-11-09'
+date: '2024-11-17'
 hasAmazonLinks: true
-hiddenIntro: true   
 ---
 
 import Emoji from '@/components/Emoji.astro';
 import Figure from '@/components/Figure.astro';
+import Video from '@/components/Video.astro';
 
 <Aside type="wave">
     If you're looking for the step-by-step guide to creating your own animated Minions eye, <a href="#part-2-how-to">click here</a> to jump past the story and right to the instructions.
@@ -51,7 +51,7 @@ In the end, I used a Raspberry Pi Zero 2 W, a 2.8 inch round display I found on 
 The night before the submission deadline, Natalia and I painted the pumpkin to look like a Minion. Once the paint dried, we tested the electronics for the last time. Everything worked perfectly. On Tuesday, Natalia carried the finished pumpkin into school, and it was up to the students at her school to decide our fate.
 
 <div class="w-50 mx-auto">
-    ![Video of a pumpkin painted like a Minion with an animated blinking eye](@/content/posts/minions-pumpkin-animated-eye/minions-pumpkin.gif)
+    <Video sources={[{ src: '/videos/minions-pumpkin.mp4', type: 'video/mp4' }]} />
 </div>
 
 On Halloween, Natalia was so excited as she stepped off the bus, proudly showing us the winning certificate. Sharing this project with her was so much fun. Natalia loves creating as much as I do, and involving her in the CAD, 3D printing, and electronics made the experience even more special.
@@ -373,6 +373,6 @@ As I mentioned above, there are a ton of existing guides on how to paint a Minio
 
 ### Final Result
 
-![Video of a pumpkin painted like a Minion with an animated blinking eye](@/content/posts/minions-pumpkin-animated-eye/minions-pumpkin.gif)
+<Video sources={[{ src: '/videos/minions-pumpkin.mp4', type: 'video/mp4' }]} />
 
 ![Minions pumpkin with animated blinking eye](@/content/posts/minions-pumpkin-animated-eye/minions-pumpkin.jpg)
