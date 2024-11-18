@@ -8,6 +8,7 @@ import purgecss from 'astro-purgecss';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel/static';
+import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 
 // Remark
 import remarkReadingtime from './src/utils/remark/reading-time';
@@ -61,6 +62,12 @@ export default defineConfig({
     }),
     integrations: [
         expressiveCode({
+            plugins: [
+                pluginLineNumbers()
+            ],
+            defaultProps: {
+                showLineNumbers: false,
+            },
             themeCssSelector: (theme) => `[data-bs-theme='${theme.type}']`,
             styleOverrides: {
                 codeFontFamily: 'var(--bs-font-monospace)',
