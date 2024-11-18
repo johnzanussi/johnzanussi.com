@@ -1,0 +1,378 @@
+---
+title: Creating an Animated Eye for a Painted Minions Pumpkin
+excerpt: Using 3D printing, electronics, and code to create an animated eye for a painted Minions pumpkin
+cover: "@/content/posts/minions-pumpkin-animated-eye/cover-minions-pumpkin-animated-eye.png"
+date: '2024-11-09'
+hasAmazonLinks: true
+hiddenIntro: true   
+---
+
+import Emoji from '@/components/Emoji.astro';
+import Figure from '@/components/Figure.astro';
+
+<Aside type="wave">
+    If you're looking for the step-by-step guide to creating your own animated Minions eye, <a href="#part-2-how-to">click here</a> to jump past the story and right to the instructions.
+</Aside>
+
+## Part 1: Story Time
+
+Every year, my daughter Natalia's elementary school hosts a pumpkin painting contest. The rules are simple: decorate a pumpkin your kid can carry into school and, most importantly, have fun as a family. Pumpkins are brought in two days before Halloween, the kids vote on them the day before Halloween, and they stay on display at school until after the holiday. Voting is done with spare change, which is donated to a local family in need. At the end of the voting, a winner is selected.
+
+As a family, we've participated in the contest for the past two years. Two years ago, Natalia and I worked on recreating the house from <i>Up</i>, complete with balloons. Last year, Natalia and my wife teamed up to make a mermaid pumpkin. Unfortunately, neither submission fared particularly well in the voting.
+
+<Grid columns={[6, 6]}>
+
+    ![Pumpkin painted like the house from the movie Up with balloons on top of it](@/content/posts/minions-pumpkin-animated-eye/pumpkin-2022-up-house.jpg)
+
+    ![Painted pumpkin with a colorful wig to look like a mermaid](@/content/posts/minions-pumpkin-animated-eye/pumpkin-2023-mermaid.jpg)
+
+</Grid>
+
+Looking back, the painting on the <i>Up</i> pumpkin wasn't our best work, and while kids might not have noticed, all I could see in my wife's mermaid pumpkin was E.T wearing a wig.
+
+<Grid columns={[6, 6]}>
+
+    ![Painted pumpkin with a colorful wig to look like a mermaid](@/content/posts/minions-pumpkin-animated-eye/pumpkin-2023-mermaid.jpg)
+
+    ![Screenshot from the movie E.T. with E.T. wearing a wig and clothes](@/content/posts/minions-pumpkin-animated-eye/et-wearing-a-wig-and-clothes.jpg)
+
+</Grid>
+
+This past summer, I took Natalia and one of her friends to see <i>Despicable Me 4</i> in theaters. Even though it was only July, halfway through the movie, I found myself thinking about how perfect a Minion pumpkin would be for this year's contest—specifically one with an animated eye.
+
+Of course, painting a Minion pumpkin has been done a million times over. But after a quick Google search, I realized no one had combined the classic Minion look with an animated eye. I was up for the challenge.
+
+[![Screenshot of Google image search results for "minions pumpkin painting"](@/content/posts/minions-pumpkin-animated-eye/screenshot-google-image-search-painted-minions-pumpkins.png)](https://www.google.com/search?q=minions+pumpkin+painting&udm=2)
+
+In the middle of summer, I started brainstorming. I've been tinkering with electronics and 3D printing for a few years now, so I figured this project would be the perfect way to combine those skills. The idea seemed doable, and I already had some components on hand. Over the next few months, I spent time tinkering with electronics, designing and 3D printing CAD models, and writing and testing code.
+
+In the end, I used a Raspberry Pi Zero 2 W, a 2.8 inch round display I found on Amazon, animated GIFs of an eyeball I commissioned on Fiverr, code I wrote, and 3D prints Natalia and I designed to create exactly what I had envisioned over the summer. 
+
+The night before the submission deadline, Natalia and I painted the pumpkin to look like a Minion. Once the paint dried, we tested the electronics for the last time. Everything worked perfectly. On Tuesday, Natalia carried the finished pumpkin into school, and it was up to the students at her school to decide our fate.
+
+<div class="w-50 mx-auto">
+    ![Video of a pumpkin painted like a Minion with an animated blinking eye](@/content/posts/minions-pumpkin-animated-eye/minions-pumpkin.gif)
+</div>
+
+On Halloween, Natalia was so excited as she stepped off the bus, proudly showing us the winning certificate. Sharing this project with her was so much fun. Natalia loves creating as much as I do, and involving her in the CAD, 3D printing, and electronics made the experience even more special.
+
+<div class="w-50 mx-auto">
+    ![Natalia standing in front of her bus holding a paper that says "Certificate for the best pumpkin awarded to Zanussi Family"](@/content/posts/minions-pumpkin-animated-eye/natalia-pumpkin-certificate.jpg)
+</div>
+
+## Part 2: How To
+Now let's get into what exactly I used and how I connected it all together to create this award winning masterpiece. <Emoji label="wink">😉</Emoji>
+
+### Parts List
+
+Like many of my other projects, I already had most of these parts on hand.
+
+ * [Raspberry Pi Zero 2 W](https://www.adafruit.com/piz2w) - $15
+ * [2.8 inch Round LCD Display](https://amzn.to/4hLdYli) - $39.99
+ * [1 inch wide Gray Elastic Band](https://amzn.to/40HkS4X) - $8.19
+ * [Mini HDMI Cable](https://amzn.to/4fHSbct) - $13.99
+ * [3D Printed Goggle](https://www.printables.com/model/1072351-minions-eye-goggle-for-28in-display) - Free
+ * [3D Printed Elastic Clip](https://www.printables.com/model/1077859-1in-elastic-strap-clip) - Free
+
+ If you're looking to power the system on a battery bank I would suggest adding a relay so that the Pi can turn the screen on and off on a fixed schedule to save power. If not, you can skip the relay and battery bank all together.
+
+ * [Gravity: Easy Relay Module](https://www.dfrobot.com/product-2094.html?tracking=Q7YYJh98Z2vzyMp6N2FFWYXtL7TLGOsNQOcSLOcWUatkUCsu89MoiuuZ21hEeSHq) - $7.90
+ * [5v Power Bank](https://amzn.to/48UGWLA) - $20-$80
+
+### 3D Prints
+
+I created the following models for this project. Both models are available for free on Printables.com in STL and Fusion360 formats.
+
+#### Goggle Frame
+
+The goggle frame was modeled to look like what the Minion's wear. There is a recessed space on the underside to fit the 2.8 inch display linked above. The holes on each side are just wide enough to fit the 1 inch elastic strap through. 
+
+[![Screenshot of Minions Eye Goggle on Printables.com noDivWrap](@/content/posts/minions-pumpkin-animated-eye/model-minions-goggle-frame.png)](https://www.printables.com/model/1072351-minions-eye-goggle-for-28in-display)
+
+[Minions Eye Goggle for 2.8in Display](https://www.printables.com/model/1072351-minions-eye-goggle-for-28in-display)
+
+#### Elastic Strap Clip
+
+This is used to tie together the two ends of the elastic strap. There is enough friction between the elastic and the print to keep the tension.
+
+[![Screenshot of Clip for 1 inch Elastic Strap on Printables.com noDivWrap](@/content/posts/minions-pumpkin-animated-eye/model-elastic-strap-clip.png)](https://www.printables.com/model/1077859-clip-for-1-inch-elastic-strap)
+
+[Clip for 1 inch Elastic Strap](https://www.printables.com/model/1077859-clip-for-1-inch-elastic-strap)
+
+### Code
+
+The following code handles both the playing of the animated gifs and the scheduling for turning the screen on and off. If you don't plan on using the scheduling you can simply set `SCHEDULE` to `False` on line 9. There are other variables available for customizing the schedule and the GPIO pin used for the controlling the relay.
+
+We'll use this code further down in the [Raspberry Pi Setup](#raspberry-pi-setup) section.
+
+```python title=eye.py showLineNumbers
+import pygame
+from PIL import Image
+import random
+import os
+import RPi.GPIO as GPIO
+import schedule
+
+# Configuration for scheduled GPIO control
+SCHEDULE = True         # Enable/disable scheduling
+SCHEDULE_ON = '07:00'   # Time to turn the relay ON
+SCHEDULE_OFF = '19:05'  # Time to turn the relay OFF
+GPIO_PIN_FOR_RELAY = 26 # GPIO pin used to control the relay
+
+if SCHEDULE:
+    # Initialize GPIO in BCM (Broadcom pin numbering) mode
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(GPIO_PIN_FOR_RELAY, GPIO.OUT)
+
+    # Define function to set the GPIO pin HIGH (activate relay)
+    def set_pin_high():
+        GPIO.output(GPIO_PIN_FOR_RELAY, GPIO.HIGH)
+        print(f"GPIO {GPIO_PIN_FOR_RELAY} set to HIGH ({SCHEDULE_ON})")
+
+    # Define function to set the GPIO pin LOW (deactivate relay)
+    def set_pin_low():
+        GPIO.output(GPIO_PIN_FOR_RELAY, GPIO.LOW)
+        print(f"GPIO {GPIO_PIN_FOR_RELAY} set to LOW ({SCHEDULE_OFF})")
+
+    # Schedule tasks to run at specified times
+    schedule.every().day.at(SCHEDULE_ON).do(set_pin_low)  # Deactivate relay at SCHEDULE_ON
+    schedule.every().day.at(SCHEDULE_OFF).do(set_pin_high)  # Activate relay at SCHEDULE_OFF
+
+# Initialize pygame for display and graphics handling
+pygame.init()
+
+# Set up a 480x480 window for displaying GIFs
+screen = pygame.display.set_mode((480, 480))
+
+# List of GIF files with their respective weights for random selection
+gif_files = [
+    ("blink.gif", 3),  # More likely to be chosen (weight 3)
+    ("look-left.gif", 1),
+    ("look-right.gif", 1),
+]
+
+# Function to load and process a GIF file into pygame-compatible frames
+def load_gif(gif_path):
+    gif = Image.open(gif_path)  # Open the GIF file
+    frames = []  # List to store individual frames
+    frame_durations = []  # List to store frame durations
+
+    # Extract and process each frame
+    for frame in range(0, gif.n_frames):
+        gif.seek(frame)  # Go to the specific frame
+        frame_image = gif.convert("RGBA")  # Convert to RGBA for pygame compatibility
+
+        # Rotate the frame 90 degrees counterclockwise
+        rotated_frame = frame_image.rotate(90, expand=True)
+
+        # Convert the frame to a pygame image
+        mode = rotated_frame.mode
+        size = rotated_frame.size
+        data = rotated_frame.tobytes()
+        py_image = pygame.image.fromstring(data, size, mode)
+
+        # Append frame and its duration
+        frames.append(py_image)
+        duration = gif.info.get("duration", 100) / 1000.0  # Duration in seconds
+        frame_durations.append(duration)
+
+    return frames, frame_durations
+
+# Function to play a GIF frame-by-frame on the pygame display
+def play_gif(frames, frame_durations):
+    current_frame = 0  # Start with the first frame
+    last_update_time = pygame.time.get_ticks()  # Time tracking for frame updates
+
+    while current_frame < len(frames):
+        # Handle user events (e.g., quit or escape key)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return False
+
+        now = pygame.time.get_ticks()
+
+        # Check if it's time to update the frame
+        if now - last_update_time > frame_durations[current_frame] * 1000:
+            current_frame += 1
+            last_update_time = now
+
+        if current_frame < len(frames):
+            # Center the frame on the screen and display it
+            frame_rect = frames[current_frame].get_rect(center=(235, 245))
+            screen.blit(frames[current_frame], frame_rect)
+            pygame.display.flip()
+
+        clock.tick(60)  # Limit the loop to 60 frames per second
+
+    return True
+
+# Main loop that handles GPIO scheduling and GIF playback
+running = True
+clock = pygame.time.Clock()  # Clock to control frame rate
+
+try:
+    while running:
+        if SCHEDULE:
+            # Execute any scheduled GPIO tasks
+            schedule.run_pending()
+
+        # Randomly select a GIF file based on weights
+        current_gif, _ = random.choices(gif_files, weights=[w for _, w in gif_files], k=1)[0]
+        gif_path = os.path.join("/home/pi", current_gif)  # Path to the selected GIF
+
+        # Load and play the selected GIF
+        frames, frame_durations = load_gif(gif_path)
+        running = play_gif(frames, frame_durations)
+
+except KeyboardInterrupt:
+    # Graceful exit on manual interruption
+    print("Program interrupted")
+
+finally:
+    # Clean up GPIO and quit pygame
+    GPIO.cleanup()
+    pygame.quit()
+```
+
+### Eye Animated GIFs
+I found someone on Fiverr to create these gifs for me. Feel free to download them and use them.
+
+<Grid columns={[4, 4, 4]}>
+
+    ![Animated gif of a blinking Minions eye](@/content/posts/minions-pumpkin-animated-eye/gifs/blink.gif)
+    
+    ![Animated gif of a Minions eye looking left](@/content/posts/minions-pumpkin-animated-eye/gifs/look-left.gif)
+    
+    ![Animated gif of a Minions eye looking right](@/content/posts/minions-pumpkin-animated-eye/gifs/look-right.gif)
+
+</Grid>
+
+[Download eye-gifs.zip](https://github.com/johnzanussi/johnzanussi.com/tree/main/src/content/posts/minions-pumpkin-animated-eye/gifs/eye-gifs.zip)
+
+### Connections
+
+1. Connect the Raspberry Pi and the relay to the battery bank for power.
+
+2. Connect the display to the relay for power.
+
+3. Connect the display to the Pi via mini HDMI.
+
+4. Connect the relay to the Raspberry Pi's GPIO pins: <Wire c="gre">26</Wire>, <Wire c="red">3.3v</Wire>, <Wire c="bla">Ground</Wire>. For a more detailed look at the GPIO pins, checkout [pinout.xyz](https://pinout.xyz/).
+
+![Raspberry Pi Zero 2 W connected to a battery bank and round 2.8 inch display](@/content/posts/minions-pumpkin-animated-eye/electronic-connections.jpg)
+
+### Raspberry Pi Setup
+
+<Aside type="info">
+    The following assumes you have a Raspberry Pi Zero 2W running Raspberry Pi OS Lite and are able to connect to the device either directly or via SSH. Check out the [Getting Started Guide](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system) from the official Raspberry Pi Documentation if you need help getting started.
+</Aside>
+
+#### Update + Install Packages
+ 
+ 1. Connect to your Pi and update packages
+
+```shell
+sudo apt update
+sudo apt full-upgrade
+```
+
+2. Install the necessary Python libraries
+
+```shell
+sudo pip3 install pygame pillow schedule RPi.GPIO
+```
+
+#### Setup Python Script
+
+1. In the root directory create a file named `eye.py`. 
+
+```shell
+cd /home/pi/
+touch eye.py
+```
+
+2. Copy the code from the above [Code](#code) section and paste it into `eye.py`.
+
+```shell
+nano eye.py
+```
+
+#### Transfer GIFS
+Use either a flash drive or [`scp`](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/#copy-a-local-file-to-a-remote-system-with-the-scp-command) to transfer the three GIF files to the Raspberry Pi. The files should be named `blink.gif`, `look-left.gif`, and `look-right.gif`. 
+
+Place the files next to `eye.py` in the `/home/pi/` directory.
+
+#### Startup Script
+
+If you'd like the animation to automatically play after the Pi boots then follow these instructions, otherwise skip to the next section.
+
+1. Navigate to the `/etc/systemd/system/` directory.
+
+```bash
+cd /etc/systemd/system/
+```
+
+2. Create a configuration file called `eye.service` and add the following.
+
+```ini title=/etc/systemd/system/eye.service
+[Unit]
+Description=Eye GIF Display
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/eye.py
+User=pi
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/pi/.Xauthority
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3. Make the `eye.py` file from earlier executable.
+
+```bash
+chmod +x /home/pi/eye.py
+```
+
+4. Reload the `systemd` manager configuration and enable the `eye.service` so it runs automatically after boot.
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable eye.service
+```
+
+5. Reboot the Pi
+
+```bash
+sudo reboot
+```
+
+### Paint Your Pumpkin
+
+As I mentioned above, there are a ton of existing guides on how to paint a Minions pumpkin. A simple search for `how to paint minion pumpkin` should yield a lot of great written and video tutorials.
+
+### Assembly
+
+1. Loop the elastic through the printed goggle frame and then create a loop and use the printed elastic clip to keep things together.
+
+2. Cut a large hole in the backside of the pumpkin and scrape out the seeds as you would a normal pumpkin carving.
+
+3. Create a square 1in x 1in hole behind where the elastic strap is to route the display's power and HDMI cables through to the inside of the pumpkin.
+
+4. Make all connections and insert everything into the pumpkin.
+
+5. Close up the hole in the back with the piece you cut out.
+
+<div class="w-50 mx-auto">
+    ![A hole cut into the backside of a pumpkin with electronics stuffed inside](@/content/posts/minions-pumpkin-animated-eye/electronics-in-pumpkin.jpg)
+</div>
+
+### Final Result
+
+![Video of a pumpkin painted like a Minion with an animated blinking eye](@/content/posts/minions-pumpkin-animated-eye/minions-pumpkin.gif)
+
+![Minions pumpkin with animated blinking eye](@/content/posts/minions-pumpkin-animated-eye/minions-pumpkin.jpg)
