@@ -15,6 +15,8 @@ $theme-attribute: 'data-bs-theme';
 
 :root {
 
+    color-scheme: light dark;
+
     --jz-nav-width: auto;
 
     @include media-breakpoint-between(md, xl) {
@@ -30,6 +32,8 @@ $theme-attribute: 'data-bs-theme';
 
 :root,
 html[data-bs-theme="light"] {
+
+    color-scheme: light;
 
     --jz-bg-gradient: linear-gradient(
         45deg,
@@ -52,6 +56,8 @@ html[data-bs-theme="light"] {
 }
 
 html[data-bs-theme="dark"] {
+
+    color-scheme: dark;
 
     --jz-bg-gradient: linear-gradient(
         45deg,
@@ -112,6 +118,9 @@ html[data-bs-theme="dark"] {
         transform: scale(1.02);
     }
 
+    background-color: light-dark($card-bg, $card-bg-dark);
+    border-color: light-dark($card-border-color, $card-border-color-dark);
+
     @include media-breakpoint-between(xl, xxl) {
 
         .card-body {
@@ -129,11 +138,6 @@ html[data-bs-theme="dark"] {
             font-size: $small-font-size;
         }
 
-    }
-
-    html[data-bs-theme="dark"] & {
-        background-color: $card-bg-dark;
-        border-color: $card-border-color-dark;
     }
 
     a {
