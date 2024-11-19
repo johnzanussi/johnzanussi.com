@@ -28,37 +28,20 @@
             display: block;
             position: absolute;
             inset: 0 auto 0 (-$border-size);
-            border-left: $border-size solid var(--jz-era-color);
-
-            html[data-bs-theme="dark"] & {
-                border-color: var(--jz-era-color-dark);
-            }
-
+            border-left: $border-size solid light-dark(var(--jz-era-color), var(--jz-era-color-dark));
         }
-
-
 
         .era-bullet {
             width: $bullet-size;
             height: $bullet-size;
-            border: $border-size solid var(--jz-era-color);
+            border: $border-size solid light-dark(var(--jz-era-color), var(--jz-era-color-dark));
             background-color: var(--jz-era-color);
             margin-left: (-$bullet-size-half);
-
-            html[data-bs-theme="dark"] & {
-                border-color: var(--jz-era-color-dark);
-            }
-
         }
 
         .era-title {
             line-height: $bullet-size;
-            color: var(--jz-era-color);
-
-            html[data-bs-theme="dark"] & {
-                color: var(--jz-era-color-dark);
-            }
-
+            color: light-dark(var(--jz-era-color), var(--jz-era-color-dark));
         }
 
         a.era-title {
