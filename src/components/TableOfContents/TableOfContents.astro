@@ -68,7 +68,8 @@ if ($sidebar) {
 
     isSticky($sidebar, {
         callback: (isSticky) => {
-            $sidebar.dataset.bsTheme = isSticky ? 'dark' : undefined;
+            const isResponsive = document.documentElement.clientWidth < 768;
+            $sidebar.dataset.bsTheme = (isSticky && isResponsive) ? 'dark' : undefined;
             document.querySelector<HTMLElement>('.site-nav')?.classList.toggle('rounded-bottom', !isSticky);
             document.querySelector<HTMLElement>('.site-nav')?.classList.toggle('shadow-lg', !isSticky);
         },
