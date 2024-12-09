@@ -14,7 +14,7 @@ The setup is straightforward, but there are a few prerequisites you'll need to c
 * Home Assistant
 * Any smart lock connected to Home Assistant
 
-## Step 1: Register your fingerprint
+## Register your fingerprint
 
 Registering fingerprints is done via the UniFi Protect mobile app.
 
@@ -23,44 +23,100 @@ Registering fingerprints is done via the UniFi Protect mobile app.
 3. Tap **Add New Fingerprint**
 5. Follow the on-screen instructions to register your fingerprints
 
-![](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-protect-app-fingerprint.png)
+![Sceenshots of the UniFi Protect iOS app](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-protect-app-fingerprint.png)
 
 You can also register NFC cards if you prefer to use them.
 
-## Step 2: Create Home Assistant Automation
+## HA 2024.12 or Later (Native Support)
 
-The automation will be triggered by a webhook from UniFi Protect, calling the unlock action on your desired lock.
+If you are running Home Assistant version `2024.11` or earlier, you can either update to at least [`2014.12`](https://www.home-assistant.io/blog/2024/12/04/release-202412/) or skip down to the [instructions on using webhooks to trigger the unlock automation](#ha-202411-or-earlier-webhooks).
 
-### Create a new automation
+### Create Home Assistant Automation
+The automation will be triggered by a state change of the G4 Doorbell with an `event_type` of either `identified` or `not_identified`. A condition template will check between these two event types and call the unlock action when an identified fingerprint is scanned.
+
+#### Create a new automation
 
 1. In Home Assistant, go to **Settings** > **Automations & Scenes**
 2. Click **Create Automation** and choose **Create New Automation**
 
-### Add Automation Webhook Trigger
+#### Add Automation Event Trigger
 
-1. Under **Add Trigger**, select **Other Triggers**
+1. Under **When**, search for and select **Manual Event**
+2. Enter `state_changed` in the **Event type** text box
+3. In the **Event data** text box, enter the following where `event.front_door_fingerprint` is the entity_id for your G4 Doorbell Pro
+
+![Screenshot of the Home Assistant automation interface where a state_changed event is configured as a trigger](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-ha-automation-when.png)
+
+#### Add Trigger Condition
+1. Under **And If**, select **Add Condition**
+2. Search for and select **Template**
+3. Copy and paste the following into the text box
+
+```jinja
+{{
+   not trigger.event.data.old_state.attributes.get('restored', false) and
+   not trigger.event.data.old_state.state == 'unavailable' and
+   trigger.event.data.new_state is not none and
+   trigger.event.data.new_state.attributes.event_type == 'identified' and
+   (trigger.event.data.new_state.attributes.ulp_id|default('')) != ''
+}}
+```
+
+This template is taken directly from the official [Home Assistant documentation](https://www.home-assistant.io/integrations/unifiprotect#example-g4-doorbell-fingerprint-identified-automation) and checks for new scans of identified fingerprints. An identified fingerprint refers to any fingerprint that has been registered in the Protect app.
+
+![Screenshot of the Home Assistant automation interface where a template is used as a condition](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-ha-automation-and-if.png)
+
+#### Add Automation Action
+Now that we have a way of triggering this automation we can setup the actions the webhook will take. In this case we want to unlock a lock but this could be setup to do anything that HA can do like sending a notification, turning on/off lights, opening a garage door, etc.
+
+1. Under **Then Do**, click **Add Action**.
+2. In the **Search Action** box, type "unlock" and select **Lock: Unlock**.
+3. Click **Choose Device**, search for, and select the lock to unlock
+    * If required, enter a code to unlock the lock
+4. Click Save, name your automation, and click Save again.
+
+![Screenshot of the Home Assistant automation interface where a Front Door lock is selected to unlock](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-ha-automation-then-do.png)
+
+Your automation should now be visible from the Automations screen.
+
+## HA 2024.11 or earlier (Webhooks)
+
+If you're using version `2024.12` or later and completed the steps above, you can skip these instructions and proceed to the [Test section](#test).
+
+### Create Home Assistant Automation
+
+The automation will be triggered by a webhook from UniFi Protect, calling the unlock action on your desired lock.
+
+#### Create a new automation
+
+1. In Home Assistant, go to **Settings** > **Automations & Scenes**
+2. Click **Create Automation** and choose **Create New Automation**
+
+#### Add Automation Webhook Trigger
+
+1. Under **When**, select **Other Triggers**
 3. Scroll to bottom and select **Webhook**
 3. Click the settings cog to the right of the Webhook ID box
 4. Ensure **POST** and **Only accessible from the local network** are selected
 
 The webhook trigger should now be setup. A random Webhook ID will be generated. You can leave it as is or customize it.
 
-![](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-ha-automation-trigger.png)
+![Screenshot of the Home Assistant automation interface where a webhook is used to trigger an automation](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-ha-automation-trigger.png)
 
 <Aside type="alert">
     **Treat the Webhook ID like a password.** If someone gains access to it and can connect to your Home Assistant instance on your local network, they could theoretically use it to unlock your lock.
 </Aside>
 
-### Add Automation Action
+#### Add Automation Action
 Now that we have a way of triggering this automation we can setup the actions the webhook will take. In this case we want to unlock a lock but this could be setup to do anything that HA can do like sending a notification, turning on/off lights, opening a garage door, etc.
 
 1. Under **Then Do**, click **Add Action**.
 2. In the **Search Action** box, type "unlock" and select **Lock: Unlock**.
 3. Click **Choose Device**, search for, and select the lock to unlock
- * If required, enter a code to unlock the lock
+    * If required, enter a code to unlock the lock
 4. Click Save, name your automation, and click Save again.
 
-![](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-ha-automation-then-do.png)
+![Screenshot of the Home Assistant automation interface where a Front Door lock is selected to unlock](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-ha-automation-then-do.png)
 
 Your automation should now be visible from the Automations screen.
 
@@ -76,38 +132,38 @@ An example full URL would be
 http://192.168.40.100:8123/api/webhook/-LtRD7o1EUXbAhfzLUT1varMj
 ```
 
-## Step 3: Call Webhook from UniFi Protect
+### Call Webhook from UniFi Protect
 
 Next, configure UniFi Protect to call the webhook when a recognized fingerprint is successfully scanned.
 
 1. Open your UniFi Protect instance in a browser or the mobile app.
 2. Click the **Alarm Manager** icon in the bottom-left corner.
 
-![](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-manager.png)
+![Screenshot of the Alarm Manager icon in UniFi Protect](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-manager.png)
 
 3. Click **Create Alarm**
 4. Under the **Trigger** section, select **Activity**
 5. Choose **Fingerprint Scan** and specify the fingerprints to use, or select **All Registered Fingerprints**
 6. Click **Save**
 
-![](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-trigger.png)
+![Screenshot of the Trigger section in UniFi Protect with Fingerprint Scan selected](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-trigger.png)
 
 7. Under the **Scope** section, select your **G4 Doorbell Pro** where fingerprints were registered
 
-![](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-scope.png)
+![Screenshot of the Scope section in UniFi Protect with Front Door selected](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-scope.png)
 
 8. Under the **Action** section, choose **Webhook**
 9. Select **Custom Webhook** from the dropdown and enter your Home Assistant webhook URL in the **Delivery URL** box
 11. Select **Advanced Settings** and set the method to **POST**
 
-![](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-action.png)
+![Screenshot of the Action section in UniFi Protect with Webhook selected](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-action.png)
 
 12. Name your alarm, e.g., **Call HA Webhook on Fingerprint Scan**
 13. Click **Save**
 
-![](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-save.png)
+![Screenshot of the text box to name an alarm in UniFi Protect](@/content/posts/unifi-g4-doorbell-fingerprint-unlock/screenshot-unifi-protect-alarm-save.png)
 
-## Step 4: Test
+## Test
 
 If everything is set up correctly, your lock should unlock. In my case, the time between scanning my fingerprint and unlocking the lock is about 1.5 seconds. However, your results may vary depending on your home network and setup.
 
