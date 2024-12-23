@@ -1,5 +1,5 @@
 ---
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 import { getImageSrc } from '@/utils/images';
 
 import DividerLayout from '@/layouts/DividerLayout.astro';
@@ -16,7 +16,7 @@ const metadata = {
     image: imageUrl,
 };
 
-const { data: subscriptions } = await getEntry('youtube', 'channels');
+const subscriptions = await getCollection('youtube');
 ---
 <DividerLayout metadata={metadata}>
 
@@ -50,42 +50,48 @@ const { data: subscriptions } = await getEntry('youtube', 'channels');
 
         <div class="mt-3 row">
 
-            {subscriptions.map(({ category, categorySlug, channels }) => (
+            {subscriptions.map(({ data }) => {
 
-                <div class="col-6 col-md-4 mb-4">
+                const { category, slug, channels } = data;
 
-                    <h3
-                        id={categorySlug}
-                        class="text-capitalize mb-3"
-                        set:html={category.replace('/', '/<wbr>')}
-                    />
+                return (
 
-                    <ul class="list-unstyled">
+                    <div class="col-6 col-md-4 mb-4">
 
-                        {channels.map(({ title, channelId, hasNotifications }) => (
+                        <h3
+                            id={slug}
+                            class="text-capitalize mb-3"
+                            set:html={category.replace('/', '/<wbr>')}
+                        />
 
-                            <li class="mb-1">
+                        <ul class="list-unstyled">
 
-                                <Link href={`https://www.youtube.com/channel/${channelId}`}>
-                                    {title}
-                                </Link>
+                            {channels.map(({ title, channelId, hasNotifications }) => (
 
-                                {hasNotifications && (
-                                    <Icon
-                                        icon="fa6-solid:bell"
-                                        label="bell icon"
-                                        class="ms-1 text-warning opacity-75"
-                                    />
-                                )}
-                            </li>
+                                <li class="mb-1">
 
-                        ))}
+                                    <Link href={`https://www.youtube.com/channel/${channelId}`}>
+                                        {title}
+                                    </Link>
 
-                    </ul>
+                                    {hasNotifications && (
+                                        <Icon
+                                            icon="fa6-solid:bell"
+                                            label="bell icon"
+                                            class="ms-1 text-warning opacity-75"
+                                        />
+                                    )}
+                                </li>
 
-                </div>
+                            ))}
 
-            ))}
+                        </ul>
+
+                    </div>
+
+                );
+
+            })}
 
         </div>
 

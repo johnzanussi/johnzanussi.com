@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { type CollectionEntry, render } from 'astro:content';
 
 export type Props = {
     post: CollectionEntry<'posts'>;
@@ -16,9 +16,9 @@ const { post, ...props } = Astro.props;
 
 const { data: { cover } } = post;
 
-const { remarkPluginFrontmatter: data } = await post.render();
+const { remarkPluginFrontmatter: data } = await render(post);
 
-const { slug } = post;
+const { id } = post;
 
 const {
     date,
@@ -55,7 +55,7 @@ const {
 
         <h1 class="h2">
             <Link
-                href={getPostUrl(slug)}
+                href={getPostUrl(id)}
                 class="stretched-link text-reset"
             >
                 {title}

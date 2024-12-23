@@ -1,9 +1,16 @@
 import { defineCollection, z, type SchemaContext } from 'astro:content';
+import { glob, file } from 'astro/loaders';
 
 // https://zod.dev/?id=primitives
 
+const mdxLoader = (contentDir: string) => glob({
+    pattern: '**/*.mdx',
+    base: `./src/content/${contentDir}`,
+});
+
 // Pages
 const pageCollection = defineCollection({
+    loader: mdxLoader('pages'),
     schema: ({ image }: SchemaContext) => z.object({
         title: z.string(),
         excerpt: z.string().nullable(),
@@ -14,6 +21,7 @@ const pageCollection = defineCollection({
 
 // Posts
 const postCollection = defineCollection({
+    loader: mdxLoader('posts'),
     schema: ({ image }: SchemaContext) => z.object({
         title: z.string(),
         excerpt: z.string().nullable(),
@@ -34,7 +42,7 @@ const ChannelSchema = z.object({
 
 const CategoryChannelsSchema = z.object({
     category: z.string(),
-    categorySlug: z.string(),
+    slug: z.string(),
     channels: z.array(ChannelSchema),
 });
 
@@ -42,8 +50,8 @@ export type Channel = z.infer<typeof ChannelSchema>;
 export type CategoryChannels = z.infer<typeof CategoryChannelsSchema>;
 
 const youtubeChannelsCollection = defineCollection({
-    type: 'data',
-    schema: z.array(CategoryChannelsSchema)
+    loader: file('./src/content/youtube/channels.json'),
+    schema: CategoryChannelsSchema,
 });
 
 export const collections = {
