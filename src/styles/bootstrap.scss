@@ -1,5 +1,5 @@
 // 1. Bootstrap Functions
-@import '../node_modules/bootstrap/scss/functions';
+@import "../../node_modules/bootstrap/scss/functions";
 
 $enable-negative-margins: true;
 $enable-cssgrid: true;
@@ -64,27 +64,27 @@ $body-emphasis-color-dark: $white;
 $body-emphasis-color: $dark;
 
 // 3. Bootstrap Variables
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
 
 $code-font-size: $font-size-base;
 $figure-caption-font-size: $font-size-base;
 
 // 3. Bootstrap Variables
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
 
 // 4. Custom Maps
 
 
 // 5. Bootstrap Required
-@import "../node_modules/bootstrap/scss/maps";
-@import "../node_modules/bootstrap/scss/mixins";
-@import "../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/root";
 
 
 // 6. Bootstrap Optional
-@import "../node_modules/bootstrap/scss/utilities";
+@import "../../node_modules/bootstrap/scss/utilities";
 
 
 $utilities: map-merge-multiple(

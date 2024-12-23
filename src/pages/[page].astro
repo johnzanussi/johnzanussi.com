@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { getImageSrc } from '@/utils/images';
 
 import DividerLayout from '@/layouts/DividerLayout.astro';
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
     return pages.map(page => ({
         params: {
-            page: page.slug,
+            page: page.id,
         },
         props: {
             page,
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { Content } = await page.render();
+const { Content } = await render(page);
 
 const { data } = page;
 

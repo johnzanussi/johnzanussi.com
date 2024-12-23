@@ -7,7 +7,6 @@ import mdx from '@astrojs/mdx';
 import purgecss from 'astro-purgecss';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel/static';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 
 // Remark
@@ -47,19 +46,11 @@ const envVariables = {
 const { url, port } = envVariables[currentEnv]();
 
 export default defineConfig({
-    experimental: {
-        // contentCollectionCache: true,
-    },
     site: url,
     server: {
         port: port,
     },
     output: 'static',
-    adapter: vercel({
-        speedInsights: {
-            enabled: true,
-        },
-    }),
     integrations: [
         expressiveCode({
             plugins: [

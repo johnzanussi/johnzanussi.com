@@ -11,7 +11,7 @@ export async function GET(context: APIContext) {
 
     const items = await Promise.all(posts.map(async (post: CollectionEntry<'posts'>) => {
 
-        const url = getPostUrl(post.slug);
+        const url = getPostUrl(post.id);
 
         const imageOptions = {
             width: 200,

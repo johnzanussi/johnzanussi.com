@@ -25,7 +25,7 @@ const { posts, showLabels = true, ...props } = Astro.props;
 
         {posts.map(({ isPrevious, item }) => {
 
-            const { data, slug } = item;
+            const { data, id } = item;
             const { title } = data;
             const label = isPrevious ? 'Previous' : 'Next';
             const icon = `fa6-solid:arrow-${isPrevious ? 'left' : 'right'}`;
@@ -59,7 +59,7 @@ const { posts, showLabels = true, ...props } = Astro.props;
                         </div>
 
                         <Link
-                            href={getPostUrl(slug)}
+                            href={getPostUrl(id)}
                             class:list={[
                                 'stretched-link lh-sm',
                                 {

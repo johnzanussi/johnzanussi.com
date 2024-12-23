@@ -20,7 +20,9 @@ import Markdown from '@/components/Markdown.astro';
 import PostPagination from '@/components/PostPagination.astro';
 
 import ContentSidebar from '@/components/ContentSidebar.astro';
+import { render } from 'astro:content';
 import { Image } from 'astro:assets';
+
 
 export async function getStaticPaths() {
 
@@ -28,7 +30,7 @@ export async function getStaticPaths() {
 
     return posts.map(post => ({
         params: {
-            slug: post.slug,
+            slug: post.id,
         },
         props: {
             post
@@ -42,9 +44,9 @@ const {
     Content,
     headings,
     remarkPluginFrontmatter: data,
-} = await post.render();
+} = await render(post);
 
-const { slug, data: { cover } } = post;
+const { id, data: { cover } } = post;
 
 const {
     title,
@@ -56,7 +58,7 @@ const {
     hiddenIntro = false,
 } = data;
 
-const postUrl = absoluteUrl(getPostUrl(slug));
+const postUrl = absoluteUrl(getPostUrl(id));
 
 const coverImageSrc = await getImageSrc(cover);
 
@@ -143,7 +145,7 @@ const siblingPosts = await getSiblingItems('posts', post);
                 </h2>
 
                 <Comments
-                    id={slug}
+                    id={id}
                     url={postUrl}
                     title={title}
                 />
