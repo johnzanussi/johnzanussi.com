@@ -1,6 +1,6 @@
 .site-nav-wrap {
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
         position: absolute;
         top: 0;
         left: 0;
@@ -8,12 +8,12 @@
     }
 
     .is-divider-layout & {
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(lg) {
             background-color: var(--jz-header-bg-color);
         }
     }
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
 
         &,
         .nav-toggle,
@@ -48,7 +48,7 @@
 
 .site-nav {
 
-    @include media-breakpoint-between(md, xl) {
+    @include media-breakpoint-between(lg, xl) {
 
         .nav-photo img {
             max-width: 75% !important;
@@ -60,7 +60,7 @@
 
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
 
         position: sticky;
         top: 3rem;
@@ -72,7 +72,7 @@
     width: var(--jz-nav-width);
 
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         .collapse {
             max-height: 0;
             overflow: hidden;
@@ -100,7 +100,7 @@
 
     img {
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(lg) {
             width: 125px;
             height: 125px;
             min-width: 125px;
@@ -112,11 +112,11 @@
 
 .nav-color-mode-toggle {
     width: 50px;
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         background-color: rgba($light, 0.1) !important;
         @include border-radius;
     }
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
         position: absolute;
         top: 0;
         right: 0;

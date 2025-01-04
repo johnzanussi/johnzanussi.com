@@ -42,8 +42,8 @@
     max-width: 1600px;
 }
 
-.mw-md-85p {
-    @include media-breakpoint-up(md) {
+.mw-xxl-85p {
+    @include media-breakpoint-up(xxl) {
         max-width: 85%;
     }
 }

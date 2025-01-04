@@ -52,12 +52,12 @@ const socialLinksCount = socialLinks.length - 1;
 ---
 <nav
     data-bs-theme="dark"
-    class="navbar site-nav d-md-flex flex-md-column flex-md-shrink-0 p-3 py-md-5 p-xl-5 sticky-md-top align-self-md-start shadow-lg rounded-bottom rounded-md-end bg-dark"
+    class="navbar site-nav d-lg-flex flex-lg-column flex-lg-shrink-0 p-3 py-lg-5 p-xl-5 sticky-lg-top align-self-lg-start shadow-lg rounded-bottom rounded-lg-end bg-dark"
     id="site-nav"
 >
-    <div class="d-flex d-md-block">
+    <div class="d-flex d-lg-block">
 
-        <div class="nav-photo text-center mb-md-0">
+        <div class="nav-photo text-center mb-lg-0">
 
             <NavPhoto />
 
@@ -74,17 +74,17 @@ const socialLinksCount = socialLinks.length - 1;
 
         </div>
 
-        <div class="mt-3 mt-md-0 ms-3 ms-md-0">
+        <div class="mt-3 mt-lg-0 ms-3 ms-lg-0">
 
-            <h1 class="mt-md-2 text-primary">
+            <h1 class="mt-lg-2 text-primary">
                 John Zanussi
             </h1>
 
-            <p class="small navbar-text text-body-secondary mb-1 mb-md-3 p-0">
+            <p class="small navbar-text text-body-secondary mb-1 mb-lg-3 p-0">
                 Long Island, New York
             </p>
 
-            <p class="navbar-text small mb-0 mb-md-3 p-0 text-white">
+            <p class="navbar-text small mb-0 mb-lg-3 p-0 text-white">
                 Engineering Manager at{' '}
                 <Link
                     href="https://www.justworks.com/"
@@ -105,9 +105,9 @@ const socialLinksCount = socialLinks.length - 1;
 
     </div>
 
-    <NavToggle class="d-md-block w-100">
+    <NavToggle class="d-lg-block w-100">
 
-        <ul class="list-unstyled font-monospace fs-5 px-3 p-md-0 text-center text-md-start mt-3 mt-md-0">
+        <ul class="list-unstyled font-monospace fs-5 px-3 p-lg-0 text-center text-lg-start mt-3 mt-lg-0">
             {pages.map(({ title, url }) => (
                 <li>
                     <Link
@@ -120,12 +120,12 @@ const socialLinksCount = socialLinks.length - 1;
             ))}
         </ul>
 
-        <ul class="list-inline mt-4 text-center text-md-start d-flex d-md-block justify-content-center justify-content-md-evenly">
+        <ul class="list-inline mt-4 text-center text-lg-start d-flex d-lg-block justify-content-center justify-content-lg-evenly">
             {socialLinks.map(({ name, icon, url }, i) => (
                 <li class:list={[
                     'list-inline-item',
                     {
-                        'me-4 me-md-3 me-xl-4': i < socialLinksCount,
+                        'me-4 me-lg-3 me-xl-4': i < socialLinksCount,
                     }
                 ]}>
                     <Link
@@ -143,7 +143,7 @@ const socialLinksCount = socialLinks.length - 1;
             ))}
         </ul>
 
-        <div class="small text-center text-md-start">
+        <div class="small text-center text-lg-start">
             <p class="mb-1">
                 <Link
                     href="/built-with"

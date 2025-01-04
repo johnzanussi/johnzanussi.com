@@ -28,25 +28,13 @@ if (withComments) {
 
 <div class="toc-header">
 
-    <h2 class="font-sans-serif text-uppercase small ps-4 d-none d-md-block">
+    <h2 class="font-sans-serif text-uppercase small ps-4">
         In this post
     </h2>
 
-    <button
-        type="button"
-        class="toc-toggle btn btn-unstyled py-2 w-100 d-flex flex-shrink-0 align-items-center d-md-none"
-    >
-        <span class="btn btn-outline-heading btn-xs d-flex align-items-center pe-0 me-3 text-nowrap">
-            In this post <Icon icon="mdi:chevron-right" class="toc-collapse-icon fs-4" />
-        </span>
-
-        <span class="toc-current-section d-block text-truncate text-body" />
-
-    </button>
-
 </div>
 
-<nav class="content-toc my-3 my-md-0">
+<nav class="content-toc my-3 my-xxl-0">
     <ToCLinks
         headings={headings}
         depth={depth}
@@ -54,41 +42,7 @@ if (withComments) {
 </nav>
 
 <script>
-import isSticky from '@/scripts/isSticky';
-import onClick from '@/scripts/onClick';
 import scrollSpy from 'simple-scrollspy';
-
-const $sidebar = document.querySelector<HTMLElement>('aside.content-sidebar');
-
-if ($sidebar) {
-
-    const toggleToC = (toggle: boolean | undefined = undefined) => {
-        $sidebar.classList.toggle('show', toggle);
-    };
-
-    isSticky($sidebar, {
-        callback: (isSticky) => {
-            const isResponsive = document.documentElement.clientWidth < 768;
-            $sidebar.dataset.bsTheme = (isSticky && isResponsive) ? 'dark' : undefined;
-            document.querySelector<HTMLElement>('.site-nav')?.classList.toggle('rounded-bottom', !isSticky);
-            document.querySelector<HTMLElement>('.site-nav')?.classList.toggle('shadow-lg', !isSticky);
-        },
-    });
-
-    window.addEventListener('click', (event) => {
-        if (
-            event.target instanceof HTMLElement &&
-            !event.target.closest('.toc-toggle') &&
-            $sidebar.classList.contains('show')
-        ) {
-            toggleToC(false);
-        }
-    });
-
-    onClick('.toc-toggle', () => {
-        toggleToC();
-    });
-}
 
 const $currentSection = document.querySelector<HTMLElement>('.toc-current-section');
 
@@ -102,7 +56,7 @@ updateCurrent(document.querySelector<HTMLElement>('.content-sidebar nav ul li:fi
 
 scrollSpy('.content-sidebar nav', {
     sectionClass: '.content-container section',
-    offset: window.innerWidth <= 768 ? 150 : 100,
+    offset: 100,
     onActive: updateCurrent,
 });
 </script>
