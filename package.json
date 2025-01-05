@@ -23,7 +23,9 @@
     "prepare": "husky",
     "update": "npx npm-check-updates",
     "youtube": "npx ts-node --esm lib/youtube/youtube.mts",
-    "ts": "tsc --noEmit"
+    "ts": "tsc --noEmit",
+    "lint": "eslint --cache src/**/*.{astro,ts}",
+    "lint:fix": "eslint --cache --fix src/**/*.{astro,ts}"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -59,6 +61,7 @@
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.25.9",
+    "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
     "@supabase/supabase-js": "^2.47.10",
     "@types/katex": "^0.16.7",
@@ -75,6 +78,7 @@
     "fastcomments-typescript": "^2.3.0",
     "gemoji": "^8.1.0",
     "github-slugger": "^2.0.0",
+    "globals": "^15.14.0",
     "husky": "^9.1.7",
     "intersection-observer-debugger": "^0.1.1",
     "lint-staged": "^15.2.11",
