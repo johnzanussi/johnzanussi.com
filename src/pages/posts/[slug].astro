@@ -9,7 +9,7 @@ import {
 import { absoluteUrl } from '@/utils/urls';
 import { getImageSrc } from '@/utils/images';
 
-import DividerLayout from '@/layouts/DividerLayout.astro';
+import Layout from '@/layouts/Layout.astro';
 
 import AmazonDisclosure from '@/components/AmazonDisclosure.astro';
 import Comments from '@/components/Comments.astro';
@@ -22,7 +22,7 @@ import PostPagination from '@/components/PostPagination.astro';
 import ContentSidebar from '@/components/ContentSidebar.astro';
 import { render } from 'astro:content';
 import { Image } from 'astro:assets';
-
+import Emoji from '@/components/Emoji.astro';
 
 export async function getStaticPaths() {
 
@@ -78,12 +78,15 @@ const metadata = {
 };
 
 const siblingPosts = await getSiblingItems('posts', post);
+const includeSidebar = headings && !!headings.length;
 ---
-<DividerLayout metadata={metadata}>
+<Layout metadata={metadata} class="is-post-layout">
 
-    <Fragment slot="header">
+    <div
+        data-bs-theme="dark"
+        class="post-header mw-1600 mx-auto post-header bg-transparent border-0 rounded-0 ratio ratio-16x9">
 
-        <div class="mb-3 mw-xxl-85p">
+        <div>
 
             <Image
                 src={cover}
@@ -92,39 +95,51 @@ const siblingPosts = await getSiblingItems('posts', post);
                 alt={title}
                 widths={[576, 768, 992, 1200, 1400, 1600]}
                 sizes="(min-width: 1680px) 958px, (min-width: 1200px) calc(73.91vw - 269px), (min-width: 780px) calc(85vw - 315px), calc(100vw - 32px)"
-                class="img-fluid rounded shadow"
                 loading="eager"
             />
 
+            <div class="card-img-overlay start-0 end-0 d-flex align-items-end">
+
+                <div class="content-container p-3">
+
+                    <h1 class="mb-3 display-3">
+                        {title}
+                    </h1>
+
+                    <p>
+
+                        <Emoji label="calendar">🗓️</Emoji>
+                        <DateFormat
+                            date={date}
+                            class="text-light"
+                        />
+
+                        <span class="small mx-2 text-body-secondary">
+                            &#x2022;
+                        </span>
+
+                        <span class="text-body-secondary">
+                            <Emoji label="stopwatch" class="me-1">⏱️</Emoji> {minutesRead}
+                        </span>
+
+                        {draft && (
+                            <DraftBadge class="ms-2" />
+                        )}
+
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <p>
+    </div>
 
-            <DateFormat
-                date={date}
-                class="text-body-secondary"
-            />
-
-            <span class="ms-3 small text-body-tertiary">
-                {minutesRead}
-            </span>
-
-            {draft && (
-                <DraftBadge class="ms-2" />
-            )}
-
-        </p>
-
-        <h1 class="mb-0 display-3">
-            {title}
-        </h1>
-
-    </Fragment>
-
-    <Fragment slot="main">
+    <div class="d-flex content-container flex-column-reverse flex-xxl-row">
 
         <article class:list={[
-            'content-container',
+            'post-content',
             {
                 'hide-intro-heading': hiddenIntro,
             }
@@ -154,8 +169,10 @@ const siblingPosts = await getSiblingItems('posts', post);
 
         </article>
 
-        <ContentSidebar headings={headings} url={postUrl} />
+        {includeSidebar && (
+            <ContentSidebar headings={headings} url={postUrl} />
+        )}
 
-    </Fragment>
+    </div>
 
-</DividerLayout>
+</Layout>

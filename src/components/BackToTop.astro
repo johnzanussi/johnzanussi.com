@@ -1,27 +1,38 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-export type Props = HTMLAttributes<'button'>;
+interface Props extends HTMLAttributes<'button'> {
+    label?: string;
+    icon?: string;
+    iconClass?: string;
+};
 
 import Icon from '@/components/Icon.astro';
 
-const { class: className = '', ...props } = Astro.props;
+const {
+    class: className = '',
+    label = 'Back to top',
+    icon = 'fa-solid:level-up-alt',
+    iconClass,
+    ...props
+} = Astro.props;
 ---
 <button
     type="button"
     class:list={[
-        'btn btn-link btn-back-to-top',
+        'btn btn-link btn-back-to-top p-0',
         className,
     ]}
     {...props}
 >
-    Back to top <Icon icon="fa-solid:level-up-alt" />
+    {label} <Icon icon={icon} class={iconClass} />
 </button>
 
 <script>
 import onClick from '@/scripts/onClick';
 onClick('.btn-back-to-top', (_, event) => {
     event.preventDefault();
+    window.history.pushState('', document.title, window.location.pathname + window.location.search);
     window.scrollTo({
         top: 0,
         behavior: 'smooth',

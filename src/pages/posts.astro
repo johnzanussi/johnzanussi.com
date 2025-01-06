@@ -32,13 +32,12 @@ const metadata = {
         class="d-flex flex-column flex-grow-1"
     >
 
-        <div class="mw-1100">
-            {posts.map(post => (
-                <div class="mb-4">
-                    <PostCard post={post} />
-                </div>
-            ))}
-        </div>
+        {posts.map(post => (
+            <div class="mb-4">
+                <PostCard post={post} />
+            </div>
+        ))}
+
     </div>
 
 </DividerLayout>

@@ -105,10 +105,10 @@ export default defineConfig({
             [
                 addClasses,
                 {
-                    h2: 'mt-4 mb-3 pb-2 border-bottom',
-                    h3: 'mt-4',
-                    h4: 'mt-3',
-                    h5: 'mt-3 text-body-emphasis',
+                    h2: 'mt-5 mb-3 pb-2 border-bottom',
+                    h3: 'mt-4 mb-3',
+                    h4: 'mt-4 mb-3',
+                    h5: 'mt-3 mb-3 text-body-emphasis',
                     iframe: 'mb-4',
                 },
             ],

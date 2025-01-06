@@ -1,7 +1,7 @@
 {
   "name": "johnzanussi.com",
   "description": "My personal website located at johnzanussi.com",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johnzanussi/johnzanussi.com.git"

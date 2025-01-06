@@ -8,16 +8,13 @@ export type Props = {
     url: string;
 };
 
-import BackToTop from '@/components/BackToTop.astro';
 import TableOfContents from '@/components/TableOfContents/TableOfContents.astro';
 
 const { headings } = Astro.props;
 const hasHeadings = !!headings.length;
 ---
-<aside class="content-sidebar sticky-xxl-top align-self-xxl-start mb-3 mb-xxl-0 ms-xxl-5 pb-2 pb-xxl-5 ps-xxl-5">
+<aside class="content-sidebar post-content w-100 mx-auto sticky-xxl-top flex-grow-sm-1 align-self-xxl-start mt-sm-4 mb-3 mb-xxl-0 pb-2 pb-xxl-5 ps-xxl-5">
 
     {hasHeadings && <TableOfContents headings={headings} />}
-
-    <BackToTop class="link-opacity-75 link-opacity-100-hover link-body-emphasis small ps-4 text-uppercase d-none d-xxl-block" />
 
 </aside>

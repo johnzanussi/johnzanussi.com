@@ -1,0 +1,59 @@
+---
+import Link from '@/components/Link.astro';
+
+type Props = {
+    wrapperClass: string;
+    itemClass: string;
+    linkClass: string;
+    useIsActive: boolean;
+};
+
+const { wrapperClass, itemClass, linkClass, useIsActive = true } = Astro.props;
+
+const pages = [
+    {
+        title: 'Posts',
+        url: '/posts',
+    },
+    {
+        title: 'About',
+        url: '/about',
+    },
+    {
+        title: 'YouTube',
+        url: '/youtube',
+    },
+];
+
+const linkAttrs = (isActive) => {
+    const attrs = {};
+    if (useIsActive) {
+        if (isActive) {
+            attrs['aria-current'] = 'page';
+        }
+    }
+    return attrs;
+};
+---
+
+<ul class={wrapperClass}>
+
+    {pages.map(({ title, url }) => {
+        const isActive = useIsActive && (url === Astro.url.pathname);
+        return (
+            <li class={itemClass}>
+                <Link
+                    href={url}
+                    class:list={[
+                        linkClass,
+                        {
+                            'active': isActive,
+                        }
+                    ]}
+                    {...linkAttrs(isActive)}>
+                    {title}
+                </Link>
+            </li>
+        );
+    })}
+</ul>

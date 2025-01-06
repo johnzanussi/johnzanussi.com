@@ -4,7 +4,8 @@ import '@fontsource-variable/roboto-mono';
 
 import '../styles/index.scss';
 
-import Nav from '@/components/Nav.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
 import ThemeToggleScript from '@/components/ThemeToggleScript.astro';
 
 import { generateTags } from '@/utils/metadata';
@@ -44,11 +45,11 @@ const isDev = import.meta.env.MODE === 'development';
     className,
 ]}>
 
-    <div class="site-nav-wrap px-2 px-md-0 sticky-top">
-        <Nav />
-    </div>
+    <Header />
 
     <slot />
+
+    <Footer />
 
 </div>
 

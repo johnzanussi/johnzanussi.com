@@ -26,58 +26,48 @@ const metadata = {
 ---
 <Layout metadata={metadata}>
 
-    <div class="p-nav py-4 py-md-5">
+    <div class="content-container py-4 py-md-5">
 
-        <div class="mw-1100">
+        <h1 class="display-1 mb-3 mb-md-5">
+            Hey, there! <Emoji label="waving hand">👋</Emoji>
+        </h1>
 
-            <h1 class="display-1 mb-3 mb-md-5">
-                Hey, there! <Emoji label="waving hand">👋</Emoji>
-            </h1>
+        <p class="lead">
+            I'm John. That's me up there <Emoji label="up left arrow">↖️</Emoji>.
+            I've been building stuff on the web either on my own or with teams for almost 20 years.
+        </p>
 
-            <p class="lead">
-                I'm John. That's me{' '}
-                <span class="d-none d-md-inline">
-                    over there <Emoji label="left arrow">⬅️</Emoji>.
-                </span>
-                <span class="d-md-none">
-                    up there <Emoji label="up left arrow">↖️</Emoji>.
-                </span>
-                I've been building stuff on the web either on my own or with teams for over 15 years.
-            </p>
+        <p class="lead">
+            I've been doing a lot of 3D printing, home automation projects, and web development stuff in my free time and wanted a place to share my experiences with the community. Creating and maintaining this site also gives me an excuse to play around with new trends in web development.
+        </p>
 
-            <p class="lead">
-                I've been doing a lot of 3D printing, home automation projects, and web development stuff in my free time and wanted a place to share my experiences with the community. Creating and maintaining this site also gives me an excuse to play around with new trends in web development.
-            </p>
+        <p class="lead">
+            You can read more about the libraries and tools I used to build
+            this site on the <Link href="/built-with">Built With</Link> page
+            or by checking out the code for yourself on{' '}
+            <Link href="https://github.com/johznanussi/johnzanussi.com">GitHub</Link>.
+        </p>
 
-            <p class="lead">
-                You can read more about the libraries and tools I used to build
-                this site on the <Link href="/built-with">Built With</Link> page
-                or by checking out the code for yourself on{' '}
-                <Link href="https://github.com/johznanussi/johnzanussi.com">GitHub</Link>.
-            </p>
+        <p class="lead">
+            You can read more about me on my{' '}
+            <Link href="/about">About</Link> page. You can see what videos
+            I'm watching on the <Link href="/youtube">YouTube</Link> page.
+        </p>
 
-            <p class="lead">
-                You can read more about me on my{' '}
-                <Link href="/about">About</Link> page. You can see what videos
-                I'm watching on the <Link href="/youtube">YouTube</Link> page.
-            </p>
+        <p class="lead">
+            Lastly, you can check out one of my recent posts below.
+        </p>
 
-            <p class="lead">
-                Lastly, you can check out one of my recent posts below.
-            </p>
-
-            <div class="mt-3">
-                <PostCard post={featuredPost} />
-            </div>
-
-            <p class="text-end lead mt-4 me-2">
-                <Link href="/posts">
-                    More Posts
-                    <Icon icon="fa6-solid:arrow-right" />
-                </Link>
-            </p>
-
+        <div class="mt-3">
+            <PostCard post={featuredPost} />
         </div>
+
+        <p class="text-end lead mt-4 me-2">
+            <Link href="/posts">
+                More Posts
+                <Icon icon="fa6-solid:arrow-right" />
+            </Link>
+        </p>
 
     </div>
 
