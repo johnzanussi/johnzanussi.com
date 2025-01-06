@@ -1,0 +1,65 @@
+.header {
+
+    .site-title {
+        color: light-dark(var(--bs-dark), var(--bs-white));
+    }
+
+    .is-post-layout & {
+        @include media-breakpoint-up(sm) {
+            .site-title,
+            .navbar-text {
+                color: var(--bs-white) !important;
+            }
+        }
+    }
+
+    .is-divider-layout & {
+        background-color: var(--jz-header-bg-color);
+    }
+
+    .nav-link {
+        --bs-nav-link-color: var(--bs-link-color);
+        --bs-nav-link-hover-color: var(--bs-link-hover-color);
+    }
+
+    .nav-wrap {
+
+        @include media-breakpoint-down(md) {
+            border-radius: 1.5em !important;
+        }
+
+    }
+
+    .navbar-brand {
+        backdrop-filter: blur(1px);
+    }
+
+    .nav-photo {
+
+        img {
+
+            @include media-breakpoint-down(lg) {
+                width: 125px;
+                height: 125px;
+                min-width: 125px;
+            }
+
+        }
+
+    }
+
+}
+
+.nav-color-mode-toggle,
+.navbar-toggler {
+    width: 50px;
+    height: 40px;
+    @include media-breakpoint-down(lg) {
+        background-color: rgba($light, 0.1) !important;
+        @include border-radius;
+    }
+}
+
+.navbar-toggler {
+    line-height: 36px; //
+}

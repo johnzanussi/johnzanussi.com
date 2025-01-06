@@ -38,6 +38,8 @@ $line-height-base: 1.65;
 
 $headings-color: #0c5294;
 $headings-color-dark: $warning;
+$h4-font-size: 1.4;
+$h5-font-size: 1.2;
 
 $link-decoration: none;
 $link-hover-decoration: none;
@@ -63,9 +65,19 @@ $border-radius: 1rem;
 $body-emphasis-color-dark: $white;
 $body-emphasis-color: $dark;
 
+$nav-link-font-size: 20px;
+$nav-link-color: $link-color;
+$nav-link-hover-color: $link-color;
+$navbar-toggler-border-radius: 1rem;
+$navbar-dark-toggler-border-color: transparent;
+$navbar-light-toggler-border-color: transparent;
+$navbar-light-active-color: $white;
+$navbar-dark-active-color: $white;
+
 // 3. Bootstrap Variables
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/variables-dark";
+
 
 $code-font-size: $font-size-base;
 $figure-caption-font-size: $font-size-base;

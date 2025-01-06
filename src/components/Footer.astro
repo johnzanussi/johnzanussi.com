@@ -1,0 +1,128 @@
+---
+import Icon from '@/components/Icon.astro';
+import Link from '@/components/Link.astro';
+import BackToTop from '@/components/BackToTop.astro';
+import NavLinks from '@/components/NavLinks.astro';
+
+const socialLinks = [
+    {
+        name: 'GitHub',
+        icon: 'fa6-brands:github',
+        url: 'https://github.com/johnzanussi',
+        brandColor: '#fff', // '#1B1F24'
+    },
+    {
+        name: 'LinkedIn',
+        icon: 'fa6-brands:linkedin',
+        url: 'https://www.linkedin.com/in/john-zanussi/',
+        brandColor: '#0A66C2' // https://brand.linkedin.com/en-us
+    },
+    {
+        name: 'Printables',
+        icon: 'printables-spool',
+        url: 'https://www.printables.com/social/170869-johnzanussi/about',
+        brandColor: '#EB6F40', // https://www.printables.com/
+    },
+    {
+        name: 'Strava',
+        icon: 'fa6-brands:strava',
+        url: 'https://www.strava.com/athletes/71228948',
+        brandColor: '#FC4C01', // https://developers.strava.com/guidelines/
+    },
+    {
+        name: 'Instagram',
+        icon: 'fa6-brands:instagram',
+        url: 'https://www.instagram.com/johnzanussi/',
+        brandColor: '#ff0069', // https://about.instagram.com/brand/gradient
+    },
+];
+---
+<footer class="footer pb-5 position-relative">
+
+    <div
+        id="footer"
+        class="content-container pt-5 pt-sm-0 position-relative">
+
+        <p class="d-sm-none m-0 bg-dark p-2 d-inline-block rounded position-absolute top-0 end-0 me-2 mt-2" style="border-radius: 1.5em !important;">
+            <BackToTop
+                label=""
+                icon="mdi:hamburger-remove"
+                class="navbar-toggler fs-1 link-primary"
+            />
+        </p>
+
+        <div
+            class="d-flex justify-content-sm-between flex-column flex-sm-row pt-5 px-3 px-sm-5 pb-5 align-items-end align-items-sm-start text-end text-sm-start">
+
+            <NavLinks
+                wrapperClass="nav flex-column font-monospace mb-5 mb-sm-0"
+                itemClass="nav-item"
+                linkClass="nav-link font-weight-bold px-0"
+                useIsActive={false}
+            />
+
+            <section class="socials mb-5 mb-sm-0">
+                <ul class="list-unstyled">
+                    {socialLinks.map(({ name, icon, url, brandColor }) => (
+                        <li class="mb-3">
+                            <Link
+                                href={url}
+                                title={name}
+                                class="icon-link flex-row-reverse flex-sm-row"
+                                style={{ '--jz-hover-color': brandColor }}
+                            >
+                                <Icon
+                                    icon={icon}
+                                    class="fa-2x bi"
+                                />
+
+                                <span class="small">
+                                    {name}
+                                </span>
+
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            <section class="text-body-secondary text-end">
+                <p class="mb-4">
+                    Built with
+                    <Link
+                        href="/built-with"
+                        class="text-decoration-none"
+                    >Astro</Link>,
+                    <Link
+                        href="/built-with"
+                        class="text-decoration-none"
+                    >Bootstrap</Link>, and
+                    <Link
+                        href="/built-with"
+                        class="text-decoration-none"
+                    >more</Link>.
+                </p>
+
+                <p class="mb-4">
+                    Subscribe to my
+                    <Link
+                        href="/rss"
+                        class="icon-link">
+                        RSS
+                        <Icon icon="fa6-solid:rss" />
+                    </Link> feed.
+                </p>
+
+                <BackToTop />
+
+                <p class="navbar-text text-body-secondary text-end mt-5 small">
+                    All content copyright John Zanussi.
+                </p>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</footer>

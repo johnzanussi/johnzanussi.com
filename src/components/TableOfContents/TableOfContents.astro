@@ -1,6 +1,5 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import Icon from '@/components/Icon.astro';
 import ToCLinks from './ToCLinks.astro';
 
 import '@/styles/toc.scss';
@@ -28,7 +27,7 @@ if (withComments) {
 
 <div class="toc-header">
 
-    <h2 class="font-sans-serif text-uppercase small ps-4">
+    <h2 class="font-sans-serif text-uppercase small">
         In this post
     </h2>
 
@@ -55,7 +54,7 @@ const updateCurrent = ($active: HTMLElement | null) => {
 updateCurrent(document.querySelector<HTMLElement>('.content-sidebar nav ul li:first-child a'));
 
 scrollSpy('.content-sidebar nav', {
-    sectionClass: '.content-container section',
+    sectionClass: '.content-container article section',
     offset: 100,
     onActive: updateCurrent,
 });

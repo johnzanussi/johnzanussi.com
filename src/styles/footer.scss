@@ -1,0 +1,30 @@
+.footer {
+    padding-top: 75px;
+    mask-image:
+        url('/src/assets/mask-divider-wave.png'),
+        linear-gradient(#000 0 0);;
+    mask-repeat: no-repeat;
+    mask-composite: exclude;
+    mask-position: top;
+    background-color: var(--jz-header-bg-color);
+
+    a {
+        &, &:link {
+            color: light-dark(var(--bs-dark), var(--bs-light)) !important;
+        }
+
+        &:hover,
+        &:active {
+            color: light-dark(var(--bs-heading-color), var(--bs-warning)) !important;
+        }
+    }
+
+    .socials {
+        a {
+            &:hover {
+                color: var(--jz-hover-color) !important;
+            }
+        }
+    }
+
+}

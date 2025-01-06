@@ -3,8 +3,8 @@
 .content-sidebar {
 
     @include bs.media-breakpoint-up(xxl) {
-        top: 8em !important;
-        max-height: calc(100vh - 8em);
+        top: 3em !important;
+        max-height: calc(100vh - 3em);
     }
 
 }

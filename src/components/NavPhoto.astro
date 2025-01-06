@@ -1,5 +1,4 @@
 ---
-import Link from '@/components/Link.astro';
 import { Image } from 'astro:assets';
 
 import imgJZ from '@/assets/img-john-zanussi-kiddo.jpg';
@@ -14,22 +13,18 @@ const {
     sizes = '(min-width: 1200px) 250px, (min-width: 780px) 182px, 125px',
     ...props
 } = Astro.props;
+
+const size = 75;
 ---
-<Link
-    href="/"
-    class:list={['d-block', className]}
+
+<Image
+    src={imgJZ}
+    alt="portrait of John Zanussi wearing sunglasses with his daughter on his shoulders"
+    class:list={['rounded-circle shadow img-fluid border border-4 border-dark', className]}
+    width={size}
+    height={size}
+    loading="eager"
+    widths={[37, 74, 125, 250, 500]}
+    sizes={sizes}
     {...props}
->
-
-    <Image
-        src={imgJZ}
-        alt="portrait of John Zanussi wearing sunglasses with his daughter on his shoulders"
-        class="rounded-circle shadow img-fluid nav-photo-img"
-        width={250}
-        height={250}
-        loading="eager"
-        widths={[37, 74, 125, 250, 500]}
-        sizes={sizes}
-    />
-
-</Link>
+/>

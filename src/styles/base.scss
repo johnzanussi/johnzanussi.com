@@ -15,6 +15,18 @@ h2 {
     }
 }
 
+h3 {
+    color: light-dark(#075985, #f59e0b); // sky-800, amber-500
+}
+
+h4 {
+    color: light-dark(#082f49, #b45309); // sky-950, amber-700
+}
+
+h5 {
+    color: light-dark(#040D39, #78350f); // amber-900
+}
+
 body {
     &:before {
         content: '';

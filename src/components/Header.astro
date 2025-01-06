@@ -1,0 +1,58 @@
+---
+import NavPhoto from '@/components/NavPhoto.astro';
+import NavLinks from '@/components/NavLinks.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import Icon from '@/components/Icon.astro';
+---
+
+<header class="header py-4 position-relative z-3">
+
+    <div class="content-container px-1">
+
+        <nav class="navbar navbar-expand-sm p-1 justify-content-between">
+
+            <a class="navbar-brand p-0 d-flex align-items-center rounded rounded-pill pe-3" href="/">
+                <NavPhoto class="d-inline-block" />
+                <span class="ms-2">
+                    <span class="site-title h3">
+                        John Zanussi
+                    </span>
+                    <span class="navbar-text smallest p-0 d-block">
+                        he/him
+                    </span>
+                </span>
+            </a>
+
+            <div
+                data-bs-theme="dark"
+                class="nav-wrap d-flex flex-column flex-sm-row align-items-sm-center rounded-pill bg-dark shadow-lg p-2 ps-sm-3">
+
+                <div class="collapse navbar-collapse">
+                    <NavLinks
+                        wrapperClass="navbar-nav font-monospace"
+                        itemClass="nav-item"
+                        linkClass="nav-link font-weight-bold"
+                    />
+                </div>
+
+                <ThemeToggle class="nav-color-mode-toggle me-sm-2" />
+
+                <a
+                    href="#footer"
+                    class="btn btn-link navbar-toggler m-0 mt-2 p-0 text-white"
+                    data-bs-target="#footer"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <Icon icon="mdi:hamburger" class="fs-2 align-text-top" />
+                </a>
+
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>
+
