@@ -3,27 +3,11 @@
     "rewrites": [
         {
             "source": "/rk6m8wh2a.js",
-            "destination": "https://analytics.johnzanussi.com/js/script.outbound-links.js"
+            "destination": "https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
         },
         {
             "source": "/api/rk6m8wh2a",
-            "destination": "https://analytics.johnzanussi.com/api/event"
-        },
-        {
-            "source": "/lxmsCZJtB2.js",
-            "destination": "https://plausible.io/js/script.js"
-        },
-        {
-            "source": "/api/lxmsCZJtB2",
             "destination": "https://plausible.io/api/event"
-        },
-        {
-            "source": "/ingest/:path(.*)",
-            "destination": "https://app.posthog.com/:path*"
-        },
-        {
-            "source": "/e9dj3dRNs.js",
-            "destination": "https://tinylytics.app/embed/xUHdB2b5yvksgocLb-s_.js"
         }
     ],
     "headers": [
