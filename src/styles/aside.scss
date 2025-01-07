@@ -22,6 +22,7 @@
     @include aside-variant('hackernews', #FF6602);
     @include aside-variant('info', bs.$blue-500);
     @include aside-variant('alert', bs.$red-500);
+    @include aside-variant('aiphoto', #7D5BDC);
 
     background-color: hsl(
         var(--jz-aside-h),

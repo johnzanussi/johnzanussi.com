@@ -1,0 +1,124 @@
+---
+title: Fantasy Football Standard vs Fractional Kicker Scoring
+excerpt: An analysis of standard vs fractional kicker scoring in fantasy football for the 2024 regular season.
+cover: "@/content/posts/standard-vs-fractional-kicker-scoring/cover-chatgpt-field-goal-kick.png"
+date: '2025-01-07'
+hiddenIntro: true
+---
+
+import Emoji from '@/components/Emoji.astro';
+
+## Intro
+
+My childhood friends and I have been in a competitive fantasy football league for the past 12 years. While I've accepted that fantasy football is mostly luck, it's a good reason to continue the long-lived text thread with my idiot friends and makes watching football on Sundays that much more enjoyable (or stressful). Especially as a Giants fan these days.
+
+For the 2024 season, my league switched from standard to fractional scoring for kickers. Once the regular season ended a few weeks ago, I was interested how much of an impact the change had on scoring. So, I dusted off my coding skills and compiled the data from each starting kicker in our league to see if I could answer my questions and maybe uncover other insights. I'm by no means a data analyst, but I think the info is interesting enough to share.
+
+<Aside type="aiphoto">
+    The cover photo above was created using [DALL&middot;E](https://openai.com/index/dall-e-3/). I gave it the following prompt and it gave me that image. Perfection. <Emoji label="smiling face with sunglasses">😎</Emoji>
+    
+    > Generate a photorealistic image of a generic nfl kicker kicking a game winning field goal in a fictional stadium during the day with clear sunny skies.
+
+</Aside>
+
+## Standard vs Fractional Scoring
+
+Yahoo's standard kicker scoring looks like this:
+
+| Field Goal Yards | Points |
+|------------------|--------|
+| 0-19             | 3      |
+| 20-29            | 3      |
+| 30-39            | 3      |
+| 40-49            | 4      |
+| 50+              | 5      |
+
+Fractional scoring assigns 1 point for each yard. So while a **62-yard** field goal increases from **5** points to **6.2** points, a **21-yard** field goal decreases from **3** points to **2.1** points.
+
+## Baseline Stats
+
+*Based on a 12-team, 14-week regular season.*
+
+|                        |        |
+|------------------------|--------|
+| **Total Kickers Used** | 22     |
+| **Total Yards Kicked** | 12,210 |
+| **Total Field Goals**  | 313    |
+| **Average Field Goals per Week** | 22.4 |
+| **Average Yards Kicked per Week** | 872.1 |
+
+## Initial Questions
+
+Before gathering and analyzing the data, I had the following initial questions, which I was able to answer:
+
+#### Would overall kicker scoring be higher or lower?
+
+**Higher.** **1,221** fractional scoring points vs **1,168** standard scoring points.
+
+This is an increase of **53 points** or **4.54%**.
+
+Across the 14-week regular season, the 12 teams in my league scored a total of **24,031.26** points. The 53 point difference only accounts for **0.22%** of total points scored. Pretty insignificant from a data perspective.
+
+
+#### Are there some kickers who are better suited for either scoring system?
+
+**Yes**. Kickers with big legs<small>*—cough Aubrey—*</small>benefited the most from fractional scoring.
+
+#### How well did each team in the league adjust to the new scoring?
+
+Some better than others. The answer to the previous question had a lot to do with this one.
+
+My team, in particular, suffered the most from fractional scoring. More on that below.
+
+## Analysis
+
+### Field Goal Yards
+
+![Bar chat showing standard vs fractional scoring for field goal yard groups](@/content/posts/standard-vs-fractional-kicker-scoring/chart-fg-yard-group-points.png)
+
+With fractional scoring, overall points decreased for all kicks in the 0-29 yard range and increased for all kicks in the 30-50+ yard range.
+
+
+![Bar chart showing the point difference as a percentage for field goal yard groups](@/content/posts/standard-vs-fractional-kicker-scoring/chart-fg-yard-group-difference.png)
+
+The 20-29 yard field goals suffered the most, losing **37%** of their points. Surprisingly, the 30-39 group saw the biggest gains with an increase of 14%, while the 50+ group saw the smallest positive increase of **6%**.
+
+![Pie chart showing the amount of field goals in the field goal yard groups](@/content/posts/standard-vs-fractional-kicker-scoring/chart-fg-yard-group-kicks.png)
+
+Outside of the two 0-19 yard field goals, the spread across the remaining groups was closer than I expected, with the biggest slice of the pie going to the 30-39 yard field goals.
+
+### Kickers
+
+![Bar chart showing the the point difference for all starting kickers](@/content/posts/standard-vs-fractional-kicker-scoring/chart-kickers-point-difference.png)
+
+Some clear winners and losers here, but I'm not sure how much of a difference **9** or **-1.9** points makes to a given team over the course of a season.
+
+![Bar chart showing standard vs fractional scoring for all starting kickers](@/content/posts/standard-vs-fractional-kicker-scoring/chart-kickers-standard-vs-fractional.png)
+
+When you include the amount of games played in the graph there's two kickers who stand out the most. Will Lutz with only 7 games played had the third biggest point increase of **6.1** and Jake Moody with 10 games played had the overall worst point decrease of **-1.9**.
+
+### Teams
+
+![Bar chart showing point difference for all 12 teams](@/content/posts/standard-vs-fractional-kicker-scoring/chart-team-point-difference.png)
+
+As I mentioned above in the initial questions, my team (**Team 1**) sufferred the worst throughout the season, primarily because I started the kicker with the largest negative impact, **Jake Moody**. **Team 12** gained the most by rostering **Aubrey**.
+
+But again, we're only talking a swing of **12.1** points over the entire season. These point differences represent only a **0.41%** increase in total points for Team 12 and a decrease of **-0.15%** for my team, Team 1.
+
+![Bar chart showing standard vs fractional scoring for all 12 teams](@/content/posts/standard-vs-fractional-kicker-scoring/chart-teams-point-totals.png)
+
+Something I did not do is go back to see if fractional vs. standard scoring made the difference in any matchups throughout the season.
+
+## Source Data
+
+I had to write some pretty janky code to hit the [Yahoo Fantasy API](https://developer.yahoo.com/fantasysports/guide/) and pull data from [Pro Football Reference](https://www.pro-football-reference.com/). I then did some data wrangling in SQLite to get this usable dataset. I've also anonymized the team names from my league.
+
+The full dataset is available as a [CSV on GitHub](https://gist.github.com/johnzanussi/d73e96cd1978b778e46e481738330be0) and as a [spreadsheet on Google Drive](https://docs.google.com/spreadsheets/d/1-x2WgvgNa-vd0z2psqc8xXnknZeJhzHLeMAChDepfVQ/edit?usp=sharing).
+
+<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRS77yj2eL7IyY6azdDBegj3LzSPULddj2lnvCrKWnBxBdltlr12dCQLpf6APUmVaCVTILbRy8iGQrv/pubhtml?gid=1599580855&amp;single=true&amp;widget=true&amp;headers=false" style={{ width: '100%', height: '800px' }} class="mb-4"></iframe>
+
+## Conclusion
+
+While my sample size is relatively small, I wouldn't expect a huge increase in points in your league by switching from standard to fractional kicker scoring. As seen above, the difference is insignificant compared to total points scored across the league—especially when compared to scoring changes like switching from standard to PPR or adding points-per-first down. However, I doubt my league will go back to standard kicker scoring, and I don't anticipate reanalyzing this data again after future seasons.
+
+Let me know in the comments if you come up with any other findings, and I'll include them in this post.

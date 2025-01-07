@@ -74,6 +74,10 @@ $navbar-light-toggler-border-color: transparent;
 $navbar-light-active-color: $white;
 $navbar-dark-active-color: $white;
 
+// $table-cell-padding-y: 1rem;
+$table-cell-padding-x: 1rem;
+$table-color: rgba(var(--bs-emphasis-color), .75);
+
 // 3. Bootstrap Variables
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/variables-dark";
