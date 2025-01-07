@@ -84,53 +84,53 @@ const includeSidebar = headings && !!headings.length;
 
     <div
         data-bs-theme="dark"
-        class="post-header mw-1600 mx-auto post-header bg-transparent border-0 rounded-0 ratio ratio-16x9">
+        class="post-header bg-divider w-100"
+        style={{ backgroundImage: `url('${coverImageSrc}')` }}>
 
-        <div>
+        <div class="bg-blur">
 
-            <Image
-                src={cover}
-                width={cover.width}
-                height={cover.height}
-                alt={title}
-                widths={[576, 768, 992, 1200, 1400, 1600]}
-                sizes="(min-width: 1680px) 958px, (min-width: 1200px) calc(73.91vw - 269px), (min-width: 780px) calc(85vw - 315px), calc(100vw - 32px)"
-                loading="eager"
-            />
+            <div class="mw-1600 mx-auto ratio ratio-16x9">
 
-            <div class="card-img-overlay start-0 end-0 d-flex align-items-end">
-
-                <div class="content-container p-3">
-
-                    <h1 class="mb-3 display-3">
-                        {title}
-                    </h1>
-
-                    <p>
-
-                        <Emoji label="calendar">🗓️</Emoji>
-                        <DateFormat
-                            date={date}
-                            class="text-light"
-                        />
-
-                        <span class="small mx-2 text-body-secondary">
-                            &#x2022;
-                        </span>
-
-                        <span class="text-body-secondary">
-                            <Emoji label="stopwatch" class="me-1">⏱️</Emoji> {minutesRead}
-                        </span>
-
-                        {draft && (
-                            <DraftBadge class="ms-2" />
-                        )}
-
-                    </p>
-
-                </div>
+                <Image
+                    src={cover}
+                    width={cover.width}
+                    height={cover.height}
+                    alt={title}
+                    widths={[576, 768, 992, 1200, 1400, 1600]}
+                    sizes="(min-width: 1680px) 958px, (min-width: 1200px) calc(73.91vw - 269px), (min-width: 780px) calc(85vw - 315px), calc(100vw - 32px)"
+                    loading="eager"
+                />
 
             </div>
+
+        </div>
+
+    </div>
+
+    <div class="content-container mb-5">
+
+        <div class="post-meta post-content">
+
+            <h1 class="mb-3 display-3">
+                {title}
+            </h1>
+
+            <p class="text-body-secondary">
+
+                <Emoji label="calendar">🗓️</Emoji>
+                <DateFormat date={date} />
+
+                <span class="small mx-2">
+                    &#x2022;
+                </span>
+
+                <Emoji label="stopwatch" class="me-1">⏱️</Emoji> {minutesRead}
+
+                {draft && (
+                    <DraftBadge class="ms-2" />
+                )}
+
+            </p>
 
         </div>
 
