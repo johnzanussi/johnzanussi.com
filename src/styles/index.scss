@@ -157,7 +157,7 @@ html[data-bs-theme="dark"] {
         }
     }
 
-    &.hide-intro-heading #h-intro {
+    .hide-intro-heading #h-intro {
         display: none;
     }
 }
@@ -182,4 +182,3 @@ html[data-bs-theme="dark"] {
 .expressive-code {
     margin-bottom: $spacer * 1.5; // mb-4
 }
-
