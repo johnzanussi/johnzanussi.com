@@ -42,23 +42,42 @@ const socialLinks = [
         brandColor: '#ff0069', // https://about.instagram.com/brand/gradient
     },
 ];
+
+const otherLinks = [
+    {
+        name: 'Buy me a coffee',
+        icon: 'tabler:coffee',
+        url: 'https://buymeacoffee.com/johnzanussi',
+        brandColor: '#FFDE02',
+    },
+    {
+        name: 'Email me',
+        icon: 'tabler:mail',
+        url: 'mailto:johnzanussi@gmail.com',
+        brandColor: '#EA4336',
+    }
+];
 ---
 <footer class="footer pb-5 position-relative">
 
     <div
         id="footer"
-        class="content-container pt-5 pt-sm-0 position-relative">
+        class="content-container position-relative">
 
-        <p class="d-sm-none m-0 bg-dark p-2 d-inline-block rounded position-absolute top-0 end-0 me-2 mt-2" style="border-radius: 1.5em !important;">
-            <BackToTop
-                label=""
-                icon="mdi:hamburger-remove"
-                class="navbar-toggler fs-1 link-primary"
-            />
-        </p>
+        <div class="footer-nav-toggle d-footer-nav-show text-end mb-3">
+            <div
+                class="d-inline-block me-2 bg-dark p-2 rounded"
+                style="border-radius: 1.5em !important;">
+                <BackToTop
+                    label=""
+                    icon="mdi:hamburger-remove"
+                    class="navbar-toggler fs-1 link-primary"
+                />
+            </div>
+        </div>
 
         <div
-            class="d-flex justify-content-sm-between flex-column flex-sm-row pt-5 px-3 px-sm-5 pb-5 align-items-end align-items-sm-start text-end text-sm-start">
+            class="d-flex justify-content-sm-between flex-column flex-sm-row pt-sm-5 px-3 px-sm-5 pb-5 align-items-end align-items-sm-start text-end text-sm-start">
 
             <NavLinks
                 wrapperClass="nav flex-column font-monospace mb-5 mb-sm-0"
@@ -74,7 +93,7 @@ const socialLinks = [
                             <Link
                                 href={url}
                                 title={name}
-                                class="icon-link flex-row-reverse flex-sm-row"
+                                class="icon-link flex-row-reverse flex-sm-row link-hover-var-color"
                                 style={{ '--jz-hover-color': brandColor }}
                             >
                                 <Icon
@@ -112,14 +131,38 @@ const socialLinks = [
                 <p class="mb-4">
                     Subscribe to my
                     <Link
-                        href="/rss"
+                        href="/rss.xml"
                         class="icon-link">
                         RSS
-                        <Icon icon="fa6-solid:rss" />
+                        <Icon icon="fa6-solid:rss" class="bi" />
                     </Link> feed.
                 </p>
 
-                <BackToTop />
+                <ul class="socials list-unstyled text-end">
+                    {otherLinks.map(({ name, icon, url, brandColor }) => (
+                        <li class="mb-3">
+                            <Link
+                                href={url}
+                                title={name}
+                                class="icon-link link-hover-var-color"
+                                style={{ '--jz-hover-color': brandColor }}
+                            >
+
+                                <span class="small">
+                                    {name}
+                                </span>
+
+                                <Icon
+                                    icon={icon}
+                                    class="fa-2x bi"
+                                />
+
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+
+                <BackToTop class="d-footer-nav-hide" />
 
                 <p class="navbar-text text-body-secondary text-end mt-5 small">
                     All content copyright John Zanussi.

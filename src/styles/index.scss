@@ -182,3 +182,26 @@ html[data-bs-theme="dark"] {
 .expressive-code {
     margin-bottom: $spacer * 1.5; // mb-4
 }
+
+
+.d-footer-nav-show {
+    display: none !important;
+}
+
+
+.footer-nav {
+    .d-footer-nav-show {
+        display: block !important;
+    }
+    .d-footer-nav-hide {
+        display: none !important;
+    }
+
+    .footer {
+        padding-top: 2rem;
+        mask-image: none;
+    }
+    .footer-nav-toggle {
+        margin-right: -1.5rem;
+    }
+}
