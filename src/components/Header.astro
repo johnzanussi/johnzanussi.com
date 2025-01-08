@@ -56,3 +56,10 @@ import Icon from '@/components/Icon.astro';
 
 </header>
 
+<script>
+import onClick from '@/scripts/onClick';
+onClick('.navbar-toggler', (_, event) => {
+    event.preventDefault();
+    document.body.classList.toggle('footer-nav');
+});
+</script>

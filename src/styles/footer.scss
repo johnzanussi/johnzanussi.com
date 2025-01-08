@@ -19,11 +19,9 @@
         }
     }
 
-    .socials {
-        a {
-            &:hover {
-                color: var(--jz-hover-color) !important;
-            }
+    a.link-hover-var-color {
+        &:hover {
+            color: var(--jz-hover-color) !important;
         }
     }
 

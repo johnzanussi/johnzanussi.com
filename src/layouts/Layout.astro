@@ -45,9 +45,13 @@ const isDev = import.meta.env.MODE === 'development';
     className,
 ]}>
 
-    <Header />
+    <div class="d-footer-nav-hide">
 
-    <slot />
+        <Header />
+
+        <slot />
+
+    </div>
 
     <Footer />
 
