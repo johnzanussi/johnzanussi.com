@@ -1,0 +1,47 @@
+---
+import DividerLayout from '@/layouts/DividerLayout.astro';
+import imgGeorge from '@/assets/img-george-is-not-home.png';
+
+import { Image } from 'astro:assets';
+
+const title = '404 Page Not Found';
+const metadata = {
+    title: title,
+    description: 'Where could it be?',
+};
+---
+
+<DividerLayout metadata={metadata}>
+
+    <h1
+        class="fs-6 lead text-end text-body-emphasis"
+        slot="header">
+        {title}
+    </h1>
+
+    <Fragment slot="main">
+
+        <div>
+
+            <p class="h2">
+                Believe it or not, this page is not home.
+            </p>
+
+            <Image
+                src={imgGeorge}
+                alt="Screenshot of George sitting next to his phone eating popcorn in Season 8 Episode 15 of Seinfeld"
+                class:list="img-fluid rounded shadow-lg my-2"
+                width="2000"
+                height="1125"
+                loading="eager"
+            />
+
+            <p class="h2 text-end">
+                Where could it be?
+            </p>
+
+        </div>
+
+    </Fragment>
+
+</DividerLayout>
