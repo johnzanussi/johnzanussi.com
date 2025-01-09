@@ -4,7 +4,7 @@ import expressiveCode from 'astro-expressive-code';
 import compress from 'astro-compress';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
-import purgecss from 'astro-purgecss';
+// import purgecss from 'astro-purgecss';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
@@ -79,7 +79,7 @@ export default defineConfig({
             },
         }),
         robotsTxt(),
-        purgecss(),
+        // purgecss(),
         compress({
             Image: false,
         }),
