@@ -1,0 +1,14 @@
+---
+import RootLink from '@/components/Link.astro';
+const { class: className, ...props } = Astro.props;
+---
+
+<RootLink
+    class:list={[
+        'text-jz-blue-bright hover:text-cyan-900 dark:text-jz-blue-brighter dark:hover:text-sky-300',
+        className
+    ]}
+    {...props}
+>
+    <slot />
+</RootLink>

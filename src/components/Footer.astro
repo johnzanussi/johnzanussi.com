@@ -58,13 +58,13 @@ const otherLinks = [
     }
 ];
 ---
-<footer class="footer pb-5 position-relative">
+<footer class="footer pb-5 relative bg-jz-blue-light dark:bg-jz-blue-dark">
 
     <div
         id="footer"
-        class="content-container position-relative">
+        class="container position-relative">
 
-        <div class="footer-nav-toggle d-footer-nav-show text-end mb-3">
+        <!-- <div class="footer-nav-toggle d-footer-nav-show text-end mb-3">
             <div
                 class="d-inline-block me-2 bg-dark p-2 rounded"
                 style="border-radius: 1.5em !important;">
@@ -74,45 +74,51 @@ const otherLinks = [
                     class="navbar-toggler fs-1 link-primary"
                 />
             </div>
-        </div>
+        </div> -->
 
         <div
-            class="d-flex justify-content-sm-between flex-column flex-sm-row pt-sm-5 px-3 px-sm-5 pb-5 align-items-end align-items-sm-start text-end text-sm-start">
+            class="w-full flex flex-col sm:items-start sm:flex-row sm:justify-between sm:pt-5 px-3 sm:px-5 pb-5 items-end sm:items-sm-start text-end sm:text-start">
 
             <NavLinks
-                wrapperClass="nav flex-column font-monospace mb-5 mb-sm-0"
-                itemClass="nav-item"
-                linkClass="nav-link font-weight-bold px-0"
+                wrapperClass="flex-col mb-5 sm:mb-0 font-mono text-xl"
+                itemClass=""
+                linkClass="block p-3 hover:text-jz-yellow"
                 useIsActive={false}
             />
 
-            <section class="socials mb-5 mb-sm-0">
-                <ul class="list-unstyled">
+            <section class="socials mb-5 sm:mb-0">
+
+                <ul>
                     {socialLinks.map(({ name, icon, url, brandColor }) => (
-                        <li class="mb-3">
+
+                        <li class="mb-4 text-base">
+
                             <Link
                                 href={url}
                                 title={name}
-                                class="icon-link flex-row-reverse flex-sm-row link-hover-var-color"
+                                class="inline-flex flex-row-reverse sm:flex-row items-center gap-1.5 hover:text-(--jz-hover-color)"
                                 style={{ '--jz-hover-color': brandColor }}
                             >
                                 <Icon
                                     icon={icon}
-                                    class="fa-2x bi"
+                                    class="text-3xl"
                                 />
 
-                                <span class="small">
-                                    {name}
-                                </span>
+                                {name}
 
                             </Link>
+
                         </li>
+
                     ))}
+
                 </ul>
+
             </section>
 
-            <section class="text-body-secondary text-end">
-                <p class="mb-4">
+            <section class="text-end text-gray-400">
+
+                <p class="mb-6">
                     Built with
                     <Link
                         href="/built-with"
@@ -128,7 +134,7 @@ const otherLinks = [
                     >more</Link>.
                 </p>
 
-                <p class="mb-4">
+                <p class="mb-6">
                     Subscribe to my
                     <Link
                         href="/rss.xml"

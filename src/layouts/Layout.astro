@@ -2,7 +2,7 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/roboto-mono';
 
-import '../styles/index.scss';
+import '@/styles/index.css';
 
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
@@ -18,7 +18,10 @@ const { head, body } = tags;
 const isDev = import.meta.env.MODE === 'development';
 ---
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html
+    lang="en"
+    data-theme="light"
+>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,14 +37,14 @@ const isDev = import.meta.env.MODE === 'development';
     />
 )}
 </head>
-<body>
+<body class="text-sky-950 dark:text-zinc-200 bg-fixed bg-gradient-white dark:bg-gradient-blue">
 
 <ThemeToggleScript />
 
 <Fragment set:html={body} />
 
 <div class:list={[
-    'site position-relative',
+    'site relative',
     className,
 ]}>
 

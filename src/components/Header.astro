@@ -5,33 +5,39 @@ import ThemeToggle from '@/components/ThemeToggle.astro';
 import Icon from '@/components/Icon.astro';
 ---
 
-<header class="header py-4 position-relative z-3">
+<header class="header py-4 position z-3">
 
-    <div class="content-container px-1">
+    <div class="container">
 
-        <nav class="navbar navbar-expand-sm p-1 justify-content-between">
+        <nav class="flex navbar-expand-sm p-1 justify-between">
 
-            <a class="navbar-brand p-0 d-flex align-items-center rounded rounded-pill pe-3" href="/">
-                <NavPhoto class="d-inline-block" />
-                <span class="ms-2">
-                    <span class="site-title h3">
+            <a class="p-0 flex items-center rounded rounded-pill pe-3" href="/">
+
+                <NavPhoto />
+
+                <span class="ms-4">
+
+                    <span class="font-mono text-2xl font-bold">
                         John Zanussi
                     </span>
-                    <span class="navbar-text smallest p-0 d-block">
+
+                    <span class="block text-xs text-gray-600 dark:text-gray-400">
                         he/him
                     </span>
+
                 </span>
+
             </a>
 
             <div
-                data-bs-theme="dark"
-                class="nav-wrap d-flex flex-column flex-sm-row align-items-sm-center rounded-pill bg-dark shadow-lg p-2 ps-sm-3">
+                data-theme="dark"
+                class="flex flex-row items-center p-2 sm:px-4 rounded-full shadow-xl bg-gradient-to-tr from-sky-950 to-cyan-950">
 
-                <div class="collapse navbar-collapse">
+
+                <div class="navbar-collapse">
                     <NavLinks
-                        wrapperClass="navbar-nav font-monospace"
-                        itemClass="nav-item"
-                        linkClass="nav-link font-weight-bold"
+                        wrapperClass="flex font-mono text-xl"
+                        linkClass="block px-2 py-3 text-cyan-500 hover:text-cyan-300"
                     />
                 </div>
 
@@ -39,7 +45,7 @@ import Icon from '@/components/Icon.astro';
 
                 <a
                     href="#footer"
-                    class="btn btn-link navbar-toggler m-0 mt-2 p-0 text-white"
+                    class="block sm:hidden btn btn-link navbar-toggler m-0 mt-2 p-0 text-white"
                     data-bs-target="#footer"
                     aria-expanded="false"
                     aria-label="Toggle navigation"

@@ -10,14 +10,28 @@
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     };
 
+    const themeAttribute = 'data-theme';
+    const disableTransitionClass = 'transition-none';
+
     const setTheme = (theme) => {
+
+        // Turn off color transitions for links
+        document.body.classList.add(disableTransitionClass);
+
         if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             theme = 'dark';
         }
         localStorage.setItem('theme', theme);
         const event = new CustomEvent('theme', { detail: theme });
         document.dispatchEvent(event);
-        document.documentElement.setAttribute('data-bs-theme', theme);
+        document.documentElement.setAttribute(themeAttribute, theme);
+
+        // Wait for browser to repaint (so theme switch finishes) before removing class
+        // https://reemus.dev/article/disable-css-transition-color-scheme-change#heading-best-solution---getcomputedstyle
+        window.getComputedStyle(document.body).opacity;
+
+        // Turn on color transitions for links
+        document.body.classList.remove(disableTransitionClass);
     };
 
     setTheme(getPreferredTheme());
@@ -30,12 +44,21 @@
 
     window.addEventListener('DOMContentLoaded', () => {
 
-        document.querySelectorAll('[data-bs-theme-value]')
+        document.querySelectorAll('.theme-controller')
             .forEach(toggle => {
-                toggle.addEventListener('click', () => {
-                    setTheme(
-                        toggle.getAttribute('data-bs-theme-value')
-                    );
+                toggle.addEventListener('click', (e) => {
+                    const theme = document.documentElement.getAttribute(themeAttribute) === 'dark' ? 'light' : 'dark';
+                    const $parent = toggle.parentElement;
+
+                    $parent.classList.add('animate-spin-once');
+                    $parent.addEventListener('animationend', function handleAnimationEnd() {
+                        $parent.classList.remove('animate-spin-once');
+                        // Remove the event listener to avoid multiple triggers
+                        $parent.removeEventListener('animationend', handleAnimationEnd);
+                    });
+
+                    setTheme(theme);
+
                 });
             });
     });
