@@ -5,7 +5,7 @@ import { getImageSrc } from '@/utils/images';
 import Emoji from '@/components/Emoji.astro';
 import Layout from '@/layouts/Layout.astro';
 import Icon from '@/components/Icon.astro';
-import Link from '@/components/Link.astro';
+import Link from '@/components/Markdown/Link.astro';
 import PostCard from '@/components/PostCard.astro';
 
 import imgScreenshot from '@/assets/screenshots/home.jpg';
@@ -26,43 +26,48 @@ const metadata = {
 ---
 <Layout metadata={metadata}>
 
-    <div class="content-container py-4 py-md-5">
+    <div class="container py-8 md:py-12 content">
 
-        <h1 class="display-1 mb-3 mb-md-5">
-            Hey, there! <Emoji label="waving hand">👋</Emoji>
+        <h1 class="text-[80px] font-mono font-medium md:mb-12 tracking-negative">
+
+            <span class="bg-linear-45 from-sky-950 to-violet-800 dark:from-jz-yellow dark:to-fuchsia-400 bg-clip-text text-transparent drop-shadow-xl">
+                Hey, there!
+            </span>
+
+            <Emoji label="waving hand">👋</Emoji>
         </h1>
 
-        <p class="lead">
+        <p class="text-xl font-medium mb-4 leading-8">
             I'm John. That's me up there <Emoji label="up left arrow">↖️</Emoji>.
             I've been building stuff on the web either on my own or with teams for almost 20 years.
         </p>
 
-        <p class="lead">
+        <p class="text-xl font-medium mb-4 leading-8">
             I've been doing a lot of 3D printing, home automation projects, and web development stuff in my free time and wanted a place to share my experiences with the community. Creating and maintaining this site also gives me an excuse to play around with new trends in web development.
         </p>
 
-        <p class="lead">
+        <p class="text-xl font-medium mb-4 leading-8">
             You can read more about the libraries and tools I used to build
             this site on the <Link href="/built-with">Built With</Link> page
             or by checking out the code for yourself on{' '}
             <Link href="https://github.com/johznanussi/johnzanussi.com">GitHub</Link>.
         </p>
 
-        <p class="lead">
+        <p class="text-xl font-medium mb-4 leading-8">
             You can read more about me on my{' '}
             <Link href="/about">About</Link> page. You can see what videos
             I'm watching on the <Link href="/youtube">YouTube</Link> page.
         </p>
 
-        <p class="lead">
+        <p class="text-xl font-medium mb-4 leading-8">
             Lastly, you can check out one of my recent posts below.
         </p>
 
-        <div class="mt-3">
+        <div class="pt-4">
             <PostCard post={featuredPost} />
         </div>
 
-        <p class="text-end lead mt-4 me-2">
+        <p class="text-xl text-end leading-8 mt-4 me-2 tracking-wider">
             <Link href="/posts">
                 More Posts
                 <Icon icon="fa6-solid:arrow-right" />

@@ -4,10 +4,10 @@ import expressiveCode from 'astro-expressive-code';
 import compress from 'astro-compress';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
-// import purgecss from 'astro-purgecss';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
+import tailwindcss from "@tailwindcss/vite";
 
 // Remark
 import remarkReadingtime from './src/utils/remark/reading-time';
@@ -51,6 +51,11 @@ export default defineConfig({
         port: port,
     },
     output: 'static',
+    vite: {
+        plugins: [
+            tailwindcss(),
+        ],
+    },
     integrations: [
         expressiveCode({
             plugins: [
@@ -79,7 +84,6 @@ export default defineConfig({
             },
         }),
         robotsTxt(),
-        // purgecss(),
         compress({
             Image: false,
         }),

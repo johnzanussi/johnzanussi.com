@@ -29,21 +29,16 @@ const {
 } = data;
 ---
 <article
-    class:list={[
-        'card card-post flex-md-row p-3',
-        {
-            'border-warning bg-warning-subtle': draft,
-        },
-    ]}
-    {...props}
->
+    class="flex md:flex-row card-post p-4 relative border bg-white border-zinc-200 dark:bg-zinc-900 dark:border-neutral-700 rounded-2xl transition hover:shadow-lg hover:scale-102"
+    {...props}>
 
-    <div class="card-body order-1 order-md-0 px-2 p-md-2 pb-0 pe-md-0">
+    <div class="card-body order-1 md:order-0 px-2 md:p-2 pb-0 md:pe-0">
 
-        <div class="text-body-secondary mb-2 small">
+        <div class="text-zinc-600 dark:text-zinc-200 mb-2 small">
 
             <DateFormat date={date} />
-            <span class="ps-2 small text-body-tertiary">
+
+            <span class="ps-2 text-sm text-neutral-400">
                 {minutesRead}
             </span>
 
@@ -53,29 +48,29 @@ const {
 
         </div>
 
-        <h1 class="h2">
+        <h1 class="font-mono font-medium text-3xl">
             <Link
                 href={getPostUrl(id)}
-                class="stretched-link text-reset"
+                class="after:absolute after:inset-0 text-sky-800 dark:text-jz-yellow"
             >
                 {title}
             </Link>
         </h1>
 
-        <p class="m-0">
+        <p class="m-0 text-base leading-7">
             {excerpt}
         </p>
 
     </div>
 
-    <div class="card-img ratio ratio-16x9 position-relative order-0 order-md-1 ms-md-3">
+    <div class="aspect-video order-0 md:order-1 md:ms-3 md:flex-[0_0_40%]">
         <Image
             src={cover}
             alt={title}
             width={852}
             widths={[308, 324, 426, 786, 852]}
             sizes="(min-width: 1640px) 426px, (min-width: 1200px) calc(35.48vw - 149px), (min-width: 780px) calc(100vw - 405px), calc(100vw - 66px)"
-            class="rounded"
+            class="object-cover rounded-2xl w-full h-full"
             loading="lazy"
         />
 
