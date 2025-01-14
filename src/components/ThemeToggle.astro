@@ -8,27 +8,18 @@ export type Props = {
 const { class: className } = Astro.props;
 ---
 
-<button
-    class:list={['btn btn-link text-warning d-none d-inline-light', className]}
-    type="button"
-    data-bs-theme-value="dark"
-    aria-label="Switch to dark theme"
->
+<label class="relative inline-grid align-middle place-content-center select-none cursor-pointer w-10 h-10">
+
+    <input type="checkbox" class="theme-controller appearance-none" value="dark" />
+
     <Icon
-        icon="fa6-solid:sun"
-        class="lead align-text-top"
+        icon="tabler:sun-high"
+        class="dark:hidden h-7 w-7 fill-current text-jz-yellow"
     />
 
-</button>
-
-<button
-    class:list={['btn btn-link text-danger d-none d-inline-dark', className]}
-    type="button"
-    data-bs-theme-value="light"
-    aria-label="Switch to light theme"
->
     <Icon
-        icon="fa6-solid:moon"
-        class="lead align-text-top"
+        icon="tabler:moon-stars"
+        class="hidden dark:block h-7 w-7 fill-current text-pink-500"
     />
-</button>
+
+</label>
