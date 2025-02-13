@@ -18,28 +18,32 @@ export interface Props extends HTMLAttributes<'div'> {
 
 import Emoji from '@/components/Emoji.astro';
 
-const { interests, ...props } = Astro.props;
+const {
+    interests,
+    class: className = '',
+    ...props
+} = Astro.props;
 ---
 <div
-    class="row"
+    class="sm:grid sm:grid-cols-2"
     {...props}
 >
     {interests.map(({ title, items }) => (
 
-        <div class="col-6">
+        <div>
 
             <h3>
                 {title}
             </h3>
 
-            <ul class="list-unstyled">
+            <ul class={className}>
 
                 {items.map(({ emoji, title, sub }) => (
 
-                    <li>
+                    <li class="py-3 align-middle">
 
-                        <Emoji class="fs-3 me-2" e={emoji}></Emoji> {title}
-                        {sub && <small class="text-body-secondary">{sub}</small>}
+                        <Emoji class="text-3xl me-2 align-middle" e={emoji}></Emoji> {title}
+                        {sub && <small class="text-zinc-600 dark:text-zinc-400">{sub}</small>}
 
                     </li>
 

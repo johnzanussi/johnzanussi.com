@@ -1,27 +1,67 @@
 @import "tailwindcss";
 
+@plugin "@tailwindcss/typography";
+@plugin "./plugin.word-spacing.ts";
+
+@source "../../astro.config.ts";
+
+
 @variant dark (&:where(html[data-theme="dark"], html[data-theme="dark"] *));
+@variant first-heading (&:where(section:first-child :first-child:is(h1, h2, h3, h4, h5, h6)));
+@variant active (&:is(.active));
 
 @theme {
+    --font-sans: "Inter Variable", sans-serif;
     --font-mono: "Roboto Mono Variable", monospace;
-    --font-display: "Inter Variable", sans-serif;
 
     /* Post Cards */
     --transform-scale-102: scale(1.02);
 
     /* 16px */
     --text-3xl: 2rem;
+    --text-7xl: 4rem;
 
     /* Not sure this is set right yet */
     --max-width-screen-xl: 69rem;
     --max-width-prose: 48rem;
 
     /* Colors */
-    --color-jz-blue-dark: #1f3749;
-    --color-jz-blue-light: #9AC4D2;
-    --color-jz-blue-bright: #0d7092;
-    --color-jz-blue-brighter: #13a0d1;
-    --color-jz-yellow: #fcd12a;
+    --color-ocean-50: #dbf6ff;
+    --color-ocean-100: #b8edff;
+    --color-ocean-200: #9AC4D2;
+    --color-ocean-300: #3dcfff;
+    --color-ocean-400: #14c4ff;
+    --color-ocean-500: #00ace6;
+    --color-ocean-600: #13a0d1;
+    --color-ocean-700: #0d7092;
+    --color-ocean-800: #1f3749;
+    --color-ocean-900: #00222e;
+    --color-ocean-950: #000f14;
+
+    /* https://www.tints.dev/wave/0C5295 */
+    --color-wave-50: #ebf5ff;
+    --color-wave-100: #d1e9ff;
+    --color-wave-200: #a8d5ff;
+    --color-wave-300: #7abfff;
+    --color-wave-400: #52abff;
+    --color-wave-500: #2495ff;
+    --color-wave-600: #0081fa;
+    --color-wave-700: #0069cc;
+    --color-wave-800: #0c5294;
+    --color-wave-900: #002a52;
+    --color-wave-950: #001529;
+
+    --color-dune-50: #fffae5;
+    --color-dune-100: #fff4c7;
+    --color-dune-200: #ffea94;
+    --color-dune-300: #ffde5c;
+    --color-dune-400: #fcd12a;
+    --color-dune-500: #f5c400;
+    --color-dune-600: #c29b00;
+    --color-dune-700: #947600;
+    --color-dune-800: #614e00;
+    --color-dune-900: #332900;
+    --color-dune-950: #191400;
 
     /* Custom */
     --background-image-gradient-white: linear-gradient(
@@ -60,8 +100,8 @@
 
     }
 
-}
 
+}
 
 @utility container {
     margin-inline: auto;
@@ -71,6 +111,30 @@
 
 @utility tracking-negative {
     word-spacing: -0.5em;
+}
+
+@utility mask-wave {
+    mask-image:
+        url('/src/assets/mask-divider-wave.png'),
+        linear-gradient(#000 0 0);
+    mask-repeat: no-repeat;
+}
+
+@utility mask-wave-full {
+    mask-image: url('/src/assets/mask-divider-wave-full.png');
+    mask-repeat: no-repeat;
+}
+
+@utility mask-exclude {
+    mask-composite: exclude;
+}
+
+@utility mask-bottom {
+    mask-position: bottom;
+}
+
+@utility mask-top {
+    mask-position: top;
 }
 
 
@@ -85,4 +149,29 @@
     .transition-none * {
         @apply !transition-none;
     }
+
+}
+
+@layer utilities {
+    .prose {
+        color: light-dark(#212529, #DEE2E6);
+        /* --tw-prose-body: #212529; */
+        /* --tw-prose-invert-body: #DEE2E6; */
+    }
+
+    .word-spacing-1 {
+
+    }
+}
+
+
+@layer components {
+    .prose p {
+        @apply mb-4;
+    }
+
+    .prose :where(h1, h2, h3, h4, h5) {
+        @apply font-mono font-medium mt-12 mb-4;
+    }
+
 }

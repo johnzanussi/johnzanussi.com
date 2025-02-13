@@ -1,8 +1,6 @@
 ---
 import type { MarkdownHeading } from 'astro';
 
-import '@/styles/content-sidebar.scss';
-
 export type Props = {
     headings: MarkdownHeading[];
     url: string;
@@ -13,7 +11,7 @@ import TableOfContents from '@/components/TableOfContents/TableOfContents.astro'
 const { headings } = Astro.props;
 const hasHeadings = !!headings.length;
 ---
-<aside class="content-sidebar post-content w-100 mx-auto sticky-xxl-top flex-grow-sm-1 align-self-xxl-start mt-sm-4 mb-3 mb-xxl-0 pb-2 pb-xxl-5 ps-xxl-5">
+<aside class="content-sidebar w-100 mx-auto 2xl:sticky 2xl:top-12 2xl:max-h-[calc(100vh-3rem)] sm:grow 2xl:self-start sm:mt-5 mb-3 xxl:mb-0 pb-2 2xl:pb-12 2xl:ps-12">
 
     {hasHeadings && <TableOfContents headings={headings} />}
 

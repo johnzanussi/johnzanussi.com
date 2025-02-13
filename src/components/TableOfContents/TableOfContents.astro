@@ -2,7 +2,7 @@
 import type { MarkdownHeading } from 'astro';
 import ToCLinks from './ToCLinks.astro';
 
-import '@/styles/toc.scss';
+// import '@/styles/toc.scss';
 
 export type Props = {
     headings: MarkdownHeading[];
@@ -24,16 +24,11 @@ if (withComments) {
     });
 }
 ---
+<h2 class="mb-2 font-sans font-medium uppercase text-sm text-wave-800 dark:text-dune-400">
+    In this post
+</h2>
 
-<div class="toc-header">
-
-    <h2 class="font-sans-serif text-uppercase small">
-        In this post
-    </h2>
-
-</div>
-
-<nav class="content-toc my-3 my-xxl-0">
+<nav class="my-3 2xl:my-0">
     <ToCLinks
         headings={headings}
         depth={depth}
@@ -43,18 +38,13 @@ if (withComments) {
 <script>
 import scrollSpy from 'simple-scrollspy';
 
-const $currentSection = document.querySelector<HTMLElement>('.toc-current-section');
-
 const updateCurrent = ($active: HTMLElement | null) => {
-    if ($active && $currentSection) {
-        $currentSection.innerHTML = $active.innerHTML;
-    }
+    console.log('$active');
+    console.log($active);
 };
 
-updateCurrent(document.querySelector<HTMLElement>('.content-sidebar nav ul li:first-child a'));
-
 scrollSpy('.content-sidebar nav', {
-    sectionClass: '.content-container article section',
+    sectionClass: '.container > article section[id]',
     offset: 100,
     onActive: updateCurrent,
 });

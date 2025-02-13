@@ -8,12 +8,21 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import ThemeToggleScript from '@/components/ThemeToggleScript.astro';
 
-import { generateTags } from '@/utils/metadata';
+import { type Metadata, generateTags } from '@/utils/metadata';
 
-const { metadata, class: className = [] } = Astro.props;
+type Props = {
+    metadata: Metadata;
+    className?: string;
+    headerClass?: string;
+};
 
-const tags = generateTags(metadata);
-const { head, body } = tags;
+const {
+    metadata,
+    class: className = '',
+    headerClass = '',
+} = Astro.props;
+
+const { head, body } = generateTags(metadata);
 
 const isDev = import.meta.env.MODE === 'development';
 ---
@@ -21,6 +30,7 @@ const isDev = import.meta.env.MODE === 'development';
 <html
     lang="en"
     data-theme="light"
+    class="scheme-light dark:scheme-dark"
 >
 <head>
 <meta charset="utf-8" />
@@ -50,7 +60,7 @@ const isDev = import.meta.env.MODE === 'development';
 
     <div class="d-footer-nav-hide">
 
-        <Header />
+        <Header class={headerClass} />
 
         <slot />
 

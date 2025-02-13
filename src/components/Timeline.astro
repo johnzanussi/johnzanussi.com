@@ -4,6 +4,10 @@ import type { ImageMetadata } from 'astro';
 interface Role {
     timeframe: string;
     title: string;
+    egg?: {
+        href: string;
+        title: string;
+    };
 }
 
 interface Era {
@@ -18,18 +22,23 @@ interface Era {
 
 export interface Props {
     timeline: Era[];
+    class?: string;
+    bulletSize?: number;
 }
 
 import { Image } from 'astro:assets';
 import Link from '@/components/Link.astro';
 import Icon from '@/components/Icon.astro';
+import IconLink from '@/components/IconLink.astro';
 
-import '@/styles/timeline.scss';
-
-const { timeline } = Astro.props;
+const {
+    timeline,
+    class: className = '',
+    bulletSize = 60,
+} = Astro.props;
 ---
 
-<div class="timeline">
+<div class:list={['timeline', className]}>
 
     {timeline.map(era => {
         const {
@@ -42,64 +51,64 @@ const { timeline } = Astro.props;
             title,
         } = era;
 
-        const variables = [
-            `--jz-era-color: ${color};`,
-            `--jz-era-color-dark: ${colorDark || color};`
-        ];
-
         return (
 
-            <div class="era-wrap d-flex">
+            <div
+                class="flex gap-x-4"
+                style={{
+                    '--timeline-era-color': `light-dark(${color}, ${colorDark || color})`,
+                    '--timeline-bullet-height': `${bulletSize}px`,
+                }}
+            >
 
-                <span class="era-start text-end text-body-secondary small">
+                <span class="text-end text-gray-600 dark:text-zinc-300 text-sm leading-(--timeline-bullet-height)">
                     {startYear}
                 </span>
 
-                <div
-                    class="era position-relative d-flex pb-4"
-                    style={variables.join('')}>
-
+                <div class="relative after:block after:absolute after:w-1 after:bg-(--timeline-era-color) after:h-full after:left-1/2 after:-ml-1 after:top-0 after:z-0">
                     <Link href={link}>
                         <Image
                             src={image}
                             alt={title}
-                            width={50}
-                            height={50}
-                            class="era-bullet rounded-circle position-relative z-2 me-3 shadow"
+                            width={bulletSize}
+                            height={bulletSize}
+                            class="rounded-full border-4 border-(--timeline-era-color) shadow relative z-1"
                         />
                     </Link>
+                </div>
+
+                <div class="era position-relative d-flex pb-4">
 
                     <div>
 
-                        {link && (
-                            <Link
-                                href={link}
-                                class="era-title d-block fs-4 fw-bolder">
-                                {title}
-                                {' '}
-                                <Icon
-                                    icon="fa-solid:external-link-alt"
-                                    class="icon-link ms-1"
-                                />
-                            </Link>
-                        )}
+                        <IconLink
+                            href={link}
+                            class="block text-xl font-bold text-(--timeline-era-color) hover:opacity-75 leading-(--timeline-bullet-height)"
+                            icon="fa-solid:external-link-alt"
+                            iconClass="text-xs"
+                            iconPosition="end">
+                            {title}
+                        </IconLink>
 
-                        {!link && (
-                            <span class="era-title d-block fs-4 fw-bolder">
-                                {title}
-                            </span>
-                        )}
-
-                        {roles.map(({ title, timeframe }) => (
+                        {roles.map(({ title, timeframe, egg }) => (
 
                             <Fragment>
 
-                                <p class="small text-body-secondary mb-0">
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400">
                                     {timeframe}
                                 </p>
 
-                                <p class="text-body-emphasis">
+                                <p class="font-medium mb-5">
                                     {title}
+                                    {!!egg && (
+                                        <Link
+                                            href={egg.href}
+                                            title={egg.title}
+                                            class="text-pink-600 dark:text-pink-400"
+                                        >
+                                            <Icon icon="mdi:egg-easter" />
+                                        </Link>
+                                    )}
                                 </p>
 
                             </Fragment>

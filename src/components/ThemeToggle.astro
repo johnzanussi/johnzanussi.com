@@ -8,18 +8,21 @@ export type Props = {
 const { class: className } = Astro.props;
 ---
 
-<label class="relative inline-grid align-middle place-content-center select-none cursor-pointer w-10 h-10">
+<label class:list={[
+    'relative inline-grid align-middle place-content-center select-none cursor-pointer w-10 h-10',
+    className,
+]}>
 
     <input type="checkbox" class="theme-controller appearance-none" value="dark" />
 
     <Icon
         icon="tabler:sun-high"
-        class="dark:hidden h-7 w-7 fill-current text-jz-yellow"
+        class="dark:!hidden h-7 w-7 fill-current text-dune-400"
     />
 
     <Icon
         icon="tabler:moon-stars"
-        class="hidden dark:block h-7 w-7 fill-current text-pink-500"
+        class="!hidden dark:!block h-7 w-7 fill-current text-pink-500"
     />
 
 </label>
