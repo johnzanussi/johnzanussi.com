@@ -3,41 +3,22 @@ import Layout from '@/layouts/Layout.astro';
 ---
 <style lang="scss">
 .header-divider {
-
-    .header-content {
-        overflow: hidden;
-        background-color: var(--jz-header-bg-color);
-    }
-
-    padding-bottom: 75px !important;
-    position: relative;
-
     &:after {
-        content: '';
-        width: 100%;
-        height: 75px;
-        background-color: var(--jz-header-bg-color);
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
         mask-image: url('/src/assets/mask-divider-wave.png');
-        mask-repeat: no-repeat-x;
-        mask-position: bottom;
     }
 }
 </style>
 
 <Layout
     {...Astro.props}
-    class="is-divider-layout"
+    headerClass="bg-ocean-200 dark:bg-ocean-800"
 >
 
-    <div class="header-divider">
+    <div class="header-divider relative pb-[75px] after:absolute after:w-full after:h-[75px] after:bottom-0 after:mask-wave after:mask-bottom after:bg-ocean-200 dark:after:bg-ocean-800">
 
-        <div class="header-content pt-lg-5">
+        <div class="bg-ocean-200 dark:bg-ocean-800 overflow-hidden lg:pt-12">
 
-            <div class="content-container pb-3 mt-4 mt-lg-0">
+            <div class="container pb-4 mt-6 lg:mt-0">
 
                 <slot name="header" />
 
@@ -47,9 +28,9 @@ import Layout from '@/layouts/Layout.astro';
 
     </div>
 
-    <div class="pb-5 pt-lg-4">
+    <div class="pb-12 lg:pt-5">
 
-        <div class="d-flex content-container flex-column-reverse flex-xxl-row">
+        <div class="flex container flex-column-reverse 2xl:flex-row">
 
             <slot name="main" />
 

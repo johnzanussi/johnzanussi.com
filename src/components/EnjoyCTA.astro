@@ -3,19 +3,19 @@ import { Image } from 'astro:assets';
 import Link from './Link.astro';
 ---
 
-<div class="bg-info text-center p-3 rounded-1">
+<div class="bg-sky-200 dark:bg-sky-950 text-center py-8 px-5 rounded-lg shadow-lg">
 
-    <p>
+    <p class="mb-4">
         Found the above useful? Have a question? Thought of something I
         didn&apos;t?
     </p>
 
-    <p>
+    <p class="mb-4">
         Consider leaving a comment below or send me an email at
         johnzanussi@gmail.com.
     </p>
 
-    <p>You can also buy me a coffee. Cheers!</p>
+    <p class="mb-4">You can also buy me a coffee. Cheers!</p>
 
     <p>
 
@@ -26,7 +26,7 @@ import Link from './Link.astro';
                 height={50}
                 src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png"
                 alt="Buy Me A Coffee"
-                class="rounded-2"
+                class="inline-block rounded-lg"
             />
 
         </Link>

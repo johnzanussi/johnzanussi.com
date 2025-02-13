@@ -22,7 +22,7 @@ const metadata = {
 
     <h1
         slot="header"
-        class="display-3"
+        class="text-6xl font-mono dark:text-dune-400"
     >
         Posts
     </h1>
@@ -33,7 +33,7 @@ const metadata = {
     >
 
         {posts.map(post => (
-            <div class="mb-4">
+            <div class="mb-6">
                 <PostCard post={post} />
             </div>
         ))}

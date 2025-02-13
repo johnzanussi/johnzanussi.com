@@ -3,45 +3,56 @@ import NavPhoto from '@/components/NavPhoto.astro';
 import NavLinks from '@/components/NavLinks.astro';
 import ThemeToggle from '@/components/ThemeToggle.astro';
 import Icon from '@/components/Icon.astro';
+
+type Props = {
+    class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const hasPhotoBg = className?.includes('has-photo-bg');
+const islandBg = 'rounded-full bg-gradient-to-tr from-sky-950 to-cyan-950 shadow-xl';
 ---
 
-<header class="header py-4 position z-3">
+<header class:list={['header py-4 relative z-3', className]}>
 
     <div class="container">
 
         <nav class="flex navbar-expand-sm p-1 justify-between">
 
-            <a class="p-0 flex items-center rounded rounded-pill pe-3" href="/">
+            <a class:list={[
+                'flex items-center group',
+                {
+                    [`${islandBg} text-zinc-100 pe-8`]: hasPhotoBg,
+                    'rounded rounded-pill pe-3': !hasPhotoBg,
+                },
+             ]}
+             href="/">
 
-                <NavPhoto />
+                <NavPhoto class="group-hover:scale-80 transition-transform ease-in-out" />
 
-                <span class="ms-4">
-
-                    <span class="font-mono text-2xl font-bold">
-                        John Zanussi
-                    </span>
-
-                    <span class="block text-xs text-gray-600 dark:text-gray-400">
-                        he/him
-                    </span>
-
+                <span class="ms-4 font-mono font-medium text-2xl leading-6 group-hover:scale-115 transition-transform ease-in-out">
+                    John Zanussi
                 </span>
 
             </a>
 
             <div
                 data-theme="dark"
-                class="flex flex-row items-center p-2 sm:px-4 rounded-full shadow-xl bg-gradient-to-tr from-sky-950 to-cyan-950">
+                class:list={[
+                    'flex flex-row items-center p-2 sm:px-4',
+                    islandBg,
+                ]}>
 
 
                 <div class="navbar-collapse">
                     <NavLinks
                         wrapperClass="flex font-mono text-xl"
-                        linkClass="block px-2 py-3 text-cyan-500 hover:text-cyan-300"
+                        linkClass="block px-2 py-3 text-cyan-500 hover:text-cyan-300 hover:scale-105 transition-transform ease-in-out"
                     />
                 </div>
 
-                <ThemeToggle class="nav-color-mode-toggle me-sm-2" />
+                <ThemeToggle class="nav-color-mode-toggle me-sm-2 hover:scale-115 transition-transform ease-in-out" />
 
                 <a
                     href="#footer"

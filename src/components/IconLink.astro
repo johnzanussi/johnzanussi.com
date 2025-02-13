@@ -1,0 +1,39 @@
+---
+import Link from '@/components/Link.astro';
+import Icon from '@/components/Icon.astro';
+
+type Props = {
+    icon: string;
+    href: string;
+    linkClass?: string;
+    iconClass?: string;
+    iconPosition?: 'start' | 'end';
+};
+
+const {
+    icon,
+    href,
+    linkClass,
+    iconClass,
+    iconPosition = 'start',
+    ...props
+} = Astro.props;
+---
+
+<Link
+    href={href}
+    class:list={[
+        'inline-flex items-center gap-1.5',
+        {
+            'flex-row-reverse': iconPosition === 'end',
+        },
+        linkClass
+    ]}
+    {...props}
+>
+
+    <Icon icon={icon} class={[iconClass]} />
+
+    <slot />
+
+</Link>

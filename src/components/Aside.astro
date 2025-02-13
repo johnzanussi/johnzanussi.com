@@ -1,28 +1,56 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-const typeIcons = {
-    egg: 'mdi:egg-easter',
-    idea: 'mdi:lightbulb-on',
-    mindblown: '🤯',
-    wave: '👋',
-    xmas: 'fa-solid:tree',
-    reddit: 'fa6-brands:reddit-alien',
-    hackernews: 'logos:ycombinator',
-    info: 'fa6-solid:info',
-    alert: 'fa6-solid:triangle-exclamation',
-    aiphoto: 'tabler:photo-ai',
+const types = {
+    egg: {
+        icon: 'mdi:egg-easter',
+        color: '--color-pink-600',
+    },
+    idea: {
+        icon: 'mdi:lightbulb-on',
+        color: '#11A0D2',
+    },
+    mindblown: {
+        icon: '🤯',
+        color: '--color-amber-600',
+    },
+    wave: {
+        icon: '👋',
+        color: '--color-cyan-400',
+    },
+    xmas: {
+        icon: 'fa-solid:tree',
+        color: '--color-green-800',
+    },
+    reddit: {
+        icon: 'fa6-brands:reddit-alien',
+        color: '#FF4500',
+    },
+    hackernews: {
+        icon: 'logos:ycombinator',
+        color: '#FF6602',
+    },
+    info: {
+        icon: 'fa6-solid:info',
+        color: '--color-blue-600',
+    },
+    alert: {
+        icon: 'fa6-solid:triangle-exclamation',
+        color: '--color-red-600',
+    },
+    aiphoto: {
+        icon: 'tabler:photo-ai',
+        color: '--color-violet-500',
+    },
 };
 
 interface Props extends HTMLAttributes<'aside'> {
     title?: string;
-    type: keyof typeof typeIcons;
+    type: keyof typeof types;
 }
 
 import Icon from '@/components/Icon.astro';
 import Emoji from '@/components/Emoji.astro';
-
-// import '@/styles/aside.scss';
 
 const {
     type,
@@ -31,29 +59,32 @@ const {
     ...props
 } = Astro.props;
 
-const icon = typeIcons[type] || '';
+const { icon = '', color } = types[type];
 const isIcon = icon.includes(':');
 ---
 
 <aside
     class:list={[
-        `content-aside aside-${type} border-start border-5 py-3 px-4 ms-2 ms-lg-0 my-5 rounded rounded-1 shadow position-relative`,
+        `content-aside aside-${type} border-start border-l-5 py-3 ps-8 pe-5 ms-2 lg:ms-0 my-12 rounded shadow-lg relative bg-(--aside-color)/[0.15] border-(--aside-color)`,
         {
-            'd-flex': !title,
+            'flex': !title,
         },
         className,
     ]}
+    style={{
+        '--aside-color': color.startsWith('--') ? `var(${color})` : color,
+    }}
     {...props}
 >
 
-    <span class="aside-icon position-absolute top-0 start-0 fs-4 rounded-1 text-center translate-middle">
-        {isIcon ? <Icon icon={icon} class="position-absolute top-50 left-50 translate-middle"/> : <Emoji e={icon} />}
+    <span class="aside-icon absolute top-0 start-0 w-11 h-11 text-3xl flex items-center justify-center text-center text-white rounded text-center -translate-x-2/4 -translate-y-2/4 bg-(--aside-color)">
+        {isIcon ? <Icon icon={icon} /> : <Emoji e={icon} />}
     </span>
 
-    <section class="py-1">
+    <section class="py-1 *:last:mb-0 *:mt-0 prose-img:rounded prose-a:!text-inherit prose-a:hover:!text-(--aside-color) prose-a:underline prose-a:decoration-dashed prose-a:underline-offset-2">
 
         {title && (
-            <p class="fs-5 fw-bold mb-1">
+            <p class="font-bold !mb-1 text-(--aside-color)">
                 {title}
             </p>
         )}
