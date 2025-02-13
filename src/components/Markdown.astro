@@ -5,6 +5,8 @@ import Link from '@/components/Link.astro';
 import WorkHistory from '@/components/WorkHistory.astro';
 import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
 
+import Prose from '@/components/Prose.astro';
+
 import Blockquote from '@/components/Markdown/Blockquote.astro';
 import Columns from '@/components/Markdown/Columns.astro';
 import Grid from '@/components/Markdown/Grid.astro';
@@ -32,4 +34,6 @@ const components = {
 const { Content } = Astro.props;
 ---
 
-<Content components={components} />
+<Prose class="mb-4" full>
+    <Content components={components} />
+</Prose>

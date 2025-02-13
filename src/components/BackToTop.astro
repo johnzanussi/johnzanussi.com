@@ -20,12 +20,12 @@ const {
 <button
     type="button"
     class:list={[
-        'btn btn-link btn-back-to-top p-0',
+        'btn-back-to-top cursor-pointer',
         className,
     ]}
     {...props}
 >
-    {label} <Icon icon={icon} class={iconClass} />
+    {label} <Icon icon={icon} class:list={['inline', iconClass]} />
 </button>
 
 <script>
