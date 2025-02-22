@@ -1,8 +1,8 @@
 ---
-import Link from '@/components/Link.astro';
+import Link, { type Props as LinkProps } from '@/components/Link.astro';
 import Icon from '@/components/Icon.astro';
 
-type Props = {
+interface Props extends LinkProps {
     icon: string;
     href: string;
     linkClass?: string;
@@ -13,8 +13,8 @@ type Props = {
 const {
     icon,
     href,
-    linkClass,
-    iconClass,
+    linkClass = '',
+    iconClass = '',
     iconPosition = 'start',
     ...props
 } = Astro.props;
@@ -32,7 +32,7 @@ const {
     {...props}
 >
 
-    <Icon icon={icon} class={[iconClass]} />
+    <Icon icon={icon} class={iconClass} />
 
     <slot />
 

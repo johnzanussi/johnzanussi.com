@@ -15,14 +15,15 @@ import remarkSectionize from './src/utils/remark/sectionize';
 import remarkUnwrapImages from './src/utils/remark/unwrap-images';
 
 // Rehype
-import addClasses from 'rehype-add-classes';
+import addClasses from 'rehype-class-names';
 import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis';
 
 // Env Variables
-const currentEnv = process.env.VERCEL_ENV ? process.env.VERCEL_ENV : 'local';
+type Environment = 'development' | 'preview' | 'production';
+const currentEnv: Environment = (process.env.VERCEL_ENV as Environment) || 'development';
 
 const envVariables = {
-    local: () => {
+    development: () => {
         const { SITE_URL = '', PORT = 0 } = loadEnv(
             import.meta.env.MODE,
             process.cwd(),
@@ -64,15 +65,15 @@ export default defineConfig({
             defaultProps: {
                 showLineNumbers: false,
             },
-            themeCssSelector: (theme) => `[data-bs-theme='${theme.type}']`,
+            themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
             styleOverrides: {
-                codeFontFamily: 'var(--bs-font-monospace)',
-                uiFontFamily: 'var(--bs-font-sans-serif)',
+                codeFontFamily: 'var(--font-mono)',
+                uiFontFamily: 'var(--font-sans)',
 
                 frames: {
                     frameBoxShadowCssValue: '1.6px 1.6px 21px 0 rgba(0,0,0,0.1)',
                     // editorActiveTabIndicatorTopColor: 'var(--bs-heading-color)',
-                    editorActiveTabIndicatorTopColor: 'var(--bs-link-color)',
+                    editorActiveTabIndicatorTopColor: 'var(--color-sky-500)',
                 },
             },
         }),
@@ -106,14 +107,13 @@ export default defineConfig({
         ],
         // https://github.com/jaywcjlove/rehype-attr
         rehypePlugins: [
-            rehypeAccessibleEmojis,
+            rehypeAccessibleEmojis as unknown as any,
             [
                 addClasses,
                 {
-                    iframe: 'mb-4',
+                    iframe: 'mb-6',
                 },
             ],
         ],
-        extendDefaultPlugins: true,
     },
 });

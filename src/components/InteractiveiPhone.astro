@@ -126,30 +126,30 @@ const steps: Step[] = [
 const bgRepeat = await getImage({ src: imgPhoneFrameRepeat });
 
 const { class: className, ...props } = Astro.props;
-
-import '@/styles/iphone-scroll.scss';
 ---
 <div
-    class={className}
+    class:list={['not-prose', className]}
+    style="--iphone-width: 60%;"
     {...props}
 >
 
     <div
         id="iphone-sim"
-        class="iphone">
+        class="bg-(length:--iphone-width) bg-no-repeat"
+    >
 
         <Image
             src={imgPhoneFrameTop}
             alt="Top frame of iPhone 15"
-            class="iphone-top img-fluid w-60"
+            class="iphone-top mw-full h-auto w-(--iphone-width)"
         />
 
-        <div class="iphone-viewport position-relative">
+        <div class="relative iphone-viewport">
 
             <Image
                 src={imgPhoneFrameButtons}
                 alt="Side frame of iPhone 15"
-                class="img-fluid position-absolute iphone-buttons"
+                class="absolute left-[-0.28209381%] w-[calc(var(--iphone-width)*1.01)] mw-full h-auto"
             />
 
             {steps.map((step, i) => {
@@ -164,7 +164,7 @@ import '@/styles/iphone-scroll.scss';
 
                 return (
                     <div class:list={[
-                        'step d-flex',
+                        'step d-flex group relative',
                         {
                             'has-context': !!context,
                             'active': !!context && i === 0,
@@ -172,12 +172,12 @@ import '@/styles/iphone-scroll.scss';
                     ]}>
 
                         <div
-                            class="shortcut px-3 px-md-4 bg-black"
+                            class="flex w-(--iphone-width) bg-cover bg-repeat-y px-3 px-md-4 bg-black"
                             style={{
                                 backgroundImage: `url('${bgRepeat.src}')`
                             }}>
 
-                            <div class:list={['shortcut-img opacity-50', className]}>
+                            <div class:list={['shortcut-img transition ease-linear duration-300 opacity-50 group-active:opacity-100', className]}>
                                 <Image
                                     src={image}
                                     alt={alt}
@@ -186,14 +186,15 @@ import '@/styles/iphone-scroll.scss';
                             </div>
 
                             {hasBreak && (
-                                <div class="d-flex justify-content-center overflow-hidden vr-wrap">
-                                    <div class="vr opacity-100"></div>
+                                <div class="d-flex justify-content-center overflow-hidden h-[1.5vw]">
+                                    <div class="inline-block w-1 mh-[1em] self-stretch opacity-100"></div>
                                 </div>
                             )}
 
                         </div>
 
-                        <div class="context invisible overflow-visible lh-sm">
+
+                        <div class="context w-[40%] top-0 p-4 rounded-r-lg absolute right-0 transition ease-linear duration-300 opacity-0 invisible overflow-visible lh-sm group-active:visible group-active:opacity-100 bg-ocean-600 dark:bg-ocean-700 text-white text-base/5">
                             {step.context}
                         </div>
                     </div>
@@ -205,7 +206,7 @@ import '@/styles/iphone-scroll.scss';
         <Image
             src={imgPhoneFrameBottom}
             alt="Bottom frame of iPhone 15"
-            class="img-fluid w-60"
+            class="img-fluid w-(--iphone-width)"
         />
 
     </div>

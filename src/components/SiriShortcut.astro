@@ -8,28 +8,27 @@ export type Props = {
     url: string;
     title: string;
     color: string;
+    class?: string;
 };
 
 const {
     color,
     title,
-    url
+    url,
+    class: className
 } = Astro.props;
 ---
-<div
-    class="card d-inline-block shadow-sm mb-4 border-0 text-start"
-    style={{
-        backgroundColor: color,
-        width: '250px',
-    }}
->
+<div class:list={[
+    'rounded-xl p-4 not-prose text-start w-[250px] shadow',
+    color,
+    className,
+]}>
 
-    <div class="card-body">
+    <div class="relative">
 
         <Link
             href={url}
-            class="stretched-link rounded-2 text-white float-end bg-white p-2"
-            style="--bs-bg-opacity: .15"
+            class="after:absolute after:inset-0 rounded-xl text-white float-end bg-white/[0.15] p-2"
         >
             Get Shortcut
         </Link>
@@ -41,7 +40,7 @@ const {
             height={43}
         />
 
-        <h5 class="card-title font-sans-serif mt-3 mb-0 text-white lh-base">
+        <h5 class="font-sans mt-3 mb-0 text-white leading-5">
             {title}
         </h5>
 

@@ -1,5 +1,5 @@
-import { type CollectionEntry, type ContentCollectionKey, getCollection } from 'astro:content';
-import type { CollectionsWithDateProperty } from '../content/config';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import type { CollectionsWithDateProperty, ContentCollectionKey } from '../content.config';
 
 const collectionUrls = {
     posts: '/posts',
@@ -13,7 +13,7 @@ export const getItems = async (
     includeDrafts = isDev
 ) => {
     const draftFilter = !includeDrafts
-        ? (item: CollectionEntry<ContentCollectionKey>) => !item.data.draft
+        ? (item: CollectionEntry<ContentCollectionKey>) => 'draft' in item.data && !item.data.draft
         : undefined;
 
     const items = await getCollection(collection, draftFilter);
@@ -21,15 +21,15 @@ export const getItems = async (
     return items;
 };
 
-export const getItemUrl = (collection: ContentCollectionKey, slug: string) => {
-    return `${collectionUrls[collection]}/${slug}`;
+export const getItemUrl = (collection: ContentCollectionKey, id: string) => {
+    return `${collectionUrls[collection]}/${id}`;
 };
 
 export const getCollectionUrl = (collection: ContentCollectionKey) => {
     return `${collectionUrls[collection]}/`;
 };
 
-export const getPostUrl = (slug: string) => getItemUrl('posts', slug);
+export const getPostUrl = (id: string) => getItemUrl('posts', id);
 
 export const getDateSortedCollection = async <T extends CollectionsWithDateProperty>(
     collection: T
@@ -52,7 +52,7 @@ export type SiblingItems<T extends ContentCollectionKey> = {
  * Get the previous and next items if
  * available for a given item
  */
-export const getSiblingItems = async <T extends ContentCollectionKey>(
+export const getSiblingItems = async <T extends CollectionsWithDateProperty>(
     collection: T,
     item: CollectionEntry<T>
 ) => {
@@ -60,27 +60,28 @@ export const getSiblingItems = async <T extends ContentCollectionKey>(
     const siblingItems: SiblingItems<T>[] = [];
 
     // Get all the items
-    const allItems = await getItems(collection);
+    const allItems = await getDateSortedCollection(collection);
 
     // Find the index for the given item
     const itemIndex = allItems.findIndex(
-        (allItem: CollectionEntry<ContentCollectionKey>) => allItem.slug === item.slug
+        (allItem: CollectionEntry<ContentCollectionKey>) => allItem.id === item.id
     );
 
     // If the item was found
     if (itemIndex > -1) {
-        // If the item isn't the last item in the array (first item)
-        if (itemIndex < allItems.length - 1) {
+
+        // If the item isn't the first item, get the previous item
+        if (itemIndex > 0) {
             siblingItems.push({
-                item: allItems[itemIndex + 1] as unknown as CollectionEntry<T>,
+                item: allItems[itemIndex - 1] as unknown as CollectionEntry<T>,
                 isPrevious: true,
             });
         }
 
-        // If the item isn't the first item in the array (last item)
-        if (itemIndex > 0) {
+        // If the item isn't the last item, get the next item
+        if (itemIndex < allItems.length - 1) {
             siblingItems.push({
-                item: allItems[itemIndex - 1] as unknown as CollectionEntry<T>,
+                item: allItems[itemIndex + 1] as unknown as CollectionEntry<T>,
                 isPrevious: false,
             });
         }

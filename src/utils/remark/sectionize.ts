@@ -1,15 +1,15 @@
+import type { Root } from 'mdast';
 import { toString } from 'mdast-util-to-string';
 import { findAfter } from 'unist-util-find-after';
 import { visitParents } from 'unist-util-visit-parents';
 import Slugger from 'github-slugger';
 
-import type { Transformer } from 'unified';
 import type { Parent } from 'unist';
 import type { Heading } from 'mdast';
 
 const slugs = new Slugger();
 
-export default function remarkSectionize(): Transformer {
+export default function remarkSectionize() {
 
     const sectionize = (heading: Heading, ancestors: Parent[]) => {
 
@@ -73,7 +73,7 @@ export default function remarkSectionize(): Transformer {
 
     };
 
-    return function (tree) {
+    return function (tree: Root) {
         slugs.reset();
         visitParents(tree, 'heading', sectionize);
     };

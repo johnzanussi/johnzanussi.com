@@ -12,11 +12,12 @@ const {
 } = Astro.props;
 
 const topLevel = headings.filter((heading) => heading.depth === depth);
+const depthPadding = Math.round(((depth - 1) * .75) * 100) / 100;
 ---
 
 <ul
-    class="list-unstyled mb-0 text-[.81rem]"
-    style={`--toc-depth-padding: ${Math.round(((depth - 1) * 1.5) * 100) / 100}rem`}
+    class="list-[circle] xl:list-none xl:list-unstyled mb-0 text-lg xl:text-[.81rem] ps-4 xl:ps-0 marker:text-amber-300"
+    style={`--toc-depth-padding: ${depthPadding}rem`}
 >
 
     {topLevel.map((heading, i) => {
@@ -30,13 +31,15 @@ const topLevel = headings.filter((heading) => heading.depth === depth);
             sliceEnd > 0 ? sliceEnd : undefined
         );
 
+        const headingSlug = heading.slug.replace('h-', '');
+
         return (
 
             <li>
 
                 <a
-                    class="block py-[.125rem] px-(--toc-depth-padding) opacity-75 hover:opacity-100 2xl:border-l 2xl:border-zinc-300 dark:2xl:border-zinc-600 active:font-medium active:opacity-100 active:border-wave-800 active:dark:2xl:border-dune-400"
-                    href={`#${heading.slug.replace('h-', '')}`}
+                    class="xl:block xl:py-[.125rem] xl:ps-(--toc-depth-padding) xl:opacity-75 hover:opacity-100 xl:border-l xl:border-zinc-300 dark:xl:border-zinc-600 active:font-medium active:opacity-100 active:border-wave-800 active:dark:xl:border-dune-400"
+                    href={`#${headingSlug}`}
                 >
                     {heading.text}
                 </a>

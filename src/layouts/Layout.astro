@@ -1,4 +1,6 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+
 import '@fontsource-variable/inter';
 import '@fontsource-variable/roboto-mono';
 
@@ -10,16 +12,18 @@ import ThemeToggleScript from '@/components/ThemeToggleScript.astro';
 
 import { type Metadata, generateTags } from '@/utils/metadata';
 
-type Props = {
+export interface Props extends HTMLAttributes<'div'> {
     metadata: Metadata;
-    className?: string;
+    class?: string;
     headerClass?: string;
+    hasPhotoHeader?: boolean;
 };
 
 const {
     metadata,
     class: className = '',
     headerClass = '',
+    hasPhotoHeader = false,
 } = Astro.props;
 
 const { head, body } = generateTags(metadata);
@@ -40,6 +44,7 @@ const isDev = import.meta.env.MODE === 'development';
 <Fragment set:html={head} />
 {!isDev && (
     <script
+        is:inline
         defer
         data-domain="johnzanussi.com"
         data-api="/api/rk6m8wh2a"
@@ -58,9 +63,9 @@ const isDev = import.meta.env.MODE === 'development';
     className,
 ]}>
 
-    <div class="d-footer-nav-hide">
+    <div class="footer-nav:hidden">
 
-        <Header class={headerClass} />
+        <Header class={headerClass} hasPhotoHeader={hasPhotoHeader} />
 
         <slot />
 

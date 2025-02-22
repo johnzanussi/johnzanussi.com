@@ -67,4 +67,5 @@ export const collections = {
 
 // type CollectionsWithDateProperty = KeysWithDateProperty<typeof collections>;
 
+export type ContentCollectionKey = 'posts' | 'pages';
 export type CollectionsWithDateProperty = 'posts';
