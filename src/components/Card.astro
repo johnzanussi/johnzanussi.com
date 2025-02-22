@@ -1,0 +1,33 @@
+---
+export type Props = {
+    class?: string;
+    tag?: keyof HTMLElementTagNameMap;
+    radius?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+};
+
+const {
+    class: className,
+    radius = '2xl',
+    tag: Element = 'div',
+} = Astro.props;
+
+const borderRadiusMap = {
+    xs: 'rounded-xs',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+};
+
+const borderRadius = borderRadiusMap[radius];
+---
+
+<Element class:list={[
+    'p-4 border bg-white border-zinc-200 dark:bg-zinc-900 dark:border-neutral-700 transition hover:shadow-log hover:scale-102',
+    borderRadius,
+    className
+]}>
+    <slot />
+</Element>

@@ -18,6 +18,7 @@ export default function remarkUnwrapImages() {
                 parent.children.splice(index, 1, ...node.children);
                 return [SKIP, index];
             }
+            return;
         });
     };
 }
@@ -31,29 +32,31 @@ function applicable(
 
     while (++index < node.children.length) {
         const child = node.children[index];
-        if (child.type === 'text' && whitespace(child.value)) {
-            // Whitespace is fine.
-        } else if (
-            child.type === 'image' ||
-            child.type === 'imageReference' ||
-            ('name' in child && child.name === 'astro-image')
-        ) {
-            image = containsImage;
-        } else if (
-            !inLink &&
-            (child.type === 'link' || child.type === 'linkReference')
-        ) {
-            const linkResult = applicable(child, true);
+        if (child) {
+            if (child.type === 'text' && whitespace(child.value)) {
+                // Whitespace is fine.
+            } else if (
+                child.type === 'image' ||
+                child.type === 'imageReference' ||
+                ('name' in child && child.name === 'astro-image')
+            ) {
+                image = containsImage;
+            } else if (
+                !inLink &&
+                (child.type === 'link' || child.type === 'linkReference')
+            ) {
+                const linkResult = applicable(child, true);
 
-            if (linkResult === containsOther) {
+                if (linkResult === containsOther) {
+                    return containsOther;
+                }
+
+                if (linkResult === containsImage) {
+                    image = containsImage;
+                }
+            } else {
                 return containsOther;
             }
-
-            if (linkResult === containsImage) {
-                image = containsImage;
-            }
-        } else {
-            return containsOther;
         }
     }
 

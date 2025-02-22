@@ -35,7 +35,8 @@ const { api, script }: Config = vercel.rewrites.reduce((accum, rewrite) => {
 ---
 {api && script && (
     <script
-        defer
+        is:inline
+        type="module"
         data-domain="johnzanussi.com"
         data-api={api}
         src={script}

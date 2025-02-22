@@ -10,6 +10,7 @@ export interface Props extends HTMLAttributes<'nav'> {
 
 import { getPostUrl } from '@/utils/collections';
 
+import Card from '@/components/Card.astro';
 import Icon from '@/components/Icon.astro';
 import Link from '@/components/Link.astro';
 
@@ -21,7 +22,7 @@ const { posts, showLabels = true, ...props } = Astro.props;
     {...props}
 >
 
-    <ul class="list-unstyled row my-4 post-pagination">
+    <ul class="my-6 sm:grid sm:grid-cols-2 gap-4 post-pagination">
 
         {posts.map(({ isPrevious, item }) => {
 
@@ -34,24 +35,26 @@ const { posts, showLabels = true, ...props } = Astro.props;
 
                 <li
                     class:list={[
-                        'col-md-6',
+                        'h-full',
                         {
-                            'text-start mb-4 mb-md-0': isPrevious,
-                            'text-end': !isPrevious,
-                            'offset-md-6': !isPrevious && posts.length === 1,
+                            'text-start mb-6 mb-md-0': isPrevious,
+                            'text-end col-start-2': !isPrevious,
                         },
                     ]}
                 >
 
-                    <div class="card-pagination card h-100 rounded-1 flex-row justify-content-between p-3">
+                    <Card
+                        class="relative flex flex-row p-3 h-full min-h-[105px] md:min-h-auto"
+                        radius="md"
+                    >
 
                         <div class:list={[
-                                'align-self-center',
-                                {
-                                    'order-0 me-3': isPrevious,
-                                    'order-1 ms-3': !isPrevious,
-                                }
-                            ]}
+                            'self-center',
+                            {
+                                'order-0': isPrevious,
+                                'order-1': !isPrevious,
+                            }
+                        ]}
                         >
 
                             <Icon icon={icon} />
@@ -61,26 +64,24 @@ const { posts, showLabels = true, ...props } = Astro.props;
                         <Link
                             href={getPostUrl(id)}
                             class:list={[
-                                'stretched-link lh-sm',
+                                'block w-full after:absolute after:inset-0 leading-5',
                                 {
-                                    'order-1 text-end': isPrevious,
-                                    'order-0 text-start': !isPrevious,
+                                    'order-1 text-start ps-4': isPrevious,
+                                    'order-0 text-end pe-4': !isPrevious,
                                 }
                             ]}>
 
                             {showLabels && (
-                                <div class="fs-6 mb-2 text-body-secondary">
+                                <div class="mb-1.5 text-sm text-zinc-600 dark:text-zinc-400">
                                     {label} Post
                                 </div>
                             )}
 
-                            <span class="fs-6">
-                                {title}
-                            </span>
+                            {title}
 
                         </Link>
 
-                    </div>
+                    </Card>
 
                 </li>
 

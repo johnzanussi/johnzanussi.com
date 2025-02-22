@@ -82,8 +82,7 @@ const includeSidebar = headings && !!headings.length;
 ---
 <Layout
     metadata={metadata}
-    headerClass="has-photo-bg"
-    class="is-post-layout"
+    hasPhotoHeader
 >
 
     <div
@@ -93,7 +92,7 @@ const includeSidebar = headings && !!headings.length;
 
         <div class="backdrop-brightness-50 backdrop-blur-lg">
 
-            <div class="max-w-[1600px] min-h-[500px] mx-auto aspect-video">
+            <div class="w-full max-w-[1600px] min-h-[500px] mx-auto aspect-video">
 
                 <Image
                     src={cover}
@@ -114,9 +113,9 @@ const includeSidebar = headings && !!headings.length;
 
     <div class="container mb-12">
 
-        <div class="post-content -mt-5 2xl:max-w-full">
+        <div class="post-content -mt-5 xl:max-w-full">
 
-            <h1 class="font-mono font-base text-wave-800 dark:text-dune-400 mb-3 xl:text-7xl -word-spacing-3 leading-tight">
+            <h1 class="font-mono font-base text-wave-800 dark:text-dune-400 mb-3 text-4xl xl:text-7xl -word-spacing-3 leading-tight">
                 {title}
             </h1>
 
@@ -142,7 +141,7 @@ const includeSidebar = headings && !!headings.length;
 
     </div>
 
-    <div class="flex container flex-col-reverse 2xl:flex-row">
+    <div class="flex container flex-col-reverse xl:flex-row">
 
         <article class:list={[
             'post-content max-w-[48rem]',
@@ -159,7 +158,7 @@ const includeSidebar = headings && !!headings.length;
 
             <PostPagination posts={siblingPosts} />
 
-            <section id="comments">
+            <section id="comments" class="prose">
 
                 <h2 id="h-comments">
                     Comments

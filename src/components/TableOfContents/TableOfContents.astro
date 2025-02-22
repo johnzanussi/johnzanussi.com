@@ -2,8 +2,6 @@
 import type { MarkdownHeading } from 'astro';
 import ToCLinks from './ToCLinks.astro';
 
-// import '@/styles/toc.scss';
-
 export type Props = {
     headings: MarkdownHeading[];
     depth?: number;
@@ -28,7 +26,7 @@ if (withComments) {
     In this post
 </h2>
 
-<nav class="my-3 2xl:my-0">
+<nav class="w-full mb-6 xl:mb-0">
     <ToCLinks
         headings={headings}
         depth={depth}

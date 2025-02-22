@@ -1,7 +1,8 @@
+import type { Root } from 'mdast';
+import type { VFile } from 'vfile';
 import getReadingTime from 'reading-time';
 import { toString } from 'mdast-util-to-string';
 
-import type { Transformer } from 'unified';
 
 interface AstroFile {
     data: {
@@ -13,8 +14,8 @@ interface AstroFile {
     };
 }
 
-export default function remarkReadingtime(): Transformer {
-    return function (tree, file) {
+export default function remarkReadingtime() {
+    return function (tree: Root, file: VFile) {
         const astroFile = file as unknown as AstroFile;
 
         if (astroFile.data.astro.frontmatter) {

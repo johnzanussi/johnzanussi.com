@@ -1,5 +1,4 @@
 ---
-import Icon from '@/components/Icon.astro';
 import Link from '@/components/Link.astro';
 import BackToTop from '@/components/BackToTop.astro';
 import NavLinks from '@/components/NavLinks.astro';
@@ -59,23 +58,24 @@ const otherLinks = [
     }
 ];
 ---
-<footer class="pt-[75px] pb-12 relative mask-wave mask-exclude mask-top bg-ocean-200 dark:bg-ocean-800">
+<footer class="pt-[75px] pb-12 relative mask-wave-top mask-exclude mask-top bg-ocean-200 dark:bg-ocean-800">
 
     <div
         id="footer"
         class="container position-relative">
 
-        <!-- <div class="footer-nav-toggle d-footer-nav-show text-end mb-3">
+        <div class="footer-nav-toggle hidden footer-nav:block mb-8">
             <div
-                class="d-inline-block me-2 bg-dark p-2 rounded"
+                class="me-3 text-end"
                 style="border-radius: 1.5em !important;">
                 <BackToTop
                     label=""
                     icon="mdi:hamburger-remove"
-                    class="navbar-toggler fs-1 link-primary"
+                    class="navbar-toggler py-1.5 px-3 rounded-2xl bg-sky-900"
+                    iconClass="size-7 align-text-top text-white"
                 />
             </div>
-        </div> -->
+        </div>
 
         <div
             class="w-full flex flex-col sm:items-start sm:flex-row sm:justify-between sm:pt-12 pb-12 items-end sm:items-sm-start text-end sm:text-start">
@@ -95,7 +95,7 @@ const otherLinks = [
                         <li class="mb-4 text-base">
 
                             <IconLink
-                                href={name}
+                                href={url}
                                 icon={icon}
                                 linkClass="hover:text-(--jz-hover-color)"
                                 iconClass="text-3xl"
@@ -148,7 +148,7 @@ const otherLinks = [
                     {otherLinks.map(({ name, icon, url, brandColor }) => (
                         <li class="mb-3">
                             <IconLink
-                                href={name}
+                                href={url}
                                 icon={icon}
                                 linkClass="hover:text-(--jz-hover-color)"
                                 iconClass="text-3xl"
@@ -161,7 +161,7 @@ const otherLinks = [
                     ))}
                 </ul>
 
-                <BackToTop class="d-footer-nav-hide mt-8 text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400" />
+                <BackToTop class="footer-nav:hidden mt-8 text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400" />
 
                 <p class="text-end mt-12">
                     All content copyright John Zanussi.

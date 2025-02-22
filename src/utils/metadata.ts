@@ -4,14 +4,14 @@ import { MetadataGenerator } from 'metatags-generator';
 import { HtmlGenerator } from 'metatags-generator/lib/html-generator/generator';
 import merge from 'deepmerge';
 
-type OpenGraphTypes = OpengraphTypes | 'website';
+type OpenGraphTypes = OpengraphTypes[keyof OpengraphTypes] | 'website';
 
-type Metadata = {
+export type Metadata = {
     title: string;
-    url: string;
-    ogType: OpenGraphTypes;
+    url?: string;
+    ogType?: OpenGraphTypes;
     image?: string;
-    description?: string;
+    description?: string | null;
     breadcrumbs?: Breadcrumb[];
     publishDate?: string;
 };
@@ -90,7 +90,7 @@ export function generateTags(metadata: Metadata) {
         })
         .setPageMeta({
             title: data.title,
-            description: data.description,
+            description: data.description || '',
             url: data.url,
             image: data.image,
             locale: 'en_US',
@@ -160,7 +160,7 @@ class MetadataGeneratorStructured extends MetadataGenerator {
         this.structuredData = new Map();
     }
 
-    configure(settings?: Settings): MetadataGeneratorStructured {
+    override configure(settings?: Settings): MetadataGeneratorStructured {
         super.configure(settings);
         return this;
     }
@@ -172,7 +172,7 @@ class MetadataGeneratorStructured extends MetadataGenerator {
         if (type === 'website') {
             this.add('meta', { property: 'og:type', content: type });
         } else {
-            super.openGraphData(type, duration);
+            super.openGraphData(type as OpengraphTypes, duration);
         }
         return this;
     }
@@ -184,7 +184,7 @@ class MetadataGeneratorStructured extends MetadataGenerator {
         this.structuredData.set(generatedData, generatedData);
     }
 
-    build(): MetatagsDocument {
+    override build(): MetatagsDocument {
         const document = super.build();
 
         const sData = Array.from(this.structuredData.values())

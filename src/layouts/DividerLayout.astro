@@ -1,16 +1,13 @@
 ---
-import Layout from '@/layouts/Layout.astro';
----
-<style lang="scss">
-.header-divider {
-    &:after {
-        mask-image: url('/src/assets/mask-divider-wave.png');
-    }
-}
-</style>
+import Layout, { type Props as LayoutProps } from '@/layouts/Layout.astro';
 
+type Props = LayoutProps;
+
+const { metadata, ...props } = Astro.props;
+---
 <Layout
-    {...Astro.props}
+    {...props}
+    metadata={metadata}
     headerClass="bg-ocean-200 dark:bg-ocean-800"
 >
 
@@ -30,7 +27,7 @@ import Layout from '@/layouts/Layout.astro';
 
     <div class="pb-12 lg:pt-5">
 
-        <div class="flex container flex-column-reverse 2xl:flex-row">
+        <div class="flex container flex-column-reverse xl:flex-row">
 
             <slot name="main" />
 

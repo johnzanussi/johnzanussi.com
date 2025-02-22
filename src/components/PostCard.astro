@@ -1,18 +1,20 @@
 ---
 import { type CollectionEntry, render } from 'astro:content';
 
-export type Props = {
-    post: CollectionEntry<'posts'>;
-};
-
 import { getPostUrl } from '@/utils/collections';
 
+import Card, { type Props as CardProps } from '@/components/Card.astro';
 import DateFormat from '@/components/DateFormat.astro';
 import DraftBadge from '@/components/DraftBadge.astro';
 import { Image } from 'astro:assets';
 import Link from '@/components/Link.astro';
 
-const { post, ...props } = Astro.props;
+export interface Props extends CardProps {
+    post: CollectionEntry<'posts'>;
+    class?: string;
+};
+
+const { post, class: className, ...props } = Astro.props;
 
 const { data: { cover } } = post;
 
@@ -28,17 +30,19 @@ const {
     minutesRead,
 } = data;
 ---
-<article
-    class="flex md:flex-row card-post p-4 relative border bg-white border-zinc-200 dark:bg-zinc-900 dark:border-neutral-700 rounded-2xl transition hover:shadow-lg hover:scale-102"
+
+<Card
+    tag="article"
+    class:list={['flex flex-col md:flex-row relative border', className]}
     {...props}>
 
-    <div class="card-body order-1 md:order-0 px-2 md:p-2 pb-0 md:pe-0">
+    <div class="order-1 md:order-0 pt-4 px-2 md:p-2 pb-0 md:pe-0">
 
-        <div class="text-zinc-600 dark:text-zinc-200 mb-2 small">
+        <div class="text-zinc-600 dark:text-zinc-400 mb-2 text-sm">
 
             <DateFormat date={date} />
 
-            <span class="ps-2 text-sm text-neutral-400">
+            <span class="ps-2 text-neutral-500">
                 {minutesRead}
             </span>
 
@@ -48,7 +52,7 @@ const {
 
         </div>
 
-        <h1 class="font-mono font-medium text-3xl">
+        <h1 class="font-mono font-medium text-2xl md:text-3xl mb-2 md:mb-0">
             <Link
                 href={getPostUrl(id)}
                 class="after:absolute after:inset-0 text-sky-800 dark:text-dune-400"
@@ -73,7 +77,6 @@ const {
             class="object-cover rounded-2xl w-full h-full"
             loading="lazy"
         />
-
     </div>
 
-</article>
+</Card>
