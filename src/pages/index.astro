@@ -19,7 +19,7 @@ const featuredPost = await getEntry(
 );
 
 const metadata = {
-    ogType: 'website',
+    title: 'John Zanussi',
     description: 'A place where I write about technology, 3D Printing, and other hobby projects I have going on.',
     image: imageUrl,
 };
@@ -29,7 +29,7 @@ const metadata = {
 
     <div class="container py-8 md:py-12 content">
 
-        <h1 class="text-[80px] font-mono font-medium md:mb-12 tracking-negative">
+        <h1 class="font-mono font-medium mb-4 md:mb-12 text-[40px] -word-spacing-5 md:text-[80px] md:-word-spacing-10">
 
             <span class="bg-linear-45 from-sky-950 to-violet-800 dark:from-dune-400 dark:to-fuchsia-400 bg-clip-text text-transparent drop-shadow-xl">
                 Hey, there!
@@ -41,8 +41,7 @@ const metadata = {
         <div class="mb-4">
 
             <Prose
-                size="xl"
-                class="font-medium"
+                class="text-xl"
                 full
             >
 
@@ -74,9 +73,11 @@ const metadata = {
 
             </Prose>
 
-            <div class="pt-4">
-                <PostCard post={featuredPost} />
-            </div>
+            {featuredPost && (
+                <div class="pt-4">
+                    <PostCard post={featuredPost} />
+                </div>
+            )}
 
             <p class="text-xl text-end leading-8 mt-4 me-2 tracking-wider">
                 <Link href="/posts">

@@ -6,12 +6,13 @@ import Icon from '@/components/Icon.astro';
 
 type Props = {
     class?: string;
+    hasPhotoHeader?: boolean;
 }
 
-const { class: className } = Astro.props;
-
-const hasPhotoBg = className?.includes('has-photo-bg');
-const islandBg = 'rounded-full bg-gradient-to-tr from-sky-950 to-cyan-950 shadow-xl';
+const {
+    class: className,
+    hasPhotoHeader = false,
+} = Astro.props;
 ---
 
 <header class:list={['header py-4 relative z-3', className]}>
@@ -23,8 +24,7 @@ const islandBg = 'rounded-full bg-gradient-to-tr from-sky-950 to-cyan-950 shadow
             <a class:list={[
                 'flex items-center group',
                 {
-                    [`${islandBg} text-zinc-100 pe-8`]: hasPhotoBg,
-                    'rounded rounded-pill pe-3': !hasPhotoBg,
+                    [`sm:rounded-full sm:bg-gradient-to-tr sm:from-sky-950 sm:to-cyan-950 sm:shadow-xl sm:text-zinc-100 sm:pe-8`]: hasPhotoHeader,
                 },
              ]}
              href="/">
@@ -39,13 +39,10 @@ const islandBg = 'rounded-full bg-gradient-to-tr from-sky-950 to-cyan-950 shadow
 
             <div
                 data-theme="dark"
-                class:list={[
-                    'flex flex-row items-center p-2 sm:px-4',
-                    islandBg,
-                ]}>
+                class="flex flex-col sm:flex-row items-center p-2 sm:px-4 rounded-3xl sm:rounded-full bg-gradient-to-tr from-sky-950 to-cyan-950 shadow-xl">
 
 
-                <div class="navbar-collapse">
+                <div class="hidden sm:block">
                     <NavLinks
                         wrapperClass="flex font-mono text-xl"
                         linkClass="block px-2 py-3 text-cyan-500 hover:text-cyan-300 hover:scale-105 transition-transform ease-in-out"
@@ -56,12 +53,12 @@ const islandBg = 'rounded-full bg-gradient-to-tr from-sky-950 to-cyan-950 shadow
 
                 <a
                     href="#footer"
-                    class="block sm:hidden btn btn-link navbar-toggler m-0 mt-2 p-0 text-white"
+                    class="block sm:hidden navbar-toggler m-0 mt-2 p-0 text-white text-center py-1.5 px-3 rounded-2xl bg-sky-900"
                     data-bs-target="#footer"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
-                    <Icon icon="mdi:hamburger" class="fs-2 align-text-top" />
+                    <Icon icon="mdi:hamburger" class="size-7 align-text-top" />
                 </a>
 
 

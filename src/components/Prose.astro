@@ -1,50 +1,20 @@
 ---
-import { isPropertyAccessOrQualifiedName } from 'typescript';
-
 type Props = {
     class?: string;
-    size?: 'sm' | 'base' | 'md' | 'lg' | 'xl' | '2xl';
     tag?: string;
     full?: boolean;
 };
 
 const {
-    size = 'base',
     class: className = '',
     tag: Element = 'div',
     full = false,
     ...props
 } = Astro.props;
-
-// https://github.com/tailwindlabs/tailwindcss-typography/tree/main?tab=readme-ov-file#element-modifiers
-const classList: Record<string, string> = [
-    'prose dark:prose-invert font-normal font-sans',
-    // 'prose-headings:font-mono prose-headings:font-medium prose-headings:mt-12 prose-headings:mb-4',
-    'prose-h2:text-3xl prose-h2:text-wave-800 prose-h2:pb-2 prose-h2:border-b prose-h2:border-wave-950 dark:prose-h2:text-dune-400 dark:prose-h2:border-dune-800',
-    'prose-h3:text-2xl prose-h3:text-sky-800 dark:prose-h3:text-yellow-500',
-    'prose-h4:text-xl prose-h4:text-sky-950 dark:prose-h4:text-yellow-600',
-    'prose-h5:text-sky-950 dark:prose-h5:text-yellow-600',
-    'prose-a:no-underline prose-a:text-ocean-700 prose-a:hover:text-cyan-900 dark:prose-a:text-ocean-600 dark:prose-a:hover:text-sky-300',
-    // 'prose-p:mb-4',
-    'prose-th:font-sans prose-th:text-base prose-th:font-bold',
-];
-
-const classes = [
-    classList,
-    {
-        'prose-sm': size === 'sm',
-        'prose-md': size === 'md',
-        'prose-lg': size === 'lg',
-        'prose-xl': size === 'xl',
-        'prose-2xl': size === '2xl',
-        'max-w-none': full,
-    },
-    className,
-];
 ---
 
 <Element
-    class:list={classes}
+    class:list={['prose', className]}
     {...props}
 >
     <slot />

@@ -1,14 +1,19 @@
 ---
-import Link from '@/components/Link.astro';
+import Link, { type Props as LinkProps } from '@/components/Link.astro';
 
 type Props = {
-    wrapperClass: string;
-    itemClass: string;
-    linkClass: string;
-    useIsActive: boolean;
+    wrapperClass?: string;
+    itemClass?: string;
+    linkClass?: string;
+    useIsActive?: boolean;
 };
 
-const { wrapperClass, itemClass, linkClass, useIsActive = true } = Astro.props;
+const {
+    wrapperClass ='',
+    itemClass = '',
+    linkClass = '',
+    useIsActive = true,
+} = Astro.props;
 
 const pages = [
     {
@@ -25,8 +30,8 @@ const pages = [
     },
 ];
 
-const linkAttrs = (isActive) => {
-    const attrs = {};
+const linkAttrs = (isActive: boolean) => {
+    const attrs: LinkProps = {};
     if (useIsActive) {
         if (isActive) {
             attrs['aria-current'] = 'page';

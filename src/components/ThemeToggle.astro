@@ -9,7 +9,7 @@ const { class: className } = Astro.props;
 ---
 
 <label class:list={[
-    'relative inline-grid align-middle place-content-center select-none cursor-pointer w-10 h-10',
+    'relative inline-grid align-middle place-content-center select-none cursor-pointer py-1.5 sm:py-0 px-3 rounded-2xl bg-sky-900 sm:bg-transparent',
     className,
 ]}>
 
@@ -17,12 +17,12 @@ const { class: className } = Astro.props;
 
     <Icon
         icon="tabler:sun-high"
-        class="dark:!hidden h-7 w-7 fill-current text-dune-400"
+        class="dark:!hidden size-7 fill-current text-dune-400"
     />
 
     <Icon
         icon="tabler:moon-stars"
-        class="!hidden dark:!block h-7 w-7 fill-current text-pink-500"
+        class="!hidden dark:!block size-7 fill-current text-pink-500"
     />
 
 </label>

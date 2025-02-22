@@ -28,11 +28,10 @@ const { products } = Astro.props;
             >
                 <img
                     src={`https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=${id}&Format=_SL160_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=jz034-20&language=en_US`}
-                    class="flex-shrink-0"
+                    class="flex-shrink-0 overflow-hidden"
                     width="50"
                     height="50"
                     alt={title}
-                    style={{ overflow: 'hidden' }}
                 />
 
                 <div class="d-flex gap-2 w-100 justify-content-between">

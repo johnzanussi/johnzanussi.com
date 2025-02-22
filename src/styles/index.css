@@ -1,14 +1,10 @@
 @import "tailwindcss";
-
-@plugin "@tailwindcss/typography";
-@plugin "./plugin.word-spacing.ts";
-
 @source "../../astro.config.ts";
-
 
 @variant dark (&:where(html[data-theme="dark"], html[data-theme="dark"] *));
 @variant first-heading (&:where(section:first-child :first-child:is(h1, h2, h3, h4, h5, h6)));
 @variant active (&:is(.active));
+@variant footer-nav (&:where(body.footer-nav, body.footer-nav *));
 
 @theme {
     --font-sans: "Inter Variable", sans-serif;
@@ -23,7 +19,7 @@
 
     /* Not sure this is set right yet */
     --max-width-screen-xl: 69rem;
-    --max-width-prose: 48rem;
+    /* --max-width-prose: 48rem; */
 
     /* Colors */
     --color-ocean-50: #dbf6ff;
@@ -100,7 +96,38 @@
 
     }
 
+    --animate-fade-in: fade-in 0.5s ease-out;
 
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    --animate-fade-out: fade-out 0.5s ease-out;
+
+    @keyframes fade-out {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+
+
+}
+
+@utility word-spacing-* {
+    word-spacing: calc(var(--spacing) * --value(integer));
+}
+
+@utility -word-spacing-* {
+    word-spacing: calc(var(--spacing) * --value(integer) * -1);
 }
 
 @utility container {
@@ -109,11 +136,12 @@
     max-width: 1100px;
 }
 
-@utility tracking-negative {
-    word-spacing: -0.5em;
+@utility mask-wave {
+    mask-image :url('/src/assets/mask-divider-wave.png');
+    mask-repeat: no-repeat;
 }
 
-@utility mask-wave {
+@utility mask-wave-top {
     mask-image:
         url('/src/assets/mask-divider-wave.png'),
         linear-gradient(#000 0 0);
@@ -146,32 +174,53 @@
                     border-color 500ms;
     }
 
+    /* Theme toggle */
     .transition-none * {
         @apply !transition-none;
     }
 
 }
 
-@layer utilities {
+@layer components {
+
+    .expressive-code {
+        @apply mb-6;
+    }
+
     .prose {
         color: light-dark(#212529, #DEE2E6);
-        /* --tw-prose-body: #212529; */
-        /* --tw-prose-invert-body: #DEE2E6; */
     }
 
-    .word-spacing-1 {
-
-    }
-}
-
-
-@layer components {
     .prose p {
-        @apply mb-4;
+        @apply mb-6;
     }
 
     .prose :where(h1, h2, h3, h4, h5) {
         @apply font-mono font-medium mt-12 mb-4;
+    }
+
+    .prose h2 {
+        @apply text-3xl pb-2 text-wave-800 border-b border-wave-950 dark:text-dune-400 dark:border-dune-800;
+    }
+
+    .prose h3 {
+        @apply text-2xl text-sky-800 dark:text-yellow-500;
+    }
+
+    .prose h4 {
+        @apply text-xl text-sky-950 dark:text-yellow-600;
+    }
+
+    .prose h5 {
+        @apply text-sky-950 dark:text-yellow-600;
+    }
+
+    .prose a {
+        @apply no-underline text-ocean-700 hover:text-cyan-900 dark:text-ocean-600 dark:hover:text-sky-300;
+    }
+
+    .prose th {
+        @apply font-sans text-base font-bold;
     }
 
 }
