@@ -7,7 +7,7 @@ import Icon from '@/components/Icon.astro';
 type Props = {
     class?: string;
     hasPhotoHeader?: boolean;
-}
+};
 
 const {
     class: className,
@@ -24,7 +24,7 @@ const {
             <a class:list={[
                 'flex items-center group',
                 {
-                    [`sm:rounded-full sm:bg-gradient-to-tr sm:from-sky-950 sm:to-cyan-950 sm:shadow-xl sm:text-zinc-100 sm:pe-8`]: hasPhotoHeader,
+                    ['sm:rounded-full sm:bg-gradient-to-tr sm:from-sky-950 sm:to-cyan-950 sm:shadow-xl sm:text-zinc-100 sm:pe-8']: hasPhotoHeader,
                 },
              ]}
              href="/">

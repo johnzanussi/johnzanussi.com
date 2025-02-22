@@ -2,13 +2,11 @@
 type Props = {
     class?: string;
     tag?: string;
-    full?: boolean;
 };
 
 const {
     class: className = '',
     tag: Element = 'div',
-    full = false,
     ...props
 } = Astro.props;
 ---
