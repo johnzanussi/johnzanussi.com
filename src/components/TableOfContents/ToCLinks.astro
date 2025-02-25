@@ -4,19 +4,21 @@ import type { MarkdownHeading } from 'astro';
 export type Props = {
     headings: MarkdownHeading[];
     depth?: number;
+    maxDepth?: number;
 };
 
 const {
     headings,
     depth = 2,
+    maxDepth = 3,
 } = Astro.props;
 
-const topLevel = headings.filter((heading) => heading.depth === depth);
+const topLevel = headings.filter((heading) => heading.depth <= maxDepth && heading.depth === depth && !!heading.text);
 const depthPadding = Math.round(((depth - 1) * .75) * 100) / 100;
 ---
 
 <ul
-    class="list-[circle] lg:list-none lg:list-unstyled mb-0 text-lg lg:text-[.81rem] ps-4 lg:ps-0 marker:text-amber-300"
+    class="list-[circle] lg:list-none lg:list-unstyled mb-0 lg:text-[.81rem] ps-5 lg:ps-0 marker:text-wave-800 dark:marker:text-amber-300"
     style={`--toc-depth-padding: ${depthPadding}rem`}
 >
 
@@ -38,7 +40,7 @@ const depthPadding = Math.round(((depth - 1) * .75) * 100) / 100;
             <li>
 
                 <a
-                    class="lg:block lg:py-[.125rem] lg:ps-(--toc-depth-padding) lg:opacity-75 hover:opacity-100 lg:hover:border-white lg:border-l lg:border-zinc-300 dark:lg:border-zinc-600 active:font-medium active:opacity-100 active:border-wave-800 active:dark:lg:border-dune-400"
+                    class="lg:block lg:py-[.125rem] lg:ps-(--toc-depth-padding) lg:opacity-75 hover:opacity-100 lg:hover:border-white lg:border-l lg:border-zinc-300 dark:lg:border-zinc-600 active:font-medium active:opacity-100 active:border-wave-800 active:dark:lg:border-yellow-500"
                     href={`#${headingSlug}`}
                 >
                     {heading.text}
