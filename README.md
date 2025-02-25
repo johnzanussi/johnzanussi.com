@@ -47,7 +47,7 @@ Built with [Astro](https://astro.build/). Hosted on [Vercel](https://vercel.com/
 └── scripts/
 │       └── script.ts
 └── styles/
-│       └── styles.scss
+│       └── index.css
 └── utils/
 │       └── util.ts
 └── package.json
@@ -72,8 +72,8 @@ Read more about why I chose these libraries and services on the [Built With](htt
 ### 📚 Libraries
 
  * [Astro](https://astro.build/)
- * [Bootstrap](https://getbootstrap.com/)
- * [Font Awesome](https://fontawesome.com/)
+ * [Tailwind](https://tailwindcss.com/)
+ * [Tabler Icons](https://tabler.io/icons)
 
 ### 🛠️ Services
 
@@ -112,7 +112,6 @@ Read more about why I chose these libraries and services on the [Built With](htt
 The following components are made available in all `.mdx` files without the need to explicitly import.
 
 * [`<Aside>`](https://github.com/johnzanussi/johnzanussi.com/blob/main/src/components/Aside.astro)
-* [`<AmazonProducts>`](https://github.com/johnzanussi/johnzanussi.com/blob/main/src/components/AmazonProducts.astro)
 * [`<Math>`](https://github.com/johnzanussi/johnzanussi.com/blob/main/src/components/Markdown/Math.astro)
 * [`<Wire>`](https://github.com/johnzanussi/johnzanussi.com/blob/main/src/components/Markdown/Wire.astro)
 * [`<Columns>`](https://github.com/johnzanussi/johnzanussi.com/blob/main/src/components/Markdown/Columns.astro)

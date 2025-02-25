@@ -1,13 +1,15 @@
 ---
 export type Props = {
     class?: string;
-    tag?: keyof HTMLElementTagNameMap;
     radius?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+    includeHover?: boolean;
+    tag?: keyof HTMLElementTagNameMap;
 };
 
 const {
     class: className,
     radius = '2xl',
+    includeHover = true,
     tag: Element = 'div',
 } = Astro.props;
 
@@ -25,7 +27,10 @@ const borderRadius = borderRadiusMap[radius];
 ---
 
 <Element class:list={[
-    'p-4 border bg-white border-zinc-200 dark:bg-zinc-900 dark:border-neutral-700 transition hover:shadow-log hover:scale-102',
+    'p-4 border bg-white border-zinc-200 dark:bg-[#0E1215] dark:border-gray-800 transition',
+    {
+        'hover:shadow hover:scale-102': includeHover,
+    },
     borderRadius,
     className
 ]}>

@@ -4,8 +4,8 @@
     "lang": "en-US",
     "start_url": "/",
     "display": "browser",
-    "theme_color": "#16273C",
-    "background_color": "#149eca",
+    "theme_color": "#0D1823",
+    "background_color": "#0D1823",
     "icons": [
         {
             "src": "/icons/favicon-16x16.png",

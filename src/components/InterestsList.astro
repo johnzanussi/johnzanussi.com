@@ -25,7 +25,10 @@ const {
 } = Astro.props;
 ---
 <div
-    class="sm:grid sm:grid-cols-2"
+    class:list={[
+        'sm:grid sm:grid-cols-2',
+        className,
+    ]}
     {...props}
 >
     {interests.map(({ title, items }) => (
@@ -36,11 +39,11 @@ const {
                 {title}
             </h3>
 
-            <ul class={className}>
+            <ul class="m-0 p-0 list-none">
 
                 {items.map(({ emoji, title, sub }) => (
 
-                    <li class="py-3 align-middle">
+                    <li class="align-middle">
 
                         <Emoji class="text-3xl me-2 align-middle" e={emoji}></Emoji> {title}
                         {sub && <small class="text-zinc-600 dark:text-zinc-400">{sub}</small>}
