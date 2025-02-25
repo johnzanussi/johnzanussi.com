@@ -84,42 +84,22 @@
         hsl(206deg 97% 12%) 101%
     );
 
-    --animate-spin-once: spin-once .6s ease-in-out 1;
+    --animate-spin-once: spin-once 600ms forwards;
 
     @keyframes spin-once {
         0% {
             transform: rotate(0deg);
+            animation-timing-function: linear;
+        }
+        70% {
+            transform: rotate(360deg);
+            animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
         }
         100% {
             transform: rotate(360deg);
         }
 
     }
-
-    --animate-fade-in: fade-in 0.5s ease-out;
-
-    @keyframes fade-in {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-
-    --animate-fade-out: fade-out 0.5s ease-out;
-
-    @keyframes fade-out {
-        0% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
-
-
-
 }
 
 @utility word-spacing-* {
@@ -131,8 +111,7 @@
 }
 
 @utility container {
-    margin-inline: auto;
-    padding-inline: 1.5rem;
+    @apply mx-auto px-6;
     max-width: 1100px;
 }
 
@@ -161,6 +140,14 @@
     mask-position: bottom;
 }
 
+@utility mask-bottom-* {
+    mask-position: calc(--value(integer)px * -1) bottom;
+}
+
+@utility -mask-bottom-* {
+    mask-position: calc(--value(integer)px * -1) bottom;
+}
+
 @utility mask-top {
     mask-position: top;
 }
@@ -169,58 +156,162 @@
 @layer base {
 
     a {
-        transition: color 500ms ease 0s,
-                    opacity 500ms ease 0s,
-                    border-color 500ms;
+        transition: color 250ms ease-out,
+                    opacity 200ms ease-in-out,
+                    border-color 250ms ease-out;
     }
 
-    /* Theme toggle */
-    .transition-none * {
+    /* Disable transitions for all elements that don't have a transition class
+       Used in the theme toggle */
+    .transitioning *:not([class*="transition-"], ::before) {
         @apply !transition-none;
     }
 
 }
 
+@property --offset {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 3px;
+}
+
 @layer components {
+
+    .prose {
+
+        section:first-child > h2 {
+            @apply mt-0;
+        }
+
+        a {
+
+            @apply font-medium underline decoration-sky-600 underline-offset-(--offset);
+
+            transition: --offset 250ms;
+            text-decoration-skip-ink: none;
+
+            &:hover {
+                --offset: .35em;
+            }
+        }
+
+        p {
+            @apply mb-6 leading-7 text-zinc-950 dark:text-[#DEE2E6];
+        }
+
+        strong {
+            @apply font-bold;
+        }
+
+        /* Headings */
+        h2 {
+            @apply mt-12 mb-6 font-mono font-bold text-3xl pb-2 text-wave-800 border-b border-wave-950 dark:text-wave-300 dark:border-wave-300;
+        }
+
+        h3 {
+            @apply mt-7 mb-4 font-semibold text-2xl text-sky-800 dark:text-sky-500;
+        }
+
+        h4 {
+            @apply mt-7 mb-2 font-semibold text-sky-950 dark:text-sky-600 ;
+        }
+
+        h5 {
+            @apply font-bold;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            @apply my-6 ps-8;
+
+            li {
+                @apply my-2 ps-2;
+            }
+
+            ul, ol {
+                @apply m-0;
+            }
+
+            ul {
+                @apply list-[circle];
+            }
+        }
+
+        ol {
+            @apply list-decimal;
+        }
+
+        ul:not(.contains-task-list) {
+            @apply list-disc;
+        }
+
+        /* Tables */
+        table {
+
+            > :not(caption) > * {
+
+                @apply border-y-1 border-zinc-200 dark:border-zinc-600;
+
+                > * {
+                    @apply py-[0.5rem] px-[1rem] bg-gray-50 dark:bg-[#141517] dark:text-zinc-200 border-x-1 border-zinc-200 dark:border-zinc-600;
+                }
+            }
+
+            /* If the second thead is empty (some tables have an empty first th) */
+            thead:has(th:nth-child(2):empty) {
+                @apply hidden;
+            }
+
+            th {
+                @apply align-bottom text-start font-sans text-base font-bold;
+            }
+
+        }
+
+
+        blockquote {
+            p {
+                @apply m-0;
+            }
+
+            cite {
+                &:before {
+                    content: '\2014\a0'; /* em dash */
+
+                }
+                @apply text-sm;
+
+                a {
+                    @apply decoration-inherit decoration-dotted;
+                }
+            }
+        }
+
+        kbd {
+            @apply min-h-[30px] inline-flex justify-center items-center py-1 px-1.5 bg-white border border-gray-200 font-mono text-sm text-gray-800 shadow-[0px_2px_0px_0px_rgba(0,0,0,0.08)] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)] rounded-md;
+        }
+
+        code {
+            @apply py-[.125rem] px-[.275rem] font-mono text-[.8125rem] bg-white dark:bg-zinc-800 text-pink-500 dark:text-pink-300 select-all;
+        }
+
+    }
 
     .expressive-code {
         @apply mb-6;
     }
 
-    .prose {
-        color: light-dark(#212529, #DEE2E6);
-    }
+    .content-aside  {
 
-    .prose p {
-        @apply mb-6;
-    }
+        a {
+            @apply decoration-(--aside-color);
+        }
 
-    .prose :where(h1, h2, h3, h4, h5) {
-        @apply font-mono font-medium mt-12 mb-4;
-    }
+        blockquote {
+            border-color: oklch(from var(--aside-color) l c h / calc(alpha - 0.5)) !important;
+        }
 
-    .prose h2 {
-        @apply text-3xl pb-2 text-wave-800 border-b border-wave-950 dark:text-dune-400 dark:border-dune-800;
-    }
-
-    .prose h3 {
-        @apply text-2xl text-sky-800 dark:text-yellow-500;
-    }
-
-    .prose h4 {
-        @apply text-xl text-sky-950 dark:text-yellow-600;
-    }
-
-    .prose h5 {
-        @apply text-sky-950 dark:text-yellow-600;
-    }
-
-    .prose a {
-        @apply no-underline text-ocean-700 hover:text-cyan-900 dark:text-ocean-600 dark:hover:text-sky-300;
-    }
-
-    .prose th {
-        @apply font-sans text-base font-bold;
     }
 
 }

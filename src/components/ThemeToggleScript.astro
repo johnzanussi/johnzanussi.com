@@ -11,12 +11,12 @@
     };
 
     const themeAttribute = 'data-theme';
-    const disableTransitionClass = 'transition-none';
+    const transitioningClass = 'transitioning';
 
     const setTheme = (theme) => {
 
         // Turn off color transitions for links
-        document.body.classList.add(disableTransitionClass);
+        document.body.classList.add(transitioningClass);
 
         if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             theme = 'dark';
@@ -31,7 +31,7 @@
         window.getComputedStyle(document.body).opacity;
 
         // Turn on color transitions for links
-        document.body.classList.remove(disableTransitionClass);
+        document.body.classList.remove(transitioningClass);
     };
 
     setTheme(getPreferredTheme());

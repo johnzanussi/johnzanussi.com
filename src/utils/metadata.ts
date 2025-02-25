@@ -50,7 +50,7 @@ const icons = [
 const meta = [
     {
         name: 'theme-color',
-        content: '#01233d',
+        content: '#0D1823',
     },
     {
         name: 'mobile-web-app-capable',

@@ -1,9 +1,15 @@
 ---
 import Layout, { type Props as LayoutProps } from '@/layouts/Layout.astro';
 
-type Props = LayoutProps;
+interface Props extends LayoutProps {
+    titleClass?: string;
+};
 
-const { metadata, ...props } = Astro.props;
+const {
+    metadata,
+    titleClass = '',
+    ...props
+} = Astro.props;
 ---
 <Layout
     {...props}
@@ -17,7 +23,9 @@ const { metadata, ...props } = Astro.props;
 
             <div class="container pb-4 mt-6 lg:mt-0">
 
-                <slot name="header" />
+                <h1 class:list={['text-6xl font-mono text-sky-950 dark:text-gray-200', titleClass]}>
+                    <slot name="title" />
+                </h1>
 
             </div>
 

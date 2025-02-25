@@ -83,8 +83,8 @@ const {
 
                         <IconLink
                             href={link}
-                            class="block text-xl font-bold text-(--timeline-era-color) hover:opacity-75 leading-(--timeline-bullet-height)"
-                            icon="fa-solid:external-link-alt"
+                            class="block text-xl font-bold text-(--timeline-era-color) hover:opacity-75 leading-(--timeline-bullet-height) no-underline"
+                            icon="tabler:external-link"
                             iconClass="text-xs"
                             iconPosition="end">
                             {title}
@@ -94,7 +94,7 @@ const {
 
                             <Fragment>
 
-                                <p class="text-sm text-zinc-600 dark:text-zinc-400">
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400 m-0">
                                     {timeframe}
                                 </p>
 
@@ -106,7 +106,7 @@ const {
                                             title={egg.title}
                                             class="text-pink-600 dark:text-pink-400"
                                         >
-                                            <Icon icon="mdi:egg-easter" />
+                                            <Icon icon="tabler:egg-cracked" />
                                         </Link>
                                     )}
                                 </p>

@@ -3,11 +3,11 @@ import type { HTMLAttributes } from 'astro/types';
 
 const types = {
     egg: {
-        icon: 'mdi:egg-easter',
+        icon: 'tabler:egg-cracked',
         color: '--color-pink-600',
     },
     idea: {
-        icon: 'mdi:lightbulb-on',
+        icon: 'tabler:bulb',
         color: '#11A0D2',
     },
     mindblown: {
@@ -19,23 +19,23 @@ const types = {
         color: '--color-cyan-400',
     },
     xmas: {
-        icon: 'fa-solid:tree',
+        icon: 'tabler:christmas-tree',
         color: '--color-green-800',
     },
     reddit: {
-        icon: 'fa6-brands:reddit-alien',
+        icon: 'tabler:brand-reddit',
         color: '#FF4500',
     },
     hackernews: {
-        icon: 'logos:ycombinator',
+        icon: 'tabler:brand-ycombinator',
         color: '#FF6602',
     },
     info: {
-        icon: 'fa6-solid:info',
+        icon: 'tabler:info-circle',
         color: '--color-blue-600',
     },
     alert: {
-        icon: 'fa6-solid:triangle-exclamation',
+        icon: 'tabler:exclamation-circle',
         color: '--color-red-600',
     },
     aiphoto: {
@@ -65,7 +65,7 @@ const isIcon = icon.includes(':');
 
 <aside
     class:list={[
-        'content-aside not-prose border-start border-l-5 py-3 ps-8 pe-5 ms-2 lg:ms-0 my-12 rounded shadow-lg relative bg-(--aside-color)/[0.15] border-(--aside-color)',
+        'content-aside not-prose border-start border-l-5 py-3 ps-8 pe-5 ms-2 lg:ms-0 mt-10 mb-6 rounded shadow-lg relative bg-(--aside-color)/[0.15] border-(--aside-color)',
         {
             'flex': !title,
         },
@@ -77,7 +77,7 @@ const isIcon = icon.includes(':');
     {...props}
 >
 
-    <span class="aside-icon absolute top-0 start-0 w-11 h-11 text-3xl flex items-center justify-center text-center text-white rounded text-center -translate-x-2/4 -translate-y-2/4 bg-(--aside-color)">
+    <span class="aside-icon absolute top-0 start-0 w-11 h-11 text-3xl flex items-center justify-center text-white rounded text-center -translate-x-2/4 -translate-y-2/4 bg-(--aside-color)">
         {isIcon ? <Icon icon={icon} /> : <Emoji e={icon} />}
     </span>
 

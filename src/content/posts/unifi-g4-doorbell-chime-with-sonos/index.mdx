@@ -16,39 +16,15 @@ I set out to find a solution to this. I thought through and tried a few options 
 
 This was always going to be my backup solution but I really didn't want to do it as it would require me to buy and wire in a traditional doorbell transformer and chime. With the current state of IoT devices and services I knew there had to be another way so I was reluctant to settle on this option for as long as it could.
 
-<AmazonProducts
-    products={[
-        {
-            id: 'B019BW9TX6',
-            title: 'Newhouse Hardware CHM1 Door Bell Chime, White',
-            link: 'https://amzn.to/3wkqwc2',
-        },
-        {
-            id: 'B07GND8RMQ',
-            title: 'Doorbell Transformer Compatible with Ring Video Doorbell Pro 16v 30va Hardwired Door Chime Transformer',
-            link: 'https://amzn.to/3bKdc7p',
-        },
-    ]}
-/>
+* [Newhouse Hardware CHM1 Door Bell Chime, White](https://amzn.to/3wkqwc2)
+* [Doorbell Transformer Compatible with Ring Video Doorbell Pro 16v 30va Hardwired Door Chime Transformer](https://amzn.to/3bKdc7p)
 
 ## Attempt 2: Honeywell Wired to Wireless Doorbell Kit
 
 While searching for wireless solutions I came across some people using these two products from Honeywell.
 
-<AmazonProducts
-    products={[
-        {
-            id: 'B01LXKH9MA',
-            title: 'Honeywell Home Wired to Wireless Doorbell Adapter Converter for Series 3, 5, 9 Honeywell Home Door Bells - RPWL4045A, White',
-            link: 'https://amzn.to/3EOrwbt',
-        },
-        {
-            id: 'B01HNSFTBQ',
-            title: 'Honeywell Home RDWL917AX2000/E Doorbell Portable Wireless Doorbell & Push Button-9 Series, Blue',
-            link: 'https://amzn.to/3bNaSwp',
-        },
-    ]}
-/>
+* [Honeywell Home Wired to Wireless Doorbell Adapter Converter for Series 3, 5, 9 Honeywell Home Door Bells - RPWL4045A, White](https://amzn.to/3EOrwbt)
+* [Honeywell Home RDWL917AX2000/E Doorbell Portable Wireless Doorbell & Push Button-9 Series, Blue](https://amzn.to/3bNaSwp)
 
 To get this working you have to wire your doorbell's power wires into the Doorbell Adapter then wirelessly link the adapter to the chime speaker. The installation and setup were pretty straight forward and you're able to upload any mp3 you want to the speaker via USB. However, for whatever reason, I found this setup to be very unreliable. Some of the issues I encountered over the couple weeks of using this setup ranged from:
 
@@ -130,7 +106,9 @@ You'll need a single "Trigger" which is activated when the doorbell button is pr
 
 #### Actions
 
-*UPDATE: Thanks to Reddit users [u/Eriner_](https://www.reddit.com/r/Ubiquiti/comments/qq9qhz/comment/hk17gt9/?utm_source=reddit&utm_medium=web2x&context=3) and [u/pie_faced_avitar](https://www.reddit.com/user/pie_faced_avitar/) for both suggesting to use the [`sonos.shapshot` and `sonos.restore` services](https://www.home-assistant.io/integrations/sonos/#service-sonossnapshot) to pause and resume whatever may be playing when the doorbell chime is played.*
+<Aside type="info" title="Update">
+  Thanks to Reddit users [u/Eriner_](https://www.reddit.com/r/Ubiquiti/comments/qq9qhz/comment/hk17gt9/?utm_source=reddit&utm_medium=web2x&context=3) and [u/pie_faced_avitar](https://www.reddit.com/user/pie_faced_avitar/) for both suggesting to use the [`sonos.shapshot` and `sonos.restore` services](https://www.home-assistant.io/integrations/sonos/#service-sonossnapshot) to pause and resume whatever may be playing when the doorbell chime is played.
+</Aside>
 
 
 ##### Action 1

@@ -11,7 +11,7 @@ import TableOfContents from '@/components/TableOfContents/TableOfContents.astro'
 const { headings } = Astro.props;
 const hasHeadings = !!headings.length;
 ---
-<aside class="content-sidebar w-100 xl:mx-auto xl:sticky xl:top-12 xl:max-h-[calc(100vh-3rem)] xl:overflow-auto sm:grow xl:self-start sm:mt-5 mb-3 xxl:mb-0 pb-2 xl:pb-12 xl:ps-12">
+<aside class="content-sidebar w-full max-w-[300px] lg:mx-auto lg:sticky lg:top-12 lg:max-h-[calc(100vh-3rem)] lg:overflow-auto sm:grow lg:self-start sm:mt-5 mb-3 xxl:mb-0 pb-2 lg:pb-12 lg:ps-12">
 
     {hasHeadings && <TableOfContents headings={headings} />}
 
