@@ -5,7 +5,6 @@ import { getPostUrl } from '@/utils/collections';
 
 import Card, { type Props as CardProps } from '@/components/Card.astro';
 import DateFormat from '@/components/DateFormat.astro';
-import DraftBadge from '@/components/DraftBadge.astro';
 import { Image } from 'astro:assets';
 import Link from '@/components/Link.astro';
 
@@ -26,7 +25,6 @@ const {
     date,
     title,
     excerpt,
-    draft,
     minutesRead,
 } = data;
 ---
@@ -45,10 +43,6 @@ const {
             <span class="ps-2 text-neutral-500 text-xs">
                 {minutesRead}
             </span>
-
-            {draft && (
-                <DraftBadge class="ms-2" />
-            )}
 
         </div>
 

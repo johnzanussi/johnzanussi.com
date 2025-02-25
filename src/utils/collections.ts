@@ -6,17 +6,10 @@ const collectionUrls = {
     pages: '/',
 };
 
-const isDev = import.meta.env.MODE === 'development';
-
 export const getItems = async (
-    collection: ContentCollectionKey,
-    includeDrafts = isDev
+    collection: ContentCollectionKey
 ) => {
-    const draftFilter = !includeDrafts
-        ? (item: CollectionEntry<ContentCollectionKey>) => 'draft' in item.data && !item.data.draft
-        : undefined;
-
-    const items = await getCollection(collection, draftFilter);
+    const items = await getCollection(collection);
 
     return items;
 };

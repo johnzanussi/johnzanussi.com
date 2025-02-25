@@ -14,7 +14,6 @@ import Layout from '@/layouts/Layout.astro';
 import AmazonDisclosure from '@/components/AmazonDisclosure.astro';
 import Comments from '@/components/Comments.astro';
 import DateFormat from '@/components/DateFormat.astro';
-import DraftBadge from '@/components/DraftBadge.astro';
 import EnjoyCTA from '@/components/EnjoyCTA.astro';
 import Markdown from '@/components/Markdown.astro';
 import PostPagination from '@/components/PostPagination.astro';
@@ -52,7 +51,6 @@ const {
     title,
     date,
     excerpt,
-    draft,
     minutesRead,
     hasAmazonLinks = false,
     hiddenIntro = false,
@@ -129,10 +127,6 @@ const includeSidebar = headings && !!headings.length;
                 </span>
 
                 <Emoji label="stopwatch" class="me-1">⏱️</Emoji> {minutesRead}
-
-                {draft && (
-                    <DraftBadge class="ms-2" />
-                )}
 
             </p>
 

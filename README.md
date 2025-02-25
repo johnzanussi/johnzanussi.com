@@ -95,7 +95,6 @@ Read more about why I chose these libraries and services on the [Built With](htt
 | `title` | `String` | Yes | |
 | `excerpt` | `String` | No | | Used on [/pages](https://johnzanussi.com/pages) and in meta tags description. |
 | `cover` | `ImageMetaData` | Yes | Image should be 16x9 ratio  |
-| `draft` | `Boolean` | No | Setting to `true` only displays the page in dev environments |
 
 #### 🗒️ Posts
 | Property | Type | Required | Notes |
@@ -106,7 +105,6 @@ Read more about why I chose these libraries and services on the [Built With](htt
 | `date`  | `String` | Yes | Value is passed to `new Date()` |
 | `hasAmazonLinks` | `Boolean` | No | Default `false`. If `true` the [`<AmazonDisclosure>`](https://github.com/johnzanussi/johnzanussi.com/blob/main/src/components/AmazonDisclosure.astro) component will be rendered at the bottom of the post. |
 | `hiddenIntro` | `Boolean` | No | Default `false`. If `true` and the post contains `## Intro` the resulting heading will be removed from the rendered page but the `Intro` link will remain in the table of contents. |
-| `draft` | `Boolean` | No | Setting to `true` only displays the page in dev environments |
 
 ### 🧩 MDX Components
 The following components are made available in all `.mdx` files without the need to explicitly import.
