@@ -104,7 +104,6 @@ export default defineConfig({
                 addClasses,
                 {
                     iframe: 'mb-6',
-                    code: 'not-prose',
                 },
             ],
         ],

@@ -77,13 +77,13 @@ const otherLinks = [
             class="w-full flex flex-col sm:items-start sm:flex-row sm:justify-between sm:pt-12 pb-12 items-end sm:items-sm-start text-end sm:text-start">
 
             <NavLinks
-                wrapperClass="flex-col mb-5 sm:mb-0 font-mono text-xl"
+                wrapperClass="flex-col mb-10 sm:mb-0 font-mono text-xl"
                 itemClass=""
-                linkClass="block p-3 hover:text-ocean-700 dark:hover:text-dune-400"
+                linkClass="block py-3 sm:p-3 hover:text-ocean-700 dark:hover:text-yellow-500"
                 useIsActive={false}
             />
 
-            <section class="socials mb-5 sm:mb-0">
+            <section class="socials mb-10 sm:mb-0">
 
                 <ul>
                     {socialLinks.map(({ name, icon, url, brandColor }) => (
@@ -112,19 +112,19 @@ const otherLinks = [
 
             <section class="text-end text-gray-600 dark:text-gray-400">
 
-                <p class="mb-6">
+                <p class="mb-2">
                     Built with
                     <Link
                         href="/built-with"
-                        class="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400"
+                        class="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-yellow-500"
                     >Astro</Link>,
                     <Link
                         href="/built-with"
-                        class="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400"
+                        class="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-yellow-500"
                     >Tailwind</Link>, and
                     <Link
                         href="/built-with"
-                        class="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400"
+                        class="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-yellow-500"
                     >more</Link>.
                 </p>
 
@@ -133,7 +133,7 @@ const otherLinks = [
                     <IconLink
                         href="/rss.xml"
                         icon="tabler:rss"
-                        linkClass="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400"
+                        linkClass="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-yellow-500"
                         iconPosition="end"
                     >
                         RSS
@@ -157,9 +157,9 @@ const otherLinks = [
                     ))}
                 </ul>
 
-                <BackToTop class="footer-nav:hidden mt-8 text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400" />
+                <BackToTop class="footer-nav:hidden mt-6 text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-yellow-500" />
 
-                <p class="text-end mt-12">
+                <p class="text-end mt-10">
                     All content copyright John Zanussi.
                 </p>
 
