@@ -7,13 +7,13 @@ import IconLink from '@/components/IconLink.astro';
 const socialLinks = [
     {
         name: 'GitHub',
-        icon: 'fa6-brands:github',
+        icon: 'tabler:brand-github',
         url: 'https://github.com/johnzanussi',
         brandColor: '#fff', // '#1B1F24'
     },
     {
         name: 'LinkedIn',
-        icon: 'fa6-brands:linkedin',
+        icon: 'tabler:brand-linkedin',
         url: 'https://www.linkedin.com/in/john-zanussi/',
         brandColor: '#0A66C2' // https://brand.linkedin.com/en-us
     },
@@ -25,19 +25,19 @@ const socialLinks = [
     },
     {
         name: 'Reddit',
-        icon: 'fa6-brands:reddit-alien',
+        icon: 'tabler:brand-reddit',
         url: 'https://www.reddit.com/user/johnzanussi/',
         brandColor: '#FF4500', // https://www.reddit.com/r/RedesignHelp/comments/84c6bl/official_reddit_brand_hex_color_codes/
     },
     {
         name: 'Strava',
-        icon: 'fa6-brands:strava',
+        icon: 'tabler:brand-strava',
         url: 'https://www.strava.com/athletes/71228948',
         brandColor: '#FC4C01', // https://developers.strava.com/guidelines/
     },
     {
         name: 'Instagram',
-        icon: 'fa6-brands:instagram',
+        icon: 'tabler:brand-instagram',
         url: 'https://www.instagram.com/johnzanussi/',
         brandColor: '#ff0069', // https://about.instagram.com/brand/gradient
     },
@@ -64,17 +64,13 @@ const otherLinks = [
         id="footer"
         class="container position-relative">
 
-        <div class="footer-nav-toggle hidden footer-nav:block mb-8">
-            <div
-                class="me-3 text-end"
-                style="border-radius: 1.5em !important;">
-                <BackToTop
-                    label=""
-                    icon="mdi:hamburger-remove"
-                    class="navbar-toggler py-1.5 px-3 rounded-2xl bg-sky-900"
-                    iconClass="size-7 align-text-top text-white"
-                />
-            </div>
+        <div class="footer-nav-toggle hidden footer-nav:block mb-8 text-end">
+            <BackToTop
+                label=""
+                icon="mdi:hamburger-remove"
+                class="navbar-toggler py-1.5 px-3 rounded-2xl bg-sky-900"
+                iconClass="size-7 align-text-top text-white"
+            />
         </div>
 
         <div
@@ -125,7 +121,7 @@ const otherLinks = [
                     <Link
                         href="/built-with"
                         class="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400"
-                    >Bootstrap</Link>, and
+                    >Tailwind</Link>, and
                     <Link
                         href="/built-with"
                         class="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400"
@@ -136,7 +132,7 @@ const otherLinks = [
                     Subscribe to my
                     <IconLink
                         href="/rss.xml"
-                        icon="fa6-solid:rss"
+                        icon="tabler:rss"
                         linkClass="text-ocean-800 hover:text-ocean-700 dark:text-white dark:hover:text-dune-400"
                         iconPosition="end"
                     >

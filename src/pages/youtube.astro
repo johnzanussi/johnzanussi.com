@@ -21,12 +21,9 @@ const subscriptions = await getCollection('youtube');
 ---
 <DividerLayout metadata={metadata}>
 
-    <h1
-        slot="header"
-        class="text-6xl font-mono dark:text-dune-400"
-    >
-        <Icon icon="fa6-brands:youtube" label="YouTube Logo" /> YouTube Subscriptions
-    </h1>
+    <Fragment slot="title">
+        <Icon icon="tabler:brand-youtube-filled" label="YouTube Logo" /> YouTube Subscriptions
+    </Fragment>
 
     <Prose slot="main">
 
@@ -37,7 +34,7 @@ const subscriptions = await getCollection('youtube');
             of addressing these requests. The following list is not all of
             the channels I subscribe to, but these are the channels that I
             watch regularly. The channels with the{' '}
-            <Icon icon="fa6-solid:bell" label="bell icon" /> icon are
+            <Icon icon="tabler:bell-ringing" label="bell icon" class="text-rose-600 dark:text-rose-400" /> icon are
             channels that I receive notifications when new videos are
             posted.
         </p>
@@ -68,15 +65,19 @@ const subscriptions = await getCollection('youtube');
 
                                 <li class="mb-1 p-0">
 
-                                    <Link href={`https://www.youtube.com/channel/${channelId}`}>
+                                    <Link
+                                        href={`https://www.youtube.com/channel/${channelId}`}
+                                        class:list={[{
+                                            'decoration-rose-600 dark:decoration-rose-400': hasNotifications,
+                                        }]}>
                                         {title}
                                     </Link>
 
                                     {hasNotifications && (
                                         <Icon
-                                            icon="fa6-solid:bell"
+                                            icon="tabler:bell-ringing"
                                             label="bell icon"
-                                            class="ms-1 text-warning opacity-75"
+                                            class="text-rose-600 dark:text-rose-400"
                                         />
                                     )}
                                 </li>

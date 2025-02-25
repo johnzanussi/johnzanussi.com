@@ -86,13 +86,12 @@ const includeSidebar = headings && !!headings.length;
 >
 
     <div
-        data-bs-theme="dark"
-        class="w-full bg-cover bg-no-repeat bg-center bg-ocean-200 dark:bg-ocean-800 sm:mt-[-131px] mask-bottom mask-wave-full"
+        class="w-full mb-4 bg-cover bg-no-repeat bg-center bg-ocean-200 dark:bg-ocean-800 sm:mt-[-131px] md:mask-bottom mask-wave-full -mask-bottom-2020"
         style={{ backgroundImage: `url('${coverImageSrc}')` }}>
 
         <div class="backdrop-brightness-50 backdrop-blur-lg">
 
-            <div class="w-full max-w-[1600px] min-h-[500px] mx-auto aspect-video">
+            <div class="w-full max-w-[1600px] min-h-[300px] md:min-h-[400px] mx-auto aspect-video">
 
                 <Image
                     src={cover}
@@ -102,7 +101,7 @@ const includeSidebar = headings && !!headings.length;
                     widths={[576, 768, 992, 1200, 1400, 1600]}
                     sizes="(min-width: 1680px) 958px, (min-width: 1200px) calc(73.91vw - 269px), (min-width: 780px) calc(85vw - 315px), calc(100vw - 32px)"
                     loading="eager"
-                    class="max-w-full h-full object-cover"
+                    class="max-w-full h-full object-cover pb-[15px]"
                 />
 
             </div>
@@ -111,11 +110,11 @@ const includeSidebar = headings && !!headings.length;
 
     </div>
 
-    <div class="container mb-12">
+    <div class="container mb-8">
 
-        <div class="post-content -mt-5 xl:max-w-full">
+        <div class="post-content -mt-5 lg:max-w-full">
 
-            <h1 class="font-mono font-base text-wave-800 dark:text-dune-400 mb-3 text-4xl xl:text-7xl -word-spacing-3 leading-tight">
+            <h1 class="font-mono font-base text-wave-800 dark:text-wave-400 mb-3 text-4xl xl:text-7xl -word-spacing-3 leading-tight">
                 {title}
             </h1>
 
@@ -141,7 +140,7 @@ const includeSidebar = headings && !!headings.length;
 
     </div>
 
-    <div class="flex container flex-col-reverse xl:flex-row">
+    <div class="flex container flex-col-reverse lg:flex-row">
 
         <article class:list={[
             'post-content max-w-[48rem]',

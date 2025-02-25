@@ -2,27 +2,30 @@
 import Icon from '@/components/Icon.astro';
 
 export type Props = {
-    align?: string;
+    align?: 'left' | 'center' | 'right';
     caption?: string;
 };
 
-const { align, caption } = Astro.props;
+const { align = 'center', caption } = Astro.props;
 
-const alignClass = align ? `justify-content-${align}` : '';
+const alignClasses = {
+    'left': 'text-start',
+    'center': 'text-center',
+    'right': 'text-end',
+};
+
+const alignClass = alignClasses[align];
 
 ---
-<figure class="figure">
+<figure class="inline-block mb-6">
 
     <slot />
 
-    <figcaption class="figure-caption">
+    <figcaption class="mt-2">
 
         {caption && (
-            <p class:list={['figure-caption fst-italic mt-2 d-flex align-items-center', alignClass]}>
-                <Icon
-                    icon="fa6-solid:image"
-                    class="me-2"
-                />
+            <p class:list={['italic text-zinc-600 dark:text-zinc-400 text-center mb-0 text-sm', alignClass]}>
+                <Icon icon="tabler:photo" />
                 {caption}
             </p>
         )}

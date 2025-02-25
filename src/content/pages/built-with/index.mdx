@@ -4,7 +4,7 @@ excerpt: The tools, libraries, and services used to build JohnZanussi.com.
 cover: "@/content/pages/built-with/cover-built-with-screenshot.jpg"
 ---
 
-Back in the day (2008), [`johnzanussi.com`](https://johnzanussi.com) was the home of my Tumblr blog.
+Back in the day (2008), [johnzanussi.com](https://johnzanussi.com) was the home of my Tumblr blog.
 
 [![Screen shot of johnzanussi.com from 2008](src/content/pages/built-with/screenshot-johnzanussi-dot-com-tumblr.png)](https://web.archive.org/web/20080817121815/http://johnzanussi.com/)
 
@@ -18,25 +18,27 @@ You can also find all the code for this site available on my [GitHub](https://gi
 
 ## Libraries
 
-##### [Astro](https://astro.build/)
+##### Astro
+As of February 2023, this website is built on [Astro](https://astro.build/). While browsing Reddit one day, I saw someone mention Astro. I immediately fell in love with it as it takes static site generation to the next level. I wrote a detailed post about why I chose Astro and the migration from Next.js which [you can read here](/posts/nextjs-to-astro-migration).
 
-As of February 2023, this website is built on Astro. While browsing Reddit one day, I saw someone mention Astro. I immediately fell in love with it as it takes static site generation to the next level. I wrote a detailed post about why I chose Astro and the migration from Next.js which [you can read here](/posts/nextjs-to-astro-migration).
+##### Tailwind
+As of February 2025, I've migrated this entire site from Bootstrap 5.3 to [Tailwind 4](http://tailwindcss.com/). I wrote an entire post about why and how, which you can read [here](/posts/bootstrap-to-tailwind-migration).
 
-##### [~~Next.js~~](https://nextjs.org)
+##### Tabler Icons
+For a long time I used Font Awesome for my icons, but I've since switched to [Tabler Icons](https://tabler.io/icons). I like the look of Tabler Icons better and they're free to use. As part of the Tailwind migration, I removed all Font Awesome icons and replaced them with Tabler Icons. I'm also using the [Astro Icon](https://www.astroicon.dev/) component to make it easier to use icons from any open source icon set provided by [Iconify](https://iconify.design/).
 
-~~Next.js has quickly become my go-to for spinning up project sites. It's easy to use, has many starter projects, and deploys easily.~~ The Next.js code has been preserved in the [`nextjs`](https://github.com/johnzanussi/johnzanussi.com/tree/nextjs) branch on my GitHub.
+##### ~~Next.js~~
+~~[Next.js](https://nextjs.org) has quickly become my go-to for spinning up project sites. It's easy to use, has many starter projects, and deploys easily.~~ The Next.js code has been preserved in the [`nextjs`](https://github.com/johnzanussi/johnzanussi.com/tree/nextjs) branch on my GitHub.
 
-##### [~~React~~](https://reactjs.org)
+##### ~~React~~
+~~Your only option for Next.js is [React](https://reactjs.org), which is fine since it's what I'm most comfortable with. I've been writing React regularly since 2016.~~
 
-~~Your only option for Next.js is React, which is fine since it's what I'm most comfortable with. I've been writing React regularly since 2016.~~
+##### ~~Bootstrap~~
+~~For this project and another personal project, I gave Tailwind a chance. Tailwind is great if you're working in an established design system with a custom component library and need utility classes. [Bootstrap](https://getbootstrap.com/) shines compared to Tailwind in the vast array of out-of-the-box components.~~
 
-##### [Bootstrap](https://getbootstrap.com/)
+##### ~~Font Awesome~~
 
-For this project and another personal project, I gave [Tailwind](https://tailwindcss.com/) a chance. Tailwind is great if you're working in an established design system with a custom component library and need utility classes. Bootstrap shines compared to Tailwind in the vast array of out-of-the-box components.
-
-##### [Font Awesome](https://fontawesome.com/)
-
-Font Awesome gets an honorable mention here, as I used a handful of their icons throughout my site.
+~~[Font Awesome](https://fontawesome.com/) gets an honorable mention here, as I used a handful of their icons throughout my site.~~
 
 A complete list of packages can be found in [`package.json`](https://github.com/johnzanussi/johnzanussi.com/blob/main/package.json)
 
@@ -53,9 +55,4 @@ I spent quite some time looking for the best way to add comments, including roll
 ##### [Plausible](https://plausible.io/)
 
 I'm self-hosting Plausible at [analytics.johnzanussi.com](https://analytics.johnzanussi.com/) to collect traffic data from this site. I followed this [amazing guide](https://www.stackovercloud.com/2021/10/28/how-to-install-plausible-analytics-on-ubuntu-20-04/) to get the self-hosted instance installed and running on DigitalOcean.
-
-##### [Grammarly](https://www.grammarly.com/)
-
-Since I’m not the best at articulating my thoughts into words, I started using Grammarly's Premium plan to check my work. It's most useful for me as a spell and grammar check, but I also appreciate some of the other suggestions, helping to make my words more readable.
-
 

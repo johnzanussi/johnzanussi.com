@@ -11,32 +11,33 @@ const metadata = {
 };
 ---
 
-<DividerLayout metadata={metadata}>
+<DividerLayout
+    metadata={metadata}
+    titleClass="text-end text-lg"
+>
 
-    <h1
-        class="fs-6 lead text-end text-body-emphasis"
-        slot="header">
+    <Fragment slot="title">
         {title}
-    </h1>
+    </Fragment>
 
     <Fragment slot="main">
 
         <div>
 
-            <p class="h2">
+            <p class="font-mono md:text-3xl font-medium text-wave-800 dark:text-wave-400">
                 Believe it or not, this page is not home.
             </p>
 
             <Image
                 src={imgGeorge}
                 alt="Screenshot of George sitting next to his phone eating popcorn in Season 8 Episode 15 of Seinfeld"
-                class:list="img-fluid rounded shadow-lg my-2"
+                class="rounded-2xl shadow-lg my-4"
                 width="2000"
                 height="1125"
                 loading="eager"
             />
 
-            <p class="h2 text-end">
+            <p class="font-mono md:text-3xl font-medium text-wave-800 dark:text-wave-400 text-end">
                 Where could it be?
             </p>
 

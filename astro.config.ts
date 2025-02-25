@@ -7,7 +7,7 @@ import mdx from '@astrojs/mdx';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
 
 // Remark
 import remarkReadingtime from './src/utils/remark/reading-time';
@@ -88,15 +88,7 @@ export default defineConfig({
         compress({
             Image: false,
         }),
-        icon({
-            include: {
-                'fa-solid': ['*'],
-                'fa6-solid': ['*'],
-                'fa6-brands': ['*'],
-                'mdi': ['*'],
-                'logos': ['*'],
-            },
-        }),
+        icon(),
     ],
     markdown: {
         syntaxHighlight: false,
@@ -112,6 +104,7 @@ export default defineConfig({
                 addClasses,
                 {
                     iframe: 'mb-6',
+                    code: 'not-prose',
                 },
             ],
         ],
