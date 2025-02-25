@@ -47,18 +47,6 @@
     --color-wave-900: #002a52;
     --color-wave-950: #001529;
 
-    --color-dune-50: #fffae5;
-    --color-dune-100: #fff4c7;
-    --color-dune-200: #ffea94;
-    --color-dune-300: #ffde5c;
-    --color-dune-400: #fcd12a;
-    --color-dune-500: #f5c400;
-    --color-dune-600: #c29b00;
-    --color-dune-700: #947600;
-    --color-dune-800: #614e00;
-    --color-dune-900: #332900;
-    --color-dune-950: #191400;
-
     /* Custom */
     --background-image-gradient-white: linear-gradient(
         45deg,
@@ -193,6 +181,7 @@
             &:hover {
                 --offset: .35em;
             }
+
         }
 
         p {
@@ -254,7 +243,7 @@
                 @apply border-y-1 border-zinc-200 dark:border-zinc-600;
 
                 > * {
-                    @apply py-[0.5rem] px-[1rem] bg-gray-50 dark:bg-[#141517] dark:text-zinc-200 border-x-1 border-zinc-200 dark:border-zinc-600;
+                    @apply py-[0.5rem] px-[1rem] bg-gray-50 dark:bg-[#0E1215] dark:text-zinc-200 border-x-1 border-zinc-200 dark:border-zinc-600;
                 }
             }
 
@@ -293,7 +282,7 @@
         }
 
         code {
-            @apply py-[.125rem] px-[.275rem] font-mono text-[.8125rem] bg-white dark:bg-zinc-800 text-pink-500 dark:text-pink-300 select-all;
+            @apply py-[.125rem] px-[.275rem] font-mono text-[.8125rem] bg-white dark:bg-zinc-800 text-pink-500 dark:text-pink-300 select-all break-words;
         }
 
     }
