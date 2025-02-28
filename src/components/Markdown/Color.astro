@@ -1,0 +1,11 @@
+---
+type Props = {
+    color: string;
+    label?: string;
+};
+
+const { color, label } = Astro.props;
+---
+<code
+    class="before:inline-block before:h-[1em] before:aspect-square before:bg-(--color) before:me-1 text-inherit before:align-[-1px]"
+    style={{ '--color': color }}>{label || color}</code>
