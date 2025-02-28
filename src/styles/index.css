@@ -173,7 +173,7 @@
 
         a {
 
-            @apply font-medium underline decoration-sky-600 underline-offset-(--offset);
+            @apply font-medium underline decoration-sky-600 underline-offset-(--offset) break-words;
 
             transition: --offset 250ms;
             text-decoration-skip-ink: none;
