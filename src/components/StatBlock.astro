@@ -1,0 +1,53 @@
+---
+type ColorSchemes = 'purple' | 'green' | 'red' | 'orange';
+
+type Props = {
+    title?: string;
+    label?: string;
+    class?: string;
+    color: ColorSchemes;
+};
+
+const {
+    title,
+    label,
+    color,
+    class: className = '',
+    ...props
+} = Astro.props;
+
+const colorSchemes: Record<ColorSchemes, string> = {
+    'purple': '**:text-violet-500 dark:**:text-violet-400',
+    'green': '**:text-green-700',
+    'red': '**:text-red-700 dark:**:text-red-800',
+    'orange': '**:text-amber-600 dark:**:text-amber-700',
+};
+---
+<div
+    class:list={[
+        'text-center',
+        className,
+    ]}
+    {...props}
+>
+
+    {title && (
+        <div class="text-xs text-slate-500">
+            {title}
+        </div>
+    )}
+
+    <div class:list={[
+        'text-3xl font-extrabold **:mb-0 my-3',
+        colorSchemes[color],
+    ]}>
+        <slot />
+    </div>
+
+    {label && (
+        <div class="text-xs text-slate-500">
+            {label}
+        </div>
+    )}
+
+</div>

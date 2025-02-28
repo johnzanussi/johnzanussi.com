@@ -27,9 +27,9 @@ const borderRadius = borderRadiusMap[radius];
 ---
 
 <Element class:list={[
-    'p-4 border bg-white border-zinc-200 dark:bg-[#0E1215] dark:border-gray-800 transition',
+    'p-4 border bg-white border-zinc-200 dark:bg-[#0E1215] dark:border-gray-800',
     {
-        'hover:shadow hover:scale-102': includeHover,
+        'hover:shadow hover:scale-102 transition': includeHover,
     },
     borderRadius,
     className

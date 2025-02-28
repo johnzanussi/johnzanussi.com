@@ -1,10 +1,10 @@
 @import "tailwindcss";
 @source "../../astro.config.ts";
 
-@variant dark (&:where(html[data-theme="dark"], html[data-theme="dark"] *));
-@variant first-heading (&:where(section:first-child :first-child:is(h1, h2, h3, h4, h5, h6)));
-@variant active (&:is(.active));
-@variant footer-nav (&:where(body.footer-nav, body.footer-nav *));
+@custom-variant dark (&:where(html[data-theme="dark"], html[data-theme="dark"] *));
+@custom-variant first-heading (&:where(section:first-child :first-child:is(h1, h2, h3, h4, h5, h6)));
+@custom-variant active (&:is(.active));
+@custom-variant footer-nav (&:where(body.footer-nav, body.footer-nav *));
 
 @theme {
     --font-sans: "Inter Variable", sans-serif;
@@ -13,9 +13,9 @@
     /* Post Cards */
     --transform-scale-102: scale(1.02);
 
-    /* 16px */
-    --text-3xl: 2rem;
-    --text-7xl: 4rem;
+    /* Font Size */
+    --text-3xl: 2rem; /* 32px */
+    --text-7xl: 4rem; /* 64px */
 
     /* Not sure this is set right yet */
     --max-width-screen-xl: 69rem;
@@ -260,7 +260,9 @@
 
 
         blockquote {
-            p {
+
+            p:last-child,
+            p:has(+ cite) {
                 @apply m-0;
             }
 

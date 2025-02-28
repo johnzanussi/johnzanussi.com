@@ -1,18 +1,30 @@
 ---
 type Props = {
-    columns: number[];
+    columns?: number[];
+    gap?: number | string;
+    cols?: number | string;
 };
 
-const { columns } = Astro.props;
-const templateColumns = columns.map(column => `${column}fr`).join(' ');
+const { columns, gap, cols } = Astro.props;
+
+
+const cssVars: Record<string, string> = {};
+
+if (columns) {
+    cssVars['--grid-cols'] = columns.map(column => `${column}fr`).join(' ');
+} else if (cols) {
+    cssVars['--grid-cols'] = `repeat(${cols.toString()}, minmax(0, 1fr))`;
+}
+
+if (gap) {
+    cssVars['--grid-gap'] = `calc(var(--spacing) * ${gap.toString()})`;
+}
+
 ---
 
 <div
-    class="grid text-center"
-    style={{
-        '--bs-columns': columns.length,
-        'grid-template-columns': templateColumns,
-    }}>
+    class="grid text-center gap-(--grid-gap) grid-cols-(--grid-cols)"
+    style={cssVars}>
 
     <slot />
 
