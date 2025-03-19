@@ -287,6 +287,10 @@
             @apply py-[.125rem] px-[.275rem] font-mono text-[.8125rem] bg-white dark:bg-zinc-800 text-pink-500 dark:text-pink-300 select-all break-words;
         }
 
+        .MathJax {
+            @apply inline-block;
+        }
+
     }
 
     .expressive-code {
