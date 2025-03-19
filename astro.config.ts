@@ -47,6 +47,12 @@ const envVariables = {
 const { url, port } = envVariables[currentEnv]();
 
 export default defineConfig({
+    redirects: {
+        '/resume': {
+            status: 302,
+            destination: '/about',
+        },
+    },
     site: url,
     server: {
         port: port,
