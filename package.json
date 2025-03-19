@@ -1,7 +1,7 @@
 {
   "name": "johnzanussi.com",
   "description": "My personal website located at johnzanussi.com",
-  "version": "3.1.0",
+  "version": "4.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johnzanussi/johnzanussi.com.git"
@@ -44,7 +44,6 @@
     "date-fns": "^4.1.0",
     "debounce": "^2.2.0",
     "deepmerge": "^4.3.1",
-    "katex": "^0.16.21",
     "metatags-generator": "^1.1.8",
     "reading-time": "^1.5.0",
     "rehype-class-names": "^2.0.0",
@@ -55,7 +54,6 @@
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.21.0",
     "@types/debounce": "^1.2.4",
-    "@types/katex": "^0.16.7",
     "@types/vfile": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^8.24.1",
     "@typescript-eslint/parser": "^8.24.1",
@@ -74,6 +72,8 @@
     "lint-staged": "^15.4.3",
     "mdast-util-to-string": "^4.0.0",
     "rehype-accessible-emojis": "^0.3.2",
+    "rehype-mathjax": "^7.1.0",
+    "remark-math": "^6.0.0",
     "sharp": "^0.33.5",
     "typescript": "^5.7.3",
     "unist-util-find-after": "^5.0.0",

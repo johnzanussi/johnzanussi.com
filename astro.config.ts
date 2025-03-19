@@ -8,6 +8,8 @@ import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import tailwindcss from '@tailwindcss/vite';
+import remarkMath from 'remark-math';
+import rehypeMathjax from 'rehype-mathjax';
 
 // Remark
 import remarkReadingtime from './src/utils/remark/reading-time';
@@ -66,7 +68,7 @@ export default defineConfig({
     integrations: [
         expressiveCode({
             plugins: [
-                pluginLineNumbers()
+                pluginLineNumbers(),
             ],
             defaultProps: {
                 showLineNumbers: false,
@@ -102,6 +104,7 @@ export default defineConfig({
             remarkSectionize,
             remarkReadingtime,
             remarkUnwrapImages,
+            remarkMath,
         ],
         // https://github.com/jaywcjlove/rehype-attr
         rehypePlugins: [
@@ -112,6 +115,7 @@ export default defineConfig({
                     iframe: 'mb-6',
                 },
             ],
+            rehypeMathjax,
         ],
     },
 });
