@@ -1,6 +1,14 @@
 ---
+import type { ComponentProps } from 'astro/types';
+
 import RootLink from '@/components/Link.astro';
+
+interface Props extends ComponentProps<typeof RootLink> {
+    class?: string;
+}
+
 const { class: className, ...props } = Astro.props;
+
 ---
 
 <RootLink
