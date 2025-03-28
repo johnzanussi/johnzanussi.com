@@ -1,13 +1,12 @@
 ---
 // https://icon-sets.iconify.design/
 import { Icon as AstroIcon } from 'astro-icon/components';
-import type { HTMLAttributes } from 'astro/types';
 
-export interface Props extends HTMLAttributes<'svg'> {
+type Props = {
     icon: string;
     class?: string;
     label?: string;
-}
+};
 
 const { class: className, icon, label } = Astro.props;
 

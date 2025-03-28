@@ -1,14 +1,15 @@
 ---
+import type { ComponentProps } from 'astro/types';
 import { type CollectionEntry, render } from 'astro:content';
 
 import { getPostUrl } from '@/utils/collections';
 
-import Card, { type Props as CardProps } from '@/components/Card.astro';
+import Card from '@/components/Card.astro';
 import DateFormat from '@/components/DateFormat.astro';
 import { Image } from 'astro:assets';
 import Link from '@/components/Link.astro';
 
-export interface Props extends CardProps {
+export interface Props extends ComponentProps<typeof Card> {
     post: CollectionEntry<'posts'>;
     class?: string;
 };

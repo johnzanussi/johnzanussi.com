@@ -1,8 +1,9 @@
 ---
-import Link, { type Props as LinkProps } from '@/components/Link.astro';
+import type { ComponentProps } from 'astro/types';
+import Link from '@/components/Link.astro';
 import Icon from '@/components/Icon.astro';
 
-interface Props extends LinkProps {
+interface Props extends ComponentProps<typeof Link> {
     icon: string;
     href: string;
     linkClass?: string;

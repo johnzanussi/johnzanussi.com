@@ -1,7 +1,8 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
 type ColorSchemes = 'purple' | 'green' | 'red' | 'orange';
 
-type Props = {
+interface Props extends HTMLAttributes<'div'> {
     title?: string;
     label?: string;
     class?: string;
