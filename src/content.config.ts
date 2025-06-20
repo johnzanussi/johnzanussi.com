@@ -31,6 +31,27 @@ const postCollection = defineCollection({
     }),
 });
 
+// Projects
+const projectCollection = defineCollection({
+    loader: mdxLoader('projects'),
+    schema: ({ image }: SchemaContext) => z.object({
+        title: z.string(),
+        cover: image(),
+        type: z.string(),
+        color: z.string(),
+        date: z.string().transform((date) => new Date(date)),
+        tech: z.array(z.object({
+            title: z.string(),
+            url: z.string().url()
+        })).optional(),
+        github: z.string().optional(),
+        links: z.array(z.object({
+            title: z.string(),
+            url: z.string().url()
+        })).optional(),
+    }),
+});
+
 // YouTube Channels
 const ChannelSchema = z.object({
     title: z.string(),
@@ -52,9 +73,11 @@ const youtubeChannelsCollection = defineCollection({
     schema: CategoryChannelsSchema,
 });
 
+
 export const collections = {
     pages: pageCollection,
     posts: postCollection,
+    projects: projectCollection,
     youtube: youtubeChannelsCollection,
 };
 // type Foo = z.infer<typeof pageCollection>
@@ -65,5 +88,5 @@ export const collections = {
 
 // type CollectionsWithDateProperty = KeysWithDateProperty<typeof collections>;
 
-export type ContentCollectionKey = 'posts' | 'pages';
-export type CollectionsWithDateProperty = 'posts';
+export type ContentCollectionKey = 'posts' | 'pages' | 'projects';
+export type CollectionsWithDateProperty = 'posts' | 'projects';

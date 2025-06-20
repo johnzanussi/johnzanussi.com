@@ -1,0 +1,40 @@
+---
+title: Fire Island Ferry Schedules
+type: iOS App + Website
+cover: "@/content/projects/fire-island-ferry-schedules/iphone-screenshot.png"
+date: '2025-06-01'
+color: 'var(--color-sky-500)'
+tech: [{
+    title: 'React Native',
+    url: 'https://reactnative.dev/',
+}, {
+    title: 'Expo',
+    url: 'https://expo.dev/',
+}, {
+    title: 'Cursor',
+    url: 'https://www.cursor.com/',
+}]
+github: private
+links: [{
+    url: 'https://apps.apple.com/us/app/fire-island-ferry-schedules/id6443580981',
+    title: 'App Store',
+}, {
+    url: 'https://fireislandferryschedules.com',
+    title: 'Website',
+}, {
+    url: 'https://instagram.com/fireislandferryschedules',
+    title: 'Instagram',
+}]
+---
+
+I purchased `fireislandferryschedules.com` back in August 2015 with the intention of building a website that would let people easily search the schedules for the various Fire Island ferries. If you're not familiar, [the schedules](https://fimedia.s3.us-east-1.amazonaws.com/16MAY25-19JUN25-MainTerminal-WEBv4-12MAY25.pdf) are published every few months in PDF format and can be super confusing to figure out.
+
+Every year I told myself I'd build a website, but then summer would come and go, and I'd never get around to it. In May 2025, almost 10 years later, I finally got around to it.
+
+Instead of a website, I decided to take the opportunity to create my first iOS app. I'd been meaning to learn React Native for a while, and this project was the perfect excuse to do so. It also gave me a chance to experiment with Cursor and see how much AI could help with development. While it provided a helpful starting point, I ended up rewriting a lot of the code myself.
+
+I manually converted PDF schedules for three main terminals and fourteen Fire Island communities into a more structured format. As of right now (with schedules through September 2025), the database has over 24,000 rows of schedule data. 
+
+The app downloads all the schedules from a remote database and stores them locally on each user's device. This allows for completely offline searching, which is a huge win given the sometimes spotty cell service on Fire Island.
+
+I had a ton of fun building this and learning the ins and outs of shipping an iOS app. I plan to keep improving it over the summer. Expect a more detailed post about the process in the future.
