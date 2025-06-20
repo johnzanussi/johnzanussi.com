@@ -1,0 +1,31 @@
+---
+title: NHL Wildcard Race
+type: Website
+cover: "@/content/projects/nhl-wildcard-race/screenshot-nhlwildcard-dark.png"
+date: '2025-04-02'
+color: 'var(--color-emerald-700)'
+tech: [{
+    title: 'Astro',
+    url: 'https://astro.build/',
+}, {
+    title: 'Tailwind',
+    url: 'https://tailwindcss.com/',
+}, {
+    title: 'NHL API',
+    url: 'https://github.com/Zmalski/NHL-API-Reference',
+}]
+github: private
+links: [{
+    url: 'https://nhlwildcard.com/#east',
+    title: 'Website',
+}, {
+    url: 'https://github.com/johnzanussi/nhl-wildcard-races',
+    title: 'GitHub',
+}]
+---
+
+As the NHL season was winding down, several teams were battling for the final two wildcard playoff spots in each conference. Reddit user r/Sarke1 had created a visual breakdown of the wildcard race and shared it on [r/hockey](https://www.reddit.com/r/hockey/comments/1jn7rlh/wildcard_races_mar_29/). I thought it was a great idea and decided to build a site that could update automatically as games were completed.
+
+The site is completely static, only pulling data from the NHL API at build time. A GitHub Action runs every 5 minutes to check the scoreboard and triggers a new build if a game has recently ended.
+
+Once the regular season ended, I turned off the GitHub Action, but I plan to start it up again next season.

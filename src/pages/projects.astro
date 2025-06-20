@@ -1,0 +1,38 @@
+---
+import { getDateSortedCollection } from '@/utils/collections';
+import { getImageSrc } from '@/utils/images';
+
+import DividerLayout from '@/layouts/DividerLayout.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+
+import imgScreenshot from '@/assets/screenshots/posts.jpg';
+
+const imageUrl = await getImageSrc(imgScreenshot);
+
+const metadata = {
+    title: 'Projects',
+    description: 'Some of the things I\'ve been working on in my free time.',
+    image: imageUrl,
+};
+
+const projects = await getDateSortedCollection('projects');
+---
+
+<DividerLayout metadata={metadata}>
+
+    <Fragment slot="title">
+        Projects
+    </Fragment>
+
+    <div
+        slot="main"
+        class="d-flex flex-column flex-grow-1"
+    >
+
+        {projects.map(project => (
+            <ProjectCard project={project} class="mb-6" />
+        ))}
+
+    </div>
+
+</DividerLayout>

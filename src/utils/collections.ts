@@ -4,6 +4,7 @@ import type { CollectionsWithDateProperty, ContentCollectionKey } from '../conte
 const collectionUrls = {
     posts: '/posts',
     pages: '/',
+    projects: '/projects',
 };
 
 export const getItems = async (

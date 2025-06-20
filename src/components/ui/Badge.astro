@@ -1,0 +1,45 @@
+---
+import { tv, type VariantProps } from 'tailwind-variants';
+import type { HTMLAttributes } from 'astro/types';
+
+// https://tailwindcss.com/plus/ui-blocks/application-ui/elements/badges
+const badge = tv({
+    base: 'inline-flex gap-x-2 items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset text-slate-800/80 hover:text-slate-800',
+    variants: {
+        color: {
+            custom: 'bg-transparent ring-(--badge-color)/70 dark:text-white/80 hover:bg-(--badge-color)/10 hover:ring-(--badge-color) dark:hover:text-white',
+            transparent: 'bg-transparent ring-slate-400 dark:text-slate-400 hover:bg-slate-50/40 dark:hover:bg-slate-400/10 hover:ring-slate-600 dark:hover:ring-slate-300 dark:hover:text-slate-300',
+        },
+        size: {
+            sm: 'px-2 py-1 text-xs',
+            md: 'px-2.5 py-1.5 text-sm',
+            lg: 'px-3 py-2 text-base',
+        },
+    }
+});
+
+export interface Props extends Omit<HTMLAttributes<'span'>, 'color'>, VariantProps<typeof badge> {
+    colorValue?: string;
+};
+
+const {
+    color = 'transparent',
+    size = 'sm',
+    colorValue,
+    ...props
+} = Astro.props;
+
+if (colorValue) {
+    props.style = {
+        '--badge-color': colorValue,
+    };
+}
+
+const classes = badge({ color, size });
+---
+<span
+    class={classes}
+    {...props}
+>
+    <slot />
+</span>

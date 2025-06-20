@@ -1,0 +1,118 @@
+---
+import type { ComponentProps } from 'astro/types';
+import { type CollectionEntry, render } from 'astro:content';
+
+import Card from '@/components/Card.astro';
+import DateFormat from '@/components/DateFormat.astro';
+import { Image } from 'astro:assets';
+import Prose from '@/components/Prose.astro';
+import TagLinks from '@/components/ui/TagLinks.astro';
+import Link from '@/components/Link.astro';
+
+export interface Props extends ComponentProps<typeof Card> {
+    project: CollectionEntry<'projects'>;
+    class?: string;
+};
+
+const {
+    project,
+    class: className,
+    ...props
+} = Astro.props;
+
+const {
+    cover,
+    title,
+    links,
+    date,
+    type,
+    tech,
+    color,
+} = project.data;
+
+const { Content } = await render(project);
+
+const maxWidth = cover.height / cover.width > 2 ? 'max-w-md' : 'max-w-lg';
+
+const primaryLink = links?.[0];
+---
+
+<article
+    id={project.id}
+    class:list={[
+        'pt-10 mb-24',
+        className
+    ]}
+    style={{
+        '--project-color': color,
+    }}
+    {...props}>
+
+    <div
+        class="px-6 flex flex-col lg:block relative bg-(--project-color)/8 rounded border-5 border-(--project-color)"
+        style={{
+            'boxShadow': '0px 0px 50px 10px var(--project-color)',
+        }}>
+
+        <div class:list={[
+            'lg:float-left lg:me-6 relative z-10 lg:-mt-10 mb-5 order-3',
+            maxWidth
+        ]}>
+            <Link href={primaryLink?.url} class="block">
+                <Image
+                    src={cover}
+                    alt={title}
+                    width={cover.width}
+                    height={cover.height}
+                    class="w-full object-cover rounded"
+                    loading="lazy"
+                />
+            </Link>
+        </div>
+
+        <time class="absolute top-0 -translate-y-1/2 font-bold text-sm text-white bg-(--project-color) rounded px-3 py-1.5">
+            <DateFormat date={date} formatStr="MMMM yyyy" />
+        </time>
+
+        <h1 class="order-1 mt-10 mb-4 text-5xl font-bold tracking-tight text-(--project-color) brightness-50 dark:brightness-100">
+            {title}
+        </h1>
+
+        <p class="order-2 mb-4 text-sm font-medium text-slate-800 dark:text-gray-300">
+            {type}
+        </p>
+
+        {links && links.length > 0 && (
+            <TagLinks
+                title="Links"
+                links={links}
+                showIcon
+                badge={{
+                    color: 'custom',
+                    size: 'md',
+                    colorValue: color,
+                }}
+                class="mb-6 space-y-1 order-4"
+            />
+        )}
+
+        {tech && tech.length > 0 && (
+            <TagLinks
+                title="Built with"
+                links={tech}
+                badge={{
+                    color: 'transparent',
+                }}
+                class="mb-7 space-y-1 order-5"
+            />
+        )}
+
+        <Prose class="order-6">
+            <Content />
+        </Prose>
+
+        <div class="clear-both"></div>
+
+    </div>
+
+</article>
