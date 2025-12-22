@@ -1,5 +1,5 @@
 ---
-import { tv, type VariantProps } from 'tailwind-variants';
+import { tv, type VariantProps } from 'tailwind-variants/lite';
 import type { HTMLAttributes } from 'astro/types';
 
 // https://tailwindcss.com/plus/ui-blocks/application-ui/elements/badges
@@ -15,7 +15,7 @@ const badge = tv({
             md: 'px-2.5 py-1.5 text-sm',
             lg: 'px-3 py-2 text-base',
         },
-    }
+    },
 });
 
 export interface Props extends Omit<HTMLAttributes<'span'>, 'color'>, VariantProps<typeof badge> {
