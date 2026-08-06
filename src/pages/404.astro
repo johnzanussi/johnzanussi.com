@@ -2,7 +2,7 @@
 import DividerLayout from '@/layouts/DividerLayout.astro';
 import imgGeorge from '@/assets/img-george-is-not-home.png';
 
-import { Picture } from 'astro:assets';
+import { Image } from 'astro:assets';
 
 const title = '404 Page Not Found';
 const metadata = {
@@ -28,13 +28,13 @@ const metadata = {
                 Believe it or not, this page is not home.
             </p>
 
-            <Picture
+            <Image
                 src={imgGeorge}
                 alt="Screenshot of George sitting next to his phone eating popcorn in Season 8 Episode 15 of Seinfeld"
                 class="rounded-2xl shadow-lg my-4"
                 width={2000}
                 height={1125}
-                formats={['webp']}
+                format="webp"
                 loading="eager"
             />
 
