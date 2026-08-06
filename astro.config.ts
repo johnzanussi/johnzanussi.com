@@ -1,5 +1,6 @@
 import { loadEnv } from 'vite';
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import expressiveCode from 'astro-expressive-code';
 import compress from 'astro-compress';
 import icon from 'astro-icon';
@@ -98,24 +99,42 @@ export default defineConfig({
         }),
         icon(),
     ],
+    fonts: [
+        {
+            name: 'Inter',
+            cssVariable: '--font-inter',
+            provider: fontProviders.fontsource(),
+            weights: ['100 900'],
+            styles: ['normal'],
+        },
+        {
+            name: 'Roboto Mono',
+            cssVariable: '--font-roboto-mono',
+            provider: fontProviders.fontsource(),
+            weights: ['100 700'],
+            styles: ['normal'],
+            fallbacks: ['monospace'],
+        },
+    ],
     markdown: {
         syntaxHighlight: false,
-        remarkPlugins: [
-            remarkSectionize,
-            remarkReadingtime,
-            remarkUnwrapImages,
-            remarkMath,
-        ],
-        // https://github.com/jaywcjlove/rehype-attr
-        rehypePlugins: [
-            rehypeAccessibleEmojis as unknown as any,
-            [
-                addClasses,
-                {
-                    iframe: 'mb-6',
-                },
+        processor: unified({
+            remarkPlugins: [
+                remarkSectionize,
+                remarkReadingtime,
+                remarkUnwrapImages,
+                remarkMath,
             ],
-            rehypeMathjax,
-        ],
+            rehypePlugins: [
+                rehypeAccessibleEmojis as unknown as any,
+                [
+                    addClasses,
+                    {
+                        iframe: 'mb-6',
+                    },
+                ],
+                rehypeMathjax,
+            ],
+        }),
     },
 });

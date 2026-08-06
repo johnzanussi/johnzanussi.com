@@ -6,7 +6,7 @@ import { getPostUrl } from '@/utils/collections';
 
 import Card from '@/components/Card.astro';
 import DateFormat from '@/components/DateFormat.astro';
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Link from '@/components/Link.astro';
 
 export interface Props extends ComponentProps<typeof Card> {
@@ -63,10 +63,11 @@ const {
     </div>
 
     <div class="aspect-video order-0 md:order-1 md:ms-3 md:flex-[0_0_40%]">
-        <Image
+        <Picture
             src={cover}
             alt={title}
             width={852}
+            formats={['avif', 'webp']}
             widths={[308, 324, 426, 786, 852]}
             sizes="(min-width: 1640px) 426px, (min-width: 1200px) calc(35.48vw - 149px), (min-width: 780px) calc(100vw - 405px), calc(100vw - 66px)"
             class="object-cover rounded-2xl w-full h-full"

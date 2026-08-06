@@ -7,8 +7,8 @@
 @custom-variant footer-nav (&:where(body.footer-nav, body.footer-nav *));
 
 @theme {
-    --font-sans: "Inter Variable", sans-serif;
-    --font-mono: "Roboto Mono Variable", monospace;
+    --font-sans: var(--font-inter), sans-serif;
+    --font-mono: var(--font-roboto-mono), monospace;
 
     /* Post Cards */
     --transform-scale-102: scale(1.02);

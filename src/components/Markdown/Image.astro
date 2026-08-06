@@ -1,5 +1,5 @@
 ---
-import { Image as AstroImage } from 'astro:assets';
+import { Picture } from 'astro:assets';
 
 const { src, alt, ...props } = Astro.props;
 
@@ -7,29 +7,35 @@ const [altText, noDivWrap = false] = alt ? alt.split(' noDivWrap') : [alt];
 
 const isUnwrapped = noDivWrap === '';
 
-const imgProps = {
-    src,
-    alt: altText,
-    class: 'img-fluid',
-    widths: [576, 768, 992, 1200, 1400, 1600],
-    sizes: '(min-width: 1200px) 720px, (min-width: 780px) calc(100vw - 371px), calc(100vw - 32px)',
-    ...props,
-};
+const widths = [576, 768, 992, 1200, 1400, 1600];
+const sizes = '(min-width: 1200px) 720px, (min-width: 780px) calc(100vw - 371px), calc(100vw - 32px)';
 ---
 
 {isUnwrapped && (
-    <AstroImage
+    <Picture
+        src={src}
+        alt={altText}
+        class="img-fluid"
+        formats={['avif', 'webp']}
+        widths={widths}
+        sizes={sizes}
         loading="lazy"
-        {...imgProps}
+        {...props}
     />
 )}
 
 {!isUnwrapped && (
 
     <div class="mb-6">
-        <AstroImage
+        <Picture
+            src={src}
+            alt={altText}
+            class="img-fluid"
+            formats={['avif', 'webp']}
+            widths={widths}
+            sizes={sizes}
             loading="lazy"
-            {...imgProps}
+            {...props}
         />
     </div>
 

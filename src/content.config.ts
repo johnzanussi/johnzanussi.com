@@ -1,4 +1,5 @@
-import { defineCollection, z, type SchemaContext } from 'astro:content';
+import { defineCollection, type SchemaContext } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob, file } from 'astro/loaders';
 
 // https://zod.dev/?id=primitives
@@ -25,7 +26,7 @@ const postCollection = defineCollection({
         title: z.string(),
         excerpt: z.string().nullable(),
         cover: image(),
-        date: z.string().transform((date) => new Date(date)),
+        date: z.coerce.date(),
         hasAmazonLinks: z.boolean().optional(),
         hiddenIntro: z.boolean().optional(),
     }),
@@ -39,15 +40,15 @@ const projectCollection = defineCollection({
         cover: image(),
         type: z.string(),
         color: z.string(),
-        date: z.string().transform((date) => new Date(date)),
+        date: z.coerce.date(),
         tech: z.array(z.object({
             title: z.string(),
-            url: z.string().url()
+            url: z.url()
         })).optional(),
         github: z.string().optional(),
         links: z.array(z.object({
             title: z.string(),
-            url: z.string().url()
+            url: z.url()
         })).optional(),
     }),
 });

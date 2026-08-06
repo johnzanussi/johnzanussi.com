@@ -20,7 +20,7 @@ import PostPagination from '@/components/PostPagination.astro';
 
 import ContentSidebar from '@/components/ContentSidebar.astro';
 import { render } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Emoji from '@/components/Emoji.astro';
 
 export async function getStaticPaths() {
@@ -91,11 +91,12 @@ const includeSidebar = headings && !!headings.length;
 
             <div class="w-full max-w-[1600px] min-h-[300px] md:min-h-[400px] mx-auto aspect-video">
 
-                <Image
+                <Picture
                     src={cover}
                     width={cover.width}
                     height={cover.height}
                     alt={title}
+                    formats={['avif', 'webp']}
                     widths={[576, 768, 992, 1200, 1400, 1600]}
                     sizes="(min-width: 1680px) 958px, (min-width: 1200px) calc(73.91vw - 269px), (min-width: 780px) calc(85vw - 315px), calc(100vw - 32px)"
                     loading="eager"
