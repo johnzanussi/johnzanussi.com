@@ -55,16 +55,16 @@ Built with [Astro](https://astro.build/). Hosted on [Vercel](https://vercel.com/
 
 ## 🧞 Commands
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run check`           | Shortcut for `astro check`                       |
-| `npm run update`          | Shortcut for `npx npm-check-updates`             |
-| `npm run ts`              | Shortcut for `tsc --noEmit`                      |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command                    | Action                                           |
+| :------------------------- | :----------------------------------------------- |
+| `pnpm install`             | Installs dependencies                            |
+| `pnpm dev`                 | Starts local dev server at `localhost:3000`      |
+| `pnpm build`               | Build your production site to `./dist/`          |
+| `pnpm preview`             | Preview your build locally, before deploying     |
+| `pnpm check`               | Shortcut for `astro check`                       |
+| `pnpm update`              | Shortcut for `pnpm dlx npm-check-updates`        |
+| `pnpm ts`                  | Shortcut for `tsc --noEmit`                      |
+| `pnpm astro -- --help`     | Get help using the Astro CLI                     |
 
 ## 🚧 Built With
 Read more about why I chose these libraries and services on the [Built With](https://johnzanussi.com/built-with) page.
