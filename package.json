@@ -13,6 +13,7 @@
   },
   "homepage": "https://johnzanussi.com",
   "private": true,
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -21,11 +22,17 @@
     "check": "astro check",
     "astro": "astro",
     "prepare": "husky",
-    "update": "npx npm-check-updates",
-    "youtube": "npx ts-node --esm lib/youtube/youtube.mts",
+    "update": "pnpm dlx npm-check-updates",
+    "youtube": "pnpm dlx ts-node --esm lib/youtube/youtube.mts",
     "ts": "tsc --noEmit",
     "lint": "eslint --cache src/**/*.{astro,ts}",
     "lint:fix": "eslint --cache --fix src/**/*.{astro,ts}"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
@@ -43,6 +50,7 @@
     "date-fns": "^4.1.0",
     "debounce": "^3.0.0",
     "deepmerge": "^4.3.1",
+    "hast-util-whitespace": "^3.0.0",
     "metatags-generator": "^1.1.8",
     "reading-time": "^1.5.0",
     "rehype-class-names": "^2.0.0",
@@ -78,7 +86,8 @@
     "typescript": "^5.9.3",
     "unist-util-find-after": "^5.0.0",
     "unist-util-visit": "^5.0.0",
-    "unist-util-visit-parents": "^6.0.2"
+    "unist-util-visit-parents": "^6.0.2",
+    "vite": "^8.2.0"
   },
   "lint-staged": {
     "*.{astro,js,ts}": "eslint --cache --fix",
