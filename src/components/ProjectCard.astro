@@ -4,7 +4,7 @@ import { type CollectionEntry, render } from 'astro:content';
 
 import Card from '@/components/Card.astro';
 import DateFormat from '@/components/DateFormat.astro';
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Prose from '@/components/Prose.astro';
 import TagLinks from '@/components/ui/TagLinks.astro';
 import Link from '@/components/Link.astro';
@@ -59,11 +59,12 @@ const primaryLink = links?.[0];
             maxWidth
         ]}>
             <Link href={primaryLink?.url} class="block">
-                <Image
+                <Picture
                     src={cover}
                     alt={title}
                     width={cover.width}
                     height={cover.height}
+                    formats={['avif', 'webp']}
                     class="w-full object-cover rounded"
                     loading="lazy"
                 />

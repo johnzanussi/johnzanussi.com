@@ -1,8 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-
-import '@fontsource-variable/inter';
-import '@fontsource-variable/roboto-mono';
+import { Font } from 'astro:assets';
 
 import '@/styles/index.css';
 
@@ -41,6 +39,8 @@ const isDev = import.meta.env.MODE === 'development';
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="darkreader-lock" />
 <meta name="generator" content={Astro.generator} />
+<Font cssVariable="--font-inter" preload />
+<Font cssVariable="--font-roboto-mono" />
 <Fragment set:html={head} />
 {!isDev && (
     <script
