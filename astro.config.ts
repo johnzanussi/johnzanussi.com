@@ -61,6 +61,16 @@ export default defineConfig({
         port: port,
     },
     output: 'static',
+    image: {
+        service: {
+            entrypoint: 'astro/assets/services/sharp',
+            config: {
+                webp: { quality: 80, effort: 4 },
+                avif: { quality: 65, effort: 4 },
+                jpeg: { quality: 80, mozjpeg: true },
+            },
+        },
+    },
     vite: {
         plugins: [
             tailwindcss(),

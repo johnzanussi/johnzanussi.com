@@ -8,6 +8,7 @@ import Card from '@/components/Card.astro';
 import DateFormat from '@/components/DateFormat.astro';
 import { Picture } from 'astro:assets';
 import Link from '@/components/Link.astro';
+import { IMAGE_PRESETS } from '@/utils/images';
 
 export interface Props extends ComponentProps<typeof Card> {
     post: CollectionEntry<'posts'>;
@@ -28,6 +29,8 @@ const {
     excerpt,
     minutesRead,
 } = data;
+
+const postCardPreset = IMAGE_PRESETS.postCard;
 ---
 
 <Card
@@ -67,9 +70,10 @@ const {
             src={cover}
             alt={title}
             width={852}
-            formats={['avif', 'webp']}
-            widths={[308, 426, 852]}
-            sizes="(min-width: 1640px) 426px, (min-width: 1200px) calc(35.48vw - 149px), (min-width: 780px) calc(100vw - 405px), calc(100vw - 66px)"
+            formats={[...postCardPreset.formats]}
+            widths={[...postCardPreset.widths]}
+            sizes={postCardPreset.sizes}
+            quality={postCardPreset.quality}
             class="object-cover rounded-2xl w-full h-full"
             loading="lazy"
         />

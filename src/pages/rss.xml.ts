@@ -18,7 +18,7 @@ export async function GET(context: APIContext) {
             height: 112,
         };
 
-        const coverImageSrc = await getImageSrc(post.data.cover);
+        const coverImageSrc = await getImageSrc(post.data.cover, 'jpeg', imageOptions);
 
         return {
             title: post.data.title,

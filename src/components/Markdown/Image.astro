@@ -1,42 +1,68 @@
 ---
-import { Image as AstroImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { Image as AstroImage, Picture } from 'astro:assets';
+import { IMAGE_PRESETS } from '@/utils/images';
 
 const { src, alt, ...props } = Astro.props;
 
-const [altText, noDivWrap = false] = alt ? alt.split(' noDivWrap') : [alt];
+const rawAlt = alt ?? '';
+const isUnwrapped = /\s?\{?noDivWrap\}?$/.test(rawAlt);
+const altText = rawAlt.replace(/\s?\{?noDivWrap\}?$/, '').trim();
 
-const isUnwrapped = noDivWrap === '';
-
-const widths = [576, 768, 992, 1200];
-const sizes = '(min-width: 1200px) 720px, (min-width: 780px) calc(100vw - 371px), calc(100vw - 32px)';
+const contentPreset = IMAGE_PRESETS.content;
+const imageSrc = src as ImageMetadata;
+// Animated GIFs: use Image→WebP (Sharp preserves animation) instead of
+// Picture/AVIF, which can drop frames or balloon file size.
+const isAnimatedGif = imageSrc?.format === 'gif';
+const imageClass = 'max-w-full h-auto';
 ---
 
-{isUnwrapped && (
-    <AstroImage
-        src={src}
-        alt={altText}
-        class="img-fluid"
-        format="webp"
-        widths={widths}
-        sizes={sizes}
-        loading="lazy"
-        {...props}
-    />
-)}
-
-{!isUnwrapped && (
-
-    <div class="mb-6">
+{isUnwrapped ? (
+    isAnimatedGif ? (
         <AstroImage
-            src={src}
+            src={imageSrc}
             alt={altText}
-            class="img-fluid"
+            class={imageClass}
             format="webp"
-            widths={widths}
-            sizes={sizes}
             loading="lazy"
             {...props}
         />
+    ) : (
+        <Picture
+            src={imageSrc}
+            alt={altText}
+            class={imageClass}
+            formats={[...contentPreset.formats]}
+            widths={[...contentPreset.widths]}
+            sizes={contentPreset.sizes}
+            quality={contentPreset.quality}
+            loading="lazy"
+            {...props}
+        />
+    )
+) : (
+    <div class="mb-6">
+        {isAnimatedGif ? (
+            <AstroImage
+                src={imageSrc}
+                alt={altText}
+                class={imageClass}
+                format="webp"
+                loading="lazy"
+                {...props}
+            />
+        ) : (
+            <Picture
+                src={imageSrc}
+                alt={altText}
+                class={imageClass}
+                formats={[...contentPreset.formats]}
+                widths={[...contentPreset.widths]}
+                sizes={contentPreset.sizes}
+                quality={contentPreset.quality}
+                loading="lazy"
+                {...props}
+            />
+        )}
     </div>
-
 )}

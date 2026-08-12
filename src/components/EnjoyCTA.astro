@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Link from './Link.astro';
+import imgBuyMeACoffee from '@/assets/buy-me-a-coffee.png';
 ---
 
 <div class="bg-sky-200 dark:bg-sky-950 text-center py-8 px-5 rounded-lg shadow-lg">
@@ -24,8 +25,9 @@ import Link from './Link.astro';
             <Image
                 width={180}
                 height={50}
-                src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png"
+                src={imgBuyMeACoffee}
                 alt="Buy Me A Coffee"
+                densities={[1, 2]}
                 class="inline-block rounded-lg"
             />
 

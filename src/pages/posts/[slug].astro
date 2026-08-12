@@ -7,7 +7,7 @@ import {
 } from '@/utils/collections';
 
 import { absoluteUrl } from '@/utils/urls';
-import { getImageSrc } from '@/utils/images';
+import { getImageSrc, getLqipSrc, IMAGE_PRESETS } from '@/utils/images';
 
 import Layout from '@/layouts/Layout.astro';
 
@@ -59,6 +59,8 @@ const {
 const postUrl = absoluteUrl(getPostUrl(id));
 
 const coverImageSrc = await getImageSrc(cover);
+const coverLqipSrc = await getLqipSrc(cover);
+const heroPreset = IMAGE_PRESETS.hero;
 
 const metadata = {
     title,
@@ -85,7 +87,7 @@ const includeSidebar = headings && !!headings.length;
 
     <div
         class="w-full mb-4 bg-cover bg-no-repeat bg-center bg-ocean-200 dark:bg-ocean-800 sm:mt-[-131px] md:mask-bottom mask-wave-full -mask-bottom-2020"
-        style={{ backgroundImage: `url('${coverImageSrc}')` }}>
+        style={{ backgroundImage: `url('${coverLqipSrc}')` }}>
 
         <div class="backdrop-brightness-50 backdrop-blur-lg">
 
@@ -96,10 +98,11 @@ const includeSidebar = headings && !!headings.length;
                     width={cover.width}
                     height={cover.height}
                     alt={title}
-                    formats={['avif', 'webp']}
-                    widths={[576, 768, 992, 1200]}
-                    sizes="(min-width: 1680px) 958px, (min-width: 1200px) calc(73.91vw - 269px), (min-width: 780px) calc(85vw - 315px), calc(100vw - 32px)"
-                    loading="eager"
+                    formats={[...heroPreset.formats]}
+                    widths={[...heroPreset.widths]}
+                    sizes={heroPreset.sizes}
+                    quality={heroPreset.quality}
+                    priority
                     class="max-w-full h-full object-cover pb-[15px]"
                 />
 
