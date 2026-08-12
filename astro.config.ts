@@ -90,6 +90,9 @@ export default defineConfig({
         sitemap({
             serialize(item) {
                 item.url = item.url.replace(/\/$/, '');
+                if (/youtube$/.test(item.url)) {
+                    return undefined;
+                }
                 return item;
             },
         }),
