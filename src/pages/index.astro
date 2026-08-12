@@ -1,6 +1,6 @@
 ---
-import { getEntry } from 'astro:content';
 import { getImageSrc } from '@/utils/images';
+import { getDateSortedCollection } from '@/utils/collections';
 
 import Emoji from '@/components/Emoji.astro';
 import Layout from '@/layouts/Layout.astro';
@@ -13,14 +13,18 @@ import imgScreenshot from '@/assets/screenshots/home.jpg';
 
 const imageUrl = await getImageSrc(imgScreenshot);
 
-const featuredPost = await getEntry(
-    'posts',
-    'bootstrap-to-tailwind-migration'
-);
+const posts = await getDateSortedCollection('posts');
+const featuredPost = posts.find((post) => {
+    const excerpt = post.data.excerpt?.trim();
+
+    return Boolean(excerpt) && excerpt !== 'asdf';
+});
+
+const description = 'I write about home automation, 3D printing, DIY projects, and the web tools I play with along the way.';
 
 const metadata = {
     title: 'John Zanussi',
-    description: 'A place where I write about technology, 3D Printing, and other hobby projects I have going on.',
+    description,
     image: imageUrl,
 };
 
@@ -44,18 +48,18 @@ const metadata = {
 
                 <p>
                     I'm John. That's me up there <Emoji label="up left arrow">↖️</Emoji>.
-                    I've been building stuff on the web either on my own or with teams for almost 20 years.
+                    I've been building stuff on the web, either on my own or with teams, for about 20 years.
                 </p>
 
                 <p>
-                    I've been doing a lot of 3D printing, home automation projects, and web development stuff in my free time and wanted a place to share my experiences with the community. Creating and maintaining this site also gives me an excuse to play around with new trends in web development.
+                    These days I spend a lot of free time on home automation, 3D printing, and DIY projects around the house. Every so often I still ship a small app or site when something scratches an itch. This site is where I write about that stuff. It also gives me an excuse to play with new web tools, since I don't write as much product code at work as I used to.
                 </p>
 
                 <p>
                     You can read more about the libraries and tools I used to build
                     this site on the <Link href="/built-with">Built With</Link> page
                     or by checking out the code for yourself on{' '}
-                    <Link href="https://github.com/johznanussi/johnzanussi.com">GitHub</Link>.
+                    <Link href="https://github.com/johnzanussi/johnzanussi.com">GitHub</Link>.
                 </p>
 
                 <p>
@@ -64,7 +68,7 @@ const metadata = {
                 </p>
 
                 <p>
-                    Lastly, you can check out one of my recent posts below.
+                    One of my recent posts is below.
                 </p>
 
             </Prose>
