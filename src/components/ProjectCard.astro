@@ -8,6 +8,7 @@ import { Picture } from 'astro:assets';
 import Prose from '@/components/Prose.astro';
 import TagLinks from '@/components/ui/TagLinks.astro';
 import Link from '@/components/Link.astro';
+import { IMAGE_PRESETS } from '@/utils/images';
 
 export interface Props extends ComponentProps<typeof Card> {
     project: CollectionEntry<'projects'>;
@@ -35,6 +36,7 @@ const { Content } = await render(project);
 const maxWidth = cover.height / cover.width > 2 ? 'max-w-md' : 'max-w-lg';
 
 const primaryLink = links?.[0];
+const projectCoverPreset = IMAGE_PRESETS.projectCover;
 ---
 
 <article
@@ -64,7 +66,10 @@ const primaryLink = links?.[0];
                     alt={title}
                     width={cover.width}
                     height={cover.height}
-                    formats={['avif', 'webp']}
+                    formats={[...projectCoverPreset.formats]}
+                    widths={[...projectCoverPreset.widths]}
+                    sizes={projectCoverPreset.sizes}
+                    quality={projectCoverPreset.quality}
                     class="w-full object-cover rounded"
                     loading="lazy"
                 />

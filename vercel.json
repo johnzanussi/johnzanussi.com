@@ -12,7 +12,7 @@
     ],
     "headers": [
         {
-            "source": "/_astro/(.*).(css|gif|js|jpg|jpeg|png|webp|woff2)",
+            "source": "/_astro/(.*).(css|gif|js|jpg|jpeg|png|webp|avif|woff2)",
             "headers": [
                 {
                     "key": "Cache-Control",
