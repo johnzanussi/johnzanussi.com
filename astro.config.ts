@@ -95,6 +95,7 @@ export default defineConfig({
         }),
         robotsTxt(),
         compress({
+            CSS: false,
             Image: false,
         }),
         icon(),
