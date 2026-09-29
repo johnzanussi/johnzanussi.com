@@ -65,8 +65,9 @@ export default defineConfig({
         service: {
             entrypoint: 'astro/assets/services/sharp',
             config: {
-                webp: { quality: 80, effort: 4 },
-                avif: { quality: 65, effort: 4 },
+                // Low AVIF effort: effort 4 was taking 1–6s per encode on Vercel (~1971 assets).
+                webp: { quality: 80, effort: 2 },
+                avif: { quality: 65, effort: 1 },
                 jpeg: { quality: 80, mozjpeg: true },
             },
         },
