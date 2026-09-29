@@ -1,6 +1,7 @@
 ---
 import Timeline from '@/components/Timeline.astro';
 
+import imgTurquoiseHealth from '@/content/pages/about/job-icons/turquoise.png';
 import imgPaperlessPost from '@/content/pages/about/job-icons/paperless-post.png';
 import imgJustworks from '@/content/pages/about/job-icons/justworks.jpg';
 import imgLeaflink from '@/content/pages/about/job-icons/leaflink.jpg';
@@ -11,6 +12,20 @@ import imgCollegeHumor from '@/content/pages/about/job-icons/collegehumor.jpg';
 
 const history = [
     {
+        title: 'Turquoise Health',
+        image: imgTurquoiseHealth,
+        color: '#137E84',
+        colorDark: '#36C6B5',
+        link: 'https://turquoise.health/',
+        startYear: '2026',
+        roles: [
+            {
+                timeframe: 'September 2026 - Present',
+                title: 'Senior Manager, Software Engineering',
+            },
+        ],
+    },
+    {
         title: 'Paperless Post',
         image: imgPaperlessPost,
         color: '#363636',
@@ -19,7 +34,7 @@ const history = [
         startYear: '2025',
         roles: [
             {
-                timeframe: 'April 2025 - Present',
+                timeframe: 'April 2025 - September 2025',
                 title: 'Senior Engineering Manager',
             },
         ],
