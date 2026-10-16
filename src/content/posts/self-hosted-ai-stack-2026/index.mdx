@@ -1,0 +1,253 @@
+---
+title: My 2026 Self-hosted AI Stack
+excerpt: How I run Open WebUI, a model gateway, a synced knowledge base, and a shared skills repo on a Beelink mini PC, and how that fits alongside Claude and Claude Code.
+cover: "@/content/posts/self-hosted-ai-stack-2026/cover-self-hosted-ai-stack.jpg"
+date: '2026-10-16'
+hiddenIntro: true
+---
+
+## Intro
+
+AI has slowly crept into just about everything I do at home. It helps manage my homelab, sets up new Home Assistant devices, and talks me through my running.
+
+Somewhere along the way, I went from "I'll just use the Claude app" to running my own AI stack in Docker, with its own gateway, knowledge base, skills, and a handful of custom models. Do I really need all of this? No, absolutely not. But I've had a lot of fun building it, and I use it every day.
+
+This post is a snapshot of what that stack looks like in October 2026. Given how fast this space moves, I fully expect parts of it to look silly in six months.
+
+<Aside type="wave">
+    Are you self-hosting any of your AI tools? I'd love to hear what you're running in the [comments](#comments).
+</Aside>
+
+## No Local Models (Mostly)
+
+The first thing people usually ask when I mention self-hosting AI is which models I'm running locally. The answer is none, at least for chat.
+
+Everything runs on spark, my main Docker host. It's a [Beelink SER8](https://www.bee-link.com/) mini PC with an AMD CPU, integrated graphics, and 27 GiB of RAM. It's a great little box for running a pile of containers, but it's not the right hardware for running a model I'd actually want to talk to.
+
+The one exception is embeddings. Ollama runs `qwen3-embedding:0.6b` on the CPU so Open WebUI can index my documents and knowledge bases. It's slow on large files, but it only has to do the work once.
+
+The other piece that makes this all work is my internet connection. I'm on Verizon Fios fiber, and it's been rock solid. When every chat is a round trip to a model provider, a stable connection matters a lot more than raw speed.
+
+## The Compose Stack
+
+The whole thing lives in a single `ai` stack with one `compose.yaml`, managed through Dockhand like everything else on spark.
+
+| Container | What it does |
+| --------- | ------------ |
+| [Open WebUI](https://github.com/open-webui/open-webui) | The chat interface. Custom models, tools, knowledge bases, and user accounts all live here. |
+| [9router](https://github.com/decolua/9router) | An LLM gateway. Open WebUI only talks to 9router, and 9router talks to the providers. |
+| [SearXNG](https://github.com/searxng/searxng) + Valkey | Self-hosted web search for the models, with Valkey as a cache. |
+| [Ollama](https://ollama.com/) | Embeddings only. |
+| [Apache Tika](https://tika.apache.org/) | Pulls text out of PDFs and other documents (including OCR on scans). |
+| [oikb](https://github.com/open-webui/oikb) | Syncs my knowledge base repo from GitHub into Open WebUI. |
+| [Open Terminal](https://github.com/open-webui/open-terminal) | Gives a couple of the models a shell, mostly for working with Windmill. |
+
+Here's a trimmed-down look at the Open WebUI service.
+
+```yaml title="ai/compose.yaml"
+services:
+    open-webui:
+        # Pinned on purpose. 0.12+ migrations have no downgrade path.
+        image: ghcr.io/open-webui/open-webui:v0.12.2
+        container_name: open-webui
+        restart: unless-stopped
+        ports:
+            - '3009:8080'
+        environment:
+            # Exposes /openapi.json so Open WebUI can use its own API as a tool server.
+            - ENV=dev
+            - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
+            # Caps each MCP tool call so a hung MCP server can't stall a chat.
+            - AIOHTTP_CLIENT_TIMEOUT_TOOL_SERVER=300
+        depends_on:
+            9router:
+                condition: service_healthy
+            searxng:
+                condition: service_healthy
+            tika:
+                condition: service_healthy
+            ollama:
+                condition: service_healthy
+        volumes:
+            - /opt/docker/ai/open-webui:/app/backend/data
+        mem_limit: 3g
+```
+
+Most of Open WebUI's settings live in its database and are edited in the admin UI, so the compose file stays pretty short. I keep Open WebUI pinned to an exact version and upgrade it by hand. Its database migrations can't be rolled back, so every upgrade starts with archiving the data folder.
+
+I also used to run LibreChat and Firecrawl in this stack. I removed both in September, and Open WebUI is now the only chat app I run.
+
+## Models, OpenRouter, and 9router
+
+Open WebUI has exactly one model connection: 9router. 9router then fans out to the actual providers, and [OpenRouter](https://openrouter.ai/) is the one that ties it all together.
+
+The reason for the extra hop is 9router's combos. A combo is a single model name that Open WebUI sees, backed by an ordered list of real models. If the first one fails, 9router tries the next. So when I pick "sonnet" in Open WebUI, I don't have to care which provider ends up answering.
+
+<Aside type="alert" title="TODO">
+    Fill in the real combo list from the 9router dashboard. Below is what I could confirm from the docs and the updater script.
+</Aside>
+
+| Combo | Models (in order) |
+| ----- | ----------------- |
+| sonnet | `cc/claude-sonnet-…` → `openrouter/~anthropic/claude-sonnet-latest` (TODO: confirm) |
+| opus | `cc/claude-opus-…` → OpenRouter fallback (TODO) |
+| fable | `cc/claude-fable-…` → OpenRouter fallback (TODO) |
+| haiku | `cc/claude-haiku-…` → OpenRouter fallback (TODO) |
+| GPT | TODO (`oai/gpt-…-sol` / `-terra` / `-luna`?) |
+| Gemini Pro / Flash | TODO (`gemini/gemini-…-pro`, `gemini/gemini-…-flash`?) |
+| gpt-image | `openai/gpt-image-1` → `openrouter/openai/gpt-5.4-image-2` |
+
+### Keeping Combos Up to Date
+
+The downside of pinning specific model versions in combos is that they go stale. New models seem to come out every other week, and I was constantly forgetting to update them.
+
+So I figured I'd let a script do it. Every morning at 5:30, while I'm still asleep, a [Windmill](https://www.windmill.dev/) script called `combo_updater` runs through every combo and does the following.
+
+1. Logs in to the 9router dashboard to get a fresh session.
+2. Looks at each pinned model and checks OpenRouter's public model catalog for a newer version of the same family. (Image models are checked against 9router's own list, since OpenRouter doesn't carry all of them.)
+3. Sends each candidate a tiny "Reply with OK" chat request through 9router. If it doesn't come back with a 200, it doesn't get applied.
+4. Updates the combos with the models that passed.
+5. Posts what changed to Discord, including the old and new price per million tokens.
+
+Models that already float, like OpenRouter's `~anthropic/claude-sonnet-latest` aliases, are skipped. The matching is a list of regex rules, one per model family.
+
+```python title="combo_updater.py"
+# local: regex for the 9router model id (group 'v' = version)
+# remote: regex for the same family in the source catalog
+# render: builds the new 9router id from the source's version string
+RULES = [
+    rule(r'^cc/claude-opus-(?P<v>[\d-]+?)(?:-\d{8})?$', r'^anthropic/claude-opus-(?P<v>[\d.]+)$', lambda v: f'cc/claude-opus-{claude_dashed(v)}'),
+    rule(r'^cc/claude-sonnet-(?P<v>[\d-]+?)(?:-\d{8})?$', r'^anthropic/claude-sonnet-(?P<v>[\d.]+)$', lambda v: f'cc/claude-sonnet-{claude_dashed(v)}'),
+    rule(r'^gemini/gemini-(?P<v>[\d.]+)-pro$', r'^google/gemini-(?P<v>[\d.]+)-pro$', lambda v: f'gemini/gemini-{v}-pro'),
+    rule(r'^oai/gpt-(?P<v>[\d.]+)-sol$', r'^openai/gpt-(?P<v>[\d.]+)-sol$', lambda v: f'oai/gpt-{v}-sol'),
+    # ...
+]
+```
+
+Testing image models would mean paying for an image every morning, so those only get checked for availability.
+
+<Aside type="alert" title="TODO">
+    Add a screenshot of one of the Discord update messages.
+</Aside>
+
+## Claude, Claude Code, and Open WebUI
+
+I don't use Open WebUI instead of Claude. I use both, and they've each settled into their own lanes.
+
+Claude Code is where the real work happens. I run it in the Claude desktop app, both locally on my Mac and over SSH on spark. The spark sessions have the Dockhand, Pi-hole, and arr MCP servers connected, so that's where I go to change a compose file, debug a container, or write a new Windmill script. This site's code gets a lot of help from Claude Code, too.
+
+Open WebUI is where I go for everything else. It's what I use on my phone through the [Conduit](https://github.com/cogwheel0/conduit) iOS app, it's where my custom models live, and it's where my wife has her own account (more on that below).
+
+<Aside type="alert" title="TODO">
+    A sentence or two in my own words on when I reach for the Claude app vs. Open WebUI day to day.
+</Aside>
+
+The tricky part of using both is keeping them in sync. I don't want to explain my network to two different assistants, and I don't want to maintain two copies of the same instructions. That's where the knowledge base and skills repos come in.
+
+## The Knowledge Base
+
+All the documentation for my home network lives in a private GitHub repo called `knowledge-base`. It's just a folder of Markdown files, one per area: the network and VLANs, DNS, reverse proxy and remote access, spark, the AI stack, Home Assistant, and backups.
+
+The repo is the single source of truth, and every assistant gets to it in its own way.
+
+* **Claude Code** works in git clones on my Mac and on spark. The clone on spark is pulled by a Windmill script on every push, so sessions there are always current.
+* **Claude** (in a Project on claude.ai) reads it through the GitHub integration.
+* **Open WebUI** gets a copy through oikb, which syncs the repo into an Open WebUI knowledge base. A GitHub webhook kicks off a sync on every push to `main`, with an hourly sync as a fallback. Files are added, updated, and deleted to match the repo.
+
+Open WebUI models can also edit the knowledge base. The Homelab model has a GitHub MCP connection with a fine-grained token that can only write to that one repo. When it changes something in the homelab, it updates the docs, the push triggers oikb, and the change shows up everywhere.
+
+<Aside type="idea">
+    Markdown files synced by oikb were showing up as one giant escaped paragraph in Open WebUI. It turned out oikb uploads files without a content type, so Open WebUI was sending them to Tika, which flattened them. Mounting a `mime.types` file into the oikb container so uploads go out as `text/markdown` fixed it.
+</Aside>
+
+## The Skills Repo
+
+Skills follow the same idea. A second private repo, `ai-skills`, holds every skill I've written, and both Claude and Open WebUI read from it.
+
+* **Claude** installs the repo as a plugin marketplace. A git pre-commit hook bumps the plugin version on any commit that touches a skill, since Claude only picks up changes when the version goes up.
+* **Open WebUI** gets skills pushed into it by another Windmill script, `skills_sync`, triggered by a GitHub webhook on every push.
+
+The sync tags every skill it creates with `repo-sync`, and it only ever updates or deletes skills with that tag. Anything I make by hand in Open WebUI is left alone. If a skill should stay Claude-only, adding `openwebui: false` to its frontmatter keeps it out (or removes it if it was already there). And if any `SKILL.md` fails to parse, the sync makes no changes at all, so one bad commit can't wipe out every skill in Open WebUI.
+
+Right now there are three skills in the repo.
+
+* `my-voice` rewrites text in my writing voice. (Yes, it was used on this post.)
+* `commit-messages` keeps commit messages consistent.
+* `ha-new-device-setup` finishes setting up a new Home Assistant device. More on this one below.
+
+The Claude side hasn't been perfectly smooth. Claude Desktop's plugin auto-update has a [known bug](https://github.com/anthropics/claude-code/issues/45810) where it gets stuck on an old commit, so I still end up running `claude plugin update` from a terminal now and then.
+
+## The Custom Models
+
+Open WebUI lets you build "models" on top of a base model with their own system prompt, tools, skills, and knowledge. I've got five, but three of them get most of the use.
+
+| Model | Base | Tools | Knowledge |
+| ----- | ---- | ----- | --------- |
+| Homelab | Claude Sonnet | Dockhand, Pi-hole, GitHub, Open Terminal | Knowledge Base |
+| Home Assistant | Claude Sonnet | Home Assistant MCP, `ha-new-device-setup` skill | None |
+| Run Coach | Claude Opus | Web search | Run training log, medical history |
+
+The other two are a Windmill model for writing automations and a WebUI Admin model that can manage Open WebUI through its own API.
+
+### Homelab
+
+The Homelab model can see and manage the Docker stacks on spark through Dockhand, manage both Pi-holes, and read the knowledge base. It can also read (but not write) the repos that hold my compose files and Windmill scripts. Those get a separate read-only token on purpose. Both repos are written to by automated jobs, and I don't want a model committing to them.
+
+### Home Assistant
+
+The Home Assistant model is connected to Home Assistant through [ha-mcp](https://github.com/homeassistant-ai/ha-mcp) and has the `ha-new-device-setup` skill attached. I mostly use it for two things: asking about the state of the house, and finishing the setup on new devices.
+
+### Run Coach
+
+Run Coach runs on Opus with web search on, and has two knowledge bases: an export of my training history from Final Surge and Strava, and my medical history. I use it to talk through training plans, how a run went, and whatever is currently hurting.
+
+The training data is a point-in-time export for now. Strava changed its API policy in June to ban using its data in AI apps, so I can't just pull in new runs automatically. My plan is to switch to [intervals.icu](https://intervals.icu/) plus Final Surge's calendar feed, summarized nightly by Windmill.
+
+## Example: Setting Up a New Device
+
+Adding a device to Home Assistant is the easy part. The tedious part is everything after: picking the area, cleaning up entity names, adding it to the dashboard, and exposing it to HomeKit. That's exactly what the `ha-new-device-setup` skill does.
+
+The skill walks through the same steps every time.
+
+1. Find the device and read its full entity list.
+2. Set its area.
+3. Clean up the device and entity names, and suggest which entities to hide or enable.
+4. Add it to the right room card on my main dashboard.
+5. Ask whether to expose it to HomeKit, and if so, which entities.
+6. Summarize what it did, with one automation idea.
+
+<Aside type="alert" title="TODO">
+    Add a real chat from the Home Assistant model here (screenshots or a transcript). Which device was it?
+</Aside>
+
+One lesson made its way into the skill early on. When I added our dishwasher, a search for "dishwasher" missed its salt and rinse aid sensors. Now the skill always reads the device directly to get every entity instead of relying on a name search.
+
+The HomeKit step is the one I was most nervous about. Home Assistant's HomeKit bridge replaces its whole entity list when you save it, and Apple Home forgets an accessory's room, scenes, and automations if it disappears and comes back. So the skill reads the current list first, stops if it can't, only ever adds entities, shows me the change, and waits for a yes. Afterward, it re-reads the list to confirm nothing was dropped.
+
+## Accessing It Away From Home
+
+At home, everything resolves straight to spark through Pi-hole. Away from home, there are a few different paths depending on what I'm doing.
+
+* **Open WebUI** is published through a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) and sits behind [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/policies/access/). Logging in with Google gets me a one-week session in a browser. The Conduit app can't show a login page, so it sends a Cloudflare service token in its headers instead.
+* **Everything else on the LAN** goes through WireGuard on the UDM Pro. On my iPhone, it's a split tunnel that only routes DNS and home network traffic, and it turns on automatically whenever I'm not on my home Wi-Fi.
+* **Home Assistant** goes through Nabu Casa. The ha-mcp server also has a Nabu Casa webhook URL, which I've added to Claude as a custom connector. That gives Claude on my phone, my Mac, and in Claude Code access to Home Assistant from anywhere, with write tools set to need my approval.
+
+None of the public pieces are open to the internet without a login, and nothing on the LAN is exposed directly.
+
+## An Account for My Wife
+
+My wife has her own account in Open WebUI, with her own chats, separate from mine.
+
+<Aside type="alert" title="TODO">
+    Fill in the details: which models she can see, what she uses it for, and how she gets in away from home. (The Cloudflare Access group only lists my email right now, so either she uses it on the home network or it needs her email added.)
+</Aside>
+
+## What's Not Perfect
+
+This setup has a few rough edges I've already run into.
+
+On October 13, the Claude login in 9router failed to refresh its token. Every Claude combo quietly fell back to OpenRouter, billed per token, for about 11 hours before I noticed. 9router's health check kept reporting that everything was fine. So now there's another Windmill script that checks 9router's database every 15 minutes and posts to Discord when a provider login breaks.
+
+Large documents are also slow to embed on a CPU. My medical history is a 36 MB scanned PDF, and it took about 55 minutes to embed. Ollama hung twice on it before I limited Open WebUI to two concurrent embedding requests.
+
+This might not be the right or best way to run AI at home. However, it's what works for me.
