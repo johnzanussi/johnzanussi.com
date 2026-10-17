@@ -1,9 +1,8 @@
-import js from '@eslint/js';
 import globals from 'globals';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import unusedImports from 'eslint-plugin-unused-imports';
-import astroParser from 'astro-eslint-parser';
+import * as astroParser from 'astro-eslint-parser';
 import astroPlugin from 'eslint-plugin-astro';
 
 // Shared base configuration
