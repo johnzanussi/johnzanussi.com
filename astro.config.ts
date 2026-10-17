@@ -2,7 +2,6 @@ import { loadEnv } from 'vite';
 import { defineConfig, fontProviders } from 'astro/config';
 import { unified } from '@astrojs/markdown-remark';
 import expressiveCode from 'astro-expressive-code';
-import compress from 'astro-compress';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
 import robotsTxt from 'astro-robots-txt';
@@ -108,10 +107,6 @@ export default defineConfig({
             },
         }),
         robotsTxt(),
-        compress({
-            CSS: false,
-            Image: false,
-        }),
         icon(),
     ],
     fonts: [

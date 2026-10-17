@@ -69,7 +69,6 @@
         "@types/unist": "^3.0.3",
         "@typescript-eslint/eslint-plugin": "^8.71.2",
         "@typescript-eslint/parser": "^8.71.2",
-        "astro-compress": "^2.4.3",
         "astro-eslint-parser": "^3.2.0",
         "astro-robots-txt": "^1.0.0",
         "eslint": "^10.13.0",
