@@ -192,6 +192,11 @@
             @apply font-bold;
         }
 
+        /* $$ math blocks */
+        math[display="block"] {
+            @apply my-6 text-2xl;
+        }
+
         /* Headings */
         h2 {
             @apply mt-12 mb-6 font-mono font-bold text-3xl pb-2 text-wave-800 border-b border-wave-950 dark:text-wave-300 dark:border-wave-300;

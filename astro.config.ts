@@ -1,6 +1,6 @@
 import { loadEnv } from 'vite';
 import { defineConfig, fontProviders } from 'astro/config';
-import { unified } from '@astrojs/markdown-remark';
+import { satteri } from '@astrojs/markdown-satteri';
 import expressiveCode from 'astro-expressive-code';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
@@ -8,17 +8,13 @@ import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import tailwindcss from '@tailwindcss/vite';
-import remarkMath from 'remark-math';
-import rehypeMathjax from 'rehype-mathjax';
 
-// Remark
-import remarkReadingtime from './src/utils/remark/reading-time';
-import remarkSectionize from './src/utils/remark/sectionize';
-import remarkUnwrapImages from './src/utils/remark/unwrap-images';
-
-// Rehype
-import addClasses from 'rehype-class-names';
-import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis';
+// Markdown plugins
+import accessibleEmojis from '@/utils/markdown/accessible-emojis';
+import math from '@/utils/markdown/math';
+import readingTime from '@/utils/markdown/reading-time';
+import sectionize from '@/utils/markdown/sectionize';
+import unwrapImages from '@/utils/markdown/unwrap-images';
 
 // Env Variables
 type Environment = 'development' | 'preview' | 'production';
@@ -128,22 +124,20 @@ export default defineConfig({
     ],
     markdown: {
         syntaxHighlight: false,
-        processor: unified({
-            remarkPlugins: [
-                remarkSectionize,
-                remarkReadingtime,
-                remarkUnwrapImages,
-                remarkMath,
+        processor: satteri({
+            features: {
+                math: {
+                    singleDollarTextMath: false,
+                },
+            },
+            mdastPlugins: [
+                sectionize(),
+                readingTime(),
+                math({ throwOnError: true }),
             ],
-            rehypePlugins: [
-                rehypeAccessibleEmojis as unknown as any,
-                [
-                    addClasses,
-                    {
-                        iframe: 'mb-6',
-                    },
-                ],
-                rehypeMathjax,
+            hastPlugins: [
+                unwrapImages(),
+                accessibleEmojis(),
             ],
         }),
     },
