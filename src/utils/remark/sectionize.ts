@@ -6,6 +6,8 @@ import Slugger from 'github-slugger';
 
 import type { Parent } from 'unist';
 import type { Heading } from 'mdast';
+// Adds `hProperties` to mdast node data types
+import type {} from 'mdast-util-to-hast';
 
 const slugs = new Slugger();
 
