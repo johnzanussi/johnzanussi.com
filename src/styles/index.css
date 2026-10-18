@@ -302,6 +302,10 @@
         @apply mb-6;
     }
 
+    .expressive-code.code-fit {
+        @apply w-fit max-w-full;
+    }
+
     .content-aside  {
 
         a {

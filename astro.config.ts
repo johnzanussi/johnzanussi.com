@@ -6,7 +6,6 @@ import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
-import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import tailwindcss from '@tailwindcss/vite';
 
 // Markdown plugins
@@ -54,25 +53,8 @@ export default defineConfig({
         ],
     },
     integrations: [
-        expressiveCode({
-            plugins: [
-                pluginLineNumbers(),
-            ],
-            defaultProps: {
-                showLineNumbers: false,
-            },
-            themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
-            styleOverrides: {
-                codeFontFamily: 'var(--font-mono)',
-                uiFontFamily: 'var(--font-sans)',
-
-                frames: {
-                    frameBoxShadowCssValue: '1.6px 1.6px 21px 0 rgba(0,0,0,0.1)',
-                    // editorActiveTabIndicatorTopColor: 'var(--bs-heading-color)',
-                    editorActiveTabIndicatorTopColor: 'var(--color-sky-500)',
-                },
-            },
-        }),
+        // Options are in ec.config.mjs
+        expressiveCode(),
         mdx(),
         sitemap({
             serialize(item) {
