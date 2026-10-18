@@ -1,9 +1,21 @@
 ---
 import { getCollection, render } from 'astro:content';
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 import { getImageSrc } from '@/utils/images';
+import { getPageUrl } from '@/utils/collections';
+import { absoluteUrl } from '@/utils/urls';
 
 import DividerLayout from '@/layouts/DividerLayout.astro';
 import Markdown from '@/components/Markdown.astro';
+import Comments from '@/components/Comments.astro';
+
+// A page's MDX can `export { default as Header }` to render
+// a component in the title band, above or below the title
+type PageModule = {
+    Header?: AstroComponentFactory;
+};
+
+const pageModules = import.meta.glob<PageModule>('/src/content/pages/**/*.mdx');
 
 export async function getStaticPaths() {
 
@@ -23,12 +35,17 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 const { Content } = await render(page);
 
-const { data } = page;
+const { data, id } = page;
 
 const {
     excerpt,
     title,
+    includeComments,
+    titlePosition,
 } = data;
+
+const loadPageModule = page.filePath ? pageModules[`/${page.filePath}`] : undefined;
+const { Header } = loadPageModule ? await loadPageModule() : {};
 
 const coverImageSrc = await getImageSrc(page.data.cover);
 
@@ -37,19 +54,41 @@ const metadata = {
     description: excerpt,
     image: coverImageSrc,
 };
+
+const pageUrl = absoluteUrl(getPageUrl(id));
 ---
 
-<DividerLayout metadata={metadata}>
+<DividerLayout metadata={metadata} titlePosition={titlePosition}>
 
     <Fragment slot="title">
         {title}
     </Fragment>
 
+    {Header && (
+        <Header slot="header" />
+    )}
+
     <Fragment slot="main">
 
-        <article>
+        <article class="min-w-0">
 
             <Markdown Content={Content} />
+
+            {includeComments && (
+                <section id="comments" class="prose">
+
+                    <h2 id="h-comments">
+                        Comments
+                    </h2>
+
+                    <Comments
+                        id={id}
+                        url={pageUrl}
+                        title={title}
+                    />
+
+                </section>
+            )}
 
         </article>
 

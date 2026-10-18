@@ -16,6 +16,8 @@ const pageCollection = defineCollection({
         title: z.string(),
         excerpt: z.string().nullable(),
         cover: image(),
+        includeComments: z.boolean().optional().default(false),
+        titlePosition: z.enum(['above', 'below']).optional().default('above'),
     }),
 });
 

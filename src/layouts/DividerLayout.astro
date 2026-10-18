@@ -4,15 +4,27 @@ import Layout, { type Props as LayoutProps } from '@/layouts/Layout.astro';
 interface Props extends LayoutProps {
     titleClass?: string;
     isLongTitle?: boolean;
+    titlePosition?: 'above' | 'below';
 };
 
 const {
     metadata,
     titleClass = '',
     isLongTitle = false,
+    titlePosition = 'above',
     ...props
 } = Astro.props;
 
+const isTitleAbove = titlePosition === 'above';
+
+const titleClasses = [
+    'font-mono text-sky-950 dark:text-gray-200 -word-spacing-2',
+    {
+        'text-4xl sm:text-6xl': isLongTitle,
+        'text-6xl': !isLongTitle
+    },
+    titleClass
+];
 
 ---
 <Layout
@@ -27,16 +39,17 @@ const {
 
             <div class="container pb-10 lg:pb-4 mt-6 lg:mt-0">
 
-                <h1 class:list={[
-                    'font-mono text-sky-950 dark:text-gray-200 -word-spacing-2',
-                    {
-                        'text-4xl sm:text-6xl': isLongTitle,
-                        'text-6xl': !isLongTitle
-                    },
-                    titleClass
-                ]}>
-                    <slot name="title" />
-                </h1>
+                {isTitleAbove && (
+                    <h1 class:list={titleClasses}>
+                        <slot name="title" />
+                    </h1>
+                )}
+
+                {Astro.slots.has('header') && (
+                    <div class:list={{ 'mt-8': isTitleAbove }}>
+                        <slot name="header" />
+                    </div>
+                )}
 
             </div>
 
@@ -45,6 +58,14 @@ const {
     </div>
 
     <div class="pb-12 lg:pt-5">
+
+        {!isTitleAbove && (
+            <div class="container mb-8">
+                <h1 class:list={titleClasses}>
+                    <slot name="title" />
+                </h1>
+            </div>
+        )}
 
         <div class="flex container flex-column-reverse xl:flex-row">
 

@@ -24,6 +24,7 @@ export const getCollectionUrl = (collection: ContentCollectionKey) => {
 };
 
 export const getPostUrl = (id: string) => getItemUrl('posts', id);
+export const getPageUrl = (id: string) => getItemUrl('pages', id);
 
 export const getDateSortedCollection = async <T extends CollectionsWithDateProperty>(
     collection: T
