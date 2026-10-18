@@ -16,33 +16,14 @@ import readingTime from '@/utils/markdown/reading-time';
 import sectionize from '@/utils/markdown/sectionize';
 import unwrapImages from '@/utils/markdown/unwrap-images';
 
-// Env Variables
-type Environment = 'development' | 'preview' | 'production';
-const currentEnv: Environment = (process.env.VERCEL_ENV as Environment) || 'development';
+// Site URL and dev port
+const { VERCEL_ENV, VERCEL_URL, VERCEL_PROJECT_PRODUCTION_URL } = process.env;
+const { PORT } = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), '');
+const port = Number(PORT) || 4321;
 
-const envVariables = {
-    development: () => {
-        const { SITE_URL = '', PORT = 0 } = loadEnv(
-            import.meta.env.MODE,
-            process.cwd(),
-            ''
-        );
-        return {
-            url: SITE_URL,
-            port: Number(PORT),
-        };
-    },
-    preview: () => ({
-        url: `https://${process.env.VERCEL_URL}/`,
-        port: 0,
-    }),
-    production: () => ({
-        url: 'https://johnzanussi.com/',
-        port: 0,
-    }),
-};
-
-const { url, port } = envVariables[currentEnv]();
+// Production uses the custom domain; previews use their own deployment address
+const host = VERCEL_ENV === 'production' ? VERCEL_PROJECT_PRODUCTION_URL : VERCEL_URL;
+const site = host ? `https://${host}/` : `http://localhost:${port}/`;
 
 export default defineConfig({
     redirects: {
@@ -51,9 +32,9 @@ export default defineConfig({
             destination: '/about',
         },
     },
-    site: url,
+    site,
     server: {
-        port: port,
+        port,
     },
     output: 'static',
     image: {
