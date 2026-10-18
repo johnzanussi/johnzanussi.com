@@ -1,21 +1,10 @@
+// Resolves a site path like /posts/foo against the configured `site`, which
+// already includes the port in local dev
 export function absoluteUrl(url: string) {
 
     if (!url) {
         return '';
     }
-    // Remove starting slash from url
-    if (url.startsWith('/')) {
-        url = url.substring(1);
-    }
 
-    const { SITE, PORT } = import.meta.env;
-
-    const parts = [
-        SITE.endsWith('/') ? SITE.slice(0, -1) : SITE,
-        PORT ? `:${PORT}` : '',
-        '/',
-        url,
-    ];
-
-    return parts.join('');
+    return new URL(url, import.meta.env.SITE).href;
 }
