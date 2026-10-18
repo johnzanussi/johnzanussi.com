@@ -106,7 +106,7 @@ I then turned that into the following flow in Node-RED.
 
 I'll walk through each node in the flow.
 
-### ![Downstairs Thermostat {noDivWrap}](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-downstairs-thermostat.png)
+### ![Downstairs Thermostat](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-downstairs-thermostat.png)(unwrap: true)
 The first node in the flow is the [events: state](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/node/events-state.html) node that listens for changes to the ecobee thermostat.
 
 ![Downstairs Thermostat node details](@/content/posts/wireless-ecobee-mini-split-home-assistant/screenshot-events-state-node-downstairs-thermostat.png)
@@ -117,39 +117,39 @@ msg.temp_set = msg.data.new_state.attributes.temperature
 msg.temp_cur = msg.data.new_state.attributes.current_temperature
 ```
 
-### ![Cooling? {noDivWrap}](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-cooling.png)
+### ![Cooling?](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-cooling.png)(unwrap: true)
 The second node is a switch that creates two outputs depending on if the state of the thermostat is “cool” or not. If the state is “cool” we move on to the next “Different Temps” . If the state is not cool we move to the “Turn Off AC” node which makes a service call to [`climate.turn_off`](https://www.home-assistant.io/integrations/climate/#service-climateturn_off) to the mini split.
 
 
 ![Cooling switch node details](@/content/posts/wireless-ecobee-mini-split-home-assistant/screenshot-switch-node-coolling.png)
 
 
-### ![Different Temps {noDivWrap}](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-different-temps.png)
+### ![Different Temps](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-different-temps.png)(unwrap: true)
 Another switch node which determines if the set temperature is different from the current temperature. If the temperatures are different we move to the “Cool or Off” node. If they are the same we move to the “Turn Off AC” node.
 
 
 ![Different temp switch node details](@/content/posts/wireless-ecobee-mini-split-home-assistant/screenshot-switch-node-different-temps.png)
 
 
-### ![Cool or Off {noDivWrap}](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-cool-or-off.png)
+### ![Cool or Off](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-cool-or-off.png)(unwrap: true)
 Yet another switch node that determines if the set temperature is less than the current temp or greater than or equal to the current temp. If less than, we move to the “Turn On AC” node. If greater than or equal to, we move to the “Turn Off AC” node.
 
 
 ![Cool or off switch node details](@/content/posts/wireless-ecobee-mini-split-home-assistant/screenshot-switch-node-cool-or-off.png)
 
 
-### ![Turn on AC {noDivWrap}](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-turn-on-ac.png)
+### ![Turn on AC](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-turn-on-ac.png)(unwrap: true)
 Makes a call to the [`climate.turn_on`](https://www.home-assistant.io/integrations/climate/#service-climateturn_on) service for the mini split unit which, as it says, turns the mini split on.
 
 ![Turn on AC call service node details](@/content/posts/wireless-ecobee-mini-split-home-assistant/screenshot-call-service-node-turn-on-ac.png)
 
 
-### ![Set Temp {noDivWrap}](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-set-temp.png)
+### ![Set Temp](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-set-temp.png)(unwrap: true)
 Makes a call to the [`climate.set_temperature`](https://www.home-assistant.io/integrations/climate/#service-climateset_temperature) service for the mini split and passes in the value from `temp_set` for the temperature param.
 
 ![Set temp call service node details](@/content/posts/wireless-ecobee-mini-split-home-assistant/screenshot-call-service-node-set-temp.png)
 
-### ![Turn Off AC {noDivWrap}](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-turn-off-ac.png)
+### ![Turn Off AC](@/content/posts/wireless-ecobee-mini-split-home-assistant/node-turn-off-ac.png)(unwrap: true)
 As mentioned above this node makes a call to [`climate.turn_off`](https://www.home-assistant.io/integrations/climate/#service-climateturn_off) for the mini split unit and turns it off.
 
 ![Turn off AC call service node details](@/content/posts/wireless-ecobee-mini-split-home-assistant/screenshot-call-service-node-turn-off-ac.png)

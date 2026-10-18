@@ -3,18 +3,19 @@ import type { ImageMetadata } from 'astro';
 import { Image as AstroImage, Picture } from 'astro:assets';
 import { IMAGE_PRESETS } from '@/utils/images';
 
-const { src, alt, ...props } = Astro.props;
+// Extra attributes come from the markdown, e.g. ![alt](src)(class: "w-40", unwrap: true)
+const { src, alt, class: customClass, unwrap, ...props } = Astro.props;
 
-const rawAlt = alt ?? '';
-const isUnwrapped = /\s?\{?noDivWrap\}?$/.test(rawAlt);
-const altText = rawAlt.replace(/\s?\{?noDivWrap\}?$/, '').trim();
+const isUnwrapped = Boolean(customClass || unwrap);
+const altText = alt ?? '';
 
 const contentPreset = IMAGE_PRESETS.content;
 const imageSrc = src as ImageMetadata;
 // Animated GIFs: use Image→WebP (Sharp preserves animation) instead of
 // Picture/AVIF, which can drop frames or balloon file size.
 const isAnimatedGif = imageSrc?.format === 'gif';
-const imageClass = 'max-w-full h-auto';
+const imageClass = customClass ? `block max-w-full h-auto ${customClass}` : 'max-w-full h-auto';
+const pictureAttributes = customClass ? { class: 'contents' } : {};
 ---
 
 {isUnwrapped ? (
@@ -32,6 +33,7 @@ const imageClass = 'max-w-full h-auto';
             src={imageSrc}
             alt={altText}
             class={imageClass}
+            pictureAttributes={pictureAttributes}
             formats={[...contentPreset.formats]}
             fallbackFormat={contentPreset.fallbackFormat}
             widths={[...contentPreset.widths]}
