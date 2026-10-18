@@ -14,7 +14,7 @@ const imageSrc = src as ImageMetadata;
 // Animated GIFs: use Image→WebP (Sharp preserves animation) instead of
 // Picture/AVIF, which can drop frames or balloon file size.
 const isAnimatedGif = imageSrc?.format === 'gif';
-const imageClass = customClass ? `block max-w-full h-auto ${customClass}` : 'max-w-full h-auto';
+const imageClass = customClass ? `block max-w-full h-auto rounded-md ${customClass}` : 'max-w-full h-auto rounded-md';
 const pictureAttributes = customClass ? { class: 'contents' } : {};
 ---
 
