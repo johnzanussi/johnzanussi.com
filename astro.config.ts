@@ -4,6 +4,7 @@ import { satteri } from '@astrojs/markdown-satteri';
 import expressiveCode from 'astro-expressive-code';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
+import imgAttr from 'satteri-imgattr';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -99,6 +100,7 @@ export default defineConfig({
                 math({ throwOnError: true }),
             ],
             hastPlugins: [
+                imgAttr(),
                 unwrapImages(),
                 accessibleEmojis(),
             ],

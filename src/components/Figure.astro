@@ -4,9 +4,14 @@ import Icon from '@/components/Icon.astro';
 export type Props = {
     align?: 'left' | 'center' | 'right';
     caption?: string;
+    class?: string;
 };
 
-const { align = 'center', caption } = Astro.props;
+const {
+    align = 'center',
+    caption,
+    class: className,
+} = Astro.props;
 
 const alignClasses = {
     'left': 'text-start',
@@ -17,7 +22,12 @@ const alignClasses = {
 const alignClass = alignClasses[align];
 
 ---
-<figure class="inline-block mb-6">
+<figure
+    class:list={[
+        'inline-block mb-6',
+        className,
+    ]}
+>
 
     <slot />
 
