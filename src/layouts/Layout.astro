@@ -7,6 +7,7 @@ import '@/styles/index.css';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import ThemeToggleScript from '@/components/ThemeToggleScript.astro';
+import UnitsToggleScript from '@/components/UnitsToggleScript.astro';
 
 import { type Metadata, generateTags } from '@/utils/metadata';
 
@@ -61,6 +62,7 @@ const isDev = import.meta.env.MODE === 'development';
 <body class="before:w-full before:h-lvh before:fixed before:bg-gradient-white dark:before:bg-gradient-blue">
 
 <ThemeToggleScript />
+<UnitsToggleScript />
 
 <Fragment set:html={body} />
 

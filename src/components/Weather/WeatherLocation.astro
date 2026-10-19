@@ -1,0 +1,12 @@
+---
+type Props = {
+    class?: string;
+};
+
+import Icon from '@/components/Icon.astro';
+
+const { class: className = '' } = Astro.props;
+---
+<div class:list={['font-bold whitespace-nowrap', className]}>
+    <Icon icon="tabler:map-pin-filled" class="size-[1em] text-pink-600 dark:text-pink-400" /> Long Island, New York
+</div>

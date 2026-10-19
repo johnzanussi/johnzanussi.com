@@ -1,0 +1,49 @@
+---
+import Icon from '@/components/Icon.astro';
+
+type Props = {
+    title: string;
+    icon?: string;
+    image?: string;
+    color?: string;
+    class?: string;
+};
+
+const {
+    title,
+    icon,
+    image,
+    color,
+    class: className,
+} = Astro.props;
+
+const hasBody = Astro.slots.has('default');
+---
+<li class:list={['relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-4 my-0 ps-0 pb-6 last:pb-0', className]}>
+
+    <div class="absolute left-5 top-5 bottom-0 w-px -translate-x-1/2 bg-zinc-300 dark:bg-gray-700" />
+
+    <div class="relative z-10 grid place-items-center size-10 rounded-xl border bg-white border-zinc-200 dark:bg-[#0E1215] dark:border-gray-800">
+        {icon && (
+            <Icon icon={icon} class:list={['size-6', color]} />
+        )}
+        {image && (
+            <img src={image} alt="" width="24" height="24" class="size-6 rounded" />
+        )}
+    </div>
+
+    <div class="min-w-0">
+
+        <div class="pt-2">
+            <span class="text-lg font-extrabold leading-6">{title}</span>
+        </div>
+
+        {hasBody && (
+            <div class="flow-root max-md:has-[>picture]:flex max-md:has-[>picture]:flex-col *:first:mt-0! *:last:mb-0!">
+                <slot />
+            </div>
+        )}
+
+    </div>
+
+</li>

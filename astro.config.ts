@@ -1,5 +1,5 @@
 import { loadEnv } from 'vite';
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 import { satteri } from '@astrojs/markdown-satteri';
 import expressiveCode from 'astro-expressive-code';
 import icon from 'astro-icon';
@@ -8,6 +8,8 @@ import imgAttr from 'satteri-imgattr';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import vercel from '@astrojs/vercel';
+import devWeatherPreview from '@/integrations/dev-weather-preview';
 
 // Markdown plugins
 import accessibleEmojis from '@/utils/markdown/accessible-emojis';
@@ -37,6 +39,23 @@ export default defineConfig({
         port,
     },
     output: 'static',
+    // Pages stay prerendered; only server islands (the weather widget) run on demand
+    adapter: vercel(),
+    env: {
+        schema: {
+            // Upstash Redis holding the latest weather station reading
+            KV_REST_API_URL: envField.string({
+                context: 'server',
+                access: 'secret',
+                optional: true,
+            }),
+            KV_REST_API_READ_ONLY_TOKEN: envField.string({
+                context: 'server',
+                access: 'secret',
+                optional: true,
+            }),
+        },
+    },
     image: {
         service: {
             entrypoint: 'astro/assets/services/sharp',
@@ -68,6 +87,7 @@ export default defineConfig({
         }),
         robotsTxt(),
         icon(),
+        devWeatherPreview(),
     ],
     fonts: [
         {

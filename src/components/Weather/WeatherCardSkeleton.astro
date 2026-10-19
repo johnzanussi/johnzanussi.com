@@ -1,0 +1,12 @@
+---
+import Card from '@/components/Card.astro';
+---
+<Card
+    includeHover={false}
+    class="flex items-center justify-center min-h-weather-card"
+    role="status"
+>
+    <p class="text-sm text-zinc-600 dark:text-zinc-400 animate-appear">
+        <span class="animate-pulse">Loading the latest weather…</span>
+    </p>
+</Card>

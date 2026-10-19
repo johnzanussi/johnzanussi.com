@@ -1,0 +1,36 @@
+---
+import type { Weather } from '@/utils/weather';
+
+type Props = {
+    weather: Weather;
+    class?: string;
+};
+
+import Icon from '@/components/Icon.astro';
+import { updatedLabel } from '@/utils/weather';
+
+const {
+    weather,
+    class: className = '',
+} = Astro.props;
+---
+<div class:list={['flex items-center gap-1 text-[0.6875rem] leading-none text-zinc-600 dark:text-zinc-400', className]}>
+
+    <Icon icon="tabler:clock" class="size-[1.2em] min-h-0!" />
+
+    Updated <time class="updated-at" datetime={weather.updated}>{updatedLabel(weather.minutes)}</time>
+
+</div>
+
+<script>
+import { minutesAgo, updatedLabel } from '@/utils/weather';
+
+const tick = () => {
+    document.querySelectorAll<HTMLTimeElement>('time.updated-at')
+        .forEach($time => {
+            $time.textContent = updatedLabel(minutesAgo($time.dateTime));
+        });
+};
+
+setInterval(tick, 30 * 1000);
+</script>

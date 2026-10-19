@@ -1,0 +1,16 @@
+---
+type Props = {
+    class?: string;
+};
+
+const { class: className } = Astro.props;
+---
+<ol
+    class:list={[
+        'not-prose relative mt-0 ps-0 list-none [&_p]:mb-4 [&_p]:leading-7 [&_p]:text-zinc-600 dark:[&_p]:text-zinc-400 [&_.expressive-code]:my-4',
+        className,
+    ]}
+    role="list"
+>
+    <slot />
+</ol>

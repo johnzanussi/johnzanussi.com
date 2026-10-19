@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+    class?: string;
+};
+
+const {
+    class: className = '',
+    ...props
+} = Astro.props;
+---
+<div
+    class:list={[
+        'flex flex-col items-center justify-center size-full rounded-full border-2 border-zinc-200 bg-zinc-100 dark:border-gray-800 dark:bg-zinc-900',
+        className,
+    ]}
+    {...props}
+>
+    <slot />
+</div>

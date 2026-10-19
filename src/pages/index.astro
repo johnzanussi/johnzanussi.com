@@ -8,6 +8,8 @@ import Icon from '@/components/Icon.astro';
 import Link from '@/components/Markdown/Link.astro';
 import PostCard from '@/components/PostCard.astro';
 import Prose from '@/components/Prose.astro';
+import WeatherCard from '@/components/Weather/WeatherCard.astro';
+import WeatherCardSkeleton from '@/components/Weather/WeatherCardSkeleton.astro';
 
 import imgScreenshot from '@/assets/screenshots/home.jpg';
 
@@ -33,18 +35,18 @@ const metadata = {
 
     <div class="container py-8 md:py-12 content">
 
-        <h1 class="font-mono font-medium mb-4 md:mb-12 text-[40px] -word-spacing-5 md:text-[80px] md:-word-spacing-10">
+        <div class="grid mb-4 md:grid-cols-[1fr_14rem] md:gap-x-10">
 
-            <span class="bg-linear-45 from-sky-950 to-violet-800 dark:from-yellow-500 dark:to-fuchsia-400 bg-clip-text text-transparent drop-shadow-xl">
-                Hey, there!
-            </span>
+            <h1 class="md:col-span-2 font-mono font-medium mb-4 md:mb-12 text-[40px] -word-spacing-5 md:text-[80px] md:-word-spacing-10">
 
-            <Emoji label="waving hand">👋</Emoji>
-        </h1>
+                <span class="bg-linear-45 from-sky-950 to-violet-800 dark:from-yellow-500 dark:to-fuchsia-400 bg-clip-text text-transparent drop-shadow-xl">
+                    Hey, there!
+                </span>
 
-        <div class="mb-4">
+                <Emoji label="waving hand">👋</Emoji>
+            </h1>
 
-            <Prose class="text-xl">
+            <Prose class="text-xl *:last:mb-0">
 
                 <p>
                     I'm John. That's me up there <Emoji label="up left arrow">↖️</Emoji>.
@@ -73,13 +75,19 @@ const metadata = {
 
             </Prose>
 
+            <div class="order-last w-full max-w-112 mx-auto pt-6 md:order-0 md:col-start-2 md:row-start-2 md:self-start md:max-w-none md:pt-0">
+                <WeatherCard server:defer>
+                    <WeatherCardSkeleton slot="fallback" />
+                </WeatherCard>
+            </div>
+
             {featuredPost && (
-                <div class="pt-4">
+                <div class="pt-4 md:col-span-2">
                     <PostCard post={featuredPost} />
                 </div>
             )}
 
-            <p class="mt-4 me-2 flex justify-end">
+            <p class="mt-4 me-2 flex justify-end md:col-span-2">
 
                 <Link href="/posts" class="text-xl text-end leading-8 inline-block hover:scale-105 transition-all">
                     More Posts

@@ -1,0 +1,93 @@
+---
+import WeatherHumidity from '@/components/Weather/WeatherHumidity.astro';
+import WeatherIcon from '@/components/Weather/WeatherIcon.astro';
+import WeatherLocation from '@/components/Weather/WeatherLocation.astro';
+import WeatherOffline from '@/components/Weather/WeatherOffline.astro';
+import WeatherPressure from '@/components/Weather/WeatherPressure.astro';
+import WeatherRain from '@/components/Weather/WeatherRain.astro';
+import WeatherTemperature from '@/components/Weather/WeatherTemperature.astro';
+import WeatherUpdated from '@/components/Weather/WeatherUpdated.astro';
+import WeatherUv from '@/components/Weather/WeatherUv.astro';
+import WeatherWind from '@/components/Weather/WeatherWind.astro';
+import { WEATHER_CACHE_CONTROL, getWeather, holdForSkeleton } from '@/utils/pws';
+
+Astro.response.headers.set('Cache-Control', WEATHER_CACHE_CONTROL);
+
+await holdForSkeleton();
+
+const weather = await getWeather();
+---
+<div class:list={[
+    'not-prose text-sky-950 dark:text-white lg:mb-6',
+    { 'flex flex-col min-h-weather-hero': !weather },
+]}>
+
+    <div class="flex flex-col items-center gap-1.5 mb-7 sm:mb-4">
+
+        <WeatherLocation class="px-4 py-1.5 rounded-full bg-white/40 dark:bg-white/5" />
+
+        {weather && <WeatherUpdated weather={weather} />}
+
+    </div>
+
+    {weather && (
+        <div class:list={[{ 'opacity-50 grayscale': weather.stale }]}>
+
+            <div class="flex items-center justify-center gap-x-hero-gap sm:gap-x-hero-gap-sm">
+
+                <div class="flex min-w-0 flex-col items-center gap-1 sm:gap-2">
+
+                    <div class="flex text-7xl xs:text-hero-display">
+                        <WeatherIcon condition={weather.condition} size="1.2em" />
+                    </div>
+
+                    <p class="text-center text-hero-label font-extrabold leading-tight tracking-tight hyphens-auto wrap-anywhere sm:leading-none">
+                        {weather.label}
+                    </p>
+
+                </div>
+
+                <WeatherTemperature
+                    weather={weather}
+                    size="lg"
+                    class="shrink-0"
+                />
+
+                <WeatherWind
+                    weather={weather}
+                    size="lg"
+                    class="flex-none"
+                />
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-4 gap-y-5 mt-6 pt-6 border-t border-dashed border-zinc-200 dark:border-gray-800 xs:grid-cols-[repeat(2,auto)] xs:justify-center xs:gap-x-[clamp(2rem,8vw,4rem)] sm:flex sm:gap-0 sm:divide-x sm:divide-zinc-200 dark:sm:divide-gray-800 sm:*:px-hero-metric-gutter lg:*:px-6 xl:*:px-8 sm:*:first:ps-0 sm:*:last:pe-0">
+
+                <WeatherRain
+                    weather={weather}
+                    size="row"
+                />
+
+                <WeatherHumidity
+                    weather={weather}
+                    size="row"
+                />
+
+                <WeatherUv
+                    weather={weather}
+                    size="row"
+                />
+
+                <WeatherPressure
+                    weather={weather}
+                    size="row"
+                />
+
+            </div>
+
+        </div>
+    )}
+
+    {!weather && <WeatherOffline class="flex-1" />}
+
+</div>

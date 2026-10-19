@@ -1,0 +1,42 @@
+<script is:inline>
+(() => {
+    const unitsAttribute = 'data-units';
+
+    // Storage can be blocked, so the toggle still works for the current page without it
+    const storage = {
+        get: () => {
+            try {
+                return localStorage.getItem('units');
+            } catch {
+                return null;
+            }
+        },
+        set: (units) => {
+            try {
+                localStorage.setItem('units', units);
+            } catch {
+                // Not remembered across pages
+            }
+        },
+    };
+
+    const setUnits = (units) => {
+        storage.set(units);
+        document.documentElement.setAttribute(unitsAttribute, units);
+    };
+
+    setUnits(storage.get() || 'imperial');
+
+    window.addEventListener('DOMContentLoaded', () => {
+
+        // The toggle arrives with the server island, after the page has loaded
+        document.addEventListener('click', (e) => {
+            const $toggle = e.target.closest('.units-controller');
+
+            if ($toggle) {
+                setUnits($toggle.value);
+            }
+        });
+    });
+})();
+</script>

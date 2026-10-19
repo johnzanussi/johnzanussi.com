@@ -1,5 +1,7 @@
 ---
-export type Props = {
+import type { HTMLAttributes } from 'astro/types';
+
+export type Props = Omit<HTMLAttributes<'div'>, 'class'> & {
     class?: string;
     radius?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
     includeHover?: boolean;
@@ -11,6 +13,7 @@ const {
     radius = '2xl',
     includeHover = true,
     tag: Element = 'div',
+    ...attrs
 } = Astro.props;
 
 const borderRadiusMap = {
@@ -26,13 +29,16 @@ const borderRadiusMap = {
 const borderRadius = borderRadiusMap[radius];
 ---
 
-<Element class:list={[
-    'p-4 border bg-white border-zinc-200 dark:bg-[#0E1215] dark:border-gray-800',
-    {
-        'hover:shadow hover:scale-102 transition': includeHover,
-    },
-    borderRadius,
-    className
-]}>
+<Element
+    class:list={[
+        'p-4 border bg-white border-zinc-200 dark:bg-[#0E1215] dark:border-gray-800',
+        {
+            'hover:shadow hover:scale-102 transition': includeHover,
+        },
+        borderRadius,
+        className
+    ]}
+    {...attrs}
+>
     <slot />
 </Element>

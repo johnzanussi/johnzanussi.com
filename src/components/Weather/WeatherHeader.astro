@@ -1,0 +1,7 @@
+---
+import WeatherHero from '@/components/Weather/WeatherHero.astro';
+import WeatherHeroSkeleton from '@/components/Weather/WeatherHeroSkeleton.astro';
+---
+<WeatherHero server:defer>
+    <WeatherHeroSkeleton slot="fallback" />
+</WeatherHero>

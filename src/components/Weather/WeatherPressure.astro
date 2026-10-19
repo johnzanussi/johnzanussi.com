@@ -1,0 +1,42 @@
+---
+import type { PressureTrend, Weather } from '@/utils/weather';
+
+interface Props extends Omit<WeatherMetricProps, 'title'> {
+    weather: Weather;
+};
+
+import Icon from '@/components/Icon.astro';
+import UnitValue from '@/components/Weather/UnitValue.astro';
+import WeatherDial from '@/components/Weather/WeatherDial.astro';
+import WeatherMetric, { type Props as WeatherMetricProps } from '@/components/Weather/WeatherMetric.astro';
+import { UNITS } from '@/utils/weather';
+
+const {
+    weather,
+    ...props
+} = Astro.props;
+
+const trendIcons: Record<PressureTrend, string> = {
+    'Rising quickly': 'tabler:trending-up',
+    'Rising': 'tabler:trending-up',
+    'Steady': 'tabler:arrow-narrow-right',
+    'Falling': 'tabler:trending-down',
+    'Falling quickly': 'tabler:trending-down',
+    'No trend yet': 'tabler:minus',
+};
+---
+<WeatherMetric title="Pressure" {...props}>
+
+    <WeatherDial>
+        <Icon icon={trendIcons[weather.pressureTrend]} label={weather.pressureTrend} class="size-1/2 text-pressure" />
+    </WeatherDial>
+
+    <Fragment slot="value">
+        <UnitValue value={weather.pressure} /> <UnitValue value={UNITS.pressure} />
+    </Fragment>
+
+    <Fragment slot="note">
+        {weather.pressureTrend}
+    </Fragment>
+
+</WeatherMetric>

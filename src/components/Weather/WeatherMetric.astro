@@ -1,0 +1,67 @@
+---
+type Sizes = 'tile' | 'row' | 'lg';
+
+export type Props = {
+    title: string;
+    size: Sizes;
+    class?: string;
+};
+
+const {
+    title,
+    size,
+    class: className = '',
+} = Astro.props;
+
+const sizes: Record<Sizes, { wrapper: string; dial: string; title: string; value: string; note: string }> = {
+    tile: {
+        wrapper: 'flex flex-col items-center gap-2 text-center @min-[25.5rem]:flex-row @min-[25.5rem]:gap-2.5 @min-[25.5rem]:text-start',
+        dial: 'size-12 @min-[25.5rem]:size-10',
+        title: 'text-xs @max-[15rem]:text-[0.6875rem]',
+        value: 'text-sm font-extrabold @max-[15rem]:text-[0.8125rem]',
+        note: 'text-xs @max-[15rem]:text-[0.625rem]',
+    },
+    row: {
+        wrapper: 'flex items-center gap-3 text-start sm:gap-hero-metric-gap',
+        dial: 'size-15 xs:size-16 sm:size-hero-metric-dial',
+        title: 'text-sm',
+        value: 'text-sm font-extrabold xs:text-base sm:text-hero-metric',
+        note: 'text-xs md:text-hero-note',
+    },
+    lg: {
+        wrapper: 'flex flex-col items-center gap-1.5 text-center xs:flex-row xs:gap-3 xs:text-start sm:gap-4 lg:gap-5',
+        dial: 'size-10 xs:size-hero-dial',
+        title: 'text-xs sm:text-sm lg:text-base',
+        value: 'text-hero-label font-extrabold sm:leading-8',
+        note: 'text-xs sm:text-sm',
+    },
+};
+
+const classes = sizes[size];
+---
+<div class:list={[classes.wrapper, className]}>
+
+    <div class:list={[
+        '@container relative grid place-items-center flex-none',
+        classes.dial,
+    ]}>
+        <slot />
+    </div>
+
+    <div>
+
+        <div class:list={['font-bold', classes.title]}>
+            {title}
+        </div>
+
+        <div class:list={['whitespace-nowrap text-zinc-700 dark:text-zinc-300', classes.value]}>
+            <slot name="value" />
+        </div>
+
+        <div class:list={['text-zinc-600 dark:text-zinc-400', classes.note]}>
+            <slot name="note" />
+        </div>
+
+    </div>
+
+</div>
