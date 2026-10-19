@@ -25,7 +25,10 @@ const {
     hasPhotoHeader = false,
 } = Astro.props;
 
-const { head, body } = generateTags(metadata);
+const { head, body } = generateTags({
+    url: new URL(Astro.url.pathname, Astro.site).href,
+    ...metadata,
+});
 
 const isDev = import.meta.env.MODE === 'development';
 ---
