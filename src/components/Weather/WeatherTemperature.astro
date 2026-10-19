@@ -1,0 +1,56 @@
+---
+import type { Weather } from '@/utils/weather';
+
+type Sizes = 'sm' | 'lg';
+
+type Props = {
+    weather: Weather;
+    size?: Sizes;
+    class?: string;
+};
+
+import UnitToggle from '@/components/Weather/UnitToggle.astro';
+import UnitValue from '@/components/Weather/UnitValue.astro';
+
+const {
+    weather,
+    size = 'sm',
+    class: className = '',
+} = Astro.props;
+
+const sizes: Record<Sizes, { wrapper: string; column: string; temp: string; feels: string; toggle: string }> = {
+    sm: {
+        wrapper: 'items-start gap-1 text-card-display',
+        column: 'gap-1',
+        temp: 'tracking-tight',
+        feels: 'text-xs whitespace-nowrap',
+        toggle: 'flex-col mt-[0.13em]',
+    },
+    lg: {
+        wrapper: 'flex-col-reverse items-center gap-0 text-7xl xs:text-hero-display sm:flex-row sm:items-start sm:gap-2',
+        column: '',
+        temp: 'tracking-tighter',
+        feels: 'text-hero-caption sm:leading-7 sm:-mt-1 lg:-mt-3',
+        toggle: 'sm:flex-col sm:mt-[0.13em]',
+    },
+};
+
+const classes = sizes[size];
+---
+<div class:list={['flex', classes.wrapper, className]}>
+
+    <div class:list={['flex flex-col items-center', classes.column]}>
+
+        <span class:list={['font-extrabold leading-none', classes.temp]}>
+            <UnitValue value={weather.temp} />°
+        </span>
+
+        <p class:list={['text-zinc-600 dark:text-zinc-400', classes.feels]}>
+            Feels like <UnitValue value={weather.feels} />°
+        </p>
+
+    </div>
+
+    <UnitToggle class={classes.toggle} />
+
+</div>

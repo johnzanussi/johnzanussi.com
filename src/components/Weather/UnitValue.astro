@@ -1,0 +1,10 @@
+---
+import type { UnitValue } from '@/utils/weather';
+
+type Props = {
+    value: UnitValue;
+};
+
+const { value } = Astro.props;
+---
+<span class="metric:hidden">{value.imperial}</span><span class="hidden metric:inline">{value.metric}</span>

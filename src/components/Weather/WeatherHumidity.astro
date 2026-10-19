@@ -1,0 +1,51 @@
+---
+import type { HumidityFeel, Weather } from '@/utils/weather';
+
+interface Props extends Omit<WeatherMetricProps, 'title'> {
+    weather: Weather;
+};
+
+import Icon from '@/components/Icon.astro';
+import WeatherDial from '@/components/Weather/WeatherDial.astro';
+import WeatherMetric, { type Props as WeatherMetricProps } from '@/components/Weather/WeatherMetric.astro';
+
+const {
+    weather,
+    ...props
+} = Astro.props;
+
+// The water level shows relative humidity; its color shows how the air feels
+const feelColors: Record<HumidityFeel, { water: string; icon: string }> = {
+    'Damp': { water: 'bg-slate-400/20', icon: 'text-slate-400' },
+    'Fresh': { water: 'bg-humidity/15', icon: 'text-humidity' },
+    'Dry': { water: 'bg-humidity/15', icon: 'text-humidity' },
+    'Comfortable': { water: 'bg-emerald-400/15', icon: 'text-emerald-400' },
+    'Sticky': { water: 'bg-yellow-400/15', icon: 'text-yellow-400' },
+    'Muggy': { water: 'bg-orange-400/15', icon: 'text-orange-400' },
+    'Oppressive': { water: 'bg-red-500/15', icon: 'text-red-500' },
+    'No reading': { water: 'bg-humidity/15', icon: 'text-humidity' },
+};
+
+const colors = feelColors[weather.humidityFeel];
+---
+<WeatherMetric title="Humidity" {...props}>
+
+    <WeatherDial
+        class="relative overflow-hidden"
+        style={{
+            '--humidity': `${weather.humidity ?? 0}%`,
+        }}
+    >
+        <div class:list={['absolute inset-x-0 bottom-0 h-(--humidity)', colors.water]}></div>
+        <Icon icon="tabler:droplet-half-2-filled" label="Humidity" class:list={['relative size-6', colors.icon]} />
+    </WeatherDial>
+
+    <Fragment slot="value">
+        {weather.humidity ?? '–'}%
+    </Fragment>
+
+    <Fragment slot="note">
+        {weather.humidityFeel}
+    </Fragment>
+
+</WeatherMetric>

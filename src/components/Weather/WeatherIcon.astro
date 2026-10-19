@@ -1,0 +1,120 @@
+---
+import type { Condition } from '@/utils/weather';
+
+type Layer = {
+    icon: string;
+    class: string;
+};
+
+type Props = {
+    condition: Condition;
+    size: string;
+    class?: string;
+};
+
+// astro-icon directly, not Icon.astro: the layers are positioned absolutely
+// and are decorative, so they take neither its inline sizing nor its role
+import { Icon } from 'astro-icon/components';
+import { CONDITIONS } from '@/utils/weather';
+
+const {
+    condition,
+    size,
+    class: className = '',
+} = Astro.props;
+
+const cloud = 'text-slate-300 dark:text-slate-200';
+const darkCloud = 'text-slate-500 dark:text-slate-400';
+
+// Each layer is placed inside a 1em square, sized as a fraction of it
+const windy: Layer[] = [
+    { icon: 'tabler:cloud-filled', class: `${cloud} text-[0.6em] left-[38%] top-[4%]` },
+    { icon: 'tabler:wind', class: 'text-wind text-[0.84em] left-[2%] top-[24%]' },
+];
+
+const layers: Record<Condition, Layer[]> = {
+    'sunny': [
+        { icon: 'tabler:sun-filled', class: 'text-yellow-300 dark:text-yellow-500 text-[0.94em] left-[3%] top-[3%]' },
+    ],
+    'clear-night': [
+        { icon: 'tabler:moon-filled', class: 'text-indigo-500 dark:text-indigo-300 text-[0.8em] left-[4%] top-[14%]' },
+        { icon: 'tabler:star-filled', class: 'text-yellow-300 text-[0.3em] left-[64%] top-[4%]' },
+        { icon: 'tabler:star-filled', class: 'text-yellow-300 text-[0.18em] left-[80%] top-[42%]' },
+    ],
+    'partlycloudy': [
+        { icon: 'tabler:sun-filled', class: 'text-yellow-300 dark:text-yellow-500 text-[0.62em] left-[34%] top-[4%]' },
+        { icon: 'tabler:cloud-filled', class: `${cloud} text-[0.78em] left-[2%] top-[24%]` },
+    ],
+    'cloudy': [
+        { icon: 'tabler:cloud-filled', class: `${darkCloud} text-[0.62em] left-[36%] top-[8%]` },
+        { icon: 'tabler:cloud-filled', class: `${cloud} text-[0.8em] left-[2%] top-[22%]` },
+    ],
+    'fog': [
+        { icon: 'tabler:cloud-fog', class: `${darkCloud} left-0 top-0` },
+    ],
+    'rainy': [
+        { icon: 'tabler:cloud-filled', class: `${cloud} text-[0.92em] left-[4%] top-0` },
+        { icon: 'tabler:droplet-filled', class: 'text-rain text-[0.26em] left-[26%] top-[68%]' },
+        { icon: 'tabler:droplet-filled', class: 'text-rain text-[0.26em] left-[52%] top-[74%]' },
+    ],
+    'pouring': [
+        { icon: 'tabler:cloud-filled', class: `${darkCloud} text-[0.92em] left-[4%] top-0` },
+        { icon: 'tabler:droplet-filled', class: 'text-rain text-[0.26em] left-[16%] top-[66%]' },
+        { icon: 'tabler:droplet-filled', class: 'text-rain text-[0.26em] left-[38%] top-[76%]' },
+        { icon: 'tabler:droplet-filled', class: 'text-rain text-[0.26em] left-[60%] top-[66%]' },
+    ],
+    'lightning': [
+        { icon: 'tabler:cloud-filled', class: `${darkCloud} text-[0.92em] left-[4%] top-0` },
+        { icon: 'tabler:bolt-filled', class: 'text-yellow-300 dark:text-yellow-500 text-[0.42em] left-[30%] top-[56%]' },
+    ],
+    'lightning-rainy': [
+        { icon: 'tabler:cloud-filled', class: `${darkCloud} text-[0.92em] left-[4%] top-0` },
+        { icon: 'tabler:bolt-filled', class: 'text-yellow-300 dark:text-yellow-500 text-[0.42em] left-[22%] top-[56%]' },
+        { icon: 'tabler:droplet-filled', class: 'text-rain text-[0.26em] left-[58%] top-[68%]' },
+    ],
+    'snowy': [
+        { icon: 'tabler:cloud-filled', class: `${cloud} text-[0.92em] left-[4%] top-0` },
+        { icon: 'tabler:snowflake', class: 'text-sky-300 text-[0.28em] left-[22%] top-[68%]' },
+        { icon: 'tabler:snowflake', class: 'text-sky-300 text-[0.28em] left-[52%] top-[72%]' },
+    ],
+    'snowy-rainy': [
+        { icon: 'tabler:cloud-filled', class: `${cloud} text-[0.92em] left-[4%] top-0` },
+        { icon: 'tabler:snowflake', class: 'text-sky-300 text-[0.28em] left-[22%] top-[68%]' },
+        { icon: 'tabler:droplet-filled', class: 'text-rain text-[0.26em] left-[54%] top-[72%]' },
+    ],
+    'hail': [
+        { icon: 'tabler:cloud-filled', class: `${darkCloud} text-[0.92em] left-[4%] top-0` },
+        { icon: 'tabler:circle-filled', class: 'text-sky-300 text-[0.16em] left-[24%] top-[72%]' },
+        { icon: 'tabler:circle-filled', class: 'text-sky-300 text-[0.16em] left-[44%] top-[80%]' },
+        { icon: 'tabler:circle-filled', class: 'text-sky-300 text-[0.16em] left-[64%] top-[72%]' },
+    ],
+    'windy': windy,
+    'windy-variant': windy,
+    'exceptional': [
+        { icon: 'tabler:alert-triangle-filled', class: 'text-amber-500 text-[0.84em] left-[8%] top-[6%]' },
+    ],
+};
+---
+<span
+    class:list={[
+        'weather-icon relative inline-block size-[1em] text-(length:--icon-size)',
+        // Light fills barely contrast with the light background, so outline them
+        '[filter:drop-shadow(0_0_1px_rgb(8_47_73/0.5))_drop-shadow(0_2px_4px_rgb(8_47_73/0.25))] dark:[filter:none]',
+        className,
+    ]}
+    style={{
+        '--icon-size': size,
+    }}
+    role="img"
+    aria-label={CONDITIONS[condition]}
+>
+
+    {layers[condition].map(layer => (
+        <Icon
+            name={layer.icon}
+            class:list={['absolute size-[1em]', layer.class]}
+            aria-hidden="true"
+        />
+    ))}
+
+</span>

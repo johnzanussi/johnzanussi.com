@@ -1,0 +1,37 @@
+---
+import type { Weather } from '@/utils/weather';
+
+interface Props extends Omit<WeatherMetricProps, 'title'> {
+    weather: Weather;
+};
+
+import Icon from '@/components/Icon.astro';
+import WeatherMetric, { type Props as WeatherMetricProps } from '@/components/Weather/WeatherMetric.astro';
+
+const {
+    weather,
+    ...props
+} = Astro.props;
+---
+<WeatherMetric title="UV Index" {...props}>
+
+    <div
+        class="grid place-items-center size-full rounded-full bg-[conic-gradient(var(--color-yellow-500)_0_var(--uv),var(--color-zinc-100)_0)] dark:bg-[conic-gradient(var(--color-yellow-500)_0_var(--uv),var(--color-zinc-900)_0)]"
+        style={{
+            '--uv': `${weather.uvPercent}%`,
+        }}
+    >
+        <div class="grid place-items-center size-3/4 rounded-full bg-white dark:bg-[#0E1215]">
+            <Icon icon="tabler:sun-filled" label="UV index" class="size-2/5 text-yellow-500" />
+        </div>
+    </div>
+
+    <Fragment slot="value">
+        {weather.uv ?? '–'}
+    </Fragment>
+
+    <Fragment slot="note">
+        {weather.uvLevel}
+    </Fragment>
+
+</WeatherMetric>

@@ -1,0 +1,90 @@
+---
+import Card from '@/components/Card.astro';
+import Icon from '@/components/Icon.astro';
+import Link from '@/components/Link.astro';
+import WeatherHumidity from '@/components/Weather/WeatherHumidity.astro';
+import WeatherIcon from '@/components/Weather/WeatherIcon.astro';
+import WeatherLocation from '@/components/Weather/WeatherLocation.astro';
+import WeatherOffline from '@/components/Weather/WeatherOffline.astro';
+import WeatherRain from '@/components/Weather/WeatherRain.astro';
+import WeatherTemperature from '@/components/Weather/WeatherTemperature.astro';
+import WeatherUpdated from '@/components/Weather/WeatherUpdated.astro';
+import WeatherWind from '@/components/Weather/WeatherWind.astro';
+import { WEATHER_CACHE_CONTROL, getWeather, holdForSkeleton } from '@/utils/pws';
+
+Astro.response.headers.set('Cache-Control', WEATHER_CACHE_CONTROL);
+
+await holdForSkeleton();
+
+const weather = await getWeather();
+---
+<Card
+    includeHover={false}
+    class:list={[{ 'flex flex-col min-h-weather-card': !weather }]}
+>
+
+    <WeatherLocation class="text-sm text-center" />
+
+    {weather && (
+        <WeatherUpdated
+            weather={weather}
+            class="justify-center mt-1"
+        />
+    )}
+
+    {weather && (
+        <div class:list={['@container', { 'opacity-50 grayscale': weather.stale }]}>
+
+            <div class="flex items-end justify-center gap-x-6 mt-4 @min-[22rem]:gap-x-12">
+
+                <div class="flex min-w-0 flex-col items-center gap-1">
+
+                    <div class="flex text-card-icon">
+                        <WeatherIcon condition={weather.condition} size="1em" />
+                    </div>
+
+                    <p class="text-center text-card-label font-bold hyphens-auto wrap-anywhere">{weather.label}</p>
+
+                </div>
+
+                <WeatherTemperature
+                    weather={weather}
+                    class="shrink-0"
+                />
+
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-dashed border-zinc-200 dark:border-gray-800 @max-[15rem]:gap-x-1 @min-[25.5rem]:justify-items-center">
+
+                <WeatherWind
+                    weather={weather}
+                    size="tile"
+                />
+
+                <WeatherRain
+                    weather={weather}
+                    size="tile"
+                />
+
+                <WeatherHumidity
+                    weather={weather}
+                    size="tile"
+                />
+
+            </div>
+
+        </div>
+    )}
+
+    {!weather && <WeatherOffline class="flex-1 my-4" />}
+
+    <p class="mt-4 flex justify-end text-xs">
+
+        <Link href="/weather">
+            About this data
+            <Icon icon="tabler:arrow-right" class="inline-block text-base" />
+        </Link>
+
+    </p>
+
+</Card>

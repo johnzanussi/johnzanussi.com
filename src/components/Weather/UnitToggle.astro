@@ -1,0 +1,69 @@
+---
+type Props = {
+    class?: string;
+};
+
+const { class: className = '' } = Astro.props;
+
+const buttonClass = 'units-controller cursor-pointer rounded-full px-1.5 py-0.5 text-[11px] font-semibold transition-colors';
+const activeClass = 'bg-white text-zinc-700 shadow-xs dark:bg-zinc-800 dark:text-zinc-300';
+const inactiveClass = 'bg-transparent text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300';
+---
+<div
+    class:list={[
+        'units-toggle flex gap-0.5 p-0.5 rounded-full bg-zinc-100 dark:bg-zinc-900',
+        className,
+    ]}
+    role="group"
+    aria-label="Units"
+>
+
+    <button
+        type="button"
+        value="imperial"
+        aria-label="Fahrenheit"
+        aria-pressed="true"
+        class:list={[
+            buttonClass,
+            activeClass,
+            'metric:bg-transparent metric:text-zinc-400 metric:shadow-none dark:metric:bg-transparent dark:metric:text-zinc-500',
+        ]}
+    >
+        F
+    </button>
+
+    <button
+        type="button"
+        value="metric"
+        aria-label="Celsius"
+        aria-pressed="false"
+        class:list={[
+            buttonClass,
+            inactiveClass,
+            'metric:bg-white metric:text-zinc-700 metric:shadow-xs dark:metric:bg-zinc-800 dark:metric:text-zinc-300',
+        ]}
+    >
+        C
+    </button>
+
+</div>
+
+<script>
+// The buttons are styled from html[data-units]; this keeps their pressed state in step for screen readers
+const syncPressed = (units: string) => {
+    document.querySelectorAll<HTMLButtonElement>('.units-controller')
+        .forEach($button => {
+            $button.setAttribute('aria-pressed', String($button.value === units));
+        });
+};
+
+syncPressed(document.documentElement.dataset.units ?? 'imperial');
+
+document.addEventListener('click', (e) => {
+    const $toggle = (e.target as Element).closest<HTMLButtonElement>('.units-controller');
+
+    if ($toggle) {
+        syncPressed($toggle.value);
+    }
+});
+</script>

@@ -1,0 +1,25 @@
+---
+type Props = {
+    class?: string;
+};
+
+import Icon from '@/components/Icon.astro';
+
+const { class: className = '' } = Astro.props;
+---
+<div class:list={['flex flex-col items-center justify-center gap-2 text-center', className]}>
+
+    <Icon
+        icon="tabler:cloud-off"
+        class="size-12 opacity-50"
+    />
+
+    <p class="text-lg font-extrabold leading-tight">
+        Station offline
+    </p>
+
+    <p class="max-w-64 text-sm text-zinc-600 dark:text-zinc-400">
+        No recent reading from the station. Check back soon.
+    </p>
+
+</div>

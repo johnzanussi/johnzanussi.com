@@ -1,0 +1,12 @@
+---
+import { Code } from 'astro-expressive-code/components';
+import WeatherOffline from '@/components/Weather/WeatherOffline.astro';
+import { WEATHER_CACHE_CONTROL, getCurrentWeather, holdForSkeleton } from '@/utils/pws';
+
+Astro.response.headers.set('Cache-Control', WEATHER_CACHE_CONTROL);
+
+await holdForSkeleton();
+
+const reading = await getCurrentWeather();
+---
+{reading ? (<Code code={reading.raw} lang="json" meta="fit" />) : (<WeatherOffline />)}

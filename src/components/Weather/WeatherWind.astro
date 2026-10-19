@@ -1,0 +1,55 @@
+---
+import type { Weather } from '@/utils/weather';
+
+interface Props extends Omit<WeatherMetricProps, 'title'> {
+    weather: Weather;
+};
+
+import Icon from '@/components/Icon.astro';
+import UnitValue from '@/components/Weather/UnitValue.astro';
+import WeatherDial from '@/components/Weather/WeatherDial.astro';
+import WeatherMetric, { type Props as WeatherMetricProps } from '@/components/Weather/WeatherMetric.astro';
+import { UNITS } from '@/utils/weather';
+
+const {
+    weather,
+    ...props
+} = Astro.props;
+
+const tickClass = 'absolute hidden @min-[4rem]:block text-[9px] @min-[6rem]:text-[max(10px,8cqi)] font-bold text-zinc-600 dark:text-zinc-400';
+---
+<WeatherMetric title="Wind" {...props}>
+
+    <WeatherDial
+        class="relative"
+        style={{
+            '--wind-degrees': `${weather.windDegrees}deg`,
+        }}
+    >
+
+        <span class:list={[tickClass, 'top-[6%] inset-x-0 text-center text-pink-600 dark:text-pink-400']}>N</span>
+        <span class:list={[tickClass, 'top-1/2 right-[8%] -translate-y-1/2']}>E</span>
+        <span class:list={[tickClass, 'bottom-[6%] inset-x-0 text-center']}>S</span>
+        <span class:list={[tickClass, 'top-1/2 left-[8%] -translate-y-1/2']}>W</span>
+
+        <Icon
+            icon="tabler:arrow-narrow-up"
+            label="Wind direction"
+            class="size-1/3 @min-[6rem]:size-2/5 text-wind rotate-(--wind-degrees)"
+        />
+
+        <span class="text-[11px] @min-[6rem]:text-[max(0.75rem,12cqi)] font-extrabold leading-none">
+            {weather.direction}
+        </span>
+
+    </WeatherDial>
+
+    <Fragment slot="value">
+        <UnitValue value={weather.wind} /> <UnitValue value={UNITS.speed} />
+    </Fragment>
+
+    <Fragment slot="note">
+        Gust <UnitValue value={weather.gust} /> <UnitValue value={UNITS.speed} />
+    </Fragment>
+
+</WeatherMetric>

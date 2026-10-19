@@ -6,10 +6,13 @@
 @custom-variant first-heading (&:where(section:first-child :first-child:is(h1, h2, h3, h4, h5, h6)));
 @custom-variant active (&:is(.active));
 @custom-variant footer-nav (&:where(body.footer-nav, body.footer-nav *));
+@custom-variant metric (&:where(html[data-units="metric"], html[data-units="metric"] *));
 
 @theme {
     --font-sans: var(--font-inter), sans-serif;
     --font-mono: var(--font-roboto-mono), monospace;
+
+    --breakpoint-xs: 27.5rem;
 
     /* Post Cards */
     --transform-scale-102: scale(1.02);
@@ -47,6 +50,56 @@
     --color-wave-800: #0c5294;
     --color-wave-900: #002a52;
     --color-wave-950: #001529;
+
+    /* Weather */
+    --color-rain: var(--color-sky-500);
+    --color-humidity: var(--color-indigo-400);
+    --color-wind: var(--color-teal-400);
+    --color-pressure: var(--color-rose-400);
+
+    /* Weather hero: fluid between xs (27.5rem), sm (40rem), md (48rem), 55rem and lg (64rem) */
+    --text-hero-display: max(
+        clamp(4.5rem, calc(4.5rem + (100vw - 27.5rem) * 0.12), 6rem),
+        clamp(4.5rem, calc(6rem + (100vw - 48rem) * 0.25), 10rem)
+    );
+    --text-hero-display--line-height: 1;
+    --text-hero-label: clamp(1rem, calc(1rem + (100vw - 27.5rem) * 0.04), 1.5rem);
+    --text-hero-label--line-height: 1.5;
+    --text-hero-caption: clamp(0.75rem, calc(0.75rem + (100vw - 27.5rem) * 0.03), 1.125rem);
+    --text-hero-caption--line-height: calc(1 / 0.75);
+    --text-hero-metric: max(
+        clamp(1rem, calc(1rem + (100vw - 40rem) * 0.01562), 1.125rem),
+        clamp(1rem, calc(1.125rem + (100vw - 48rem) * 0.01786), 1.25rem)
+    );
+    --text-hero-metric--line-height: 1.4;
+    --text-hero-note: clamp(0.75rem, calc(0.75rem + (100vw - 48rem) * 0.01786), 0.875rem);
+    --text-hero-note--line-height: calc(20 / 14);
+
+    --spacing-hero-gap: clamp(1.25rem, calc(1.25rem + (100vw - 27.5rem) * 0.14), 3rem);
+    --spacing-hero-gap-sm: clamp(2.25rem, calc(2.25rem + (100vw - 40rem) * 0.09375), 3rem);
+    --spacing-hero-dial: max(
+        clamp(4rem, calc(4rem + (100vw - 27.5rem) * 0.16), 6rem),
+        clamp(4rem, calc(6rem + (100vw - 48rem) * 0.2188), 9.5rem)
+    );
+    --spacing-hero-metric-dial: max(
+        clamp(3rem, calc(3rem + (100vw - 40rem) * 0.0625), 3.5rem),
+        clamp(3rem, calc(3.5rem + (100vw - 48rem) * 0.07143), 4rem)
+    );
+    --spacing-hero-metric-gap: clamp(0.5rem, calc(0.5rem + (100vw - 40rem) * 0.0625), 1rem);
+    --spacing-hero-metric-gutter: clamp(0.75rem, calc(0.75rem + (100vw - 40rem) * 0.03125), 1rem);
+
+    /* Weather card: sized from the card's own width (cqi), from the 11.875rem sidebar up to the 28rem cap */
+    --text-card-icon: max(
+        clamp(3.5rem, calc(3.5rem + (100cqi - 11.875rem) * 0.3636), 5.5rem),
+        clamp(3.5rem, calc(5.5rem + (100cqi - 22.375rem) * 0.2143), 6.25rem)
+    );
+    --text-card-display: max(
+        clamp(3rem, calc(3rem + (100cqi - 11.875rem) * 0.1818), 4rem),
+        clamp(3rem, calc(4rem + (100cqi - 22.375rem) * 0.1429), 4.5rem)
+    );
+    --text-card-display--line-height: 1;
+    --text-card-label: clamp(0.875rem, calc(0.875rem + (100cqi - 22.375rem) * 0.01786), 0.9375rem);
+    --text-card-label--line-height: calc(20 / 14);
 
     /* Custom */
     --background-image-gradient-white: linear-gradient(
@@ -88,6 +141,47 @@
             transform: rotate(360deg);
         }
 
+    }
+
+    /* Loading text stays hidden for a beat so fast loads never show it */
+    --animate-appear: appear 300ms ease-out 800ms both;
+
+    @keyframes appear {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+/* Reserved heights for the weather hero and card, shared by the loading placeholders and the offline state */
+@utility min-h-weather-hero {
+    min-height: 374px;
+
+    @variant xs {
+        min-height: 416px;
+    }
+
+    @variant sm {
+        min-height: 328px;
+    }
+
+    @variant md {
+        min-height: clamp(330px, calc(330px + (100vw - 48rem) * 0.32), 412px);
+    }
+}
+
+@utility min-h-weather-card {
+    min-height: 377px;
+
+    @media (width >= 30.625rem) {
+        min-height: 335px;
+    }
+
+    @variant md {
+        min-height: 360px;
     }
 }
 
