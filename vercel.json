@@ -10,12 +10,12 @@
             "destination": "https://plausible.io/api/event"
         },
         {
-            "source": "/kj2f93d.js",
-            "destination": "https://stats.johnzanussi.com/script.js"
+            "source": "/kqk44a7uu.js",
+            "destination": "https://analytics.johnzanussi.com/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
         },
         {
-            "source": "/api/send",
-            "destination": "https://stats.johnzanussi.com/api/send"
+            "source": "/api/kqk44a7uu",
+            "destination": "https://analytics.johnzanussi.com/api/event"
         }
     ],
     "headers": [
