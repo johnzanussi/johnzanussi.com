@@ -53,7 +53,7 @@
         "@iconify-json/tabler": "^1.2.42",
         "@tailwindcss/vite": "^4.3.3",
         "astro": "^7.4.0",
-        "astro-expressive-code": "^0.44.2",
+        "astro-expressive-code": "^0.44.3",
         "astro-icon": "^1.2.0",
         "date-fns": "^4.4.0",
         "debounce": "^3.0.0",
