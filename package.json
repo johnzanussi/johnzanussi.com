@@ -46,7 +46,7 @@
         "@astrojs/mdx": "^8.1.0",
         "@astrojs/rss": "^4.0.19",
         "@astrojs/sitemap": "^3.7.4",
-        "@astrojs/vercel": "^11.0.15",
+        "@astrojs/vercel": "^11.0.16",
         "@expressive-code/plugin-collapsible-sections": "^0.44.2",
         "@expressive-code/plugin-line-numbers": "^0.44.2",
         "@iconify-json/mdi": "^1.2.3",
